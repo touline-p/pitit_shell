@@ -52,6 +52,7 @@ $(NAME) : $(OBJS) $(HEADERS)
 
 
 ./obj/%.o : %.c
+	@mkdir -p $(shell dirname $@)
 	gcc $(FLAGS) -o $@ -c $< -I libft $(addprefix -I , $(HEADERS))
 
 re	: fclean
