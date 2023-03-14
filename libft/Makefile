@@ -69,6 +69,7 @@ FILES	=	ft_atoi.c \
 	ft_print_split.c \
 	close_pipe_arr.c \
 	ft_free_int_arr.c \
+	ft_join_str_arr_on.c \
 
 HFILES	=	libft.h\
 

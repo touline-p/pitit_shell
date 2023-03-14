@@ -2,3 +2,4 @@
 .idea
 **/a.out
 a.out
+**/*.a
