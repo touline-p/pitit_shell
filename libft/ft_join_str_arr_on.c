@@ -20,3 +20,13 @@ t_ret_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
 		str_pin = ft_strcpy_rn(str_pin, *(arr_pin++));
 	return (SUCCESS);
 }
+
+/*
+int main()
+{
+	char **oh = ft_split("", ' ');
+	char *line;
+	ft_join_str_arr_on(oh, &line);
+	printf("-%s-\n", line);
+}
+ */
