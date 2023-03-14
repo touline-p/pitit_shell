@@ -13,11 +13,10 @@ t_ret_status	cut_line_on(char *line, char ***res_pt)
 	line_arr = malloc(sizeof(char *) * count_indep_words(line));
 	if (line_arr == NULL
 		|| alloc_each_cells(line, line_arr) != SUCCESS)
-		return (MLC_ERR);
+		return (free(line), MLC_ERR);
 	fill_cells(line, line_arr);
 	*res_pt = line_arr;
-	free(line);
-	return (SUCCESS);
+	return (free(line), SUCCESS);
 }
 
 
@@ -121,7 +120,7 @@ int main(int ac, char **av, char **env)
 {
 	(void)ac; (void)av; (void)env;
 
-	char	*line = ft_strdup("expand qui marche $USER, expand qui marche pas ->$USERU<- $test");
+	char	*line = ft_strdup("expand qui marche $USER");
 	char 	**line_arr;
 	cut_line_on(line, &line_arr);
 	char **tmp = line_arr;

@@ -2,6 +2,8 @@
 NAME := ./tester
 
 FILE := srcs/expands/expands.c \
+	srcs/expands/cut_line.c \
+	srcs/expands/replace_dollar_str_by_env_value.c \
 #	main.c \
 #	mini_parsing.c \
 #	testing_utils.c \
@@ -39,7 +41,7 @@ HEADERS	:= srcs/expands/ \
 #	test_mini.h \
 #	libft/libft.h
 
-FLAGS := -Wall -Werror -Wextra -g3 #-D SILENCIEUX=false
+FLAGS := -Wall -Werror -Wextra # -fsanitize=address #-D SILENCIEUX=false
 
 OBJS := $(addprefix obj/, $(FILE:.c=.o))
 
@@ -52,7 +54,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS) $(HEADERS)
 	make -C libft
-	gcc -o $(NAME) $(OBJS) $(addprefix -I , $(HDIR)) -L./libft -lft
+	gcc $(FLAGS) -o $(NAME) $(OBJS) $(addprefix -I , $(HDIR)) -L./libft -lft
 
 
 ./obj/%.o : %.c

@@ -20,6 +20,7 @@ t_ret_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 		}
 		pin_env++;
 	}
+	free(*pin_pt);
 	*pin_pt = ft_strdup("");
 	if (*pin_pt == NULL)
 		return (MLC_ERR);
