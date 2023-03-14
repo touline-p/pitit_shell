@@ -31,7 +31,7 @@ t_ret_status	performe_expand_on_line(char **line_pt, char **env)
 int	main(int ac, char **av, char **env)
 {
 	(void)ac; (void)av;
-	char	*line = ft_strdup("expand qui marche $USER $test");
+	char	*line = ft_strdup("expand qui marche $USE\"lR\" $test");
 	printf("origine:\n->%s<-\n", line);
 	performe_expand_on_line(&line, env);
 	printf("test:\n->%s<-\n", line);
