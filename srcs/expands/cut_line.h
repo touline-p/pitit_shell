@@ -6,6 +6,5 @@
 #include "../../libft/libft.h"
 
 t_ret_status	cut_line_on(char *line, char ***res_pt);
-//#define TST_CUT_LINE
 
 #endif
