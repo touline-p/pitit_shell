@@ -1,13 +1,23 @@
-#include "expands.h"
+#include "cut_line.h"
+
+#define TST_EXPAND
 
 t_ret_status	performe_expand_on_line(char **line_pt, char **env)
 {
 	char **line_arr;
+	char *pin;
 
-	(void)line_arr;
-	(void)line_pt;
-	(void)env;
-
+	if (cut_line_on(*line_pt, &line_arr) != SUCCESS)
+		return (MLC_ERR);
+	pin = *line_arr;
+	while (pin)
+	{
+		if (*pin == '$' && replace_dollar_str_by_env_value(&pin, env) != SUCCESS)
+			return (MLC_ERR);
+		pin++;
+	}
+	if (ft_join_str_arr_on(line_arr, line_pt) != SUCCESS)
+		return (MLC_ERR);
 	return (SUCCESS);
 }
 
