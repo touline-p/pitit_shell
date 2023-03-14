@@ -21,6 +21,19 @@
 #  define ERT
 # endif
 
+#ifndef T_RET_STATUS
+# define T_RET_STATUS
+
+typedef	enum e_ret_status
+{
+	SUCCESS,
+	FAILURE,
+	MLC_ERR,
+	WRT_ERR
+}	t_ret_status;
+
+#endif
+
 typedef unsigned char			t_uchar;
 
 typedef struct s_list
@@ -65,6 +78,7 @@ int			ft_tolower(int c);
 int			ft_toupper(int c);
 void		*ft_calloc(size_t n, size_t size);
 char		**ft_split(char const *s, char c);
+t_ret_status	ft_join_str_arr_on(char **str_arr, char **line_pt);
 char		*ft_strdup(const char *src);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
