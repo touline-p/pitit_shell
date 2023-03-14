@@ -29,6 +29,9 @@ FILE := srcs/expands/expands.c \
 #	get_here_doc_fd.c \
 #	read_here_doc_process.c \
 
+HDIR := srcs/expands/ \
+	srcs/ \
+	libft/
 
 HEADERS	:= srcs/expands/ \
 	srcs/
@@ -40,20 +43,21 @@ FLAGS := -Wall -Werror -Wextra -g3 #-D SILENCIEUX=false
 
 OBJS := $(addprefix obj/, $(FILE:.c=.o))
 
-all : $(NAME)
-
 test	: $(NAME)
 	clear
 	valgrind --leak-check=full --track-fds=yes $(NAME)
 
+all : $(NAME)
+
+
 $(NAME) : $(OBJS) $(HEADERS)
 	make -C libft
-	gcc -o $(NAME) $(OBJS) $(addprefix -I , $(HEADERS)) -L./libft -lft
+	gcc -o $(NAME) $(OBJS) $(addprefix -I , $(HDIR)) -L./libft -lft
 
 
 ./obj/%.o : %.c
 	@mkdir -p $(shell dirname $@)
-	gcc $(FLAGS) -o $@ -c $< -I libft $(addprefix -I , $(HEADERS))
+	gcc $(FLAGS) -o $@ -c $< -I libft $(addprefix -I , $(HDIR))
 
 re	: fclean
 	make
