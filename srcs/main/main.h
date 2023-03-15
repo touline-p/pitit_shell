@@ -10,4 +10,6 @@
 #include <readline/history.h>
 #include <stdlib.h>
 
+# define MINI_SHELL_MUST_GO 1
+
 #endif //PITIT_SHELL_MAIN_H
