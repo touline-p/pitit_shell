@@ -17,10 +17,9 @@ int	main(int ac, char **av, char **env)
 
 	while (MINI_SHELL_MUST_GO)
 	{
-		rl_signal_reset();
 		line = readline("prompt : >");
 		token_lst = lexing_line_to_token_lst(line, env);
-		execute_token_lst(token_lst);
+		execute_token_lst(token_lst, env);
 	}
 	return (0);
 }
