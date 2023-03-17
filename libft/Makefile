@@ -70,6 +70,7 @@ FILES	=	ft_atoi.c \
 	close_pipe_arr.c \
 	ft_free_int_arr.c \
 	ft_join_str_arr_on.c \
+	ft_get_env.c \
 
 HFILES	=	libft.h\
 
