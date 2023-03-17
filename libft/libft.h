@@ -100,6 +100,7 @@ int			str_is_made_of(char *str, char *charset);
 t_uchar		*ft_ustrdup(unsigned char *str);
 int			ft_min(int a, int b);
 int			ft_max(int a, int b);
+char		*ft_get_env(char *key, char **env);
 
 //t_ert		ft_atoi_on(const char *str, int *int_pt);
 
