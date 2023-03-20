@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   defines_execution.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 18:53:30 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/20 18:53:59 by wangthea         ###   ########.fr       */
+/*   Created: 2023/03/20 18:27:48 by wangthea          #+#    #+#             */
+/*   Updated: 2023/03/20 19:07:14 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef DEFINES_EXECUTION_H
+# define DEFINES_EXECUTION_H
 
-#ifdef NORMAL
+# define MINI_SHELL_MUST_GO_ON 1
 
-#include "minishell.h"
-
-#include "fcntl.h"
-#include <unistd.h>
-
-int	main(int ac, char **av, char **env)
-{
-	char			*line;
-	t_str_token_lst	*token_lst;
-
-	while (MINI_SHELL_MUST_GO)
-	{
-		rl_signal_reset();
-		line = readline("prompt : >");
-		token_lst = lexing_line_to_token_lst(line, env);
-		execute_token_lst(token_lst);
-	}
-	return (0);
-}
-
-#endif
+#endif 

@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   prototypes_execution.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 18:53:30 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/20 18:53:59 by wangthea         ###   ########.fr       */
+/*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
+/*   Updated: 2023/03/20 19:20:52 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PROTOTYPES_EXECUTION_H
+# define PROTOTYPES_EXECUTION_H
 
-#ifdef NORMAL
-
-#include "minishell.h"
-
-#include "fcntl.h"
-#include <unistd.h>
-
-int	main(int ac, char **av, char **env)
-{
-	char			*line;
-	t_str_token_lst	*token_lst;
-
-	while (MINI_SHELL_MUST_GO)
-	{
-		rl_signal_reset();
-		line = readline("prompt : >");
-		token_lst = lexing_line_to_token_lst(line, env);
-		execute_token_lst(token_lst);
-	}
-	return (0);
-}
+# include "enums_parsing.h"
+# include "structures_parsing.h"
 
 #endif

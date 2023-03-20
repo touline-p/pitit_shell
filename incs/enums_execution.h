@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   enums_execution.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 18:53:30 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/20 18:53:59 by wangthea         ###   ########.fr       */
+/*   Created: 2023/03/20 18:28:34 by wangthea          #+#    #+#             */
+/*   Updated: 2023/03/20 19:12:59 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef ENUMS_EXECUTION_H
+# define ENUMS_EXECUTION_H
 
-#ifdef NORMAL
+/*---- typedef enums ---------------------------------------------------------*/
 
-#include "minishell.h"
+typedef enum e_ret_status t_ret_status;
 
-#include "fcntl.h"
-#include <unistd.h>
+/*----------------------------------------------------------------------------*/
 
-int	main(int ac, char **av, char **env)
+enum e_ret_status
 {
-	char			*line;
-	t_str_token_lst	*token_lst;
-
-	while (MINI_SHELL_MUST_GO)
-	{
-		rl_signal_reset();
-		line = readline("prompt : >");
-		token_lst = lexing_line_to_token_lst(line, env);
-		execute_token_lst(token_lst);
-	}
-	return (0);
-}
+	failure,
+	success,
+	failed_malloc,
+	failed_write
+};
 
 #endif
