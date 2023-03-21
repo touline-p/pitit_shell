@@ -1,12 +1,24 @@
-#include "minishell_parsing.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expands.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/21 15:22:46 by twang             #+#    #+#             */
+/*   Updated: 2023/03/21 18:02:40 by twang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell_parsing.h"
+/*
 t_ret_status	performe_expand_on_line(char **line_pt, char **env)
 {
 	char **line_arr;
 	char **pin;
 
 	if (cut_line_on(*line_pt, &line_arr) != SUCCESS)
-		return ();
+		return (0);
 	printf("i m here\n");
 	pin = line_arr;
 	while (pin && *pin)
@@ -22,7 +34,7 @@ t_ret_status	performe_expand_on_line(char **line_pt, char **env)
 	return (SUCCESS);
 }
 
-#define TST_EXPAND
+// #define TST_EXPAND
 #ifdef TST_EXPAND
 
 int	main(int ac, char **av, char **env)
@@ -40,3 +52,4 @@ int	main(int ac, char **av, char **env)
 }
 
 #endif
+*/

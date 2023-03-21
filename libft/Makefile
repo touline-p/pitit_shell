@@ -73,7 +73,9 @@ FILES	=	ft_atoi.c 				\
 			ft_get_env.c 			\
 			ft_printf.c				\
 			check_extension.c		\
-			open_file.c
+			open_file.c				\
+			ft_putnbr_base_fd.c		\
+			ft_putnbr_unsigned_fd.c	\
 
 HFILES	=	libft.h					
 

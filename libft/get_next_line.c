@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:54:46 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/21 13:56:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/21 14:08:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 //	t_list		*head;
 //
 //	if (ft_lstnew_onsf(ft_strdup(buffer), &head) != SUCCESS)
-//		return (ft_memcset(buffer, 0, 0, BUFFER_SIZE), MLC_ERR);
+//		return (ft_memcset(buffer, 0, 0, BUFFER_SIZE), FAILED_MALLOC);
 //	ft_memcset(buffer, 0, 0, BUFFER_SIZE);
 //	if (_read_into_lst(fd, head, buffer) != SUCCESS)
-//		return (_gnl_ep(head, MLC_ERR));
+//		return (_gnl_ep(head, FAILED_MALLOC));
 //	if (ft_lststr_to_str(head, line_pt) != SUCCESS)
-//		return (_gnl_ep(head, MLC_ERR));
+//		return (_gnl_ep(head, FAILED_MALLOC));
 //	if (**line_pt == 0)
 //	{
 //		free(*line_pt);
@@ -46,7 +46,7 @@
 //	while (ft_strchr(pin->content, '\n') == NULL && signal == BUFFER_SIZE)
 //	{
 //		if (ft_lstnew_onsf(malloc(BUFFER_SIZE + 1), &(pin->next)) != SUCCESS)
-//			return (MLC_ERR);
+//			return (FAILED_MALLOC);
 //		pin = pin->next;
 //		signal = read(fd, pin->content, BUFFER_SIZE);
 //		if (signal == -1)
