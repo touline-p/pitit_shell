@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 20:43:18 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/21 13:53:55 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/21 14:08:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_lstclean(t_list *head, void (*del)(void *))
 //
 //	new = malloc(sizeof (t_list));
 //	if (new == NULL)
-//		return (MLC_ERR);
+//		return (FAILED_MALLOC);
 //	new->content = content;
 //	new->next = NULL;
 //	*list_ptr = new;
@@ -46,6 +46,6 @@ void	ft_lstclean(t_list *head, void (*del)(void *))
 //t_ert	ft_lstnew_onsf(void *content, t_list **list_ptr)
 //{
 //	if (content == NULL)
-//		return (MLC_ERR);
+//		return (FAILED_MALLOC);
 //	return (ft_lstnew_on(content, list_ptr));
 //}

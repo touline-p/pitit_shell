@@ -3,19 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+         #
+#    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/03/20 19:08:04 by wangthea         ###   ########.fr        #
+#    Updated: 2023/03/21 17:39:21 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.SILENT:
-
+include config/print.mk
 include config/headers_execution.mk
 include config/headers_parsing.mk
 include config/sources_execution.mk
 include config/sources_parsing.mk
+
+.SILENT:
 
 #--variables-------------------------------------------------------------------#
 
@@ -25,7 +26,7 @@ DEBUG		=	no
 #--includes & libraries--------------------------------------------------------#
 
 INC_DIR		=	incs
-LIBFT_DIR	=	$(LIB_DIR)/libft
+LIBFT_DIR	=	libft
 
 #--sources & objects-----------------------------------------------------------#
 
@@ -34,7 +35,7 @@ OBJ_DIR		=	.objs
 
 #--flags-----------------------------------------------------------------------#
 
-CFLAGS		=	-Wall -Wextra -Werror -I $(LIBFT_DIR) -I $(INC_DIR)
+CFLAGS		=	-Wall -Wextra -Werror -I $(LIBFT_DIR) -I $(INC_DIR)/execution_incs -I $(INC_DIR)/parsing_incs
 
 #--debug flags--------------------------------------------------------#
 
@@ -64,12 +65,12 @@ all:
 
 $(NAME): $(OBJECTS)
 	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@
+	$(PRINT_CREATING)
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS) $(LIBFT)
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
-
-
+	$(PRINT_COMPILING)
 
 #--libs, debugs & bonus--------------------------------------------------------#
 
@@ -88,11 +89,13 @@ re:
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(RM) -rf $(OBJECTS)
+	$(PRINT_CLEAN)
 
 fclean:
 	$(MAKE) clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
+	$(PRINT_FCLEAN)
 
 #--PHONY-----------------------------------------------------------------------#
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_parsing.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:11:55 by twang             #+#    #+#             */
-/*   Updated: 2023/03/20 19:21:17 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:00:49 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 /*---- includes --------------------------------------------------------------*/
 
+# include "libft.h"
 # include "defines_parsing.h"
 # include "enums_parsing.h"
-# include "minishell_parsing.h"
 # include "prototypes_parsing.h"
 # include "structures_parsing.h"
 

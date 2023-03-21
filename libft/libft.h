@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/21 13:56:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/21 15:15:14 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,21 @@
 # include <limits.h>
 # include <stdio.h>
 
-# ifndef ERT
-#  define ERT
-# endif
+# include <stdarg.h>
+# include <fcntl.h>
+# include <stdbool.h>
+# include <stdint.h>
+
+# define HEXA_LOW "0123456789abcdef"
+# define HEXA_UP "0123456789ABCDEF"
+
+# define END "\033[0m"
+# define GREY "\033[1;30m"
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define BLUE "\033[1;34m"
+# define PURPLE "\033[1;35m"
 
 #ifndef T_RET_STATUS
 # define T_RET_STATUS
@@ -28,8 +40,8 @@ typedef	enum e_ret_status
 {
 	SUCCESS,
 	FAILURE,
-	MLC_ERR,
-	WRT_ERR
+	FAILED_MALLOC,
+	FAILED_WRITE
 }	t_ret_status;
 
 #endif
@@ -57,10 +69,7 @@ void		*ft_memcpy(void *dst, const void *src, size_t lenght);
 void		*ft_memmove(void *dst, const void *src, size_t length);
 void		*ft_memset(void *dst, int c, size_t length);
 void		*ft_memcset(void *dst, int c, int till, size_t max_length);
-void		ft_putchar_fd(char c, int fd);
-void		ft_putstr_fd(char *c, int fd);
 void		ft_putendl_fd(char *c, int fd);
-void		ft_putnbr_fd(int c, int fd);
 char		*ft_strchr(const char *s, int c);
 size_t		ft_index_of(const char *s, int c);
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
@@ -131,8 +140,25 @@ size_t		ft_lststrlen(t_list *lst);
 
 /** GNL **/
 
-# define BUFFER_SIZE 1024
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 //t_ert		ft_gnl_on(int fd, char **line_pt);
+
+/**---- utils ---- **/
+
+int		open_file(const char *av);
+
+/**---- printf ---- dprintf ---- **/
+
+int		ft_printf(const char *str, ...);
+int		ft_dprintf(int fd, const char *str, ...);
+size_t	ft_putchar_fd(int c, int fd);
+void	ft_putendl_fd(char *s, int fd);
+size_t	ft_putstr_fd(char *s, int fd);
+size_t	ft_putnbr_base(unsigned long nbr, char *base, int fd);
+size_t	ft_putnbr_unsigned_fd(unsigned int n, int fd);
+size_t	ft_putnbr_fd(int n, int fd);
 
 #endif

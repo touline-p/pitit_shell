@@ -13,7 +13,7 @@ t_ret_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
 		size_str += ft_strlen(*(arr_pin++));
 	*line_pt = malloc(size_str);
 	if (*line_pt == NULL)
-		return (MLC_ERR);
+		return (FAILED_MALLOC);
 	str_pin = *line_pt;
 	arr_pin = str_arr;
 	while (*arr_pin)
