@@ -1,5 +1,7 @@
-# Le PITIT_SHELL
+# LE PITIT_SHELL
 
-## Ceci est un super titre pour l'intro
+## Aussi mignon qu’un vrai shell
 
-youhou
+Ici nous expliquons le projet et comment nous l'avons fait !
+
+by bpoumeau & twang.

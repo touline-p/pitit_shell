@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_ert.c                                          :+:      :+:    :+:   */
+/*   structures_parsing.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 19:11:04 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/21 13:56:30 by twang            ###   ########.fr       */
+/*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
+/*   Updated: 2023/03/20 19:19:27 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef STRUCTURES_PARSING_H
+# define STRUCTURES_PARSING_H
 
-//void	put_ert(t_ert code)
-//{
-//	if (code == SUCCESS)
-//		write(1, "SUCCESS\n", 8);
-//	if (code == FAILURE)
-//		write(1, "FAILURE\n", 8);
-//	if (code == MLC_ERR)
-//		write(1, "MLC_ERR\n", 8);
-//}
+/*---- typedef structures ----------------------------------------------------*/
+
+
+
+/*---- structures ------------------------------------------------------------*/
+
+
+
+#endif

@@ -1,0 +1,43 @@
+
+NAME := ./tester
+
+HDIR := srcs/expands/ \
+	srcs/ \
+	libft/
+
+HEADERS	:= srcs/expands/ \
+	srcs/
+#	mini_parsing.h \
+#	test_mini.h \
+#	libft/libft.h
+
+FLAGS := -Wall -Werror -Wextra # -fsanitize=address #-D SILENCIEUX=false
+
+OBJS := $(addprefix obj/, $(FILE:.c=.o))
+
+test	: $(NAME)
+	clear
+	valgrind --leak-check=full --track-fds=yes $(NAME)
+
+all : $(NAME)
+
+
+$(NAME) : $(OBJS) $(HEADERS)
+	make -C libft
+	gcc $(FLAGS) -o $(NAME) $(OBJS) $(addprefix -I , $(HDIR)) -L./libft -lft
+
+
+./obj/%.o : %.c
+	@mkdir -p $(shell dirname $@)
+	gcc $(FLAGS) -o $@ -c $< -I libft $(addprefix -I , $(HDIR))
+
+re	: fclean
+	make
+
+fclean	: clean
+	rm $(NAME)
+
+clean :
+	rm -rf obj
+	mkdir obj
+	make -C libft fclean

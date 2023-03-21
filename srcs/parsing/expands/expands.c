@@ -1,6 +1,4 @@
-#include "cut_line.h"
-#include "expands.h"
-
+#include "minishell_parsing.h"
 
 t_ret_status	performe_expand_on_line(char **line_pt, char **env)
 {
@@ -8,27 +6,25 @@ t_ret_status	performe_expand_on_line(char **line_pt, char **env)
 	char **pin;
 
 	if (cut_line_on(*line_pt, &line_arr) != SUCCESS)
-		return (MLC_ERR);
+		return ();
 	printf("i m here\n");
 	pin = line_arr;
 	while (pin && *pin)
 	{
-		if (**pin == '$' && replace_dollar_str_by_env_value(pin, env) != SUCCESS)
-			return (MLC_ERR);
+		if (**pin == '$' && \
+		replace_dollar_str_by_env_value(pin, env) != SUCCESS)
+			return (FAILED_MALLOC);
 		pin++;
 	}
 	if (ft_join_str_arr_on(line_arr, line_pt) != SUCCESS)
-		return (ft_free_split(line_arr), MLC_ERR);
+		return (ft_free_split(line_arr), FAILED_MALLOC);
 	ft_free_split(line_arr);
 	return (SUCCESS);
 }
 
-
-
 #define TST_EXPAND
-
 #ifdef TST_EXPAND
-#include <stdio.h>
+
 int	main(int ac, char **av, char **env)
 {
 	(void) ac;
@@ -42,4 +38,5 @@ int	main(int ac, char **av, char **env)
 	printf("I am so smart!\n");
 	return (0);
 }
+
 #endif

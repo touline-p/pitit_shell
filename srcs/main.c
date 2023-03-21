@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_ert.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 19:11:04 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/21 13:56:30 by twang            ###   ########.fr       */
+/*   Created: 2023/03/20 18:53:30 by wangthea          #+#    #+#             */
+/*   Updated: 2023/03/21 13:58:52 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-//void	put_ert(t_ert code)
-//{
-//	if (code == SUCCESS)
-//		write(1, "SUCCESS\n", 8);
-//	if (code == FAILURE)
-//		write(1, "FAILURE\n", 8);
-//	if (code == MLC_ERR)
-//		write(1, "MLC_ERR\n", 8);
-//}
+#ifdef NORMAL
+
+#include "minishell.h"
+
+#include "fcntl.h"
+#include <unistd.h>
+
+int	main(int ac, char **av, char **env)
+{
+	char			*line;
+	t_str_token_lst	*token_lst;
+
+	while (MINI_SHELL_MUST_GO_ON)
+	{
+		rl_signal_reset();
+		line = readline("prompt : >");
+		token_lst = lexing_line_to_token_lst(line, env);
+		execute_token_lst(token_lst);
+	}
+	return (0);
+}
+
+#endif

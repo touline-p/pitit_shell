@@ -1,4 +1,4 @@
-#include "../../libft/libft.h"
+#include "minishell_parsing.h"
 
 t_ret_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 {
@@ -8,7 +8,7 @@ t_ret_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 	pin_env = env;
 	join = ft_strjoin(*pin_pt + 1, "=");
 	if (!join)
-		return (MLC_ERR);
+		return (FAILED_MALLOC);
 	while (*pin_env)
 	{
 		if (ft_strncmp(join, *pin_env, ft_strlen(join)) == 0)
@@ -17,7 +17,7 @@ t_ret_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 			*pin_pt = ft_strdup(ft_strchr(*pin_env, '=') + 1);
 			free(join);
 			if (*pin_pt == NULL)
-				return (MLC_ERR);
+				return (FAILED_MALLOC);
 			return (SUCCESS);
 		}
 		pin_env++;
@@ -26,7 +26,7 @@ t_ret_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 	free(join);
 	*pin_pt = ft_strdup("");
 	if (*pin_pt == NULL)
-		return (MLC_ERR);
+		return (FAILED_MALLOC);
 	return (SUCCESS);
 }
 

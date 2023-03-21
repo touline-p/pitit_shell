@@ -1,5 +1,5 @@
 
-#include "cut_line.h"
+#include "minishell_parsing.h"
 
 static size_t			count_indep_words(char *line);
 static t_ret_status 	check_allocations(char **line_arr, size_t arr_len);
@@ -14,7 +14,7 @@ t_ret_status	cut_line_on(char *line, char ***res_pt)
 	line_arr = malloc(sizeof(char *) * count_indep_words(line));
 	if (line_arr == NULL
 		|| alloc_each_cells(line, line_arr) != SUCCESS)
-		return (free(line), free(line_arr), MLC_ERR);
+		return (free(line), free(line_arr), FAILED_MALLOC);
 	fill_cells(line, line_arr);
 	*res_pt = line_arr;
 	return (free(line), SUCCESS);
@@ -56,7 +56,7 @@ static	t_ret_status 	check_allocations(char **line_arr, size_t arr_len)
 	}
 	while (tmp--)
 		free(line_arr[tmp]);
-	return (MLC_ERR);
+	return (FAILED_MALLOC);
 }
 
 static	t_ret_status	alloc_each_cells(char *line, char **line_arr)
@@ -134,4 +134,5 @@ int main(int ac, char **av, char **env)
 	}
 	ft_free_split(line_arr);
 }
+
 #endif
