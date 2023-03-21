@@ -13,11 +13,11 @@ t_ret_status	cut_line_on(char *line, char ***res_pt)
 	*res_pt = NULL;
 	line_arr = malloc(sizeof(char *) * count_indep_words(line));
 	if (line_arr == NULL
-		|| alloc_each_cells(line, line_arr) != success)
-		return (free(line), free(line_arr), failed_malloc);
+		|| alloc_each_cells(line, line_arr) != SUCCESS)
+		return (free(line), free(line_arr), FAILED_MALLOC);
 	fill_cells(line, line_arr);
 	*res_pt = line_arr;
-	return (free(line), success);
+	return (free(line), SUCCESS);
 }
 
 
@@ -52,11 +52,11 @@ static	t_ret_status 	check_allocations(char **line_arr, size_t arr_len)
 		if (line_arr[arr_len] == NULL)
 			break ;
 		if (arr_len == 0)
-			return (success);
+			return (SUCCESS);
 	}
 	while (tmp--)
 		free(line_arr[tmp]);
-	return (failed_malloc);
+	return (FAILED_MALLOC);
 }
 
 static	t_ret_status	alloc_each_cells(char *line, char **line_arr)

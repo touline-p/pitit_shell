@@ -3,14 +3,16 @@
 #                                                         :::      ::::::::    #
 #    headers_parsing.mk                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+         #
+#    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:32:02 by twang             #+#    #+#              #
-#    Updated: 2023/03/20 18:57:48 by wangthea         ###   ########.fr        #
+#    Updated: 2023/03/21 12:36:59 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-HEADERS	=	incs/defines_parsing.h											\
-			incs/enums_parsing.h											\
-			incs/minishell_parsing.h										\
-			incs/prototypes_parsing.h
+HEADERS	=	incs/parsing_incs/defines_parsing.h								\
+			incs/parsing_incs/enums_parsing.h								\
+			incs/parsing_incs/minishell_parsing.h							\
+			incs/parsing_incs/prototypes_parsing.h							\
+			incs/parsing_incs/structures_execution.h
+

@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enums_parsing.h                                    :+:      :+:    :+:   */
+/*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 18:28:34 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/20 19:22:10 by wangthea         ###   ########.fr       */
+/*   Created: 2023/01/31 11:48:21 by wangthea          #+#    #+#             */
+/*   Updated: 2023/03/08 18:40:16 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENUMS_PARSING_H
-# define ENUMS_PARSING_H
+#include "libft.h"
 
-/*---- typedef enums ---------------------------------------------------------*/
-
-typedef enum e_ret_status	t_ret_status;
-
-/*----------------------------------------------------------------------------*/
-
-enum e_ret_status
+int	open_file(const char *av)
 {
-	success,
-	failure,
-	malloc_fail,
-	write_fail
-};
+	int	fd;
 
-#endif
+	fd = open(av, O_DIRECTORY, 0644);
+	if (fd != -1)
+	{
+		ft_dprintf(2, "Error\n");
+		ft_dprintf(2, "warning: the file shouldn't be a directory\n");
+		close(fd);
+		exit (1);
+	}
+	fd = open(av, O_RDONLY, 0644);
+	if (fd == -1)
+	{
+		ft_dprintf(2, "Error\n");
+		perror("open");
+		close(fd);
+		exit (1);
+	}
+	return (fd);
+}
