@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/03/22 14:12:48 by twang            ###   ########.fr        #
+#    Updated: 2023/03/22 16:48:31 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,9 @@ include config/sources_parsing.mk
 
 NAME		=	minishell
 DEBUG		=	no
+
+BPOUMEAU	=	\e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a
+TWANG		=	\e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a
 
 #--includes & libraries--------------------------------------------------------#
 
@@ -85,7 +88,7 @@ debug:
 
 header:
 	printf "\n${PURPLE}project:\t${END}${BLUE}minishell${END}\n"
-	printf "${PURPLE}author:\t\t${END}${BLUE}bpoumeau && twang${END}\n"
+	printf "${PURPLE}author:\t\t${END}${BLUE}${BPOUMEAU} && ${TWANG}${END}\n"
 	printf "${PURPLE}debug mode:\t${END}${BLUE}${DEBUG}${END}\n"
 	printf "${PURPLE}compiler:\t${END}${BLUE}${CC}${END}\n"
 	printf "${PURPLE}flags:\t\t${END}${BLUE}${CFLAGS}${END}\n"
