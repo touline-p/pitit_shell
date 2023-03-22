@@ -71,11 +71,12 @@ FILES	=	ft_atoi.c 				\
 			ft_free_int_arr.c 		\
 			ft_join_str_arr_on.c 	\
 			ft_get_env.c 			\
-			ft_printf.c				\
+			ft_str_arr.c			\
+			open_file.c				\
+			#ft_printf.c				\
 			check_extension.c		\
-			open_file.c
 
-HFILES	=	libft.h					
+HFILES	=	libft.h
 
 ODIR	=	./
 

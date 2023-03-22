@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
+# include <stdarg.h>
+# include <fcntl.h>
 
 # ifndef ERT
 #  define ERT
@@ -80,9 +82,11 @@ void		*ft_calloc(size_t n, size_t size);
 char		**ft_split(char const *s, char c);
 t_ret_status	ft_join_str_arr_on(char **str_arr, char **line_pt);
 char		*ft_strdup(const char *src);
+t_ret_status	ft_strdup_on(const char *src, char **str_pt);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+t_ret_status	ft_substr_on(char const *s, unsigned int start, size_t len, char **line_pt);
 int			ft_atoi(const char *nptr);
 int			ft_atoi_has_overflown(char *str);
 char		*ft_itoa(int n);
@@ -101,8 +105,12 @@ t_uchar		*ft_ustrdup(unsigned char *str);
 int			ft_min(int a, int b);
 int			ft_max(int a, int b);
 char		*ft_get_env(char *key, char **env);
+size_t 		ft_str_array_len(char **str_arr);
+char 		**ft_str_array_dup(char **str_arr);
+char 		**ft_strarray_join(char **first, char **second);
 
 //t_ert		ft_atoi_on(const char *str, int *int_pt);
+int	ft_dprintf(int fd, const char *str, ...);
 
 /** Pipes utils **/
 

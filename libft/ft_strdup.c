@@ -29,3 +29,14 @@ char	*ft_strdup(const char *src)
 	*tmp = 0;
 	return (dst);
 }
+
+t_ret_status	ft_strdup_on(const char *src, char **str_pt)
+{
+	char *new;
+
+	new = ft_strdup(src);
+	if (new == NULL)
+		return (MLC_ERR);
+	*str_pt = new;
+	return (SUCCESS);
+}
