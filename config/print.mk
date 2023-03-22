@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 17:19:52 by twang             #+#    #+#              #
-#    Updated: 2023/03/21 17:40:26 by twang            ###   ########.fr        #
+#    Updated: 2023/03/22 13:58:26 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,15 +36,15 @@ define    PRINT_CLEAN
 endef
 
 define    PRINT_FCLEAN
-    printf "[ ${RED}removing${END} ]\t${LIGHTBLUE}executable file${END}\n"
+    printf "[ ${RED}removing${END} ]\t${LIGHTBLUE}executable file${END}\n\n"
 endef
 
 define    PRINT_COMPILING
-    printf "%-95b%b" "[ ${ORANGE}compiling${END} ]\t${LIGHTBLUE}$<${END}" "${GREEN}[✓]${END}\n"
+    printf "%-95b%b" "[ ${PURPLE}compiling${END} ]\t${LIGHTBLUE}$<${END}" "${GREEN}[✓]${END}\n"
 endef
 
 define    PRINT_CREATING
-    printf "[ ${ORANGE}creating${END} ]\t${LIGHTBLUE}$@${END}\n"
+    printf "\n[ ${PURPLE}creating${END} ]\t${LIGHTBLUE}$@${END}\n"
 endef
 
 define LINE

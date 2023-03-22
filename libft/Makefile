@@ -96,7 +96,7 @@ BOBJS	=	$(addprefix $(ODIR), $(BFILES:.c=.o))
 all	:	 $(ODIR) $(NAME)
 
 $(NAME)	:	$(OBJS) 
-	@ $(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	$(PRINT_CREATING)
 
 $(ODIR)	:
@@ -107,12 +107,12 @@ $(ODIR)%.o	:	%.c $(HFILES)
 	$(PRINT_COMPILING)
 
 clean	:
-	-rm -rf $(OBJS)
-	-rm -rf $(BOBJS)
+	rm -rf $(OBJS)
+	rm -rf $(BOBJS)
 	$(PRINT_CLEAN)
 
 fclean	:	clean
-	-rm $(NAME)
+	rm $(NAME)
 	$(PRINT_FCLEAN)
 
 re	:	

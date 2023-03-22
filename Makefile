@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/03/21 17:39:21 by twang            ###   ########.fr        #
+#    Updated: 2023/03/22 14:12:48 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ OBJECTS	=	$(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 #--compilation rules-----------------------------------------------------------#
 
 all:
+	$(MAKE) header
 	$(MAKE) lib
 	$(MAKE) $(NAME)
 
@@ -79,6 +80,17 @@ lib:
 
 debug:
 	$(MAKE) re DEBUG=yes
+
+#--print header----------------------------------------------------------------#
+
+header:
+	printf "\n${PURPLE}project:\t${END}${BLUE}minishell${END}\n"
+	printf "${PURPLE}author:\t\t${END}${BLUE}bpoumeau && twang${END}\n"
+	printf "${PURPLE}debug mode:\t${END}${BLUE}${DEBUG}${END}\n"
+	printf "${PURPLE}compiler:\t${END}${BLUE}${CC}${END}\n"
+	printf "${PURPLE}flags:\t\t${END}${BLUE}${CFLAGS}${END}\n"
+	printf "${PURPLE}date:\t\t${END}${BLUE}2023/03/20${END}\n"
+	printf "              ____________________________\n\n"
 
 #--re, clean & fclean----------------------------------------------------------#
 
