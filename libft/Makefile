@@ -1,3 +1,7 @@
+include print_libft.mk
+
+.SILENT:
+
 NAME	=	libft.a
 
 CC	=	cc
@@ -92,21 +96,24 @@ BOBJS	=	$(addprefix $(ODIR), $(BFILES:.c=.o))
 all	:	 $(ODIR) $(NAME)
 
 $(NAME)	:	$(OBJS) 
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS) 
-	ranlib $(NAME)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	$(PRINT_CREATING)
 
 $(ODIR)	:
 	mkdir $(ODIR)
 
 $(ODIR)%.o	:	%.c $(HFILES)
 	$(CC) $(CFLAGS) -I $(HDIR) -o $@ -c $<
+	$(PRINT_COMPILING)
 
 clean	:
-	-rm -rf $(OBJS)
-	-rm -rf $(BOBJS)
+	rm -rf $(OBJS)
+	rm -rf $(BOBJS)
+	$(PRINT_CLEAN)
 
 fclean	:	clean
-	-rm $(NAME)
+	rm $(NAME)
+	$(PRINT_FCLEAN)
 
 re	:	
 	make fclean
@@ -114,7 +121,6 @@ re	:
 
 bonus	:	$(BOBJS) $(OBJS) $(HEADER)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(BOBJS)
-	ranlib $(NAME)
 
 ncpy	:	$(NAME)
 	cp $(NAME) ~/lib/
