@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:33:30 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/12 00:43:24 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:47:30 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -389,9 +389,26 @@ void	tests_tok_to_str_tok_ln(char *str, char **env)
 	str_tok = token_lst_to_str_token(tok);
 	if (str_tok != NULL)
 	{
+		del_space_token(str_tok);
 		display_str_token(str_tok);
 		string_token_destructor(str_tok);
 	}
+}
+
+t_string_token	*parsing_constructor(char *str, char **env)
+{
+	t_token			*tok;
+	t_string_token	*str_tok;
+
+	tok = token_lst_constructor(str);
+	preserve_token_lst(tok);
+	expand_dollars(tok, env);
+	split_toklst_on_meta(tok);
+	regroup_meta(tok);
+	str_tok = token_lst_to_str_token(tok);
+	del_space_token(str_tok);
+	display_str_token(str_tok);
+	return (str_tok);
 }
 
 void	tests_tok_to_str_tok(char **env)
@@ -492,7 +509,11 @@ int main(int ac, char **av, char **env) {
 	//tests_tok_to_str_tok(env);
 	//tests_pipe_arr(env);
 
-	tests_all_first_child(env);
+	//tests_all_first_child(env);
 	//tests_tokenisation(env);
+	
+	t_string_token	*str_tok = parsing_constructor(av[1], env);
+	display_str_token(str_tok);
+	
 	return (0);
 }
