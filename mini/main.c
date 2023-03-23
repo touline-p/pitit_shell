@@ -6,7 +6,7 @@
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:33:30 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/23 17:47:30 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:08:24 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -497,6 +497,7 @@ int main(int ac, char **av, char **env) {
 
 	(void)ac;
 	(void)av;
+	// (void)env;
 	//tests_preserves();
 	//tests_id_meta();
 	//tests_metachar_groupment();
@@ -506,10 +507,10 @@ int main(int ac, char **av, char **env) {
 	//tests_expands(env);
 	//tests_str_to_split_token(env);
 
-	//tests_tok_to_str_tok(env);
+	tests_tok_to_str_tok(env);
 	//tests_pipe_arr(env);
 
-	//tests_all_first_child(env);
+	// tests_all_first_child(env);
 	//tests_tokenisation(env);
 	
 	t_string_token	*str_tok = parsing_constructor(av[1], env);

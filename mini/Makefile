@@ -1,7 +1,7 @@
 
 NAME := ./tester
 
-FILE := main.c \
+FILE	=	main.c \
 	mini_parsing.c \
 	testing_utils.c \
 	token_lst_utils.c \
