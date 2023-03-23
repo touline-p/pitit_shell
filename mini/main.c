@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:33:30 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/12 00:43:24 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/03/23 10:09:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,6 +480,7 @@ int main(int ac, char **av, char **env) {
 
 	(void)ac;
 	(void)av;
+	// (void)env;
 	//tests_preserves();
 	//tests_id_meta();
 	//tests_metachar_groupment();
@@ -489,10 +490,10 @@ int main(int ac, char **av, char **env) {
 	//tests_expands(env);
 	//tests_str_to_split_token(env);
 
-	//tests_tok_to_str_tok(env);
+	tests_tok_to_str_tok(env);
 	//tests_pipe_arr(env);
 
-	tests_all_first_child(env);
+	// tests_all_first_child(env);
 	//tests_tokenisation(env);
 	return (0);
 }
