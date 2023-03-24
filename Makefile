@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/03/22 16:48:31 by twang            ###   ########.fr        #
+#    Updated: 2023/03/23 17:45:50 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,14 @@ OBJ_DIR		=	.objs
 CFLAGS		=	-Wall -Wextra -Werror -I $(LIBFT_DIR) -I $(INC_DIR)/execution_incs -I $(INC_DIR)/parsing_incs
 
 #--debug flags--------------------------------------------------------#
+
+DFLAGS		=	-g3 -fsanitize=address
+
+ifeq ($(DEBUG), yes)
+CFLAGS 		+=	$(DFLAGS)
+endif
+
+#--leaks flags--------------------------------------------------------#
 
 DFLAGS		=	-g3 -fsanitize=address
 
