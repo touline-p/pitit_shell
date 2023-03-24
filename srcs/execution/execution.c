@@ -6,22 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/23 13:43:08 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/24 16:15:12 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
-
-/***
-typedef struct s_process
-{
-	int fd_in;
-	int fd_out;
-	char *cmd;
-	char **args;
-}	t_process;
-
- ***/
 
 /***
 < start > < 1str > <_>_> < 2str > < 3str > < << > < 4str > < 5str > < end >
@@ -56,6 +45,8 @@ execve(cmd, args, *env_pt);
 
 static void	token_recognition(t_string_token *string_of_tokens)
 {
+	/// balader dans la liste chainees et faire en fonction
+	//create structure init -> fds management	-> fork management -> heredoc 
 	//check des chevrons	-> infile / outifile - les gerer - les virer
 	//check here_docs 		-> here_doc becomes infile 
 	//check des pipes		-> checks fds -> prepare for fork
