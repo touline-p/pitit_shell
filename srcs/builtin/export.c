@@ -5,20 +5,91 @@ static t_ret_status	_get_key_on(char *line, char **key_pt);
 static t_ret_status	_display_unic_export(char *env_line);
 static t_ret_status	_get_content_on(char *line, char **key_pt);
 
+void	modify_env(char *key, char **args, char **env);
+t_ret_status	compare_and_modify_export_args(char **args, char **env);
+
 t_ret_status	export_builtin(char **args, char ***env_pt)
 {
 	char **tmp;
 
 	if (ft_str_array_len(args) == 1)
 		return (ft_free_split(args), _export_display(*env_pt));
+	if (compare_and_modify_export_args(args, *env_pt) == MLC_ERR)
+		return (MLC_ERR);
 	tmp = ft_strarray_join(*env_pt, args);
+	free(args);
 	if (tmp == NULL)
 		return (MLC_ERR);
-	free(args);
 	free(*env_pt);
 	*env_pt = tmp;
 	return (SUCCESS);
 }
+
+t_ret_status	key_is_in_env(char *key, char **env, char ***env_line_pt)
+{
+	char	*key_env;
+
+	while (*env)
+	{
+		if (_get_key_on(*env, &key_env) != SUCCESS)
+			return (MLC_ERR);
+		if (ft_strcmp(key, key_env) == 0)
+		{
+			*env_line_pt = env;
+			free(key_env);
+			return (SUCCESS);
+		}
+		free(key_env);
+		env++;
+	}
+	return (FAILURE);
+}
+
+void	modify_env(char *key, char **args, char **env)
+{
+	char	**env_line_pt;
+
+	if (key_is_in_env(key, env, &env_line_pt) == FAILURE
+		|| ft_strchr(*args, '=') == NULL)
+		return ;
+	free(*env_line_pt);
+	*env_line_pt = *args;
+	*args = NULL;
+}
+
+static void	_resize_arr(char **args, size_t args_len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < args_len)
+	{
+		while (args[i] == NULL && args_len > i)
+			args[i] = args[args_len--];
+		i++;
+	}
+}
+
+t_ret_status	compare_and_modify_export_args(char **args, char **env)
+{
+	char	*key;
+	size_t	args_len;
+
+	args_len = ft_str_array_len(args);
+	while (*args)
+	{
+		if (_get_key_on(*args, &key) != SUCCESS)
+			return (MLC_ERR);
+		modify_env(key, args, env);
+		free(key);
+		args++;
+	}
+	//_resize_arr(args, args_len);
+	return (SUCCESS);
+}
+
+
+
 
 static t_ret_status	_export_display(char **env)
 {
@@ -87,7 +158,7 @@ int main(int ac, char **av, char **env)
 	env = ft_str_array_dup(env);
 	export_builtin(av, &env);
 	ft_free_split(env);
-	//ft_print_split(env);
+	ft_print_split(env);
 }
 #endif
 
