@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:21:25 by bpoumeau          #+#    #+#             */
-/*   Updated: 2022/11/08 13:44:50 by bpoumeau         ###   ########lyon.fr   */
+/*   Created: 2022/11/08 13:52:20 by bpoumeau          #+#    #+#             */
+/*   Updated: 2022/11/08 18:47:40 by bpoumeau         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-char	*ft_strdup(const char *src)
+void	*ft_memmove(void *dst, const void *src, size_t length)
 {
-	char	*dst;
-	char	*tmp;
+	int	i;
 
-	tmp = (char *)src;
-	while (*tmp)
-		tmp++;
-	dst = malloc(tmp - src + 1);
-	if (!dst)
-		return (NULL);
-	tmp = dst;
-	while (*src)
-		*(tmp++) = *(src++);
-	*tmp = 0;
+	if (dst == src)
+		return (dst);
+	if (dst > src)
+	{
+		i = length - 1;
+		while (i >= 0)
+		{
+			*(char *)(dst + i) = *(char *)(src + i);
+			i--;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < (int)length)
+		{
+			*(char *)(dst + i) = *(char *)(src + i);
+			i++;
+		}
+	}
 	return (dst);
-}
-
-t_ret_status	ft_strdup_on(const char *src, char **str_pt)
-{
-	char *new;
-
-	new = ft_strdup(src);
-	if (new == NULL)
-		return (MLC_ERR);
-	*str_pt = new;
-	return (SUCCESS);
 }

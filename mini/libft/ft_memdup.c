@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:21:25 by bpoumeau          #+#    #+#             */
-/*   Updated: 2022/11/08 13:44:50 by bpoumeau         ###   ########lyon.fr   */
+/*   Created: 2023/02/13 18:26:29 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/02/13 18:26:33 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-char	*ft_strdup(const char *src)
+void	*ft_memdup(void *mem, size_t size)
 {
-	char	*dst;
-	char	*tmp;
+	char	*str;
+	char	*pin;
 
-	tmp = (char *)src;
-	while (*tmp)
-		tmp++;
-	dst = malloc(tmp - src + 1);
-	if (!dst)
+	str = malloc(size);
+	if (!str)
 		return (NULL);
-	tmp = dst;
-	while (*src)
-		*(tmp++) = *(src++);
-	*tmp = 0;
-	return (dst);
-}
-
-t_ret_status	ft_strdup_on(const char *src, char **str_pt)
-{
-	char *new;
-
-	new = ft_strdup(src);
-	if (new == NULL)
-		return (MLC_ERR);
-	*str_pt = new;
-	return (SUCCESS);
+	pin = str;
+	while (size--)
+		*(pin++) = *(char *)mem++;
+	return (str);
 }

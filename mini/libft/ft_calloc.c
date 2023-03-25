@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:21:25 by bpoumeau          #+#    #+#             */
-/*   Updated: 2022/11/08 13:44:50 by bpoumeau         ###   ########lyon.fr   */
+/*   Created: 2022/11/08 14:20:14 by bpoumeau          #+#    #+#             */
+/*   Updated: 2022/11/09 12:36:57 by bpoumeau         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h" 
 
-char	*ft_strdup(const char *src)
+void	*ft_calloc(size_t n, size_t size)
 {
-	char	*dst;
-	char	*tmp;
+	void	*ptr;
 
-	tmp = (char *)src;
-	while (*tmp)
-		tmp++;
-	dst = malloc(tmp - src + 1);
-	if (!dst)
+	if (size == 0)
+		return (ft_strdup(""));
+	if (n > UINT_MAX / size)
 		return (NULL);
-	tmp = dst;
-	while (*src)
-		*(tmp++) = *(src++);
-	*tmp = 0;
-	return (dst);
-}
-
-t_ret_status	ft_strdup_on(const char *src, char **str_pt)
-{
-	char *new;
-
-	new = ft_strdup(src);
-	if (new == NULL)
-		return (MLC_ERR);
-	*str_pt = new;
-	return (SUCCESS);
+	ptr = (void *)malloc(n * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, n * size);
+	return (ptr);
 }

@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   per_n_ret.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/03/11 20:23:57 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/03/11 20:24:00 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini_parsing.h"
 
-void	ft_print_split(char **split)
+void	per_n_set_errno(char *msg)
 {
-	if (split == NULL)
-	{
-		printf("Null\n");
-		return ;
-	}
-	while (*split)
-	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
-	}
-	printf("%p\n", *split);
+	perror(msg);
+	errno = SUCCESS;
 }

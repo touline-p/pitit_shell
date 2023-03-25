@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/02/15 18:35:57 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/02/15 18:41:11 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_print_split(char **split)
+char	*ft_strcpy(char *dst, char *src)
 {
-	if (split == NULL)
+	char	*pin;
+
+	pin = dst;
+	while (*src)
 	{
-		printf("Null\n");
-		return ;
+		*pin = *src;
+		pin++;
+		src++;
 	}
-	while (*split)
+	*pin = 0;
+	return (dst);
+}
+
+char	*ft_strcpy_rn(char *dst, char *src)
+{
+	while (*src)
 	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
+		*dst = *src;
+		dst++;
+		src++;
 	}
-	printf("%p\n", *split);
+	*dst = *src;
+	return (dst);
 }

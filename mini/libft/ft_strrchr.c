@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/02/08 21:43:17 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/02/15 22:52:51 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_split(char **split)
+char	*ft_strrchr(const char *s, int c)
 {
-	if (split == NULL)
+	char	*tmp;
+	char	*pin;
+
+	if ((unsigned char)c == 0)
+		return ((char *)(s + ft_strlen(s)));
+	pin = NULL;
+	tmp = ft_strchr(s, c);
+	while (tmp != NULL)
 	{
-		printf("Null\n");
-		return ;
+		pin = (char *)tmp;
+		tmp = ft_strchr(tmp + 1, c);
 	}
-	while (*split)
-	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
-	}
-	printf("%p\n", *split);
+	return (pin);
 }

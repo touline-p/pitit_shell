@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:21:25 by bpoumeau          #+#    #+#             */
-/*   Updated: 2022/11/08 13:44:50 by bpoumeau         ###   ########lyon.fr   */
+/*   Created: 2022/11/08 13:35:37 by bpoumeau          #+#    #+#             */
+/*   Updated: 2022/11/10 19:26:47 by bpoumeau         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h" 
+#include <stdio.h>
 
-char	*ft_strdup(const char *src)
+static int	ret_min(unsigned int a, unsigned int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*dst;
 	char	*tmp;
 
-	tmp = (char *)src;
-	while (*tmp)
-		tmp++;
-	dst = malloc(tmp - src + 1);
-	if (!dst)
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	len = ret_min(ft_strlen(s + start), len);
+	dst = malloc((len + 1) * sizeof(char));
+	if (!dst || !s)
 		return (NULL);
 	tmp = dst;
-	while (*src)
-		*(tmp++) = *(src++);
+	while (*s && start--)
+		s++;
+	while (*s && len--)
+		*(tmp++) = *(s++);
 	*tmp = 0;
 	return (dst);
-}
-
-t_ret_status	ft_strdup_on(const char *src, char **str_pt)
-{
-	char *new;
-
-	new = ft_strdup(src);
-	if (new == NULL)
-		return (MLC_ERR);
-	*str_pt = new;
-	return (SUCCESS);
 }

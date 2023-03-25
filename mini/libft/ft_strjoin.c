@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:21:25 by bpoumeau          #+#    #+#             */
-/*   Updated: 2022/11/08 13:44:50 by bpoumeau         ###   ########lyon.fr   */
+/*   Created: 2022/11/08 13:21:33 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/01/09 17:49:22 by bpoumeau         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*dst;
 	char	*tmp;
 
-	tmp = (char *)src;
-	while (*tmp)
-		tmp++;
-	dst = malloc(tmp - src + 1);
+	dst = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!dst)
 		return (NULL);
 	tmp = dst;
-	while (*src)
-		*(tmp++) = *(src++);
+	while (*s1)
+		*tmp++ = *s1++;
+	while (*s2)
+		*tmp++ = *s2++;
 	*tmp = 0;
 	return (dst);
-}
-
-t_ret_status	ft_strdup_on(const char *src, char **str_pt)
-{
-	char *new;
-
-	new = ft_strdup(src);
-	if (new == NULL)
-		return (MLC_ERR);
-	*str_pt = new;
-	return (SUCCESS);
 }

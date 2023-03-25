@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/02/13 19:08:34 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/02/13 19:08:57 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_split(char **split)
+int	ft_strcmp(char *s1, char *s2)
 {
-	if (split == NULL)
+	while (*s1 && *s2 && *s1 == *s2)
 	{
-		printf("Null\n");
-		return ;
+		s1++;
+		s2++;
 	}
-	while (*split)
+	return (*s1 - *s2);
+}
+
+int	ft_ustrcmp(t_uchar *s1, t_uchar *s2)
+{
+	while (*s1 && *s2 && *s1 == *s2)
 	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
+		s1++;
+		s2++;
 	}
-	printf("%p\n", *split);
+	return (*s1 - *s2);
 }

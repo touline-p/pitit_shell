@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2022/11/08 13:21:54 by bpoumeau          #+#    #+#             */
+/*   Updated: 2022/11/10 19:43:51 by bpoumeau         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_split(char **split)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (split == NULL)
+	char			*dst;
+	unsigned int	i;
+	int				ln;
+
+	ln = ft_strlen(s);
+	dst = malloc(ln + 1);
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (s[i])
 	{
-		printf("Null\n");
-		return ;
+		dst[i] = (*f)(i, s[i]);
+		i++;
 	}
-	while (*split)
-	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
-	}
-	printf("%p\n", *split);
+	dst[i] = 0;
+	return (dst);
 }

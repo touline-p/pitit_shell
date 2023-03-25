@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   str_token_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/03/11 16:43:42 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/03/11 16:53:24 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini_parsing.h"
 
-void	ft_print_split(char **split)
+int	next_control_operator_is_a_pipe(t_string_token *tok)
 {
-	if (split == NULL)
+	while (tok->token != EOL && tok->token != AMPERSAND && tok->token != AND && tok->token != OR)
 	{
-		printf("Null\n");
-		return ;
+		if (tok->token == PIPE)
+			return (1);
+		tok = tok->next;
 	}
-	while (*split)
-	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
-	}
-	printf("%p\n", *split);
+	return (0);
 }

@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   simple_tokens_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/03/11 17:03:28 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/03/11 17:26:28 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+//
+// Created by bpoumeau on 3/11/23.
+//
 
-void	ft_print_split(char **split)
+#include "mini_parsing.h"
+
+t_ert	is_control_operator(t_emt token)
 {
-	if (split == NULL)
-	{
-		printf("Null\n");
-		return ;
-	}
-	while (*split)
-	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
-	}
-	printf("%p\n", *split);
+	if (token == PIPE || token == OR || token == AMPERSAND || token == AND)
+		return (SUCCESS);
+	return (FAILURE);
 }

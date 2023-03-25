@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin_three.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:21:25 by bpoumeau          #+#    #+#             */
-/*   Updated: 2022/11/08 13:44:50 by bpoumeau         ###   ########lyon.fr   */
+/*   Created: 2023/01/05 17:36:47 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/01/05 17:40:51 by bpoumeau         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strjoin_three(char *a, char *b, char *c)
 {
+	int		ln;
 	char	*dst;
-	char	*tmp;
+	int		i;
 
-	tmp = (char *)src;
-	while (*tmp)
-		tmp++;
-	dst = malloc(tmp - src + 1);
+	ln = ft_strlen(a) + ft_strlen(b) + ft_strlen(c) + 1;
+	dst = malloc(ln);
 	if (!dst)
 		return (NULL);
-	tmp = dst;
-	while (*src)
-		*(tmp++) = *(src++);
-	*tmp = 0;
+	ln = 0;
+	i = 0;
+	while (a[i])
+		dst[ln++] = a[i++];
+	i = 0;
+	while (b[i])
+		dst[ln++] = b[i++];
+	i = 0;
+	while (c[i])
+		dst[ln++] = c[i++];
+	dst[ln++] = c[i++];
 	return (dst);
-}
-
-t_ret_status	ft_strdup_on(const char *src, char **str_pt)
-{
-	char *new;
-
-	new = ft_strdup(src);
-	if (new == NULL)
-		return (MLC_ERR);
-	*str_pt = new;
-	return (SUCCESS);
 }

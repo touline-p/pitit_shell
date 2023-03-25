@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_ustrdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:21:25 by bpoumeau          #+#    #+#             */
-/*   Updated: 2022/11/08 13:44:50 by bpoumeau         ###   ########lyon.fr   */
+/*   Created: 2023/02/05 01:39:07 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/02/05 01:39:13 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-char	*ft_strdup(const char *src)
+unsigned char	*ft_ustrdup(unsigned char *str)
 {
-	char	*dst;
-	char	*tmp;
+	unsigned char	*new;
+	size_t			size;
 
-	tmp = (char *)src;
-	while (*tmp)
-		tmp++;
-	dst = malloc(tmp - src + 1);
-	if (!dst)
+	size = ft_ustrlen(str);
+	new = malloc(sizeof(unsigned char) * (size + 1));
+	if (new == NULL)
 		return (NULL);
-	tmp = dst;
-	while (*src)
-		*(tmp++) = *(src++);
-	*tmp = 0;
-	return (dst);
+	ft_memcpy(new, str, size + 1);
+	return (new);
 }
 
-t_ret_status	ft_strdup_on(const char *src, char **str_pt)
+t_ert	ft_ustrdup_on(unsigned char *str, unsigned char **new_pt)
 {
-	char *new;
+	size_t	size;
 
-	new = ft_strdup(src);
-	if (new == NULL)
+	size = ft_ustrlen(str);
+	*new_pt = malloc(size + 1);
+	if (*new_pt == NULL)
 		return (MLC_ERR);
-	*str_pt = new;
+	ft_memcpy(*new_pt, str, size + 1);
 	return (SUCCESS);
 }

@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
+# include <stdarg.h>
+# include <fcntl.h>
 
 # include <stdarg.h>
 # include <fcntl.h>
@@ -56,6 +58,37 @@ typedef struct s_list
 
 //void		put_ert(t_ert signal);
 t_ret_status	ft_join_str_arr_on(char **str_arr, char **line_pt);
+char		*ft_strdup(const char *src);
+t_ret_status	ft_strdup_on(const char *src, char **str_pt);
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strtrim(char const *s1, char const *set);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+t_ret_status	ft_substr_on(char const *s, unsigned int start, size_t len, char **line_pt);
+int			ft_atoi(const char *nptr);
+int			ft_atoi_has_overflown(char *str);
+char		*ft_itoa(int n);
+int			*ft_intarr_set(int *tab, int value, size_t size);
+void		*ft_memdup(void *src, size_t ln);
+void		ft_swap(int *a, int *b);
+int			ft_is_overflowing(char *str);
+void		*ft_free_split(char **dst);
+void		ft_free_int_arr(int **int_arr);
+void		ft_print_split(char **split);
+char		*ft_strjoin_three(char *a, char *b, char *c);
+void		*per_n_ret(char *msg);
+int			is_from(char c, char *base);
+int			str_is_made_of(char *str, char *charset);
+t_uchar		*ft_ustrdup(unsigned char *str);
+int			ft_min(int a, int b);
+int			ft_max(int a, int b);
+char		*ft_get_env(char *key, char **env);
+size_t 		ft_str_array_len(char **str_arr);
+char 		**ft_str_array_dup(char **str_arr);
+char 		**ft_strarray_join(char **first, char **second);
+
+//t_ert		ft_atoi_on(const char *str, int *int_pt);
+int	ft_dprintf(int fd, const char *str, ...);
+
 void			ft_swap(int *a, int *b);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);

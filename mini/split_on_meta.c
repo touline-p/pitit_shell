@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   split_on_meta.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/02/26 17:27:20 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/02/26 18:40:52 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini_parsing.h"
 
-void	ft_print_split(char **split)
+t_token	*split_on_meta(t_token *tok)
 {
-	if (split == NULL)
+	t_token *ret_val;
+
+	ret_val = tok;
+	while (tok->next)
 	{
-		printf("Null\n");
-		return ;
+		get_next_emt(tok);
+		tok = tok->next_word;
 	}
-	while (*split)
-	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
-	}
-	printf("%p\n", *split);
+	return (ret_val);
+}
+
+t_token	*get_next_emt(t_token *tok)
+{
+	t_emt	tmp;
+	t_token *first;
+
+	first = tok;
+	tmp = tok->token;
+	while (tok->next && tok->next->token == tmp)
+		tok = tok->next;
+	first->next_word = tok->next;
+	tok->next = NULL;
+	return (tok);
 }

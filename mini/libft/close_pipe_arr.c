@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   close_pipe_arr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/03/10 21:46:01 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/03/10 22:30:03 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_split(char **split)
+void	close_pipe_arr(int **pipe_arr)
 {
-	if (split == NULL)
+	while (*pipe_arr)
 	{
-		printf("Null\n");
-		return ;
+		close((*pipe_arr)[0]);
+		close((*pipe_arr)[1]);
+		pipe_arr++;
 	}
-	while (*split)
+}
+
+void	ft_print_pipe_arr(int **pipe_arr)
+{
+	write(1, "pipe arr\n", 9);
+	while (*pipe_arr)
 	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
+		ft_putnbr_fd((*pipe_arr)[0], 1);
+		write(1, "  ", 2);
+		ft_putnbr_fd((*pipe_arr)[1], 1);
+		write(1, "\n", 1);
+		pipe_arr++;
 	}
-	printf("%p\n", *split);
 }

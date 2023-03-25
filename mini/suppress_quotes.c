@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_split.c                                   :+:      :+:    :+:   */
+/*   suppress_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 23:45:17 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 19:13:11 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/03/09 18:54:44 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/03/09 19:15:30 by bpoumeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini_parsing.h"
 
-void	ft_print_split(char **split)
+void	suppress_quotes(t_token *tok)
 {
-	if (split == NULL)
+	t_token *pin;
+
+	pin = tok;
+	while (pin->next->token != EOL)
 	{
-		printf("Null\n");
-		return ;
+		if (pin->next->esec == UNSECURED \
+		&& is_from(pin->next->sign_char, "\'\""))
+			del_next_token(pin);
+		else
+			pin = pin->next;
 	}
-	while (*split)
-	{
-		if (write(1, *split, ft_strlen(*split)) == -1
-			|| write(1, "\n", 1) == -1)
-			write(2, "Error write ft_print_split", 26);
-		split++;
-	}
-	printf("%p\n", *split);
 }
