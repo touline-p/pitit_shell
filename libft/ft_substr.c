@@ -46,7 +46,7 @@ t_ret_status	ft_substr_on(char const *s, unsigned int start, size_t len, char **
 
 	new = ft_substr(s, start, len);
 	if (new == NULL)
-		return (MLC_ERR);
+		return (FAILED_MALLOC);
 	*line_pt = new;
 	return (SUCCESS);
 }

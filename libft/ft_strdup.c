@@ -36,7 +36,7 @@ t_ret_status	ft_strdup_on(const char *src, char **str_pt)
 
 	new = ft_strdup(src);
 	if (new == NULL)
-		return (MLC_ERR);
+		return (FAILED_MALLOC);
 	*str_pt = new;
 	return (SUCCESS);
 }
