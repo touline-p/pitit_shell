@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/03/22 16:48:31 by twang            ###   ########.fr        #
+#    Updated: 2023/03/24 15:56:21 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,10 @@ ifeq ($(DEBUG), yes)
 CFLAGS 		+=	$(DFLAGS)
 endif
 
+#--leaks flags--------------------------------------------------------#
+
+LEAKS	=	valgrind --leak-check=full --track-fds=yes
+
 #--libs------------------------------------------------------------------------#
 
 LIBFT	=	$(LIBFT_DIR)/libft.a
@@ -84,6 +88,11 @@ lib:
 debug:
 	$(MAKE) re DEBUG=yes
 
+leaks:
+	clear
+	$(MAKE) re
+	$(LEAKS) ./minishell
+
 #--print header----------------------------------------------------------------#
 
 header:
@@ -98,6 +107,7 @@ header:
 #--re, clean & fclean----------------------------------------------------------#
 
 re:
+	clear
 	$(MAKE) fclean
 	$(MAKE) all
 
@@ -107,6 +117,7 @@ clean:
 	$(PRINT_CLEAN)
 
 fclean:
+	clear
 	$(MAKE) clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
