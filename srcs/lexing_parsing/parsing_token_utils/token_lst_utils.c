@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_parsing.h"
+#include "minishell_parsing.h"
 
 t_token	*token_constructor(t_emt emt, char msg)
 {
@@ -109,7 +109,7 @@ t_token	*token_lst_constructor_word(char *string, t_esec esec)
 	return (new);
 }
 
-t_ert	insert_str_in_tkn_lst(t_token *token_lst, char *str, t_esec insert_esec)
+t_return_status	insert_str_in_tkn_lst(t_token *token_lst, char *str, t_esec insert_esec)
 {
 	t_token *next;
 	t_token *new;
@@ -117,7 +117,7 @@ t_ert	insert_str_in_tkn_lst(t_token *token_lst, char *str, t_esec insert_esec)
 	next = token_lst->next;
 	new = token_lst_constructor_word(str, insert_esec);
 	if (!new)
-		return (MLC_ERR);
+		return (FAILED_MALLOC);
 	token_lst->next = new;
 	while (token_lst->next != NULL)
 	{

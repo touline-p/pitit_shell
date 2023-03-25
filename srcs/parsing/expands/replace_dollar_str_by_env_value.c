@@ -1,6 +1,6 @@
 #include "minishell_parsing.h"
 
-t_ret_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
+t_return_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 {
 	char	**pin_env;
 	char	*join;

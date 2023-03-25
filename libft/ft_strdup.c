@@ -30,7 +30,7 @@ char	*ft_strdup(const char *src)
 	return (dst);
 }
 
-t_ret_status	ft_strdup_on(const char *src, char **str_pt)
+t_return_status	ft_strdup_on(const char *src, char **str_pt)
 {
 	char *new;
 

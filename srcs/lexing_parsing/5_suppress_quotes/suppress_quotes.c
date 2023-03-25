@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_parsing.h"
+#include "minishell_parsing.h"
 
 void	suppress_quotes(t_token *tok)
 {

@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_parsing.h"
+#include "minishell_parsing.h"
 
-t_ert		_substitute_for_env_variable(t_token **token, char **env);
+t_return_status		_substitute_for_env_variable(t_token **token, char **env);
 char		*_get_env_variable(t_token *token, char **env);
 static char *_check_for_env_variable(t_token *tok, char *env);
 
-t_ert	expand_dollars(t_token *token_lst, char **env)
+t_return_status	expand_dollars(t_token *token_lst, char **env)
 {
 	t_token	*pin;
 
@@ -26,13 +26,13 @@ t_ert	expand_dollars(t_token *token_lst, char **env)
 		if (pin->next->sign_char == '$'
 			&& pin->next->esec == UNSECURED
 			&& _substitute_for_env_variable(&pin, env) != SUCCESS)
-			return (MLC_ERR);
+			return (FAILED_MALLOC);
 		pin = pin->next;
 	}
 	return (SUCCESS);
 }
 
-t_ert	_substitute_for_env_variable(t_token **last_token, char **env)
+t_return_status	_substitute_for_env_variable(t_token **last_token, char **env)
 {
 	char *variable_string;
 
@@ -41,7 +41,7 @@ t_ert	_substitute_for_env_variable(t_token **last_token, char **env)
 	del_next_word(*last_token);
 	if (variable_string != NULL &&
 		insert_str_in_tkn_lst(*last_token, variable_string, UNSECURED) != SUCCESS)
-		return (MLC_ERR);
+		return (FAILED_MALLOC);
 	return (SUCCESS);
 }
 

@@ -14,5 +14,9 @@
 # define DEFINES_PARSING_H
 
 # define MINI_SHELL_MUST_GO_ON 1
+# define STRT_CHR -1
+# define EOSTR 0
+# define METACHAR_SET "|&<>(); "
+# define IFS " \t\n"
 
 #endif 

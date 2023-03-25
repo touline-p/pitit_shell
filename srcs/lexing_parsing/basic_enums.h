@@ -24,11 +24,6 @@ typedef enum	e_return_status
 }	t_ert;
 # endif
 
-# define STRT_CHR -1
-# define EOSTR 0
-
-# define METACHAR_SET "|&<>(); "
-# define IFS " \t\n"
 typedef enum 	e_token_minishell
 {
 	START = 0,

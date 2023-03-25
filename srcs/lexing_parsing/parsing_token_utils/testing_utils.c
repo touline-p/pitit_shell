@@ -14,9 +14,7 @@
 // Created by bpoumeau on 2/21/23.
 //
 
-# include "test_mini.h"
-# include "basic_enums.h"
-# include "mini_parsing.h"
+# include "minishell_parsing.h"
 
 
 void	display_tokens(t_token *token_lst)

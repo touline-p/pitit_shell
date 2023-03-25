@@ -1,20 +1,20 @@
 #include "../../libft/libft.h"
 #include <stddef.h>
 
-static t_ret_status	_export_display(char **env);
-static t_ret_status	_get_key_on(char *line, char **key_pt);
-static t_ret_status	_display_unic_export(char *env_line);
-static t_ret_status	_get_content_on(char *line, char **key_pt);
+static t_return_status	_export_display(char **env);
+static t_return_status	_get_key_on(char *line, char **key_pt);
+static t_return_status	_display_unic_export(char *env_line);
+static t_return_status	_get_content_on(char *line, char **key_pt);
 
-t_ret_status	add_str_to_env(char *line, char ***env_pt);
+t_return_status	add_str_to_env(char *line, char ***env_pt);
 void	modify_env(char *key, char **args, char **env);
-t_ret_status	compare_and_modify_export_args(char **args, char **env);
+t_return_status	compare_and_modify_export_args(char **args, char **env);
 
-t_ret_status	key_is_in_env(char *line, char **env);
-t_ret_status	arg_has_content(char *line);
+t_return_status	key_is_in_env(char *line, char **env);
+t_return_status	arg_has_content(char *line);
 void		replace_content(char *line, char **env);
 
-t_ret_status	key_is_in_env(char *line, char **env)
+t_return_status	key_is_in_env(char *line, char **env)
 {
 	size_t	i;
 
@@ -30,7 +30,7 @@ t_ret_status	key_is_in_env(char *line, char **env)
 	return (FAILURE);
 }
 
-t_ret_status	arg_has_content(char *line)
+t_return_status	arg_has_content(char *line)
 {
 	if (ft_strchr(line, '=') != NULL)
 		return (SUCCESS);
@@ -58,7 +58,7 @@ void	replace_content(char *line, char **env)
 }
 	
 
-t_ret_status	export_builtin(char **args, char ***env_pt)
+t_return_status	export_builtin(char **args, char ***env_pt)
 {
 	char		**tmp;
 
@@ -73,7 +73,7 @@ t_ret_status	export_builtin(char **args, char ***env_pt)
 		{
 			printf("i was here\n");
 			if (add_str_to_env(*tmp, env_pt) != SUCCESS)
-				return (MLC_ERR);
+				return (FAILED_MALLOC);
 		}
 		tmp++;
 	}
@@ -82,7 +82,7 @@ t_ret_status	export_builtin(char **args, char ***env_pt)
 	return (SUCCESS);
 }
 
-t_ret_status	add_str_to_env(char *line, char ***env_pt)
+t_return_status	add_str_to_env(char *line, char ***env_pt)
 {
 	char	**new_env;
 	char	**env;
@@ -90,7 +90,7 @@ t_ret_status	add_str_to_env(char *line, char ***env_pt)
 
 	new_env = (char **)malloc(sizeof(char *) * (ft_str_array_len(*env_pt) + 2));
 	if (new_env == NULL)
-		return (MLC_ERR);
+		return (FAILED_MALLOC);
 	env = *env_pt;
 	i = 0;
 	while (env[i])
@@ -106,7 +106,7 @@ t_ret_status	add_str_to_env(char *line, char ***env_pt)
 }
 
 
-static t_ret_status	_export_display(char **env)
+static t_return_status	_export_display(char **env)
 {
 	char	**env_dup;
 	size_t	i;
@@ -121,7 +121,7 @@ static t_ret_status	_export_display(char **env)
 	return (SUCCESS);
 }
 
-static	t_ret_status	_display_unic_export(char *env_line)
+static	t_return_status	_display_unic_export(char *env_line)
 {
 	char *key;
 	char *content;
@@ -130,18 +130,18 @@ static	t_ret_status	_display_unic_export(char *env_line)
 	content = NULL;
 	if (_get_key_on(env_line, &key) != SUCCESS
 		|| _get_content_on(env_line, &content) != SUCCESS)
-		return (free(key), free(content), MLC_ERR);
+		return (free(key), free(content), FAILED_MALLOC);
 	if (printf("export %s", key) == -1)
-		return (free(key), free(content), WRT_ERR);
+		return (free(key), free(content), FAILED_WRITE);
 	if (content != NULL)
 		if (printf("=\'%s\'", content) == -1)
-			return (free(key), free(content), WRT_ERR);
+			return (free(key), free(content), FAILED_WRITE);
 	if (printf("\n") != -1)
-		return (free(content), free(key), WRT_ERR);
+		return (free(content), free(key), FAILED_WRITE);
 	return (free(content), free(key), SUCCESS);
 }
 
-static t_ret_status	_get_key_on(char *line, char **key_pt)
+static t_return_status	_get_key_on(char *line, char **key_pt)
 {
 	size_t	idx;
 
@@ -151,7 +151,7 @@ static t_ret_status	_get_key_on(char *line, char **key_pt)
 	return (ft_substr_on(line, 0, idx, key_pt));
 }
 
-static t_ret_status	_get_content_on(char *line, char **key_pt)
+static t_return_status	_get_content_on(char *line, char **key_pt)
 {
 	size_t	idx;
 
@@ -164,7 +164,6 @@ static t_ret_status	_get_content_on(char *line, char **key_pt)
 	return (ft_substr_on(line, idx + 1, ft_strlen(line + idx + 1), key_pt));
 }
 
-#define  TST_EXPORT
 #ifdef TST_EXPORT
 int main(int ac, char **av, char **env)
 {

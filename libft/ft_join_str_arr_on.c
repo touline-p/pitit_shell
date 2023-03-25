@@ -1,7 +1,7 @@
 
 #include "libft.h"
 
-t_ret_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
+t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
 {
 	char	**arr_pin;
 	char 	*str_pin;

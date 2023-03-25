@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../mini_parsing/mini_parsing.h"
+#include "minishell_parsing.h"
 
-static t_ert	_dquoting_process_ep(void);
+static t_return_status	_dquoting_process_ep(void);
 
-t_ert	dquoting_process(t_token *last_token, t_token *token, t_token **end_of_quot_pt)
+t_return_status	dquoting_process(t_token *last_token, t_token *token, t_token **end_of_quot_pt)
 {
 	t_token	*pin;
 
@@ -34,7 +34,7 @@ t_ert	dquoting_process(t_token *last_token, t_token *token, t_token **end_of_quo
 	return (SUCCESS);
 }
 
-static t_ert	_dquoting_process_ep(void)
+static t_return_status	_dquoting_process_ep(void)
 {
 	write(2, "syntax error near newline.\nLine can't end with open double quote\n", 65);
 	return (FAILURE);

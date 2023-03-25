@@ -13,12 +13,29 @@
 #ifndef STRUCTURES_PARSING_H
 # define STRUCTURES_PARSING_H
 
+# include "enums_parsing.h"
+
 /*---- typedef structures ----------------------------------------------------*/
 
-
+typedef struct s_token t_token;
 
 /*---- structures ------------------------------------------------------------*/
 
+typedef enum  e_secured
+{
+	SECURED,
+	UNSECURED
+}	t_esec;
+
+typedef struct	s_token
+{
+	t_emt			token;
+	char 			sign_char;
+	void			*content;
+	t_esec			esec;
+	struct s_token	*next;
+	struct s_token	*next_word;
+}	t_token;
 
 
 #endif

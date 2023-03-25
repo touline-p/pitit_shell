@@ -2,13 +2,12 @@
 // Created by bpoumeau on 3/15/23.
 //
 
-#include "basic_enums_struct.h"
-#include "stdlib.h"
+#include "minishell_parsing.h"
+#include "structures_execution.h"
 
-#include "mini_parsing.h"
-t_str_token_lst	*lexing_line_to_token_lst(char *line)
+t_string_token	*lexing_line_to_token_lst(char *line)
 {
-	t_str_token_lst	*token_lst;
+	t_string_token	*token_lst;
 	t_token 		*basic_token_lst;
 
 	token_lst = NULL;
