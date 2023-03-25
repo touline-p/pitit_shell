@@ -1,73 +1,129 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
+#    Updated: 2023/03/24 15:56:21 by twang            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME := ./tester
+include config/print.mk
+include config/headers_execution.mk
+include config/headers_parsing.mk
+include config/sources_execution.mk
+include config/sources_parsing.mk
 
-FILE := srcs/expands/expands.c \
-	srcs/expands/cut_line.c \
-	srcs/expands/replace_dollar_str_by_env_value.c \
-#	main.c \
-#	mini_parsing.c \
-#	testing_utils.c \
-#	token_lst_utils.c \
-#	escaping_chars.c \
-#	preserv.c \
-#	simple_quoting.c \
-#	double_quoting.c \
-#	split_toklst_on_meta.c \
-#	split_on_meta.c \
-#	expand_variable.c \
-#	suppress_quotes.c \
-#	instruction_block_tree_utils.c \
-#	instruction_block_chain.c \
-#	instruction_block_tree_debug.c \
-#	str_token_debug.c \
-#	token_to_str_token.c \
-#	t_string_token_utils.c \
-#	init_pipe_arr_on.c \
-#	child_token.c \
-#	str_token_utils.c \
-#	instruction_block_building_utils.c \
-#	simple_tokens_utils.c \
-#	per_n_set_errno.c \
-#	get_here_doc_fd.c \
-#	read_here_doc_process.c \
+.SILENT:
 
-HDIR := srcs/expands/ \
-	srcs/ \
-	libft/
+#--variables-------------------------------------------------------------------#
 
-HEADERS	:= srcs/expands/ \
-	srcs/
-#	mini_parsing.h \
-#	test_mini.h \
-#	libft/libft.h
+NAME		=	minishell
+DEBUG		=	no
 
-FLAGS := -Wall -Werror -Wextra # -fsanitize=address #-D SILENCIEUX=false
+BPOUMEAU	=	\e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a
+TWANG		=	\e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a
 
-OBJS := $(addprefix obj/, $(FILE:.c=.o))
+#--includes & libraries--------------------------------------------------------#
 
-test	: $(NAME)
+INC_DIR		=	incs
+LIBFT_DIR	=	libft
+
+#--sources & objects-----------------------------------------------------------#
+
+SRC_DIR		=	srcs
+OBJ_DIR		=	.objs
+
+#--flags-----------------------------------------------------------------------#
+
+CFLAGS		=	-Wall -Wextra -Werror -I $(LIBFT_DIR) -I $(INC_DIR)/execution_incs -I $(INC_DIR)/parsing_incs
+
+#--debug flags--------------------------------------------------------#
+
+DFLAGS		=	-g3 -fsanitize=address
+
+ifeq ($(DEBUG), yes)
+CFLAGS 		+=	$(DFLAGS)
+endif
+
+#--leaks flags--------------------------------------------------------#
+
+LEAKS	=	valgrind --leak-check=full --track-fds=yes
+
+#--libs------------------------------------------------------------------------#
+
+LIBFT	=	$(LIBFT_DIR)/libft.a
+
+#--objects---------------------------------------------------------------------#
+
+OBJECTS	=	$(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
+
+#--global rules----------------------------------------------------------------#
+
+.DEFAULT_GOAL = all
+
+#--compilation rules-----------------------------------------------------------#
+
+all:
+	$(MAKE) header
+	$(MAKE) lib
+	$(MAKE) $(NAME)
+
+$(NAME): $(OBJECTS)
+	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@
+	$(PRINT_CREATING)
+
+$(OBJ_DIR)/%.o: %.c $(HEADERS) $(LIBFT)
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+	$(PRINT_COMPILING)
+
+#--libs, debugs & bonus--------------------------------------------------------#
+
+lib:
+	$(MAKE) -C $(LIBFT_DIR)
+
+debug:
+	$(MAKE) re DEBUG=yes
+
+leaks:
 	clear
-	valgrind --leak-check=full --track-fds=yes $(NAME)
+	$(MAKE) re
+	$(LEAKS) ./minishell
 
-all : $(NAME)
+#--print header----------------------------------------------------------------#
 
+header:
+	printf "\n${PURPLE}project:\t${END}${BLUE}minishell${END}\n"
+	printf "${PURPLE}author:\t\t${END}${BLUE}${BPOUMEAU} && ${TWANG}${END}\n"
+	printf "${PURPLE}debug mode:\t${END}${BLUE}${DEBUG}${END}\n"
+	printf "${PURPLE}compiler:\t${END}${BLUE}${CC}${END}\n"
+	printf "${PURPLE}flags:\t\t${END}${BLUE}${CFLAGS}${END}\n"
+	printf "${PURPLE}date:\t\t${END}${BLUE}2023/03/20${END}\n"
+	printf "              ____________________________\n\n"
 
-$(NAME) : $(OBJS) $(HEADERS)
-	make -C libft
-	gcc $(FLAGS) -o $(NAME) $(OBJS) $(addprefix -I , $(HDIR)) -L./libft -lft
+#--re, clean & fclean----------------------------------------------------------#
 
+re:
+	clear
+	$(MAKE) fclean
+	$(MAKE) all
 
-./obj/%.o : %.c
-	@mkdir -p $(shell dirname $@)
-	gcc $(FLAGS) -o $@ -c $< -I libft $(addprefix -I , $(HDIR))
+clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(RM) -rf $(OBJECTS)
+	$(PRINT_CLEAN)
 
-re	: fclean
-	make
+fclean:
+	clear
+	$(MAKE) clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(RM) $(NAME)
+	$(PRINT_FCLEAN)
 
-fclean	: clean
-	rm $(NAME)
+#--PHONY-----------------------------------------------------------------------#
 
-clean :
-	rm -rf obj
-	mkdir obj
-	make -C libft fclean
+.PHONY: all lib debug re clean fclean
+ 

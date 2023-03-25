@@ -39,3 +39,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	*tmp = 0;
 	return (dst);
 }
+
+t_ret_status	ft_substr_on(char const *s, unsigned int start, size_t len, char **line_pt)
+{
+	char	*new;
+
+	new = ft_substr(s, start, len);
+	if (new == NULL)
+		return (FAILED_MALLOC);
+	*line_pt = new;
+	return (SUCCESS);
+}

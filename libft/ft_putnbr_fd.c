@@ -3,38 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:20:39 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/01/10 15:02:38 by bpoumeau         ###   ########lyon.fr   */
+/*   Created: 2022/11/14 16:32:37 by twang             #+#    #+#             */
+/*   Updated: 2022/11/23 16:18:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	void	ft_putnbr(int n, int fd)
+size_t	ft_putnbr_fd(int n, int fd)
 {
-	char	c;
+	size_t	size;
 
-	if (n > 9)
-		ft_putnbr(n / 10, fd);
-	c = ('0' + n % 10);
-	write(fd, &c, 1);
-}
-
-void	ft_putnbr_fd(int n, int fd)
-{
-	int		sign;
-	char	c;
-
-	sign = 1;
-	if (n < 0)
+	size = 0;
+	if (n == -2147483648)
+		size += ft_putstr_fd("-2147483648", fd);
+	else
 	{
-		write(fd, "-", 1);
-		sign = -1;
+		if (n >= 0 && n <= 9)
+			size += ft_putchar_fd((n + '0'), fd);
+		if (n < 0)
+		{
+			size += ft_putchar_fd('-', fd);
+			size += ft_putnbr_fd((n *(-1)), fd);
+		}
+		if (n > 9)
+		{
+			size += ft_putnbr_fd(n / 10, fd);
+			size += ft_putnbr_fd(n % 10, fd);
+		}
 	}
-	if (n > 9 || n < -9)
-		ft_putnbr(n / (10 * sign), fd);
-	c = ('0' + n % 10 * sign);
-	write(fd, &c, 1);
+	return (size);
 }

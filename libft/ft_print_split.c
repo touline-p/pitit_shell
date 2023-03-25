@@ -26,4 +26,5 @@ void	ft_print_split(char **split)
 			write(2, "Error write ft_print_split", 26);
 		split++;
 	}
+	printf("%p\n", *split);
 }

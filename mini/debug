@@ -1,0 +1,527 @@
+--------------------------------------------------------------------------------
+Profile data file 'xtmemory.kcg' (creator: xtree-1)
+--------------------------------------------------------------------------------
+Profiled target:  ./tester (PID 97472)
+Events recorded:  curB curBk totB totBk totFdB totFdBk
+Events shown:     curB curBk totB totBk totFdB totFdBk
+Event sort order: curB curBk totB totBk totFdB totFdBk
+Thresholds:       100 100 100 100 100 100
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+curB curBk totB  totBk totFdB totFdBk 
+--------------------------------------------------------------------------------
+ 191    12 2,359    62  2,168      50  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+curB curBk totB  totBk totFdB totFdBk  file:function
+--------------------------------------------------------------------------------
+ 191    12 2,359    62  1,144      49  main.c:main
+ 191    12 2,359    62  1,144      49  main.c:tests_tokenisation
+ 191    12 2,359    62  1,144      49  main.c:tokenisation_ln
+ 191    12   191    12    800      20  token_to_str_token.c:token_lst_to_str_token
+ 168     7   168     7      0       0  t_string_token_utils.c:string_token_creator
+ 168     7   168     7      0       0  t_string_token_utils.c:string_token_creator_on
+ 143    10   143    10      0       0  token_to_str_token.c:_get_str_token_on_and_reset_pin
+  23     5    23     5      0       0  token_to_str_token.c:_reset_pin_ret_string
+   0     0 1,144    21    120      20  testing_utils.c:display_t_emt
+   0     0 1,144    21    120      20  testing_utils.c:display_tokens
+   0     0 1,024     1      0       0  /build/glibc-SzIz7B/glibc-2.31/libio/filedoalloc.c:_IO_file_doallocate
+   0     0 1,024     1      0       0  /build/glibc-SzIz7B/glibc-2.31/libio/fileops.c:_IO_file_overflow@@GLIBC_2.2.5
+   0     0 1,024     1      0       0  /build/glibc-SzIz7B/glibc-2.31/libio/fileops.c:_IO_file_xsputn@@GLIBC_2.2.5
+   0     0 1,024     1      0       0  /build/glibc-SzIz7B/glibc-2.31/libio/genops.c:_IO_doallocbuf
+   0     0 1,024     1      0       0  /build/glibc-SzIz7B/glibc-2.31/stdio-common/printf.c:printf
+   0     0 1,024     1      0       0  /build/glibc-SzIz7B/glibc-2.31/stdio-common/vfprintf-internal.c:__vfprintf_internal
+   0     0   680    17      0       0  mini_parsing.c:token_lst_constructor
+   0     0   680    17      0       0  token_lst_utils.c:token_constructor
+   0     0   320     8    200       5  expand_variable.c:_substitute_for_env_variable
+   0     0   320     8    200       5  expand_variable.c:expand_dollars
+   0     0   320     8      0       0  token_lst_utils.c:insert_str_in_tkn_lst
+   0     0   320     8      0       0  token_lst_utils.c:token_constructor_esec
+   0     0   320     8      0       0  token_lst_utils.c:token_lst_constructor_word
+   0     0   144    24      0       0  UnknownFile???:ft_strdup
+   0     0    24     4     24       4  str_token_debug.c:display_str_token
+   0     0    24     4     24       4  str_token_debug.c:display_t_emt_string
+   0     0     0     0  1,024       1  /build/glibc-SzIz7B/glibc-2.31/csu/../csu/libc-start.c:(below main)
+   0     0     0     0  1,024       1  /build/glibc-SzIz7B/glibc-2.31/stdlib/exit.c:__run_exit_handlers
+   0     0     0     0  1,024       1  /build/glibc-SzIz7B/glibc-2.31/stdlib/exit.c:exit
+   0     0     0     0  1,024       1  UnknownFile???:__libc_freeres
+   0     0     0     0  1,024       1  UnknownFile???:_vgnU_freeres
+   0     0     0     0  1,024       1  UnknownFile???:buffer_free
+   0     0     0     0  1,000      25  token_lst_utils.c:del_token
+   0     0     0     0    800      20  token_lst_utils.c:token_lst_clear
+   0     0     0     0    200       5  token_lst_utils.c:del_next_token
+   0     0     0     0    160       4  token_lst_utils.c:del_next_word
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: main.c
+--------------------------------------------------------------------------------
+curB curBk totB  totBk totFdB totFdBk 
+
+-- line 348 ----------------------------------------
+   .     .     .     .      .       .  	token_lst_clear(tok);
+   .     .     .     .      .       .  }
+   .     .     .     .      .       .  
+   .     .     .     .      .       .  void	tokenisation_ln(char *str, char **env)
+   .     .     .     .      .       .  {
+   .     .     .     .      .       .  	t_token *tok;
+   .     .     .     .      .       .  	t_string_token *str_tok;
+   .     .     .     .      .       .  	t_instruction_block_tree *tree;
+   0     0   680    17      0       0  	tok = TLC(str);
+   .     .     .     .      .       .  	preserve_token_lst(tok);
+   0     0   320     8    200       5  	expand_dollars(tok, env);
+   .     .     .     .      .       .  	split_toklst_on_meta(tok);
+   .     .     .     .      .       .  	regroup_meta(tok);
+   0     0 1,144    21    120      20  	display_tokens(tok);
+ 191    12   191    12    800      20  	str_tok = token_lst_to_str_token(tok);
+   0     0    24     4     24       4  	display_str_token(str_tok);
+   .     .     .     .      .       .  	if (str_tok == NULL)
+   .     .     .     .      .       .  		return ;
+   .     .     .     .      .       .  	//str_token_to_instruction_block_tree_on(str_tok, &tree);
+   .     .     .     .      .       .  	tree = NULL;
+   .     .     .     .      .       .  	display_instruction_block_tree(tree, 0);
+   .     .     .     .      .       .  	instruction_block_tree_destructor(tree);
+   .     .     .     .      .       .  }
+   .     .     .     .      .       .  
+   .     .     .     .      .       .  void	tests_tokenisation(char **env)
+   .     .     .     .      .       .  {
+ 191    12 2,359    62  1,144      49  	tokenisation_ln("echo damn $USER", env);
+   .     .     .     .      .       .  }
+   .     .     .     .      .       .  
+   .     .     .     .      .       .  void	tests_tok_to_str_tok_ln(char *str, char **env)
+   .     .     .     .      .       .  {
+   .     .     .     .      .       .  	t_token			*tok;
+   .     .     .     .      .       .  	t_string_token	*str_tok;
+   .     .     .     .      .       .  
+   .     .     .     .      .       .  	printf("\nfor ->%s<-\n", str);
+-- line 382 ----------------------------------------
+-- line 442 ----------------------------------------
+   .     .     .     .      .       .  	//tests_get_next_emt();
+   .     .     .     .      .       .  	//test_brick_expand(env);
+   .     .     .     .      .       .  	//tests_expands(env);
+   .     .     .     .      .       .  	//tests_str_to_split_token(env);
+   .     .     .     .      .       .  
+   .     .     .     .      .       .  	//tests_tok_to_str_tok(env);
+   .     .     .     .      .       .  	//tests_pipe_arr(env);
+   .     .     .     .      .       .  
+ 191    12 2,359    62  1,144      49  	tests_tokenisation(env);
+   .     .     .     .      .       .  	return (0);
+   .     .     .     .      .       .  }
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: mini_parsing.c
+--------------------------------------------------------------------------------
+curB curBk totB totBk totFdB totFdBk 
+
+-- line 14 ----------------------------------------
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  static t_token	*_token_lst_constructor_ep(t_token *trash, t_token *ret_val);
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  t_token	*token_lst_constructor(char *str)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_token	*token;
+   .     .    .     .      .       .  	t_token	*pin;
+   .     .    .     .      .       .  
+   0     0   40     1      0       0  	token = token_constructor(START, STRT_CHR);
+   .     .    .     .      .       .  	pin = token;
+   .     .    .     .      .       .  	while (*str != EOSTR)
+   .     .    .     .      .       .  	{
+   0     0  600    15      0       0  		pin->next = token_constructor(LETTER, *str);
+   .     .    .     .      .       .  		if (!pin->next)
+   .     .    .     .      .       .  			return (_token_lst_constructor_ep(token, NULL));
+   .     .    .     .      .       .  		pin = pin->next;
+   .     .    .     .      .       .  		str++;
+   .     .    .     .      .       .  	}
+   0     0   40     1      0       0  	pin->next = token_constructor(EOL, EOSTR);
+   .     .    .     .      .       .  	return (token);
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  static t_token	*_token_lst_constructor_ep(t_token *trash, t_token *ret_val)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	token_lst_clear(trash);
+   .     .    .     .      .       .  	return (ret_val);
+   .     .    .     .      .       .  }-- line 40 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: token_lst_utils.c
+--------------------------------------------------------------------------------
+curB curBk totB totBk totFdB totFdBk 
+
+-- line 11 ----------------------------------------
+   .     .    .     .      .       .  /* ************************************************************************** */
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  #include "mini_parsing.h"
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  t_token	*token_constructor(t_emt emt, char msg)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_token	*new;
+   .     .    .     .      .       .  
+   0     0  680    17      0       0  	new = malloc(sizeof(t_token));
+   .     .    .     .      .       .  	if (!new)
+   .     .    .     .      .       .  		return (NULL);
+   .     .    .     .      .       .  	new->token = emt;
+   .     .    .     .      .       .  	new->sign_char = msg;
+   .     .    .     .      .       .  	new->next = NULL;
+   .     .    .     .      .       .  	new->esec = UNSECURED;
+   .     .    .     .      .       .  	new->next_word = NULL;
+   .     .    .     .      .       .  	return (new);
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  t_token *token_constructor_esec(t_emt emt, char msg, t_esec esec)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_token *new;
+   .     .    .     .      .       .  
+   0     0  320     8      0       0  	new = malloc(sizeof(t_token));
+   .     .    .     .      .       .  	if (!new)
+   .     .    .     .      .       .  		return (NULL);
+   .     .    .     .      .       .  	new->token = emt;
+   .     .    .     .      .       .  	new->sign_char = msg;
+   .     .    .     .      .       .  	new->next = NULL;
+   .     .    .     .      .       .  	new->esec = esec;
+   .     .    .     .      .       .  	new->next_word = NULL;
+   .     .    .     .      .       .  	return (new);
+-- line 42 ----------------------------------------
+-- line 44 ----------------------------------------
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  void	token_lst_clear(t_token *trash)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_token *tmp;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	while (trash)
+   .     .    .     .      .       .  	{
+   .     .    .     .      .       .  		tmp = trash->next;
+   0     0    0     0    800      20  		del_token(trash);
+   .     .    .     .      .       .  		trash = tmp;
+   .     .    .     .      .       .  	}
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  void	del_next_token(t_token *token)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_token *tmp;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	tmp = token->next->next;
+   0     0    0     0    200       5  	del_token(token->next);
+   .     .    .     .      .       .  	token->next = tmp;
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  void	del_first_token(t_token **token)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_token *tmp;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	tmp = *token;
+-- line 70 ----------------------------------------
+-- line 71 ----------------------------------------
+   .     .    .     .      .       .  	*token = tmp->next;
+   .     .    .     .      .       .  	del_token(tmp);
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  void	del_next_word(t_token *token)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	while (ft_isalnum(token->next->sign_char))
+   .     .    .     .      .       .  	{
+   0     0    0     0    160       4  		del_next_token(token);
+   .     .    .     .      .       .  	}
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  void	del_token(t_token *token)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	token_lst_clear(token->next_word);
+   0     0    0     0  1,000      25  	free(token);
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  t_token	*token_lst_constructor_word(char *string, t_esec esec)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_token *pin;
+   .     .    .     .      .       .  	t_token *new;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	if (*string != '\0')
+   0     0   40     1      0       0  		new = token_constructor_esec(LETTER, *(string++), esec);
+   .     .    .     .      .       .  	if (!new)
+   .     .    .     .      .       .  		return (NULL);
+   .     .    .     .      .       .  	pin = new;
+   .     .    .     .      .       .  	while (*string != '\0')
+   .     .    .     .      .       .  	{
+   0     0  280     7      0       0  		pin->next = token_constructor_esec(LETTER, *(string++), esec);
+   .     .    .     .      .       .  		if (!pin->next)
+   .     .    .     .      .       .  		{
+   .     .    .     .      .       .  			token_lst_clear(new);
+   .     .    .     .      .       .  			return (NULL);
+   .     .    .     .      .       .  		}
+   .     .    .     .      .       .  		pin = pin->next;
+   .     .    .     .      .       .  	}
+   .     .    .     .      .       .  	return (new);
+-- line 109 ----------------------------------------
+-- line 110 ----------------------------------------
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  t_ert	insert_str_in_tkn_lst(t_token *token_lst, char *str, t_esec insert_esec)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_token *next;
+   .     .    .     .      .       .  	t_token *new;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	next = token_lst->next;
+   0     0  320     8      0       0  	new = token_lst_constructor_word(str, insert_esec);
+   .     .    .     .      .       .  	if (!new)
+   .     .    .     .      .       .  		return (MLC_ERR);
+   .     .    .     .      .       .  	token_lst->next = new;
+   .     .    .     .      .       .  	while (token_lst->next != NULL)
+   .     .    .     .      .       .  	{
+   .     .    .     .      .       .  		token_lst = token_lst->next;
+   .     .    .     .      .       .  		token_lst->esec = insert_esec;
+   .     .    .     .      .       .  	}
+-- line 126 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: expand_variable.c
+--------------------------------------------------------------------------------
+curB curBk totB totBk totFdB totFdBk 
+
+-- line 20 ----------------------------------------
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_token	*pin;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	pin = token_lst->next;
+   .     .    .     .      .       .  	while (pin->token != EOL)
+   .     .    .     .      .       .  	{
+   .     .    .     .      .       .  		if (pin->next->sign_char == '$'
+   .     .    .     .      .       .  			&& pin->next->esec == UNSECURED
+   0     0  320     8    200       5  			&& _substitute_for_env_variable(&pin, env) != SUCCESS)
+   .     .    .     .      .       .  			return (MLC_ERR);
+   .     .    .     .      .       .  		pin = pin->next;
+   .     .    .     .      .       .  	}
+   .     .    .     .      .       .  	return (SUCCESS);
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  t_ert	_substitute_for_env_variable(t_token **last_token, char **env)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	char *variable_string;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	variable_string = _get_env_variable((*last_token)->next, env);
+   0     0    0     0     40       1  	del_next_token(*last_token);
+   0     0    0     0    160       4  	del_next_word(*last_token);
+   .     .    .     .      .       .  	if (variable_string != NULL &&
+   0     0  320     8      0       0  		insert_str_in_tkn_lst(*last_token, variable_string, UNSECURED) != SUCCESS)
+   .     .    .     .      .       .  		return (MLC_ERR);
+   .     .    .     .      .       .  	return (SUCCESS);
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  char *_get_env_variable(t_token *token, char **env)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	char *variable_str;
+   .     .    .     .      .       .  
+-- line 51 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: token_to_str_token.c
+--------------------------------------------------------------------------------
+curB curBk totB totBk totFdB totFdBk 
+
+-- line 18 ----------------------------------------
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  t_string_token *token_lst_to_str_token(t_token *tok)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_string_token	*str_token_list;
+   .     .    .     .      .       .  	t_string_token	*mem;
+   .     .    .     .      .       .  	t_token 		*pin;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	mem = NULL;
+  24     1   24     1      0       0  	if (string_token_creator_on(&str_token_list) != SUCCESS)
+   .     .    .     .      .       .  		return (_token_lst_to_str_token_ep(tok, mem));
+   .     .    .     .      .       .  	str_token_list->token = START;
+   .     .    .     .      .       .  	mem = str_token_list;
+   .     .    .     .      .       .  	pin = tok->next;
+   .     .    .     .      .       .  	while (pin->token != EOL)
+   .     .    .     .      .       .  	{
+ 143    10  143    10      0       0  		if (_get_str_token_on_and_reset_pin(&str_token_list->next, &pin) != SUCCESS)
+   .     .    .     .      .       .  			return (_token_lst_to_str_token_ep(tok, mem));
+   .     .    .     .      .       .  		str_token_list = str_token_list->next;
+   .     .    .     .      .       .  	}
+  24     1   24     1      0       0  	if (string_token_creator_on(&str_token_list->next) != SUCCESS)
+   .     .    .     .      .       .  		return (_token_lst_to_str_token_ep(tok, mem));
+   .     .    .     .      .       .  	str_token_list->next->token = EOL;
+   0     0    0     0    800      20  	token_lst_clear(tok);
+   .     .    .     .      .       .  	return (mem);
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  static t_ert	_get_str_token_on_and_reset_pin(t_string_token **str_tok_pt, t_token **pin_pt)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_emt tmp;
+   .     .    .     .      .       .  
+ 120     5  120     5      0       0  	if (string_token_creator_on(str_tok_pt) != SUCCESS)
+   .     .    .     .      .       .  		return (FAILURE);
+   .     .    .     .      .       .  	tmp = (*pin_pt)->token;
+  23     5   23     5      0       0  	(*str_tok_pt)->content = _reset_pin_ret_string(pin_pt);
+   .     .    .     .      .       .  	if (tmp == LETTER)
+   .     .    .     .      .       .  		(*str_tok_pt)->token = STRING;
+   .     .    .     .      .       .  	else
+   .     .    .     .      .       .  		(*str_tok_pt)->token = tmp;
+   .     .    .     .      .       .  	if (errno)
+   .     .    .     .      .       .  	{
+   .     .    .     .      .       .  		errno = SUCCESS;
+   .     .    .     .      .       .  		return (FAILURE);
+-- line 59 ----------------------------------------
+-- line 69 ----------------------------------------
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  static char	*_reset_pin_ret_string(t_token **pin_pt)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	char	*new;
+   .     .    .     .      .       .  	int 	len;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	len = len_to_next_type(*pin_pt);
+  23     5   23     5      0       0  	new = malloc(len + 1);
+   .     .    .     .      .       .  	if (new == NULL)
+   .     .    .     .      .       .  		return (NULL);
+   .     .    .     .      .       .  	cpy_token_lst_to_str(*pin_pt, new);
+   .     .    .     .      .       .  	while (len--)
+   .     .    .     .      .       .  		*pin_pt = (*pin_pt)->next;
+   .     .    .     .      .       .  	return (new);
+   .     .    .     .      .       .  }
+--------------------------------------------------------------------------------
+-- Auto-annotated source: str_token_debug.c
+--------------------------------------------------------------------------------
+curB curBk totB totBk totFdB totFdBk 
+
+-- line 16 ----------------------------------------
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	while (tok)
+   .     .    .     .      .       .  	{
+   .     .    .     .      .       .  		if (tok->token == STRING)
+   .     .    .     .      .       .  		{
+   .     .    .     .      .       .  			printf("<%s>", tok->content);
+   .     .    .     .      .       .  		}
+   .     .    .     .      .       .  		else
+   0     0   24     4     24       4  			display_t_emt_string(tok);
+   .     .    .     .      .       .  		tok = tok->next;
+   .     .    .     .      .       .  	}
+   .     .    .     .      .       .  	printf("\n");
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  void	display_t_emt_string(t_string_token *token)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	const char	*msgarr[] = {"start", "pipe_", "_and_", "fd_in", "fd_ot", "_or__", "ifnot", "hrdoc", "appnd", "lfpar", "rtpar", "smcln", "space", "_tab_", "_ltr_","end_l", "_str_", "dolrs"};
+-- line 32 ----------------------------------------
+-- line 33 ----------------------------------------
+   .     .    .     .      .       .  	char		*msg;
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  	if (token == NULL)
+   .     .    .     .      .       .  		return ;
+   .     .    .     .      .       .  	if (token->token == STRING) {
+   .     .    .     .      .       .  		msg = ft_strdup(token->content);
+   .     .    .     .      .       .  	}
+   .     .    .     .      .       .  	else
+   0     0   24     4      0       0  		msg = ft_strdup((char *)msgarr[token->token]);
+   .     .    .     .      .       .  	printf("<%.5s>", msg);
+   0     0    0     0     24       4  	free(msg);
+   .     .    .     .      .       .  }
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: t_string_token_utils.c
+--------------------------------------------------------------------------------
+curB curBk totB totBk totFdB totFdBk 
+
+-- line 11 ----------------------------------------
+   .     .    .     .      .       .  /* ************************************************************************** */
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  #include "mini_parsing.h"
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  t_string_token	*string_token_creator(void)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_string_token	*new;
+   .     .    .     .      .       .  
+ 168     7  168     7      0       0  	new = malloc(sizeof(t_string_token));
+   .     .    .     .      .       .  	if (new == NULL)
+   .     .    .     .      .       .  		return (NULL);
+   .     .    .     .      .       .  	new->next = NULL;
+   .     .    .     .      .       .  	new->content = NULL;
+   .     .    .     .      .       .  	new->token = NONE;
+   .     .    .     .      .       .  	return (new);
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  t_ert	string_token_creator_on(t_string_token **tok_pt)
+   .     .    .     .      .       .  {
+   .     .    .     .      .       .  	t_string_token *new;
+   .     .    .     .      .       .  
+ 168     7  168     7      0       0  	new = string_token_creator();
+   .     .    .     .      .       .  	if (new == NULL)
+   .     .    .     .      .       .  		return (MLC_ERR);
+   .     .    .     .      .       .  	*tok_pt = new;
+   .     .    .     .      .       .  	return (SUCCESS);
+   .     .    .     .      .       .  }
+   .     .    .     .      .       .  
+   .     .    .     .      .       .  void	string_token_destructor(t_string_token *trash)
+   .     .    .     .      .       .  {
+-- line 40 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: testing_utils.c
+--------------------------------------------------------------------------------
+curB curBk totB  totBk totFdB totFdBk 
+
+-- line 23 ----------------------------------------
+   .     .     .     .      .       .  {
+   .     .     .     .      .       .  	t_token *next_block;
+   .     .     .     .      .       .  
+   .     .     .     .      .       .  	while (token_lst)
+   .     .     .     .      .       .  	{
+   .     .     .     .      .       .  		next_block = token_lst->next_word;
+   .     .     .     .      .       .  		while (token_lst != NULL)
+   .     .     .     .      .       .  		{
+   0     0 1,144    21    120      20  			display_t_emt(token_lst);
+   .     .     .     .      .       .  			token_lst = token_lst->next;
+   .     .     .     .      .       .  		}
+   .     .     .     .      .       .  		printf("\n");
+   .     .     .     .      .       .  		token_lst = next_block;
+   .     .     .     .      .       .  	}
+   .     .     .     .      .       .  	printf("\n");
+   .     .     .     .      .       .  }
+   .     .     .     .      .       .  
+   .     .     .     .      .       .  void	display_t_emt(t_token *token)
+   .     .     .     .      .       .  {
+   .     .     .     .      .       .  	const char	*msgarr[] = {"start", "pipe_", "_and_", "fd_in", "fd_ot", "_or__", "ifnot", "hrdoc", "appnd", "lfpar", "rtpar", "smcln", "space", "_tab_", "_ltr_","end_l", "_str_", "dolrs"};
+   .     .     .     .      .       .  	char		*msg;
+   .     .     .     .      .       .  
+   .     .     .     .      .       .  	if (token->token == LETTER) {
+   0     0    96    16      0       0  		msg = ft_strdup("     ");
+   .     .     .     .      .       .  		if (token->esec == SECURED)
+   .     .     .     .      .       .  		{
+   .     .     .     .      .       .  			msg[0] = '_';
+   .     .     .     .      .       .  			msg[1] = '_';
+   .     .     .     .      .       .  			msg[3] = '_';
+   .     .     .     .      .       .  			msg[4] = '_';
+   .     .     .     .      .       .  		}
+   .     .     .     .      .       .  		msg[2] = token->sign_char;
+   .     .     .     .      .       .  	}
+   .     .     .     .      .       .  	else
+   0     0    24     4      0       0  		msg = ft_strdup((char *)msgarr[token->token]);
+   0     0 1,024     1      0       0  	printf("<%.5s>", msg);
+   0     0     0     0    120      20  	free(msg);
+   .     .     .     .      .       .  }
+   .     .     .     .      .       .  
+   .     .     .     .      .       .  void	put_esec(t_token *tok)
+   .     .     .     .      .       .  {
+   .     .     .     .      .       .  	if (tok->esec == SECURED)
+   .     .     .     .      .       .  		printf("-> secured");
+   .     .     .     .      .       .  	else
+   .     .     .     .      .       .  		printf("-> unsecured");
+-- line 67 ----------------------------------------
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  /build/glibc-SzIz7B/glibc-2.31/csu/../csu/libc-start.c
+  /build/glibc-SzIz7B/glibc-2.31/libio/filedoalloc.c
+  /build/glibc-SzIz7B/glibc-2.31/libio/fileops.c
+  /build/glibc-SzIz7B/glibc-2.31/libio/genops.c
+  /build/glibc-SzIz7B/glibc-2.31/stdio-common/printf.c
+  /build/glibc-SzIz7B/glibc-2.31/stdio-common/vfprintf-internal.c
+  /build/glibc-SzIz7B/glibc-2.31/stdlib/exit.c
+  UnknownFile???
+
+--------------------------------------------------------------------------------
+curB  curBk totB   totBk totFdB totFdBk 
+--------------------------------------------------------------------------------
+1,266    77 13,066   351  7,080     279  events annotated
+
