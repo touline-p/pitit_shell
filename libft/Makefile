@@ -114,7 +114,7 @@ clean	:
 	$(PRINT_CLEAN)
 
 fclean	:	clean
-	rm $(NAME)
+	rm -rf $(NAME)
 	$(PRINT_FCLEAN)
 
 re	:	
