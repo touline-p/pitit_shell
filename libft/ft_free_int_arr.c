@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_int_arr.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 22:03:33 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 22:04:38 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:25:14 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free_int_arr(int **int_arr)
 {
-	int **tmp;
+	int	**tmp;
 
 	tmp = int_arr;
 	while (*int_arr)

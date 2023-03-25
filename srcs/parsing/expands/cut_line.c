@@ -1,6 +1,6 @@
 
 #include "minishell_parsing.h"
-
+/*
 static size_t			count_indep_words(char *line);
 static t_ret_status 	check_allocations(char **line_arr, size_t arr_len);
 static t_ret_status		alloc_each_cells(char *line, char **line_arr);
@@ -19,7 +19,6 @@ t_ret_status	cut_line_on(char *line, char ***res_pt)
 	*res_pt = line_arr;
 	return (free(line), SUCCESS);
 }
-
 
 static size_t	count_indep_words(char *line)
 {
@@ -136,3 +135,4 @@ int main(int ac, char **av, char **env)
 }
 
 #endif
+*/
