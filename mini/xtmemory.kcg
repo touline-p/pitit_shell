@@ -1,0 +1,812 @@
+# callgrind format
+version: 1
+creator: xtree-1
+pid: 97472
+cmd: ./tester
+
+positions: line
+event: curB : currently allocated Bytes
+event: curBk : currently allocated Blocks
+event: totB : total allocated Bytes
+event: totBk : total allocated Blocks
+event: totFdB : total Freed Bytes
+event: totFdBk : total Freed Blocks
+events: curB  curBk  totB  totBk  totFdB  totFdBk 
+fl=(1) /nfs/homes/bpoumeau/Documents/mini_parsing/main.c
+fn=(1) main
+450
+cfi=(1)
+cfn=(2) tests_tokenisation
+calls=0 374
+450 0 0 40 1 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3) tokenisation_ln
+calls=0 356
+374 0 0 40 1 0 0
+fl=(1)
+fn=(3)
+356
+cfi=(2) /nfs/homes/bpoumeau/Documents/mini_parsing/mini_parsing.c
+cfn=(4) token_lst_constructor
+calls=0 22
+356 0 0 40 1 0 0
+fl=(2)
+fn=(4)
+22
+cfi=(3) /nfs/homes/bpoumeau/Documents/mini_parsing/token_lst_utils.c
+cfn=(5) token_constructor
+calls=0 19
+22 0 0 40 1 0 0
+fl=(3)
+fn=(5)
+19 0 0 40 1 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 600 15 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 356
+374 0 0 600 15 0 0
+fl=(1)
+fn=(3)
+356
+cfi=(2)
+cfn=(4)
+calls=0 26
+356 0 0 600 15 0 0
+fl=(2)
+fn=(4)
+26
+cfi=(3)
+cfn=(5)
+calls=0 19
+26 0 0 600 15 0 0
+fl=(3)
+fn=(5)
+19 0 0 600 15 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 40 1 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 356
+374 0 0 40 1 0 0
+fl=(1)
+fn=(3)
+356
+cfi=(2)
+cfn=(4)
+calls=0 32
+356 0 0 40 1 0 0
+fl=(2)
+fn=(4)
+32
+cfi=(3)
+cfn=(5)
+calls=0 19
+32 0 0 40 1 0 0
+fl=(3)
+fn=(5)
+19 0 0 40 1 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 0 0 40 1
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 358
+374 0 0 0 0 40 1
+fl=(1)
+fn=(3)
+358
+cfi=(4) /nfs/homes/bpoumeau/Documents/mini_parsing/expand_variable.c
+cfn=(6) expand_dollars
+calls=0 28
+358 0 0 0 0 40 1
+fl=(4)
+fn=(6)
+28
+cfi=(4)
+cfn=(7) _substitute_for_env_variable
+calls=0 40
+28 0 0 0 0 40 1
+fl=(4)
+fn=(7)
+40
+cfi=(3)
+cfn=(8) del_next_token
+calls=0 62
+40 0 0 0 0 40 1
+fl=(3)
+fn=(8)
+62
+cfi=(3)
+cfn=(9) del_token
+calls=0 86
+62 0 0 0 0 40 1
+fl=(3)
+fn=(9)
+86 0 0 0 0 40 1
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 0 0 160 4
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 358
+374 0 0 0 0 160 4
+fl=(1)
+fn=(3)
+358
+cfi=(4)
+cfn=(6)
+calls=0 28
+358 0 0 0 0 160 4
+fl=(4)
+fn=(6)
+28
+cfi=(4)
+cfn=(7)
+calls=0 41
+28 0 0 0 0 160 4
+fl=(4)
+fn=(7)
+41
+cfi=(3)
+cfn=(10) del_next_word
+calls=0 79
+41 0 0 0 0 160 4
+fl=(3)
+fn=(10)
+79
+cfi=(3)
+cfn=(8)
+calls=0 62
+79 0 0 0 0 160 4
+fl=(3)
+fn=(8)
+62
+cfi=(3)
+cfn=(9)
+calls=0 86
+62 0 0 0 0 160 4
+fl=(3)
+fn=(9)
+86 0 0 0 0 160 4
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 40 1 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 358
+374 0 0 40 1 0 0
+fl=(1)
+fn=(3)
+358
+cfi=(4)
+cfn=(6)
+calls=0 28
+358 0 0 40 1 0 0
+fl=(4)
+fn=(6)
+28
+cfi=(4)
+cfn=(7)
+calls=0 43
+28 0 0 40 1 0 0
+fl=(4)
+fn=(7)
+43
+cfi=(3)
+cfn=(11) insert_str_in_tkn_lst
+calls=0 118
+43 0 0 40 1 0 0
+fl=(3)
+fn=(11)
+118
+cfi=(3)
+cfn=(12) token_lst_constructor_word
+calls=0 95
+118 0 0 40 1 0 0
+fl=(3)
+fn=(12)
+95
+cfi=(3)
+cfn=(13) token_constructor_esec
+calls=0 34
+95 0 0 40 1 0 0
+fl=(3)
+fn=(13)
+34 0 0 40 1 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 280 7 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 358
+374 0 0 280 7 0 0
+fl=(1)
+fn=(3)
+358
+cfi=(4)
+cfn=(6)
+calls=0 28
+358 0 0 280 7 0 0
+fl=(4)
+fn=(6)
+28
+cfi=(4)
+cfn=(7)
+calls=0 43
+28 0 0 280 7 0 0
+fl=(4)
+fn=(7)
+43
+cfi=(3)
+cfn=(11)
+calls=0 118
+43 0 0 280 7 0 0
+fl=(3)
+fn=(11)
+118
+cfi=(3)
+cfn=(12)
+calls=0 101
+118 0 0 280 7 0 0
+fl=(3)
+fn=(12)
+101
+cfi=(3)
+cfn=(13)
+calls=0 34
+101 0 0 280 7 0 0
+fl=(3)
+fn=(13)
+34 0 0 280 7 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 24 4 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 361
+374 0 0 24 4 0 0
+fl=(1)
+fn=(3)
+361
+cfi=(5) /nfs/homes/bpoumeau/Documents/mini_parsing/testing_utils.c
+cfn=(14) display_tokens
+calls=0 31
+361 0 0 24 4 0 0
+fl=(5)
+fn=(14)
+31
+cfi=(5)
+cfn=(15) display_t_emt
+calls=0 57
+31 0 0 24 4 0 0
+fl=(5)
+fn=(15)
+57
+cfi=(6) UnknownFile???
+cfn=(16) ft_strdup
+calls=0 0
+57 0 0 24 4 0 0
+fl=(6)
+fn=(16)
+0 0 0 24 4 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 1024 1 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 361
+374 0 0 1024 1 0 0
+fl=(1)
+fn=(3)
+361
+cfi=(5)
+cfn=(14)
+calls=0 31
+361 0 0 1024 1 0 0
+fl=(5)
+fn=(14)
+31
+cfi=(5)
+cfn=(15)
+calls=0 58
+31 0 0 1024 1 0 0
+fl=(5)
+fn=(15)
+58
+cfi=(7) /build/glibc-SzIz7B/glibc-2.31/stdio-common/printf.c
+cfn=(17) printf
+calls=0 33
+58 0 0 1024 1 0 0
+fl=(7)
+fn=(17)
+33
+cfi=(8) /build/glibc-SzIz7B/glibc-2.31/stdio-common/vfprintf-internal.c
+cfn=(18) __vfprintf_internal
+calls=0 1373
+33 0 0 1024 1 0 0
+fl=(8)
+fn=(18)
+1373
+cfi=(9) /build/glibc-SzIz7B/glibc-2.31/libio/fileops.c
+cfn=(19) _IO_file_xsputn@@GLIBC_2.2.5
+calls=0 1244
+1373 0 0 1024 1 0 0
+fl=(9)
+fn=(19)
+1244
+cfi=(9)
+cfn=(20) _IO_file_overflow@@GLIBC_2.2.5
+calls=0 745
+1244 0 0 1024 1 0 0
+fl=(9)
+fn=(20)
+745
+cfi=(10) /build/glibc-SzIz7B/glibc-2.31/libio/genops.c
+cfn=(21) _IO_doallocbuf
+calls=0 347
+745 0 0 1024 1 0 0
+fl=(10)
+fn=(21)
+347
+cfi=(11) /build/glibc-SzIz7B/glibc-2.31/libio/filedoalloc.c
+cfn=(22) _IO_file_doallocate
+calls=0 101
+347 0 0 1024 1 0 0
+fl=(11)
+fn=(22)
+101 0 0 1024 1 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 0 0 120 20
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 361
+374 0 0 0 0 120 20
+fl=(1)
+fn=(3)
+361
+cfi=(5)
+cfn=(14)
+calls=0 31
+361 0 0 0 0 120 20
+fl=(5)
+fn=(14)
+31
+cfi=(5)
+cfn=(15)
+calls=0 59
+31 0 0 0 0 120 20
+fl=(5)
+fn=(15)
+59 0 0 0 0 120 20
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 96 16 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 361
+374 0 0 96 16 0 0
+fl=(1)
+fn=(3)
+361
+cfi=(5)
+cfn=(14)
+calls=0 31
+361 0 0 96 16 0 0
+fl=(5)
+fn=(14)
+31
+cfi=(5)
+cfn=(15)
+calls=0 46
+31 0 0 96 16 0 0
+fl=(5)
+fn=(15)
+46
+cfi=(6)
+cfn=(16)
+calls=0 0
+46 0 0 96 16 0 0
+fl=(6)
+fn=(16)
+0 0 0 96 16 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 24 1 24 1 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 362
+374 24 1 24 1 0 0
+fl=(1)
+fn=(3)
+362
+cfi=(12) /nfs/homes/bpoumeau/Documents/mini_parsing/token_to_str_token.c
+cfn=(23) token_lst_to_str_token
+calls=0 26
+362 24 1 24 1 0 0
+fl=(12)
+fn=(23)
+26
+cfi=(13) /nfs/homes/bpoumeau/Documents/mini_parsing/t_string_token_utils.c
+cfn=(24) string_token_creator_on
+calls=0 32
+26 24 1 24 1 0 0
+fl=(13)
+fn=(24)
+32
+cfi=(13)
+cfn=(25) string_token_creator
+calls=0 19
+32 24 1 24 1 0 0
+fl=(13)
+fn=(25)
+19 24 1 24 1 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 120 5 120 5 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 362
+374 120 5 120 5 0 0
+fl=(1)
+fn=(3)
+362
+cfi=(12)
+cfn=(23)
+calls=0 33
+362 120 5 120 5 0 0
+fl=(12)
+fn=(23)
+33
+cfi=(12)
+cfn=(26) _get_str_token_on_and_reset_pin
+calls=0 48
+33 120 5 120 5 0 0
+fl=(12)
+fn=(26)
+48
+cfi=(13)
+cfn=(24)
+calls=0 32
+48 120 5 120 5 0 0
+fl=(13)
+fn=(24)
+32
+cfi=(13)
+cfn=(25)
+calls=0 19
+32 120 5 120 5 0 0
+fl=(13)
+fn=(25)
+19 120 5 120 5 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 23 5 23 5 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 362
+374 23 5 23 5 0 0
+fl=(1)
+fn=(3)
+362
+cfi=(12)
+cfn=(23)
+calls=0 33
+362 23 5 23 5 0 0
+fl=(12)
+fn=(23)
+33
+cfi=(12)
+cfn=(26)
+calls=0 51
+33 23 5 23 5 0 0
+fl=(12)
+fn=(26)
+51
+cfi=(12)
+cfn=(27) _reset_pin_ret_string
+calls=0 77
+51 23 5 23 5 0 0
+fl=(12)
+fn=(27)
+77 23 5 23 5 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 24 1 24 1 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 362
+374 24 1 24 1 0 0
+fl=(1)
+fn=(3)
+362
+cfi=(12)
+cfn=(23)
+calls=0 37
+362 24 1 24 1 0 0
+fl=(12)
+fn=(23)
+37
+cfi=(13)
+cfn=(24)
+calls=0 32
+37 24 1 24 1 0 0
+fl=(13)
+fn=(24)
+32
+cfi=(13)
+cfn=(25)
+calls=0 19
+32 24 1 24 1 0 0
+fl=(13)
+fn=(25)
+19 24 1 24 1 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 0 0 800 20
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 362
+374 0 0 0 0 800 20
+fl=(1)
+fn=(3)
+362
+cfi=(12)
+cfn=(23)
+calls=0 40
+362 0 0 0 0 800 20
+fl=(12)
+fn=(23)
+40
+cfi=(3)
+cfn=(28) token_lst_clear
+calls=0 52
+40 0 0 0 0 800 20
+fl=(3)
+fn=(28)
+52
+cfi=(3)
+cfn=(9)
+calls=0 86
+52 0 0 0 0 800 20
+fl=(3)
+fn=(9)
+86 0 0 0 0 800 20
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 24 4 0 0
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 363
+374 0 0 24 4 0 0
+fl=(1)
+fn=(3)
+363
+cfi=(14) /nfs/homes/bpoumeau/Documents/mini_parsing/str_token_debug.c
+cfn=(29) display_str_token
+calls=0 24
+363 0 0 24 4 0 0
+fl=(14)
+fn=(29)
+24
+cfi=(14)
+cfn=(30) display_t_emt_string
+calls=0 41
+24 0 0 24 4 0 0
+fl=(14)
+fn=(30)
+41
+cfi=(6)
+cfn=(16)
+calls=0 0
+41 0 0 24 4 0 0
+fl=(6)
+fn=(16)
+0 0 0 24 4 0 0
+
+fl=(1)
+fn=(1)
+450
+cfi=(1)
+cfn=(2)
+calls=0 374
+450 0 0 0 0 24 4
+fl=(1)
+fn=(2)
+374
+cfi=(1)
+cfn=(3)
+calls=0 363
+374 0 0 0 0 24 4
+fl=(1)
+fn=(3)
+363
+cfi=(14)
+cfn=(29)
+calls=0 24
+363 0 0 0 0 24 4
+fl=(14)
+fn=(29)
+24
+cfi=(14)
+cfn=(30)
+calls=0 43
+24 0 0 0 0 24 4
+fl=(14)
+fn=(30)
+43 0 0 0 0 24 4
+
+fl=(15) /build/glibc-SzIz7B/glibc-2.31/csu/../csu/libc-start.c
+fn=(31) (below main)
+342
+cfi=(16) /build/glibc-SzIz7B/glibc-2.31/stdlib/exit.c
+cfn=(32) exit
+calls=0 139
+342 0 0 0 0 1024 1
+fl=(16)
+fn=(32)
+139
+cfi=(16)
+cfn=(33) __run_exit_handlers
+calls=0 132
+139 0 0 0 0 1024 1
+fl=(16)
+fn=(33)
+132
+cfi=(6)
+cfn=(34) _vgnU_freeres
+calls=0 0
+132 0 0 0 0 1024 1
+fl=(6)
+fn=(34)
+0
+cfi=(6)
+cfn=(35) __libc_freeres
+calls=0 0
+0 0 0 0 0 1024 1
+fl=(6)
+fn=(35)
+0
+cfi=(6)
+cfn=(36) buffer_free
+calls=0 0
+0 0 0 0 0 1024 1
+fl=(6)
+fn=(36)
+0 0 0 0 0 1024 1
+
+totals: 191 12 2359 62 2168 50

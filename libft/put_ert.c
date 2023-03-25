@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_ert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 19:11:04 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/02/13 19:11:11 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:08:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 //		write(1, "SUCCESS\n", 8);
 //	if (code == FAILURE)
 //		write(1, "FAILURE\n", 8);
-//	if (code == MLC_ERR)
-//		write(1, "MLC_ERR\n", 8);
+//	if (code == FAILED_MALLOC)
+//		write(1, "FAILED_MALLOC\n", 8);
 //}
