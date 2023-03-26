@@ -61,6 +61,10 @@ dkms.conf
 .DS_Store
 .idea
 tester
+<<<<<<< HEAD
+minishell
+=======
 
 # Program name
 minishell
+>>>>>>> master

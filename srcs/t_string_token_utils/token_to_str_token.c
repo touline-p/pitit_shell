@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_parsing.h"
+#include "minishell_parsing.h"
 
-static t_ert	_get_str_token_on_and_reset_pin(t_string_token **str_tok_pt, t_token **pin_pt);
+static t_return_status	_get_str_token_on_and_reset_pin(t_string_token **str_tok_pt, t_token **pin_pt);
 static void		*_token_lst_to_str_token_ep(t_token *trash, t_string_token *mem);
 static char 	*_reset_pin_ret_string(t_token **pin_pt);
 
@@ -41,7 +41,7 @@ t_string_token *token_lst_to_str_token(t_token *tok)
 	return (mem);
 }
 
-static t_ert	_get_str_token_on_and_reset_pin(t_string_token **str_tok_pt, t_token **pin_pt)
+static t_return_status	_get_str_token_on_and_reset_pin(t_string_token **str_tok_pt, t_token **pin_pt)
 {
 	t_emt tmp;
 

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../mini_parsing/mini_parsing.h"
-#include "../../mini_parsing/libft/libft.h"
+#include "minishell_parsing.h"
 
 static	void	_get_signal_from_char(char sign_char, t_emt *emt_pt);
 static void		_regroup_ft(t_token *tok);

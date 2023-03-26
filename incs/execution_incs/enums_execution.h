@@ -15,25 +15,13 @@
 
 /*---- typedef enums ---------------------------------------------------------*/
 
-typedef enum e_return_status	t_return_status;
 typedef enum e_token_minishell	t_token_minishell;
 typedef enum e_secured_status	t_secured_status;
 
 /*----------------------------------------------------------------------------*/
 
-enum	e_return_status
-{
-	SUCCESS = 0,
-	FAILURE = 1,
-	FAILED_MALLOC = 2,
-	FAILED_WRITE = 4
-};
-
-enum	e_secured_status
-{
-	SECURED,
-	UNSECURED
-};
+# ifndef EMT
+#  define EMT
 
 enum	e_token_minishell
 {
@@ -57,5 +45,7 @@ enum	e_token_minishell
 	DOLLAR,
 	NONE
 };
+
+# endif
 
 #endif

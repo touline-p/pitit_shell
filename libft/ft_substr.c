@@ -40,7 +40,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (dst);
 }
 
-t_ret_status	ft_substr_on(char const *s, unsigned int start, size_t len, char **line_pt)
+t_return_status	ft_substr_on(char const *s, unsigned int start, size_t len, char **line_pt)
 {
 	char	*new;
 

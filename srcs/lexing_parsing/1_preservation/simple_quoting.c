@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../mini_parsing/mini_parsing.h"
+#include "minishell_parsing.h"
 
-static t_ert	_squoting_process_ep(void);
+static t_return_status	_squoting_process_ep(void);
 
-t_ert	squoting_process(t_token *last_token, t_token *token, t_token **end_of_quot_pt)
+t_return_status	squoting_process(t_token *last_token, t_token *token, t_token **end_of_quot_pt)
 {
 	(void)last_token;
 	token = token->next;
@@ -29,7 +29,7 @@ t_ert	squoting_process(t_token *last_token, t_token *token, t_token **end_of_quo
 	return (SUCCESS);
 }
 
-static t_ert	_squoting_process_ep(void)
+static t_return_status	_squoting_process_ep(void)
 {
 	write(2, "syntax error near newline.\nLine can't end with open simple quote\n", 65);
 	return (FAILURE);

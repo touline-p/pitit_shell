@@ -14,9 +14,9 @@
 // Created by bpoumeau on 3/11/23.
 //
 
-#include "mini_parsing.h"
+#include "minishell_parsing.h"
 
-t_ert	is_control_operator(t_emt token)
+t_return_status	is_control_operator(t_emt token)
 {
 	if (token == PIPE || token == OR || token == AMPERSAND || token == AND)
 		return (SUCCESS);

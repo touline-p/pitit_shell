@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../mini_parsing/mini_parsing.h"
+#include "minishell_parsing.h"
 
-static t_ert	_escaping_chars_ep(void);
+static t_return_status	_escaping_chars_ep(void);
 
 ////TO DO cette fonction parcours toute la chaine pour tout les escape
 //// Ce n'est pas le bon fonctionnement.
 ////SI TU CHANGE ESCAPING CHANGE AUSSI CE COMMENT
 
-t_ert	escaping_chars(t_token *tok)
+t_return_status	escaping_chars(t_token *tok)
 {
 	t_token *pin;
 
@@ -33,7 +33,7 @@ t_ert	escaping_chars(t_token *tok)
 	return (SUCCESS);
 }
 
-t_ert	escape_process(t_token *last_pt, t_token *tok, t_token **voided)
+t_return_status	escape_process(t_token *last_pt, t_token *tok, t_token **voided)
 {
 	(void)voided;
 	if (tok->token != LETTER
@@ -47,7 +47,7 @@ t_ert	escape_process(t_token *last_pt, t_token *tok, t_token **voided)
 	return (SUCCESS);
 }
 
-static t_ert	_escaping_chars_ep(void)
+static t_return_status	_escaping_chars_ep(void)
 {
 	write(2, "syntax error near newline.\nLine can't be end by '\\'\n", 52);
 	return (FAILURE);

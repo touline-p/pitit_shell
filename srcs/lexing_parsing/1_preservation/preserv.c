@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../mini_parsing/mini_parsing.h"
+#include "minishell_parsing.h"
 
 #define DONO_INDX 3
 
 static size_t	_code_from(char code);
-t_ert			do_nothing(t_token *voided, t_token *also_voided, t_token **this_one_too);
+t_return_status			do_nothing(t_token *voided, t_token *also_voided, t_token **this_one_too);
 
-t_ert	preserve_token_lst(t_token *token)
+t_return_status	preserve_token_lst(t_token *token)
 {
 	t_token *pin;
 	const t_preserv_act	act[] = {escape_process, squoting_process, dquoting_process, do_nothing};
@@ -45,7 +45,7 @@ static size_t _code_from(char code)
 	return (tmp - charset);
 }
 
-t_ert	do_nothing(t_token *voided, t_token *also_voided, t_token **this_one_too)
+t_return_status	do_nothing(t_token *voided, t_token *also_voided, t_token **this_one_too)
 {
 	(void)voided;
 	(void)also_voided;

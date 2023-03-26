@@ -35,8 +35,8 @@
 # define BLUE "\033[1;34m"
 # define PURPLE "\033[1;35m"
 
-# ifndef T_RET_STATUS
-#  define T_RET_STATUS
+# ifndef ERT
+#  define ERT
 
 typedef enum e_ret_status
 {
@@ -44,7 +44,7 @@ typedef enum e_ret_status
 	FAILURE,
 	FAILED_MALLOC,
 	FAILED_WRITE
-}	t_ret_status;
+}	t_return_status;
 
 # endif
 
@@ -57,13 +57,13 @@ typedef struct s_list
 }	t_list;
 
 //void		put_ert(t_ert signal);
-t_ret_status	ft_join_str_arr_on(char **str_arr, char **line_pt);
+t_return_status ft_join_str_arr_on(char **str_arr, char **line_pt);
 char		*ft_strdup(const char *src);
-t_ret_status	ft_strdup_on(const char *src, char **str_pt);
+t_return_status	ft_strdup_on(const char *src, char **str_pt);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
-t_ret_status	ft_substr_on(char const *s, unsigned int start, size_t len, char **line_pt);
+t_return_status	ft_substr_on(char const *s, unsigned int start, size_t len, char **line_pt);
 int			ft_atoi(const char *nptr);
 int			ft_atoi_has_overflown(char *str);
 char		*ft_itoa(int n);

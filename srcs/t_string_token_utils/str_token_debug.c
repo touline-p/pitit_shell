@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_parsing.h"
+#include "minishell_parsing.h"
+
+void	display_t_emt_string(t_string_token *token);
 
 void	display_str_token(t_string_token *tok)
 {

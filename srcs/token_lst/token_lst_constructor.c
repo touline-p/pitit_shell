@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mini_parsing/mini_parsing.h"
+#include "minishell_parsing.h"
 
 static t_token	*_token_lst_constructor_ep(t_token *trash, t_token *ret_val);
 

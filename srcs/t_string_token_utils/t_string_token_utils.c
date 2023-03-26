@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_parsing.h"
+#include "minishell_parsing.h"
 
 t_string_token	*string_token_creator(void)
 {
@@ -25,13 +25,13 @@ t_string_token	*string_token_creator(void)
 	return (new);
 }
 
-t_ert	string_token_creator_on(t_string_token **tok_pt)
+t_return_status	string_token_creator_on(t_string_token **tok_pt)
 {
 	t_string_token *new;
 
 	new = string_token_creator();
 	if (new == NULL)
-		return (MLC_ERR);
+		return (FAILED_MALLOC);
 	*tok_pt = new;
 	return (SUCCESS);
 }
