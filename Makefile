@@ -72,7 +72,7 @@ all:
 	$(MAKE) $(NAME)
 
 $(NAME): $(OBJECTS)
-	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@
+	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@ -lreadline
 	$(PRINT_CREATING)
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS) $(LIBFT)

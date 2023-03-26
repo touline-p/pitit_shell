@@ -16,14 +16,13 @@
 /*---- libraries -------------------------------------------------------------*/
 
 # include <stdio.h>
-
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include "libft.h"
 
 /*---- includes --------------------------------------------------------------*/
 
-# include "libft.h"
 # include "defines_parsing.h"
 # include "enums_parsing.h"
 # include "prototypes_parsing.h"
