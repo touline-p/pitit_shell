@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:53:30 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/24 18:19:53 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/27 14:08:21 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	main(int ac, char **av, char **env)
 
 	line = readline("Y a quoi ? :");
 	printf("j'ai lu ->%s<-\n", line);
-	get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
+	get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS;
 	display_str_token(str_tok_lst);
+	exe
 	return (0);
 }

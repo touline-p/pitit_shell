@@ -5,6 +5,7 @@ FILE	=	main.c \
 	mini_parsing.c \
 	testing_utils.c \
 	token_lst_utils.c \
+	executions.c \
 	escaping_chars.c \
 	preserv.c \
 	simple_quoting.c \
@@ -27,13 +28,12 @@ FILE	=	main.c \
 	per_n_set_errno.c \
 	get_here_doc_fd.c \
 
-
 HEADERS	:= basic_enums.h \
 	mini_parsing.h \
 	test_mini.h \
 	libft/libft.h
 
-FLAGS := -Wall -Werror -Wextra -g3 #-D SILENCIEUX=false
+FLAGS := -Wall -Werror -Wextra -g3 #-fsanitize=address #-D SILENCIEUX=false
 
 OBJS := $(addprefix obj/, $(FILE:.c=.o))
 
