@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:47:29 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/12 00:42:05 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/03/27 12:48:03 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,9 @@ t_ert	str_token_to_instruction_block_tree_on(t_string_token *tok, t_instruction_
 t_ert	stock_last_redirect(t_instruction_block_tree *block, t_string_token *tok, char **env);
 
 void	per_n_set_errno(char *msg);
+
+/*** execution parts tests ***/
+
+void	execution(t_string_token *string_of_tokens);
 
 #endif //MINI_PARSING_MINI_PARSING_H

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:33:30 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/23 18:08:24 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:06:07 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -509,14 +509,16 @@ int main(int ac, char **av, char **env) {
 	//tests_expands(env);
 	//tests_str_to_split_token(env);
 
-	tests_tok_to_str_tok(env);
+	//tests_tok_to_str_tok(env);
 	//tests_pipe_arr(env);
 
 	// tests_all_first_child(env);
 	//tests_tokenisation(env);
-	
+	if (av[1] == NULL)
+		return (1);
 	t_string_token	*str_tok = parsing_constructor(av[1], env);
 	display_str_token(str_tok);
-	
+	if (str_tok != NULL)
+		execution(str_tok);
 	return (0);
 }
