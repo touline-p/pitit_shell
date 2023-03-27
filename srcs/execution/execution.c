@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/27 14:59:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/27 16:41:33 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void	token_recognition(t_string_token *string_of_tokens)
 			puts("pipe");
 		if (temp->token == CHEVRON_IN)
 			puts("chevron_in");
-		if (temp->token == CHEVRON_OT)
+		if (temp->token == CHEVRON_OUT)
 			puts("chevron_out");
 		if (temp->token == HERE_DOC)
 			puts("here_doc");
 		if (temp->token == APPENDS)
 			puts("appends");
-		puts("passe a la casse");
+		// puts("passe a la casse");
 		temp = temp->next;
 	}
 }
