@@ -37,4 +37,5 @@ SOURCES +=																	\
 			srcs/t_string_token_utils/token_to_str_token.c					\
 			srcs/t_string_token_utils/str_token_utils.c						\
 			srcs/builtin/export.c 											\
+			srcs/initialisation/env_init.c									\
 			srcs/main.c
