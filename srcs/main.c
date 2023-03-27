@@ -25,11 +25,11 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		line = readline("Y a quoi ? :");
+		add_history(line);
 		printf("j'ai lu ->%s<-\n", line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
 		if (syntax_is_valid(str_tok_lst) == FAILURE)
 		{
-			printf("this is an error\n");
 			string_token_destructor(str_tok_lst);
 			continue;
 		}

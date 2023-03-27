@@ -27,8 +27,10 @@ t_return_status	syntax_is_valid(t_string_token *lst_to_check)
 
 static t_return_status	_syntax_is_valid_ep(t_emt token)
 {
-	const char	str_arr[9][20] = {"'|'", "'||'", "'&&'", "'&'", "'>'", "'<'", "'>>'", "'<<'", "'newline'"};
-	const t_emt	token_arr[] = {PIPE, OR, AND, AMPERSAND, CHEVRON_OT, CHEVRON_IN, APPENDS, HERE_DOC, EOL};
+	const char	str_arr[9][20] = {"'|'", "'||'", "'&&'", \
+	"'&'", "'>'", "'<'", "'>>'", "'<<'", "'newline'"};
+	const t_emt	token_arr[] = {PIPE, OR, AND, \
+	AMPERSAND, CHEVRON_OT, CHEVRON_IN, APPENDS, HERE_DOC, EOL};
 	size_t		i;
 
 	i = 0;
