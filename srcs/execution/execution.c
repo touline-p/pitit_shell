@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/27 16:41:33 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/27 18:46:28 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,70 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void	token_recognition(t_string_token *string_of_tokens);
+static void	token_recognition(t_data *data, t_string_token *string_of_tokens);
+static void	files_management(t_data *data, char *file, t_token_minishell token);
 
 /*----------------------------------------------------------------------------*/
 
 void	execution(t_string_token *string_of_tokens)
 {
-	token_recognition(string_of_tokens);
+	t_data	data;
+	
+	ft_memset(&data, 0, sizeof(t_data));
+	token_recognition(&data, string_of_tokens);
 }
 
-static void	token_recognition(t_string_token *string_of_tokens)
+static void	token_recognition(t_data *data, t_string_token *string_of_tokens)
 {
 	t_string_token	*temp;
+	t_token_minishell token;
 
 	temp = string_of_tokens;
 	while (temp != NULL)
 	{
-		if (temp->token == START)
-			puts("start");
 		if (temp->token == PIPE)
-			puts("pipe");
-		if (temp->token == CHEVRON_IN)
-			puts("chevron_in");
-		if (temp->token == CHEVRON_OUT)
-			puts("chevron_out");
-		if (temp->token == HERE_DOC)
+			data->nb_of_pipes++;
+		else if (temp->token == CHEVRON_IN || temp->token == CHEVRON_OUT || \
+			temp->token == APPENDS)
+		{
+			token = temp->token;
+			temp = temp->next;
+			files_management(data, temp->content, token);
+		}
+		else if (temp->token == HERE_DOC)
 			puts("here_doc");
-		if (temp->token == APPENDS)
-			puts("appends");
-		// puts("passe a la casse");
 		temp = temp->next;
+	}
+}
+
+static void	files_management(t_data *data, char *file, t_token_minishell token)
+{
+	printf("%d\n", token);
+	if (token == CHEVRON_IN)
+	{
+		puts("che_in");
+		if (data->infile != 0)
+			close(data->infile);
+		data->infile = open(file, O_RDONLY, 0644);
+		if (data->infile == -1)
+			perror("open infile");
+	}
+	else 
+	{
+		if (data->outfile != 0)
+			close(data->outfile);
+		if (token == CHEVRON_OUT)
+		{
+			puts("che_out");
+			data->outfile = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		}
+		else
+		{
+			puts("append");
+			data->outfile = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		}
+		if (data->outfile == -1)
+			perror("open outfile");
 	}
 }
 	/// balader dans la liste chainees et faire en fonction
