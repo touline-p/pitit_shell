@@ -416,6 +416,8 @@ void	tests_tok_to_str_tok(char **env)
 	tests_tok_to_str_tok_ln("", env);
 	tests_tok_to_str_tok_ln("bonjour a tous", env);
 	tests_tok_to_str_tok_ln("echo hi | cat > outfile", env);
+	tests_tok_to_str_tok_ln("echo'$hi '| cat<<$USER > outfile", env);
+	tests_tok_to_str_tok_ln("echo\"hi \" $a | cat<<$USER > outfile", env);
 
 }
 
