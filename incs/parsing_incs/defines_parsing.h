@@ -18,5 +18,5 @@
 # define EOSTR 0
 # define METACHAR_SET "|&<>(); "
 # define IFS " \t\n"
-
+# define NAME_OF_EXE "Pitit shell"
 #endif 

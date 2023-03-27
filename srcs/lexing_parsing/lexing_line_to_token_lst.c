@@ -36,7 +36,7 @@ static t_return_status	_syntax_is_valid_ep(t_emt token)
 	i = 0;
 	while (token_arr[i] != token)
 		i++;
-	ft_dprintf(2, "NAME_OF_EXE syntax error near unexpected token %s\n", str_arr[i]);
+	dprintf(2, "%s : syntax error near unexpected token %s\n", NAME_OF_EXE, str_arr[i]);
 	return (FAILURE);
 }
 
