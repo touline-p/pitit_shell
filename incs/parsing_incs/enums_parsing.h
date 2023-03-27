@@ -16,6 +16,7 @@
 /*---- typedef enums ---------------------------------------------------------*/
 
 typedef enum	e_token_minishell	t_emt;
+typedef enum	e_enum_op			t_e_op;
 
 /*----------------------------------------------------------------------------*/
 
@@ -45,5 +46,13 @@ enum 	e_token_minishell
 	NONE = 18
 };
 # endif
+
+enum e_enum_op
+{
+	AND_OP = 1,
+	OR_OP = 2,
+	UNRESOLVED = 3,
+	RESOLVED = 4
+};
 
 #endif

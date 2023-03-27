@@ -31,7 +31,7 @@ void	display_str_token(t_string_token *tok)
 
 void	display_t_emt_string(t_string_token *token)
 {
-	const char	*msgarr[] = {"start", "pipe_", "_and_", "fd_in", "fd_ot", "_or__", "ifnot", "hrdoc", "appnd", "lfpar", "rtpar", "smcln", "space", "_tab_", "_ltr_","end_l", "_str_", "dolrs"};
+	const char	*msgarr[] = {"start", "pipe_", "ifnot", "fd_in", "fd_ot", "_or__", "_and_", "hrdoc", "appnd", "lfpar", "rtpar", "smcln", "space", "_tab_", "_ltr_","end_l", "_str_", "dolrs"};
 	char		*msg;
 
 	if (token == NULL)
