@@ -9,14 +9,16 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 	t_token			*simple_tok_lst;
 	t_string_token	*str_token_lst;
 
+	(void)env;
+
 	simple_tok_lst = token_lst_constructor(line);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
 	preserve_token_lst(simple_tok_lst);
 	split_toklst_on_meta(simple_tok_lst);
 	regroup_meta(simple_tok_lst);
-	expand_dollars(simple_tok_lst, env);
 	str_token_lst = token_lst_to_str_token(simple_tok_lst);
+	display_str_token(str_token_lst);
 	del_space_token(str_token_lst);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
