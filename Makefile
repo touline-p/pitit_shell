@@ -6,13 +6,13 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/03/24 15:56:21 by twang            ###   ########.fr        #
+#    Updated: 2023/03/27 16:32:45 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include config/print.mk
 include config/headers_execution.mk
 include config/headers_parsing.mk
+include config/print.mk
 include config/sources_execution.mk
 include config/sources_parsing.mk
 

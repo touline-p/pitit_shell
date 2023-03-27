@@ -6,11 +6,11 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:31:59 by twang             #+#    #+#              #
-#    Updated: 2023/03/21 16:16:43 by twang            ###   ########.fr        #
+#    Updated: 2023/03/27 16:34:22 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES =																	\
+SOURCES +=																	\
 			srcs/parsing/expands/cut_line.c 								\
 			srcs/parsing/expands/expands.c 									\
 			srcs/parsing/expands/replace_dollar_str_by_env_value.c			\
