@@ -5,24 +5,44 @@
 #include "minishell_parsing.h"
 #include "structures_execution.h"
 
-t_string_token	*lexing_line_to_token_lst(char *line)
+static t_return_status	_syntax_is_valid_ep(t_emt token);
+t_return_status is_a_meta(t_emt token);
+
+t_return_status	syntax_is_valid(t_string_token *lst_to_check)
 {
-	t_string_token	*token_lst;
-	t_token 		*basic_token_lst;
+	t_string_token	*pin;
 
-	token_lst = NULL;
-	basic_token_lst = token_lst_constructor(line);
-	if (basic_token_lst == NULL)
-		return (NULL);
-	preserve_token_lst(basic_token_lst);
-	split_toklst_on_meta(basic_token_lst);
-	regroup_meta(basic_token_lst);
-	token_lst = token_lst_to_str_token(basic_token_lst);
-	if (token_lst == NULL)
-		return (NULL);
-	del_space_token(token_lst);
+	pin = lst_to_check;
+	if (is_a_meta(pin->next->token) == SUCCESS)
+		return (_syntax_is_valid_ep(pin->next->token));
+	pin = pin->next;
+	while (pin->token != EOL)
+	{
+		if (is_a_meta(pin->token) == SUCCESS && is_a_meta(pin->next->token) == SUCCESS)
+			return (_syntax_is_valid_ep(pin->next->token));
+		pin = pin->next;
+	}
+	return (SUCCESS);
+}
 
+static t_return_status	_syntax_is_valid_ep(t_emt token)
+{
+	const char	str_arr[9][20] = {"'|'", "'||'", "'&&'", \
+	"'&'", "'>'", "'<'", "'>>'", "'<<'", "'newline'"};
+	const t_emt	token_arr[] = {PIPE, OR, AND, \
+	AMPERSAND, CHEVRON_OT, CHEVRON_IN, APPENDS, HERE_DOC, EOL};
+	size_t		i;
 
+	i = 0;
+	while (token_arr[i] != token)
+		i++;
+	dprintf(2, "%s : syntax error near unexpected token %s\n", NAME_OF_EXE, str_arr[i]);
+	return (FAILURE);
+}
 
-	return (token_lst);
+t_return_status is_a_meta(t_emt token)
+{
+	if (token > 8 && token != EOL)
+		return (FAILURE);
+	return (SUCCESS);
 }

@@ -92,7 +92,13 @@ int				next_control_operator_is_a_pipe(t_string_token *tok);
 void			del_next_string_token(t_string_token *tok);
 void			del_space_token(t_string_token *tok);
 
-/*** build block ***/
+/*** checking syntax ***/
+
+
+t_return_status	syntax_is_valid(t_string_token *lst_to_check);
+
+
+
 
 void	per_n_set_errno(char *msg);
 

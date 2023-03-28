@@ -18,6 +18,7 @@
 /*---- typedef structures ----------------------------------------------------*/
 
 typedef struct s_token t_token;
+typedef struct s_block t_block;
 
 /*---- structures ------------------------------------------------------------*/
 
@@ -27,7 +28,7 @@ typedef enum  e_secured
 	UNSECURED
 }	t_esec;
 
-typedef struct	s_token
+struct	s_token
 {
 	t_emt			token;
 	char 			sign_char;
@@ -35,7 +36,14 @@ typedef struct	s_token
 	t_esec			esec;
 	struct s_token	*next;
 	struct s_token	*next_word;
-}	t_token;
+};
 
+struct	s_block
+{
+	int		value;
+	t_e_op	e_op;
+	t_block	*right;
+	t_block	*left;
+};
 
 #endif
