@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:53:30 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/28 12:44:40 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/28 13:59:00 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 
 /*----------------------------------------------------------------------------*/
 
-
 int	main(int ac, char **av, char **env)
 {
 	char	*line;
@@ -30,15 +29,15 @@ int	main(int ac, char **av, char **env)
 
 	while (MINI_SHELL_MUST_GO_ON)
 	{
-		line = readline(PURPLE"Y a quoi ? :"END);
+		line = readline(PURPLE"Y a quoi ? "END);
 		add_history(line);
-		printf("j'ai lu ->%s<-\n", line);
+		printf(BLUE"j'ai lu -> %s <-\n"END, line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
-		if (syntax_is_valid(str_tok_lst) == FAILURE)
-		{
-			string_token_destructor(str_tok_lst);
-			continue;
-		}
+		// if (syntax_is_valid(str_tok_lst) == FAILURE)
+		// {
+		// 	string_token_destructor(str_tok_lst);
+		// 	continue;
+		// }
 		display_str_token(str_tok_lst);
 		execution(str_tok_lst);
 	}

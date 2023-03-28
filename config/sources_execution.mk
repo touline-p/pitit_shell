@@ -6,9 +6,10 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:31:59 by twang             #+#    #+#              #
-#    Updated: 2023/03/27 16:35:16 by twang            ###   ########.fr        #
+#    Updated: 2023/03/28 15:08:14 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES	=																	\
-			srcs/execution/execution.c										
+			srcs/execution/parsing/tokens.c									\
+			srcs/execution/execution.c										\
