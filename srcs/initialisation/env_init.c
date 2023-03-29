@@ -5,6 +5,7 @@ static t_return_status	_reconstruct_env(char ***env_pt);
 
 t_return_status	env_init_on(char ***env_pt)
 {
+	////TODO : checking e presence du pwd et oldpwd
 	if (*env_pt == NULL)
 		return (_reconstruct_env(env_pt));
 	*env_pt = ft_str_array_dup(*env_pt);
