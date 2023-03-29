@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:53:30 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/28 13:59:00 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/29 20:12:37 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,19 @@ t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 
 /*----------------------------------------------------------------------------*/
 
+static void	welcome_to_minihell(void)
+{
+	printf(ITALIC BLUE"\nThis is madness\n\n"END);
+	printf(BLUE"by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
+	printf("& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char	*line;
 	t_string_token	*str_tok_lst;
 	(void)ac; (void)av;
-
+	welcome_to_minihell();
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		line = readline(PURPLE"Y a quoi ? "END);

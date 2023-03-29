@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines_execution.h                                :+:      :+:    :+:   */
+/*   clean_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 18:27:48 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/29 10:47:24 by twang            ###   ########.fr       */
+/*   Created: 2023/03/29 20:00:13 by twang             #+#    #+#             */
+/*   Updated: 2023/03/29 20:00:31 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_EXECUTION_H
-# define DEFINES_EXECUTION_H
+#include "minishell_execution.h"
 
-# define MINI_SHELL_MUST_GO_ON 1
-# define HEREDOC_MUST_GO_ON 1
-# define STRT_CHR -1
-# define EOSTR 0
-# define METACHAR_SET "|&<>(); "
-# define IFS " \t\n"
+void	clean_files_token(t_string_token *string_of_tokens)
+{
+	t_string_token	*temp;
 
-#endif 
+	temp = string_of_tokens;
+	while (temp != NULL)
+	{
+		if (temp->next->token == CHEVRON_IN || temp->next->token == CHEVRON_OT || \
+			temp->next->token == APPENDS)
+			del_next_string_token(temp);
+		else
+			temp = temp->next;
+	}
+}

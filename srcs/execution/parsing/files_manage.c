@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   files_manage.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/29 18:22:32 by twang            ###   ########.fr       */
+/*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
+/*   Updated: 2023/03/29 20:01:05 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,28 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
+
 /*----------------------------------------------------------------------------*/
 
-void	execution(t_string_token *string_of_tokens)
+void	files_management(t_data *data, char *file, t_token_minishell token)
 {
-	t_data	data;
-	
-	ft_memset(&data, 0, sizeof(t_data));
-	token_recognition(&data, string_of_tokens);
+	if (token == CHEVRON_IN)
+	{
+		if (data->infile != 0)
+			close(data->infile);
+		data->infile = open(file, O_RDONLY, 0644);
+		if (data->infile == -1)
+			perror("open infile");
+	}
+	else 
+	{
+		if (data->outfile != 0)
+			close(data->outfile);
+		if (token == CHEVRON_OT)
+			data->outfile = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else
+			data->outfile = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (data->outfile == -1)
+			perror("open outfile");
+	}
 }
-
-	/// balader dans la liste chainees et faire en fonction
-	//create structure init -> fds management	-> fork management -> heredoc
-	//check des chevrons	-> infile / outifile - les gerer - les virer
-	//check here_docs 		-> here_doc becomes infile 
-	//check des pipes		-> checks fds -> prepare for fork
-	//check commands 		-> builtins -> call built_in function
-	//						-> commands to exec -> get_path, ... pipex

@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/28 15:07:11 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/29 20:11:23 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@
 /*-- execution----------------------------------------------------------------*/
 
 void	execution(t_string_token *string_of_tokens);
+
 void	token_recognition(t_data *data, t_string_token *string_of_tokens);
+
+void	heredoc_management(t_data *data, char *limiter);
+void	files_management(t_data *data, char *file, t_token_minishell token);
+
+void	clean_files_token(t_string_token *string_of_tokens);
+
+void	del_next_string_token(t_string_token *tok);
+void	display_str_token(t_string_token *tok);
 
 #endif

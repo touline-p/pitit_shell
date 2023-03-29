@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/29 18:22:32 by twang            ###   ########.fr       */
+/*   Created: 2023/03/29 18:58:11 by twang             #+#    #+#             */
+/*   Updated: 2023/03/29 18:59:59 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,38 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
+
+
 /*----------------------------------------------------------------------------*/
 
-void	execution(t_string_token *string_of_tokens)
+void	heredoc_management(t_data *data, char *limiter)
 {
-	t_data	data;
+	int		fd[2];
+	char	*line;
 	
-	ft_memset(&data, 0, sizeof(t_data));
-	token_recognition(&data, string_of_tokens);
+	printf("%s\n", limiter);
+	printf("%ld\n", strlen(limiter));
+	if (data->infile != 0)
+			close(data->infile);
+	if (pipe(fd) == -1)
+		exit(dprintf(2, RED"Error\nPipe Issue\n"END));
+	else if (pipe(fd) == 0)
+	{
+		while (HEREDOC_MUST_GO_ON)
+		{
+			line = readline(PURPLE"> "END);
+			if (!strcmp(line, limiter))
+			{
+				free(limiter);
+				break ;
+			}
+			write(fd[1], line, ft_strlen(line));
+			free(line);
+		}
+	}
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
 }
-
-	/// balader dans la liste chainees et faire en fonction
-	//create structure init -> fds management	-> fork management -> heredoc
-	//check des chevrons	-> infile / outifile - les gerer - les virer
-	//check here_docs 		-> here_doc becomes infile 
-	//check des pipes		-> checks fds -> prepare for fork
-	//check commands 		-> builtins -> call built_in function
-	//						-> commands to exec -> get_path, ... pipex
