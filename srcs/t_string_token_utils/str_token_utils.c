@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../incs/execution_incs/minishell_execution.h"
+#include "../../incs/parsing_incs/minishell_parsing.h"
 #include "minishell_parsing.h"
 
 int	next_control_operator_is_a_pipe(t_string_token *tok)

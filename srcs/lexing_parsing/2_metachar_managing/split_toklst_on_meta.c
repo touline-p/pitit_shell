@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell_parsing.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
 
 static	void	_get_signal_from_char(char sign_char, t_emt *emt_pt);
 static void		_regroup_ft(t_token *tok);

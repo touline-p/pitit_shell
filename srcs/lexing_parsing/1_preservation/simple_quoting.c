@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell_parsing.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
 
 static t_return_status	_squoting_process_ep(void);
 

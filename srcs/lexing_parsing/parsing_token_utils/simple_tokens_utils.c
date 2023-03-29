@@ -15,6 +15,7 @@
 //
 
 #include "minishell_parsing.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
 
 t_return_status	is_control_operator(t_emt token)
 {

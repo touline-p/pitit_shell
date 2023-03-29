@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell_parsing.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
 
 t_token	*token_constructor(t_emt emt, char msg)
 {

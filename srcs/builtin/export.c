@@ -157,7 +157,7 @@ static t_return_status	_get_content_on(char *line, char **key_pt)
 
 	idx = ft_index_of(line, '=');
 	if (idx == (size_t)-1)
-	{
+	{	
 		*key_pt = NULL;
 		return (SUCCESS);
 	}
