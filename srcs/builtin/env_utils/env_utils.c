@@ -37,6 +37,29 @@ char    *get_env_content_from_key(char *key, char **env)
 	return (NULL);
 }
 
+t_return_status	add_str_to_env(char *line, char ***env_pt)
+{
+	char	**new_env;
+	char	**env;
+	size_t	i;
+
+	new_env = (char **)malloc(sizeof(char *) * (ft_str_array_len(*env_pt) + 2));
+	if (new_env == NULL)
+		return (FAILED_MALLOC);
+	env = *env_pt;
+	i = 0;
+	while (env[i])
+	{
+		new_env[i] = env[i];
+		i++;
+	}
+	new_env[i++] = line;
+	new_env[i++] = NULL;
+	free(env);
+	*env_pt = new_env;
+	return (SUCCESS);
+}
+
 #ifdef TST_ENV_UTILS
 
 int	main(int ac, char **av, char **env)
