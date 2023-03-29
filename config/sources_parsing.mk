@@ -10,8 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES +=																	\
-			srcs/parsing/expands/cut_line.c 								\
+SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/parsing/expands/expands.c 									\
 			srcs/parsing/expands/replace_dollar_str_by_env_value.c			\
 			srcs/token_lst/token_lst_constructor.c 							\
