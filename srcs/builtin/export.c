@@ -65,6 +65,7 @@ int main(int ac, char **av, char **env)
 	av = ft_str_array_dup(av);
 	env = ft_str_array_dup(env);
 	export_builtin(av, &env);
+	ft_print_split(env);
 	ft_free_split(env);
 }
 #endif
