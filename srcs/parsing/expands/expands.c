@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_parsing.h"
-/*
-t_ret_status	performe_expand_on_line(char **line_pt, char **env)
+#include "../../incs/execution_incs/minishell_execution.h"
+#include "../../incs/parsing_incs/minishell_parsing.h"
+
+t_return_status	performe_expand_on_line(char **line_pt, char **env)
 {
 	char **line_arr;
 	char **pin;
 
 	if (cut_line_on(*line_pt, &line_arr) != SUCCESS)
 		return (0);
-	printf("i m here\n");
 	pin = line_arr;
 	while (pin && *pin)
 	{
@@ -52,4 +52,3 @@ int	main(int ac, char **av, char **env)
 }
 
 #endif
-*/

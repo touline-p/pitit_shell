@@ -1,12 +1,14 @@
 
-#include "minishell_parsing.h"
-/*
+
+#include "../../incs/execution_incs/minishell_execution.h"
+#include "../../incs/parsing_incs/minishell_parsing.h"
+
 static size_t			count_indep_words(char *line);
-static t_ret_status 	check_allocations(char **line_arr, size_t arr_len);
-static t_ret_status		alloc_each_cells(char *line, char **line_arr);
+static t_return_status 	check_allocations(char **line_arr, size_t arr_len);
+static t_return_status		alloc_each_cells(char *line, char **line_arr);
 static void				fill_cells(char *line, char **line_arr);
 
-t_ret_status	cut_line_on(char *line, char ***res_pt)
+t_return_status	cut_line_on(char *line, char ***res_pt)
 {
 	char	**line_arr;
 
@@ -41,7 +43,7 @@ static size_t	count_indep_words(char *line)
 	return (count);
 }
 
-static	t_ret_status 	check_allocations(char **line_arr, size_t arr_len)
+static	t_return_status 	check_allocations(char **line_arr, size_t arr_len)
 {
 	int	tmp;
 
@@ -58,7 +60,7 @@ static	t_ret_status 	check_allocations(char **line_arr, size_t arr_len)
 	return (FAILED_MALLOC);
 }
 
-static	t_ret_status	alloc_each_cells(char *line, char **line_arr)
+static	t_return_status	alloc_each_cells(char *line, char **line_arr)
 {
 	size_t	arr_indx;
 	size_t	word_len;
@@ -135,4 +137,3 @@ int main(int ac, char **av, char **env)
 }
 
 #endif
-*/
