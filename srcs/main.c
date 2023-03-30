@@ -15,6 +15,8 @@
 #include "structures_execution.h"
 #include <readline/readline.h>
 
+#include "../incs/execution_incs/minishell_execution.h"
+#include "../incs/parsing_incs/minishell_parsing.h"
 /*---- prototypes ------------------------------------------------------------*/
 
 t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env);

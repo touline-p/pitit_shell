@@ -3,7 +3,8 @@
 //
 
 #include "minishell_parsing.h"
-#include "structures_execution.h"
+#include "../../incs/execution_incs/structures_execution.h"
+#include "../../incs/parsing_incs/minishell_parsing.h"
 
 static t_return_status	_syntax_is_valid_ep(t_emt token);
 t_return_status is_a_meta(t_emt token);
@@ -30,7 +31,7 @@ static t_return_status	_syntax_is_valid_ep(t_emt token)
 	const char	str_arr[9][20] = {"'|'", "'||'", "'&&'", \
 	"'&'", "'>'", "'<'", "'>>'", "'<<'", "'newline'"};
 	const t_emt	token_arr[] = {PIPE, OR, AND, \
-	AMPERSAND, CHEVRON_OT, CHEVRON_IN, APPENDS, HERE_DOC, EOL};
+	AMPERSAND, CHEVRON_OUT, CHEVRON_IN, APPENDS, HERE_DOC, EOL};
 	size_t		i;
 
 	i = 0;
