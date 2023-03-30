@@ -143,15 +143,12 @@ t_return_status	split_t_string_token_on_space(t_string_token **token)
 	t_string_token	*token_lst;
 
 	split = ft_split((*token)->content, ' ');
-	if (split == NULL)
-		return (FAILED_MALLOC);
-	if (*split == NULL)
-		*(char *)((*token)->content) = 0;
-	if (str_arr_to_str_token_lst(split) != SUCCESS)
-	if (token_lst == NULL)
-		return (FAILED_MALLOC);
 	free((*token)->content);
 	free(*token);
+	if (split == NULL)
+		return (FAILED_MALLOC);
+	if (str_arr_to_str_token_lst(split, &token_lst) != SUCCESS)
+		return (FAILED_MALLOC);
 	*token = token_lst;
 	return (SUCCESS);
 }
