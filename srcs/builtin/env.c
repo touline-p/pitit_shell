@@ -5,7 +5,14 @@ t_return_status	env_builtin(char **av, char ***env_pt)
 {
 	char **pin;
 
-	ft_free_split(av)
+	ft_free_split(av);
+	pin = *env_pt;
+	while (*pin)
+	{
+		printf("%s\n", *pin);
+		pin++;
+	}
+	return (SUCCESS);
 }
 
 
@@ -18,7 +25,6 @@ int	main(int ac, char **av, char **env)
 	env = ft_str_array_dup(env);
 	av = ft_str_array_dup(av);
 	env_builtin(av, &env);
-	ft_print_split(env);
 	ft_free_split(env);
 	return (0);
 }
