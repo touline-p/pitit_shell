@@ -3,10 +3,12 @@
 
 t_return_status	cd_builtin(char **av, char ***env_pt)
 {
-	if (ft_str_array_len(av) > 2)
-		return (dprintf(2, "cd: too much arguments\n"), ft_free_split(av), SUCCESS);
+	(void)env_pt;
+	if (ft_str_array_len(av) != 2)
+		return (dprintf(2, "cd: bad arguments number\n"), ft_free_split(av), SUCCESS);
 //	if (ft_str_array_len(av) == 1)
 //		return (_go_to_home(env_pt));
+
 	chdir(av[1]);
 	if (errno)
 	{
@@ -16,6 +18,7 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 	return (SUCCESS);
 }
 
+#ifdef CD_TST
 int main(int ac, char **av, char **env)
 {
 	(void)ac; (void)av; (void)env;
@@ -28,3 +31,4 @@ int main(int ac, char **av, char **env)
 	ft_free_split(env);
 	return (0);
 }
+#endif
