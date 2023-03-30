@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../incs/execution_incs/minishell_execution.h"
+#include "../../incs/parsing_incs/minishell_parsing.h"
 #include "minishell_parsing.h"
 
 t_string_token	*string_token_creator(void)
