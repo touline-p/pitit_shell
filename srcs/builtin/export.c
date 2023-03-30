@@ -15,7 +15,10 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 	tmp = args + 1;
 	while (*tmp != NULL)
 	{
-		if (is_a_key_from_env(*tmp, *env_pt) == true && ft_strchr(*tmp, '=') != NULL)
+		if (has_a_key_from_env(*tmp, *env_pt) == true
+			&& ft_strchr(*tmp, '=') == NULL)
+			;
+		else if (has_a_key_from_env(*tmp, *env_pt) == true)
 			replace_content_in_env(*tmp, *env_pt);
 		else
 		{
@@ -55,6 +58,7 @@ static void	_display_unic_export(char *env_line)
 	printf("declare -x %s=\"%s\"\n", env_line, content);
 	*(--content) = '=';
 }
+#define TST_EXPORT
 
 #ifdef TST_EXPORT
 int main(int ac, char **av, char **env)

@@ -8,6 +8,23 @@ bool	is_a_key_from_env(char *key, char **env)
 	return (false);
 }
 
+bool	has_a_key_from_env(char *line, char **env)
+{
+	bool ret_val;
+	char *equal_sign;
+
+	equal_sign = ft_strchr(line, '=');
+	if (equal_sign == NULL)
+		ret_val = is_a_key_from_env(line, env);
+	else
+	{
+		*equal_sign = 0;
+		ret_val = is_a_key_from_env(line, env);
+		*equal_sign = '=';
+	}
+	return (ret_val);
+}
+
 char    *get_line_from_key(char *key, char **env)
 {
 	char    **pin;
