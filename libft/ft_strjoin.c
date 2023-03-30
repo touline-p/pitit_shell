@@ -28,3 +28,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	*tmp = 0;
 	return (dst);
 }
+
+char	*ft_strjoin_free_sec_sf(char *s1, char *s2)
+{
+	char *dst;
+
+	if (s2 == NULL)
+		return (NULL);
+	dst = ft_strjoin(s1, s2);
+	free(s2);
+	return (dst);
+}
+

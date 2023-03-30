@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_parsing.h"
+#include "libft.h";
 
 void	per_n_set_errno(char *msg)
 {
