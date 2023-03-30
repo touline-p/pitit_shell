@@ -58,7 +58,6 @@ static void	_display_unic_export(char *env_line)
 	printf("declare -x %s=\"%s\"\n", env_line, content);
 	*(--content) = '=';
 }
-#define TST_EXPORT
 
 #ifdef TST_EXPORT
 int main(int ac, char **av, char **env)

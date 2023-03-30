@@ -8,6 +8,7 @@ t_return_status	echo_builtin(char **av, char ***env_pt)
 	char **tmp;
 	bool option;
 
+	(void)env_pt;
 	tmp = av + 1;
 	option = _is_option_n(*tmp);
 	if (option == true)

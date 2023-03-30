@@ -7,7 +7,7 @@ t_return_status	pwd_builtin(char **args, char ***env_pt)
 
 	(void)env_pt;
 	if (ft_str_array_len(args) > 1)
-		return (dprintf(2, "pwd: too many arguments\n"), ft_free_split(args) FAILURE)
+		return (dprintf(2, "pwd: too many arguments\n"), ft_free_split(args), FAILURE);
 	ft_free_split(args);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
