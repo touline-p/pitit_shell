@@ -94,6 +94,30 @@ t_return_status	add_str_to_env(char *line, char ***env_pt)
 	return (SUCCESS);
 }
 
+t_return_status del_str_from_env(char *line, char ***env_pt)
+{
+	char	**new_env;
+	char 	**env;
+	size_t	i;
+
+	new_env = (char **)malloc(sizeof(char *) * (ft_str_array_len(*env_pt)));
+	if (new_env == NULL)
+		return (FAILED_MALLOC);
+	env = *env_pt;
+	i = 0;
+	while (*env)
+	{
+		if (*env != line)
+			new_env[i++] = *env;
+		env++;
+	}
+	new_env[i] = NULL;
+	free(line);
+	free(env);
+	*env_pt = new_env;
+	return (SUCCESS);
+}
+
 void	replace_content_in_env(char *line, char **env)
 {
 	char **line_to_replace;
