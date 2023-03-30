@@ -92,3 +92,66 @@ void	del_space_token(t_string_token *tok)
 			pin = pin->next;
 	}
 }
+
+t_return_status string_token_new_on(void *content, t_emt emt, t_string_token **str_token_pt)
+{
+	t_string_token *new;
+
+	new = malloc(sizeof(t_string_token *));
+	if (!new)
+		return (FAILED_MALLOC);
+	new->content = content;
+	new->token = emt;
+	*str_token_pt = new;
+	return (SUCCESS);
+}
+
+t_return_status str_arr_to_str_token_lst(char **split, t_string_token **str_token_pt)
+{
+	t_string_token	*new_lst;
+	char 			**split_tmp;
+
+	split_tmp = split;
+	if (string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
+		return (FAILED_MALLOC);
+	free((*str_token_pt)->content);
+	free(*str_token_pt);
+	*str_token_pt = new_lst;
+	while (new_lst->content != NULL)
+	{
+		if (string_token_new_on(*(split++), STRING, &(new_lst->next)) != SUCCESS)
+		new_lst = new_lst->next;
+	}
+	free(split_tmp);
+	return (SUCCESS);
+}
+
+void del_empty_tokens(t_string_token *token_lst)
+{
+	while (token_lst->next->token != EOL)
+	{
+		if (token_lst->next->content == NULL || *(char *)(token_lst->next->content) == 0)
+			del_next_string_token(token_lst);
+		else
+			token_lst = token_lst->next;
+	}
+}
+
+t_return_status	split_t_string_token_on_space(t_string_token **token)
+{
+	char			**split;
+	t_string_token	*token_lst;
+
+	split = ft_split((*token)->content, ' ');
+	if (split == NULL)
+		return (FAILED_MALLOC);
+	if (*split == NULL)
+		*(char *)((*token)->content) = 0;
+	if (str_arr_to_str_token_lst(split) != SUCCESS)
+	if (token_lst == NULL)
+		return (FAILED_MALLOC);
+	free((*token)->content);
+	free(*token);
+	*token = token_lst;
+	return (SUCCESS);
+}
