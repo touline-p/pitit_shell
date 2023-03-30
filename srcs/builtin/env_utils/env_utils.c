@@ -111,9 +111,9 @@ t_return_status del_str_from_env(char *line, char ***env_pt)
 			new_env[i++] = *env;
 		env++;
 	}
-	new_env[i] = NULL;
 	free(line);
-	free(env);
+	new_env[i] = NULL;
+	free(*env_pt);
 	*env_pt = new_env;
 	return (SUCCESS);
 }

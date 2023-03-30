@@ -70,6 +70,9 @@ int main(int ac, char **av, char **env)
 	env = ft_str_array_dup(env);
 	export_builtin(av, &env);
 	ft_print_split(env);
+	del_str_from_env(get_line_from_key("USER", env), &env);
+	printf("\n\n\nyouhou\n\n\n");
+	ft_print_split(env);
 	ft_free_split(env);
 }
 #endif
