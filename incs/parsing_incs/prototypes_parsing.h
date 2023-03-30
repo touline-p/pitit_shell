@@ -104,6 +104,8 @@ t_return_status	add_str_to_env(char *line, char ***env_pt);
 
 char *get_first_line_in_env(char **env);
 char *get_next_line_in_env(char *last, char **env);
+char 	**get_line_addr_from_key(char *key, char **env);
+void	replace_content_in_env(char *line, char **env);
 
 
 void	per_n_set_errno(char *msg);

@@ -25,6 +25,23 @@ char    *get_line_from_key(char *key, char **env)
 	return (*pin);
 }
 
+char 	**get_line_addr_from_key(char *key, char **env)
+{
+	char    **pin;
+	size_t  ln;
+
+	pin = env;
+	ln = ft_strlen(key);
+	while (*pin)
+	{
+		if (ft_strncmp(*pin, key, ln) == 0 \
+			&& ((*pin)[ln] == 0 || (*pin)[ln] == '='))
+			return (pin);
+		pin++;
+	}
+	return (pin);
+}
+
 char    *get_env_content_from_key(char *key, char **env)
 {
 	char	*line;
@@ -58,6 +75,17 @@ t_return_status	add_str_to_env(char *line, char ***env_pt)
 	free(env);
 	*env_pt = new_env;
 	return (SUCCESS);
+}
+
+void	replace_content_in_env(char *line, char **env)
+{
+	char **line_to_replace;
+
+	*ft_strchr(line, '=') = 0;
+	line_to_replace = get_line_addr_from_key(line, env);
+	*ft_strchr(line, 0) = '=';
+	free(*line_to_replace);
+	*line_to_replace = line;
 }
 
 #ifdef TST_ENV_UTILS
