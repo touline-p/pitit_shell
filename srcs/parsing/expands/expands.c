@@ -73,7 +73,7 @@ int	main(int ac, char **av, char **env)
 
 #endif
 
-#define TST_EXPAND_FOR_ARGS
+//#define TST_EXPAND_FOR_ARGS
 #ifdef TST_EXPAND_FOR_ARGS
 
 int	main(int ac, char **av, char **env)
