@@ -9,11 +9,11 @@
 #include "../incs/parsing_incs/minishell_parsing.h"
 /*---- prototypes ------------------------------------------------------------*/
 
-t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env);
 
 /*----------------------------------------------------------------------------*/
 
 
+#ifdef MAIN
 int	main(int ac, char **av, char **env)
 {
 	char	*line;
@@ -36,3 +36,4 @@ int	main(int ac, char **av, char **env)
 	}
 	return (0);
 }
+#endif

@@ -82,14 +82,16 @@ void	del_next_string_token(t_string_token *tok)
 void	del_space_token(t_string_token *tok)
 {
 	t_string_token *pin;
+	int i = 0;
 
 	pin = tok;
 	while (pin->next->token != EOL)
 	{
-		if (pin->next->token == SPACE || pin->next->token == TABULATION)
+		if (pin->next->token == E_SPACE || pin->next->token == TABULATION)
 			del_next_string_token(pin);
 		else
 			pin = pin->next;
+		i++;
 	}
 }
 
@@ -97,11 +99,12 @@ t_return_status string_token_new_on(void *content, t_emt emt, t_string_token **s
 {
 	t_string_token *new;
 
-	new = malloc(sizeof(t_string_token *));
+	new = malloc(sizeof(t_string_token));
 	if (!new)
 		return (FAILED_MALLOC);
-	new->content = content;
+	new->content = (char *)content;
 	new->token = emt;
+	new->next = NULL;
 	*str_token_pt = new;
 	return (SUCCESS);
 }
@@ -114,12 +117,12 @@ t_return_status str_arr_to_str_token_lst(char **split, t_string_token **str_toke
 	split_tmp = split;
 	if (string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
 		return (FAILED_MALLOC);
-	free((*str_token_pt)->content);
-	free(*str_token_pt);
 	*str_token_pt = new_lst;
-	while (new_lst->content != NULL)
+	printf("%s\n", new_lst->content);
+	while (*split != NULL)
 	{
 		if (string_token_new_on(*(split++), STRING, &(new_lst->next)) != SUCCESS)
+			return (FAILED_MALLOC);
 		new_lst = new_lst->next;
 	}
 	free(split_tmp);
@@ -137,18 +140,32 @@ void del_empty_tokens(t_string_token *token_lst)
 	}
 }
 
-t_return_status	split_t_string_token_on_space(t_string_token **token)
+t_return_status	split_t_string_token_on_space(t_string_token *token)
 {
 	char			**split;
 	t_string_token	*token_lst;
+	t_string_token	*tmp;
 
-	split = ft_split((*token)->content, ' ');
-	free((*token)->content);
-	free(*token);
-	if (split == NULL)
+	split = ft_split(token->content, ' ');
+	*(token->content) = 0;
+	tmp = token->next;
+	if (split == NULL
+		|| str_arr_to_str_token_lst(split, &token_lst) != SUCCESS)
 		return (FAILED_MALLOC);
-	if (str_arr_to_str_token_lst(split, &token_lst) != SUCCESS)
-		return (FAILED_MALLOC);
-	*token = token_lst;
+	token->next = token_lst;
+	while (token_lst->next != NULL)
+		token_lst = token_lst->next;
+	token_lst->next = tmp;
 	return (SUCCESS);
 }
+
+
+#ifdef TST_SPLIT_STR_ON_SPACE
+
+int main(int ac, char **av, char **env)
+{
+
+	return (0);
+}
+
+#endif

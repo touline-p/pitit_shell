@@ -27,6 +27,7 @@ static size_t	count_indep_words(char *line)
 	size_t	count;
 
 	count = 1;
+	printf("log : %s\n", line);
 	while (*line)
 	{
 		count++;
@@ -113,7 +114,7 @@ static void	fill_cells(char *line, char **line_arr)
 		line_arr++;
 	}
 }
-
+//#define TST_CUT_LINE
 #ifdef TST_CUT_LINE
 
 #include <stdio.h>

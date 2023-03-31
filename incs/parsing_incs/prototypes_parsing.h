@@ -44,6 +44,8 @@ t_return_status	replace_dollar_str_by_env_value(char **pin_pt, char **env);
 t_token	*mini_parsing(char *str);
 t_token	*token_lst_constructor(char *str);
 
+t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env);
+
 /*** Token Utils ***/
 
 void	token_lst_clear(t_token *trash);
@@ -89,7 +91,7 @@ void			cpy_token_lst_to_str(t_token *tok, char *str);
 int				next_control_operator_is_a_pipe(t_string_token *tok);
 void			del_next_string_token(t_string_token *tok);
 void			del_space_token(t_string_token *tok);
-t_return_status	split_t_string_token_on_space(t_string_token **token_pt);
+t_return_status	split_t_string_token_on_space(t_string_token *token_pt);
 void			del_empty_tokens(t_string_token *token_lst);
 
 /*** checking syntax ***/
