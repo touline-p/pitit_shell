@@ -111,6 +111,8 @@ char 	**get_line_addr_from_key(char *key, char **env);
 void	replace_content_in_env(char *line, char **env);
 bool	has_a_key_from_env(char *line, char **env);
 
+t_return_status	expand_for_args(t_string_token *token_lst, char **env);
+
 
 void	per_n_set_errno(char *msg);
 

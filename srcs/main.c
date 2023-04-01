@@ -32,6 +32,8 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		display_str_token(str_tok_lst);
+		expand_for_args(str_tok_lst, env);
+		display_str_token(str_tok_lst);
 		//execution(str_tok_lst);
 	}
 	return (0);
