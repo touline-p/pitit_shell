@@ -32,7 +32,7 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		display_str_token(str_tok_lst);
-		execution(str_tok_lst);
+		//execution(str_tok_lst);
 	}
 	return (0);
 }
