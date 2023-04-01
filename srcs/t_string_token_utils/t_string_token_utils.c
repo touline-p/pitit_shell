@@ -86,7 +86,7 @@ void	del_space_token(t_string_token *tok)
 	pin = tok;
 	while (pin->next->token != EOL)
 	{
-		if (pin->next->token == SPACE || pin->next->token == TABULATION)
+		if (pin->next->token == E_SPACE || pin->next->token == TABULATION)
 			del_next_string_token(pin);
 		else
 			pin = pin->next;

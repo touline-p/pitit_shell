@@ -37,7 +37,7 @@ enum	e_token_minishell
 	O_PRTSS,
 	C_PRTSS,
 	SEMICOLON,
-	SPACE,
+	E_SPACE,
 	TABULATION,
 	LETTER,
 	EOL,
