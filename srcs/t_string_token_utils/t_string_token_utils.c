@@ -115,7 +115,7 @@ t_return_status str_arr_to_str_token_lst(char **split, t_string_token **str_toke
 	char 			**split_tmp;
 
 	split_tmp = split;
-	if (string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
+	if (*split == NULL || string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
 		return (FAILED_MALLOC);
 	*str_token_pt = new_lst;
 	printf("%s\n", new_lst->content);
@@ -133,7 +133,10 @@ void del_empty_tokens(t_string_token *token_lst)
 {
 	while (token_lst->next->token != EOL)
 	{
-		if (token_lst->next->content == NULL || *(char *)(token_lst->next->content) == 0)
+		printf("this is : \n");
+		display_str_token(token_lst->next);
+		printf("\nthis is : \n");
+		if (token_lst->next->content == NULL || ft_strcmp(token_lst->next->content, ""))
 			del_next_string_token(token_lst);
 		else
 			token_lst = token_lst->next;

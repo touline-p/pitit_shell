@@ -65,6 +65,8 @@ char    *get_env_content_from_key(char *key, char **env)
 	char	*ret_val;
 
 	line = get_line_from_key(key, env);
+	if (!line)
+		return (NULL);
 	ret_val = ft_strchr(line, '=');
 	if (ret_val)
 		return (ret_val + 1);
