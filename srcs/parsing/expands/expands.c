@@ -40,7 +40,7 @@ t_return_status	expand_for_args(t_string_token *token_lst, char **env)
 {
 	t_string_token	*pin;
 
-	pin = token_lst;
+	pin = token_lst->next;
 	while (pin->token != EOL)
 		if (_expand_str_and_split_space(&pin, env) != SUCCESS)
 			return (FAILED_MALLOC);
