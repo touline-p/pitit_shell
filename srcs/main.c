@@ -13,6 +13,8 @@ t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 
 /*----------------------------------------------------------------------------*/
 
+//#define MAIN
+#ifdef MAIN
 
 int	main(int ac, char **av, char **env)
 {
@@ -38,3 +40,5 @@ int	main(int ac, char **av, char **env)
 	}
 	return (0);
 }
+
+#endif
