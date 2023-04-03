@@ -13,6 +13,8 @@ t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 
 /*----------------------------------------------------------------------------*/
 
+#define MAIN
+#ifdef MAIN
 
 int	main(int ac, char **av, char **env)
 {
@@ -32,7 +34,11 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		display_str_token(str_tok_lst);
-		execution(str_tok_lst);
+		expand_for_args(str_tok_lst, env);
+		display_str_token(str_tok_lst);
+		//execution(str_tok_lst);
 	}
 	return (0);
 }
+
+#endif

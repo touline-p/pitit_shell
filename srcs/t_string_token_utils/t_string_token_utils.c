@@ -97,11 +97,12 @@ t_return_status string_token_new_on(void *content, t_emt emt, t_string_token **s
 {
 	t_string_token *new;
 
-	new = malloc(sizeof(t_string_token *));
+	new = malloc(sizeof(t_string_token));
 	if (!new)
 		return (FAILED_MALLOC);
 	new->content = content;
 	new->token = emt;
+	new->next = NULL;
 	*str_token_pt = new;
 	return (SUCCESS);
 }
@@ -112,12 +113,11 @@ t_return_status str_arr_to_str_token_lst(char **split, t_string_token **str_toke
 	char 			**split_tmp;
 
 	split_tmp = split;
-	if (string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
+	if (*split && string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
 		return (FAILED_MALLOC);
-	free((*str_token_pt)->content);
 	free(*str_token_pt);
 	*str_token_pt = new_lst;
-	while (new_lst->content != NULL)
+	while (*split)
 	{
 		if (string_token_new_on(*(split++), STRING, &(new_lst->next)) != SUCCESS)
 		new_lst = new_lst->next;
@@ -142,9 +142,8 @@ t_return_status	split_t_string_token_on_space(t_string_token **token)
 	char			**split;
 	t_string_token	*token_lst;
 
+	token_lst = NULL;
 	split = ft_split((*token)->content, ' ');
-	free((*token)->content);
-	free(*token);
 	if (split == NULL)
 		return (FAILED_MALLOC);
 	if (str_arr_to_str_token_lst(split, &token_lst) != SUCCESS)
