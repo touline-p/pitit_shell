@@ -17,6 +17,7 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/parsing/expands/replace_dollar_str_by_env_value.c			\
 			srcs/parsing/expands/cut_line.c 								\
 			srcs/parsing/expands/expands.c 									\
+			srcs/parsing/expands/join_expands.c 							\
 			srcs/lexing_parsing/5_suppress_quotes/suppress_quotes.c			\
 			srcs/lexing_parsing/3_expand_in_parsing/expand_variable.c		\
 			srcs/lexing_parsing/parsing_articulation.c						\
@@ -37,12 +38,12 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/t_string_token_utils/str_token_utils.c						\
 			srcs/builtin/export.c 											\
 			srcs/initialisation/env_init.c									\
-			srcs/main.c \
-			srcs/builtin/env_utils/ordering_env_export.c \
-			srcs/builtin/env_utils/env_utils.c \
-			srcs/builtin/env.c \
-			srcs/builtin/cd.c \
-			srcs/builtin/echo.c \
-			srcs/builtin/pwd.c \
-			srcs/builtin/unset.c \
-			srcs/builtin/export.c \
+			srcs/main.c														\
+			srcs/builtin/env_utils/ordering_env_export.c					\
+			srcs/builtin/env_utils/env_utils.c								\
+			srcs/builtin/env.c												\
+			srcs/builtin/cd.c												\
+			srcs/builtin/echo.c												\
+			srcs/builtin/pwd.c												\
+			srcs/builtin/unset.c											\
+			srcs/builtin/export.c											\
