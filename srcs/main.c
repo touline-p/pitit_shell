@@ -9,7 +9,6 @@
 #include "../incs/parsing_incs/minishell_parsing.h"
 /*---- prototypes ------------------------------------------------------------*/
 
-t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env);
 
 /*----------------------------------------------------------------------------*/
 
@@ -25,6 +24,8 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		line = readline("Y a quoi ? :");
+		if (strcmp("END", line) == 0)
+			return (clear_history(), free(line), 0);
 		add_history(line);
 		printf("j'ai lu ->%s<-\n", line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
@@ -34,8 +35,11 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		display_str_token(str_tok_lst);
-		expand_for_args(str_tok_lst, env);
+		cut_all_lines(str_tok_lst);
+		join_all_lines(str_tok_lst, env);
+
 		display_str_token(str_tok_lst);
+		string_token_destructor(str_tok_lst);
 		//execution(str_tok_lst);
 	}
 	return (0);

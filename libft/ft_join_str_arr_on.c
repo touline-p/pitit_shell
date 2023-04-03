@@ -12,6 +12,7 @@ t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
 	while (*arr_pin)
 		size_str += ft_strlen(*(arr_pin++));
 	*line_pt = malloc(size_str);
+	printf("%p\n", *line_pt);
 	if (*line_pt == NULL)
 		return (FAILED_MALLOC);
 	str_pin = *line_pt;

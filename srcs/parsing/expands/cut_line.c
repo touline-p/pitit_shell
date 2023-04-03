@@ -12,7 +12,7 @@ t_return_status	cut_line_on(char *line, char ***res_pt)
 	char	**line_arr;
 
 	*res_pt = NULL;
-	line_arr = malloc(sizeof(char *) * count_indep_words(line));
+	line_arr = malloc(sizeof(char *) * (count_indep_words(line) + 1));
 	if (line_arr == NULL
 		|| alloc_each_cells(line, line_arr) != SUCCESS)
 		return (free(line), free(line_arr), FAILED_MALLOC);
@@ -80,6 +80,8 @@ static t_return_status	check_allocations(char **line_arr, size_t arr_len)
 	int	tmp;
 
 	tmp = arr_len;
+	if (arr_len == 0)
+		return (SUCCESS);
 	while (arr_len--)
 	{
 		if (line_arr[arr_len] == NULL)
@@ -95,7 +97,6 @@ static t_return_status	check_allocations(char **line_arr, size_t arr_len)
 void	increment_ln_reset_pin(t_increment_ft incr_ft, \
 							size_t *ln_pt, char **line_pt, void *arg)
 {
-	printf("%c : 0", **line_pt);
 	if (ft_isalnum(**line_pt) != true)
 	{
 		(*line_pt)++;
@@ -103,13 +104,11 @@ void	increment_ln_reset_pin(t_increment_ft incr_ft, \
 	}
 	while (**line_pt && (*incr_ft)(**line_pt, arg) == false)
 	{
-		printf("%c : %ld", **line_pt, *ln_pt);
 		(*line_pt)++;
 		(*ln_pt)++;
 	}
 	if (incr_ft == &is_eq_to)
 	{
-		printf("i m here\n");
 		(*line_pt)++;
 		(*ln_pt)++;
 	}
@@ -138,7 +137,8 @@ static	t_return_status	alloc_each_cells(char *line, char **line_arr)
 	size_t	count;
 	char	*tmp;
 
-	arr_indx = 0;
+	*line_arr = ft_strdup("");
+	arr_indx = 1;
 	while (*line)
 	{
 		tmp = line;
