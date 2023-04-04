@@ -77,9 +77,7 @@ t_export_ft	_get_ft_to_do(char *line, char **env)
 	plus = ft_strchr(line, '+');
 	_get_rid_of_plus(line);
 	if (has_a_key_from_env(line, env) == false)
-	{
 		return (&add_str_to_env);
-	}
 	if (eq == NULL)
 		return (&do_nothing_t_export_ft);
 	if (plus == eq - 1)
