@@ -21,7 +21,10 @@ static t_return_status 	_expand_lines(char **str_arr, char **env)
 {
 	while (*str_arr)
 	{
-		if (**str_arr == '$' \
+		if (**str_arr == - '"' \
+			&& replace_dquotes_str_by_env_value(str_arr, env) != SUCCESS)
+			return (FAILED_MALLOC);
+		else if (**str_arr == '$' \
 			&& replace_dollar_str_by_env_value(str_arr, env) != SUCCESS)
 			return (FAILED_MALLOC);
 		str_arr++;
@@ -69,22 +72,13 @@ int main(int ac, char **av, char **env)
 {
 	(void)ac; (void)av; (void)env;
 
-	char	*line = ft_strdup("expand\"qui\" \'marche\'$USER ");
-	char 	**line_arr;
-	change(line);
-	cut_line_on(line, &line_arr);
-	char **tmp = line_arr;
-	int i = 0;
-	while (*tmp)
-	{
-		i++;
-		printf("%d: ->%s<-, \n", i, *tmp);
-		tmp++;
-	}
-	join_arr_on(line_arr, &line, env);
-	printf("->%s<-\n", line);
-	free(line);
-
+	t_string_token 	*tok_lst;
+	char	*line = ft_strdup("expand\"qui\"\"\" \'marche\'$USER ");
+	get_lexed_str_token_lst_from_line(line, &tok_lst, env);
+	cut_all_lines(tok_lst);
+	join_all_lines(tok_lst, env);
+	display_str_token(tok_lst);
+	string_token_destructor(tok_lst);
 }
 
 #endif

@@ -26,6 +26,7 @@ struct s_string_token
 {
 	t_token_minishell	token;
 	char				*content;
+	char 				**str_arr;
 	t_string_token		*next;
 };
 

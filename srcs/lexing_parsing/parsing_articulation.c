@@ -12,6 +12,7 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 	(void)env;
 
 	simple_tok_lst = token_lst_constructor(line);
+	free(line);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
 	preserve_token_lst(simple_tok_lst);
