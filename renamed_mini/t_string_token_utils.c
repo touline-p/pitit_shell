@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_string_token_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:25:09 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/11 21:31:18 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:47:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	del_next_string_token(t_string_token *tok)
 	t_string_token	*tmp;
 
 	tmp = tok->next->next;
-	free(tok->next->content);
-	free(tok->next);
+	//free(tok->next->content);
+	//free(tok->next);
 	tok->next = tmp;
 }
 

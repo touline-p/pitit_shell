@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/04/02 20:40:46 by bpoumeau         ###   ########.fr        #
+#    Updated: 2023/04/04 19:14:37 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ include config/sources_parsing.mk
 
 NAME		=	minishell
 DEBUG		=	no
+VALGRIND		=	no
 
 BPOUMEAU	=	\e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a
 TWANG		=	\e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a
@@ -90,7 +91,7 @@ debug:
 
 leaks:
 	clear
-	$(MAKE) re
+	$(MAKE) re VALGRIND=yes
 	$(LEAKS) ./minishell
 
 #--print header----------------------------------------------------------------#
@@ -98,6 +99,7 @@ leaks:
 header:
 	printf "\n${PURPLE}project:\t${END}${BLUE}minishell${END}\n"
 	printf "${PURPLE}author:\t\t${END}${BLUE}${BPOUMEAU} && ${TWANG}${END}\n"
+	printf "${PURPLE}leaks mode:\t${END}${BLUE}${VALGRIND}${END}\n"
 	printf "${PURPLE}debug mode:\t${END}${BLUE}${DEBUG}${END}\n"
 	printf "${PURPLE}compiler:\t${END}${BLUE}${CC}${END}\n"
 	printf "${PURPLE}flags:\t\t${END}${BLUE}${CFLAGS}${END}\n"

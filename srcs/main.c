@@ -1,5 +1,4 @@
 
-
 #include "minishell_parsing.h"
 #include "minishell_execution.h"
 #include "structures_execution.h"
@@ -11,23 +10,28 @@
 
 
 /*----------------------------------------------------------------------------*/
-
 #define MAIN
 #ifdef MAIN
+static void	welcome_to_minihell(void)
+{
+	printf(ITALIC PURPLE"\nThis is madness\n\n"END);
+	printf(PURPLE"by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
+	printf("& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
+}
 
 int	main(int ac, char **av, char **env)
 {
 	char	*line;
 	t_string_token	*str_tok_lst;
 	(void)ac; (void)av;
-
+	welcome_to_minihell();
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		line = readline("Y a quoi ? :");
 		if (strcmp("END", line) == 0)
 			return (clear_history(), free(line), 0);
 		add_history(line);
-		printf("j'ai lu ->%s<-\n", line);
+		printf(BLUE"j'ai lu -> %s <-\n"END, line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
 		if (syntax_is_valid(str_tok_lst) == FAILURE
 			|| cut_all_lines(str_tok_lst) != SUCCESS

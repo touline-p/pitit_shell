@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/21 18:24:08 by twang            ###   ########.fr       */
+/*   Updated: 2023/03/29 16:16:41 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
-# include <stdarg.h>
 # include <fcntl.h>
 
 # include <stdarg.h>
@@ -34,6 +33,12 @@
 # define YELLOW "\033[1;33m"
 # define BLUE "\033[1;34m"
 # define PURPLE "\033[1;35m"
+
+# define END "\033[0m"
+# define BOLD "\033[1m"
+# define ITALIC "\033[3m"
+# define UNDERLINE "\033[4m"
+# define DEL_LINE "\033[2K\r"
 
 # ifndef ERT
 #  define ERT
@@ -113,7 +118,8 @@ size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *s);
 size_t			ft_ustrlen(unsigned char *s);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int				ft_strncmp(char *s1, char *s2, size_t n);
+int				ft_strncmp(char *s1, char *s2, unsigned int n);
+int				heredoc_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_ustrcmp(t_uchar *s1, t_uchar *s2);
 char			*ft_strnstr(char *big, const char *little, size_t len);
