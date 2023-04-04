@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:53:30 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/29 20:12:37 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/04 16:11:28 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env);
 
 /*----------------------------------------------------------------------------*/
-
+#define MAIN
+#ifdef MAIN
 static void	welcome_to_minihell(void)
 {
 	printf(ITALIC BLUE"\nThis is madness\n\n"END);
 	printf(BLUE"by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
 	printf("& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
 }
+
 
 int	main(int ac, char **av, char **env)
 {
@@ -50,3 +52,5 @@ int	main(int ac, char **av, char **env)
 	}
 	return (0);
 }
+
+#endif
