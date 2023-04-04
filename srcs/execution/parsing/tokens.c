@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:41:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/04 19:12:23 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/04 19:58:53 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	strings_recognition(t_data *data, t_string_token *string_of_tokens)
 	while (temp != NULL)
 	{
 		if (temp->token == STRING)
-			strings_management(data, temp->content);
+			strings_management(data, string_of_tokens, temp->content);
 		temp = temp->next;
 	}
 }
