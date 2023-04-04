@@ -122,7 +122,6 @@ int				ft_strncmp(char *s1, char *s2, unsigned int n);
 int				heredoc_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_ustrcmp(t_uchar *s1, t_uchar *s2);
-char			*ft_strnstr(char *big, const char *little, size_t len);
 char			*ft_strrchr(const char *s, int c);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
