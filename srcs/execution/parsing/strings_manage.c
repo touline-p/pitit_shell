@@ -20,6 +20,7 @@ static bool	is_builtin(char *string);
 
 void	strings_management(t_data *data, char *string)
 {
+	(void)data;
 	if (is_builtin(string) == true)
 		puts(RED"c'est un builtin"END);
 	else
