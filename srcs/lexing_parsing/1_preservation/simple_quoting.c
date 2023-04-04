@@ -11,21 +11,24 @@
 /* ************************************************************************** */
 
 #include "minishell_parsing.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
 
 static t_return_status	_squoting_process_ep(void);
 
 t_return_status	squoting_process(t_token *last_token, t_token *token, t_token **end_of_quot_pt)
 {
 	(void)last_token;
+	token->sign_char = -'\'';
 	token = token->next;
 	while(token->token != EOL && token->sign_char != '\'')
 	{
 		token->esec = SECURED;
 		token = token->next;
 	}
-	*end_of_quot_pt = token;
 	if (token->token == EOL)
 		return (_squoting_process_ep());
+	*end_of_quot_pt = token;
+	token->sign_char = -'\'';
 	return (SUCCESS);
 }
 

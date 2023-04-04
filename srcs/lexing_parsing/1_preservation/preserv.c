@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell_parsing.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
 
 #define DONO_INDX 3
 
@@ -27,7 +28,6 @@ t_return_status	preserve_token_lst(t_token *token)
 	{
 		if (act[_code_from(pin->sign_char)](token, pin, &token) != SUCCESS)
 			return (FAILURE);
-		token = token->next;
 		if (token)
 			pin = token->next;
 	}
@@ -50,5 +50,6 @@ t_return_status	do_nothing(t_token *voided, t_token *also_voided, t_token **this
 	(void)voided;
 	(void)also_voided;
 	(void)this_one_too;
+	*this_one_too = (*this_one_too)->next;
 	return (SUCCESS);
 }

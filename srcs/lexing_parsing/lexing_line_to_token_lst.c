@@ -3,22 +3,24 @@
 //
 
 #include "minishell_parsing.h"
-#include "structures_execution.h"
+#include "../../incs/execution_incs/structures_execution.h"
+#include "../../incs/parsing_incs/minishell_parsing.h"
 
 static t_return_status	_syntax_is_valid_ep(t_emt token);
-t_return_status is_a_meta(t_emt token);
+bool	is_a_meta(t_emt token);
+bool	is_a_redir(t_emt token);
 
 t_return_status	syntax_is_valid(t_string_token *lst_to_check)
 {
 	t_string_token	*pin;
 
 	pin = lst_to_check;
-	if (is_a_meta(pin->next->token) == SUCCESS)
+	if (is_a_meta(pin->next->token) == true && is_a_redir(pin->next->token) == false)
 		return (_syntax_is_valid_ep(pin->next->token));
 	pin = pin->next;
 	while (pin->token != EOL)
 	{
-		if (is_a_meta(pin->token) == SUCCESS && is_a_meta(pin->next->token) == SUCCESS)
+		if (is_a_meta(pin->token) == true && is_a_meta(pin->next->token) == true)
 			return (_syntax_is_valid_ep(pin->next->token));
 		pin = pin->next;
 	}
@@ -40,9 +42,16 @@ static t_return_status	_syntax_is_valid_ep(t_emt token)
 	return (FAILURE);
 }
 
-t_return_status is_a_meta(t_emt token)
+bool	is_a_meta(t_emt token)
 {
 	if (token > 8 && token != EOL)
-		return (FAILURE);
-	return (SUCCESS);
+		return (false);
+	return (true);
+}
+
+bool	is_a_redir(t_emt token)
+{
+	if (token == CHEVRON_OT || token == CHEVRON_IN || token == HERE_DOC)
+		return (true);
+	return (false);
 }

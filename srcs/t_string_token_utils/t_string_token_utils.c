@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../incs/execution_incs/minishell_execution.h"
+#include "../../incs/parsing_incs/minishell_parsing.h"
 #include "minishell_parsing.h"
 
 t_string_token	*string_token_creator(void)
@@ -84,9 +86,68 @@ void	del_space_token(t_string_token *tok)
 	pin = tok;
 	while (pin->next->token != EOL)
 	{
-		if (pin->next->token == SPACE || pin->next->token == TABULATION)
+		if (pin->next->token == E_SPACE || pin->next->token == TABULATION)
 			del_next_string_token(pin);
 		else
 			pin = pin->next;
 	}
+}
+
+t_return_status string_token_new_on(void *content, t_emt emt, t_string_token **str_token_pt)
+{
+	t_string_token *new;
+
+	new = malloc(sizeof(t_string_token));
+	if (!new)
+		return (FAILED_MALLOC);
+	new->content = content;
+	new->token = emt;
+	new->next = NULL;
+	*str_token_pt = new;
+	return (SUCCESS);
+}
+
+t_return_status str_arr_to_str_token_lst(char **split, t_string_token **str_token_pt)
+{
+	t_string_token	*new_lst;
+	char 			**split_tmp;
+
+	split_tmp = split;
+	if (*split && string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
+		return (FAILED_MALLOC);
+	free(*str_token_pt);
+	*str_token_pt = new_lst;
+	while (*split)
+	{
+		if (string_token_new_on(*(split++), STRING, &(new_lst->next)) != SUCCESS)
+		new_lst = new_lst->next;
+	}
+	free(split_tmp);
+	return (SUCCESS);
+}
+
+void del_empty_tokens(t_string_token *token_lst)
+{
+	while (token_lst->next->token != EOL)
+	{
+		if (token_lst->next->content == NULL || *(char *)(token_lst->next->content) == 0)
+			del_next_string_token(token_lst);
+		else
+			token_lst = token_lst->next;
+	}
+}
+
+t_return_status	split_t_string_token_on_space(t_string_token **token)
+{
+	char			**split;
+	t_string_token	*token_lst;
+
+	token_lst = NULL;
+	split = ft_split((*token)->content, ' ');
+	if (split == NULL)
+		return (FAILED_MALLOC);
+	if (str_arr_to_str_token_lst(split, &token_lst) != SUCCESS)
+		return (FAILED_MALLOC);
+	*token = token_lst;
+	return (SUCCESS);
 }

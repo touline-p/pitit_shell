@@ -14,10 +14,8 @@
 #ifndef PROTOTYPES_PARSING_H
 # define PROTOTYPES_PARSING_H
 
-# include "enums_parsing.h"
-# include "libft.h"
-# include "structures_parsing.h"
-# include "structures_execution.h"
+# include "minishell_parsing.h"
+# include "../execution_incs/minishell_execution.h"
 
 /*----- expands --------------------------------------------------------------*/
 
@@ -91,14 +89,34 @@ void			cpy_token_lst_to_str(t_token *tok, char *str);
 int				next_control_operator_is_a_pipe(t_string_token *tok);
 void			del_next_string_token(t_string_token *tok);
 void			del_space_token(t_string_token *tok);
+t_return_status	split_t_string_token_on_space(t_string_token **token_pt);
+void			del_empty_tokens(t_string_token *token_lst);
 
 /*** checking syntax ***/
 
 
 t_return_status	syntax_is_valid(t_string_token *lst_to_check);
 
+/*** env_utils ***/
+
+char    		*get_line_from_key(char *key, char **env);
+bool			is_a_key_from_env(char *key, char **env);
+char    		*get_env_content_from_key(char *key, char **env);
+t_return_status	add_str_to_env(char *line, char ***env_pt);
+t_return_status del_str_from_env(char *line, char ***env_pt);
+
+char *get_first_line_in_env(char **env);
+char *get_next_line_in_env(char *last, char **env);
+char 	**get_line_addr_from_key(char *key, char **env);
+void	replace_content_in_env(char *line, char **env);
+bool	has_a_key_from_env(char *line, char **env);
+
+t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 
 
+t_return_status cut_all_lines(t_string_token *string_token_lst);
+t_return_status join_all_lines(t_string_token *string_token_lst, char **env);
+t_return_status	join_arr_on(char **str_arr, char **line_pt, char **env);
 
 void	per_n_set_errno(char *msg);
 
@@ -113,6 +131,9 @@ void	display_str_token(t_string_token *tok);
 
 
 char	*_get_env_variable(t_token *token, char **env);
+void cpy_next_char(unsigned int index, char *str);
+t_return_status	replace_dquotes_str_by_env_value(char **line_pt, char **env);
+t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env);
 
 #endif
 #endif //MINI_PARSING_MINI_PARSING_H

@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../incs/execution_incs/minishell_execution.h"
+#include "../../incs/parsing_incs/minishell_parsing.h"
 #include "minishell_parsing.h"
 
 static t_return_status	_get_str_token_on_and_reset_pin(t_string_token **str_tok_pt, t_token **pin_pt);

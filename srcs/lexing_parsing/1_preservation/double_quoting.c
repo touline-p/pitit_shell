@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_parsing.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
 
 static t_return_status	_dquoting_process_ep(void);
 
@@ -19,6 +19,7 @@ t_return_status	dquoting_process(t_token *last_token, t_token *token, t_token **
 	t_token	*pin;
 
 	pin = token->next;
+	token->sign_char = -'\"';
 	while ((pin->token != EOL && pin->sign_char != '\"') || pin->esec == SECURED)
 	{
 		if (pin->sign_char == '\\' && is_from(pin->next->sign_char, "\\\"$"))
@@ -30,6 +31,7 @@ t_return_status	dquoting_process(t_token *last_token, t_token *token, t_token **
 	}
 	if (pin->token == EOL)
 		return (_dquoting_process_ep());
+	pin->sign_char = -'\"';
 	*end_of_quot_pt = pin;
 	return (SUCCESS);
 }

@@ -3,3 +3,4 @@
 //
 
 #include "minishell_parsing.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
