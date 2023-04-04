@@ -77,7 +77,8 @@ FILES	=	ft_atoi.c 				\
 			ft_get_env.c 			\
 			ft_str_arr.c			\
 			open_file.c				\
-			#ft_printf.c				\
+			ft_strnstr.c			\
+			#ft_printf.c			\
 			check_extension.c		\
 			open_file.c				\
 			ft_putnbr_base_fd.c		\

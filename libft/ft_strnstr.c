@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 21:38:06 by bpoumeau          #+#    #+#             */
-/*   Updated: 2022/11/10 21:22:56 by bpoumeau         ###   ########lyon.fr   */
+/*   Created: 2022/11/10 11:21:43 by twang             #+#    #+#             */
+/*   Updated: 2022/11/14 09:58:51 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	size_t	ret_min(size_t a, size_t b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-char	*ft_strnstr(char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
-	size_t	lt_ln;
+	size_t	j;
+	char	*hayst;
+	char	*needl;
 
 	i = 0;
-	lt_ln = ft_strlen(little);
-	if (!lt_ln)
-		return (big);
-	while (len >= lt_ln && big[i])
+	hayst = (char *)haystack;
+	needl = (char *)needle;
+	if (!needl[i])
+		return (hayst);
+	while (i < len && hayst[i])
 	{
-		if (len < lt_ln)
-			return (NULL);
-		if (ft_strncmp(big + i, (char *)little, ret_min(lt_ln, len)) == 0)
-			return (big + i);
-		len--;
+		j = 0;
+		while (hayst[i + j] == needl[j] && i + j < len)
+		{
+			if (needl[j + 1] == '\0')
+				return ((char *) &hayst[i]);
+			j++;
+		}
 		i++;
 	}
 	return (NULL);
