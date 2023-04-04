@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:28:34 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/21 17:01:09 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/04 17:35:23 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ enum 	e_token_minishell
 	O_PRTSS = 9,
 	C_PRTSS = 10,
 	SEMICOLON = 11,
-	SPACE = 12,
+	E_SPACE = 12,
 	TABULATION = 13,
 	LETTER = 14,
 	EOL = 15,

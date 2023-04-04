@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   heredoc_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:58:11 by twang             #+#    #+#             */
-/*   Updated: 2023/03/29 18:59:59 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/04 18:01:40 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	heredoc_management(t_data *data, char *limiter)
 	int		fd[2];
 	char	*line;
 	
-	printf("%s\n", limiter);
-	printf("%ld\n", strlen(limiter));
 	if (data->infile != 0)
 			close(data->infile);
 	if (pipe(fd) == -1)
