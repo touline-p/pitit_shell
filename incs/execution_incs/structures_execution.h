@@ -6,19 +6,20 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/27 17:50:12 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/05 19:46:19 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_EXECUTION_H
-# define STRUCTURES_EXECUTION_H
+#ifndef STRUCTURES_EXECUTION_autre_H
+# define STRUCTURES_EXECUTION_autre_H
 
 # include "enums_execution.h"
 
 /*---- typedef structures ----------------------------------------------------*/
 
 typedef struct s_string_token	t_string_token;
-typedef struct s_data			t_data;	
+typedef struct s_data			t_data;
+typedef struct s_cmd			t_cmd;
 
 /*---- structures ------------------------------------------------------------*/
 
@@ -32,14 +33,18 @@ struct s_string_token
 
 struct s_data
 {
-	char	***commands;
-	int		nb_of_pipes;
-	int		nb_of_commands;
-	int		**fds;
-	pid_t	*process_ids;
-	int		infile;
-	int		outfile;
+	t_cmd	*cmds_block;
+	int 	nb_of_cmd;
+	// int 	*pid_de_sortie;
 };
 
+struct s_cmd
+{
+	char	**commands;
+	// char 	**args;
+	int		infile;
+	int		outfile;
+	int		pipes[2];
+};
 
 #endif

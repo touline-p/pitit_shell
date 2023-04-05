@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:58:11 by twang             #+#    #+#             */
-/*   Updated: 2023/04/04 18:01:40 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/05 17:56:48 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	heredoc_management(t_data *data, char *limiter)
 	int		fd[2];
 	char	*line;
 	
-	if (data->infile != 0)
-			close(data->infile);
+	if (data->cmds_block->infile != 0)
+			close(data->cmds_block->infile);
 	if (pipe(fd) == -1)
 		exit(dprintf(2, RED"Error\nPipe Issue\n"END));
 	else if (pipe(fd) == 0)
