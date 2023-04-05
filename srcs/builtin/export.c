@@ -115,7 +115,7 @@ static void	_display_unic_export(char *env_line)
 	*(--content) = '=';
 }
 
-#define TST_EXPORT
+//#define TST_EXPORT
 #ifdef TST_EXPORT
 int main(int ac, char **av, char **env)
 {
