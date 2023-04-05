@@ -10,7 +10,7 @@
 
 
 /*----------------------------------------------------------------------------*/
-#define MAIN
+//#define MAIN
 #ifdef MAIN
 static void	welcome_to_minihell(void)
 {
