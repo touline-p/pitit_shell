@@ -10,15 +10,18 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 	t_string_token	*str_token_lst;
 
 	(void)env;
-
+	*str_tok_pt = NULL;
 	simple_tok_lst = token_lst_constructor(line);
 	free(line);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
 	preserve_token_lst(simple_tok_lst);
+	display_tokens(simple_tok_lst);
 	split_toklst_on_meta(simple_tok_lst);
 	regroup_meta(simple_tok_lst);
 	str_token_lst = token_lst_to_str_token(simple_tok_lst);
+	if (str_token_lst == NULL)
+		return (FAILED_MALLOC);
 	del_space_token(str_token_lst);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
