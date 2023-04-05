@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   fill_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/29 18:22:32 by twang            ###   ########.fr       */
+/*   Created: 2023/04/05 20:14:11 by twang             #+#    #+#             */
+/*   Updated: 2023/04/05 20:22:42 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,30 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
+static void	cmds_block_alloc(t_data *data, t_string_token *string_of_tokens);
+
 /*----------------------------------------------------------------------------*/
 
-void	execution(t_string_token *string_of_tokens)
+static void	cmds_block_alloc(t_data *data, t_string_token *string_of_tokens)
 {
-	t_data	data;
-	
-	ft_memset(&data, 0, sizeof(t_data));
-	token_recognition(&data, string_of_tokens);
+	int					pipes;
+	t_string_of_token	*temp;
+
+	pipes = 0;
+	temp = string_of_tokens;
+	while (temp != NULL)
+	{
+		if (temp->token == PIPE)
+		{
+			pipes++;
+			data->nb_of_cmd = pipes + 1;
+		}
+		temp = temp->next;
+	}
+	data->cmds_block = (t_cmd *)malloc((data->nb_of_cmds + 1) * sizeof(t_cmd));
 }
 
-	/// balader dans la liste chainees et faire en fonction
-	//create structure init -> fds management	-> fork management -> heredoc
-	//check des chevrons	-> infile / outifile - les gerer - les virer
-	//check here_docs 		-> here_doc becomes infile 
-	//check des pipes		-> checks fds -> prepare for fork
-	//check commands 		-> builtins -> call built_in function
-	//						-> commands to exec -> get_path, ... pipex
+void	fill_struct(t_data *data, t_string_token *string_of_tokens)
+{
+	cmds_block_alloc(data, string_of_tokens);
+}

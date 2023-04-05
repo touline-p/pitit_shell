@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:41:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/05 17:58:15 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/05 20:02:01 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ static void	strings_recognition(t_data *data, t_string_token *string_of_tokens);
 void	token_recognition(t_data *data, t_string_token *string_of_tokens)
 {
 	heredoc_recognition(data, string_of_tokens);
+	printf("%d\n", data->nb_of_cmd);
 	//wait for end of heredoc.
-	// fill_t_command_struct(data, string_of_tokens);
+	
 	files_recognition(data, string_of_tokens);
 	display_str_token(string_of_tokens);
 	clean_files_token(string_of_tokens);
@@ -35,11 +36,18 @@ void	token_recognition(t_data *data, t_string_token *string_of_tokens)
 
 static void	heredoc_recognition(t_data *data, t_string_token *string_of_tokens)
 {
+	int				pipes;
 	t_string_token	*temp;
 
+	pipes = 0;
 	temp = string_of_tokens;
 	while (temp != NULL)
 	{
+		if (temp->token == PIPE)
+		{
+			pipes++;
+			data->nb_of_cmd = pipes + 1;
+		}
 		if (temp->token == HERE_DOC)
 		{
 			temp = temp->next;
