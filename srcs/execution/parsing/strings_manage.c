@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/04 20:07:41 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/05 11:10:55 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static bool	is_builtin(char *string);
 
 void	strings_management(t_data *data, t_string_token *str_of_tok, char *str)
 {
-	if (is_builtin(str) == true)
+	(void)data;
+	if (is_builtin(string) == true)
 		puts(RED"c'est un builtin"END);
 	else
 	{
@@ -42,9 +43,10 @@ static bool	is_builtin(char *string)
 
 static void	get_command(t_data *data, t_string_token *str_of_tok, char *string)
 {
-	t_string_token *temp;
+	int				i;
+	t_string_token	*temp;
 	
-	data->commands = malloc();
+	data->commands = ft_calloc()
 	temp = str_of_tok;
 	while (temp->token != PIPE || temp->token != EOL)
 	{
