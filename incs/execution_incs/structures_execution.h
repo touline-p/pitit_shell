@@ -35,7 +35,10 @@ struct s_data
 {
 	t_cmd	*cmds_block;
 	int 	nb_of_cmd;
+	int 	nb_of_pipes;
 	int 	*pid_de_sortie;
+	int		infile;
+	int		outfile;
 };
 
 struct s_cmd
