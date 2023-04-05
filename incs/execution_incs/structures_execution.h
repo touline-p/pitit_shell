@@ -41,5 +41,43 @@ struct s_data
 	int		outfile;
 };
 
+#ifndef STRUCTURES_EXECUTION_autre_H
+# define STRUCTURES_EXECUTION_autre_H
+
+# include "enums_execution.h"
+
+/*---- typedef structures ----------------------------------------------------*/
+
+typedef struct s_string_token	t_string_token;
+typedef struct s_data			t_data;
+typedef struct s_cmd			t_cmd;
+
+/*---- structures ------------------------------------------------------------*/
+
+struct s_string_token
+{
+	t_token_minishell	token;
+	char				*content;
+	char 				**str_arr;
+	t_string_token		*next;
+};
+
+struct s_data
+{
+	t_cmd	*cmds_block;
+	int 	nb_of_cmd;
+	int 	*pid_de_sortie;
+};
+
+struct s_cmd
+{
+	char	*commands;
+	char 	**args;
+	int		infile;
+	int		outfile;
+};
+
+
+#endif
 
 #endif
