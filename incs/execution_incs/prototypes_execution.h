@@ -6,7 +6,7 @@
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/06 23:34:45 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/06 23:39:59 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 void	execution(t_string_token *string_of_tokens);
 
 /*-- parsing -----------------------------------------------------------------*/
-
 /*-- clean_utils --*/
 void	clean_files_token(t_string_token *string_of_tokens);
 void	clean_token(t_string_token *string_of_tokens);
