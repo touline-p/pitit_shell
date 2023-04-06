@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes_execution.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/04 18:46:33 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/06 23:34:45 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,28 @@
 # include "structures_execution.h"
 # include "structures_parsing.h"
 
-/*-- execution----------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*---- Execution -------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 void	execution(t_string_token *string_of_tokens);
 
-void	token_recognition(t_data *data, t_string_token *string_of_tokens);
+/*-- parsing -----------------------------------------------------------------*/
 
-void	heredoc_management(t_data *data, char *limiter);
-void	files_management(t_data *data, char *file, t_token_minishell token);
-void	strings_management(t_data *data, char *string);
-
+/*-- clean_utils --*/
 void	clean_files_token(t_string_token *string_of_tokens);
 void	clean_token(t_string_token *string_of_tokens);
 
+/*-- infiles_manage --*/
+void	infiles_management(t_data *data, t_string_token *string_of_tokens);
+
+/*-- outfiles_manage --*/
+void	outfiles_management(t_data *data, t_string_token *string_of_tokens);
+
+/*-- string_manage --*/
+void	strings_management(t_data *data, t_string_token *str_of_tok, char *str);
+
+/*-- Genius Brieuc utils --*/
 void	del_next_string_token(t_string_token *tok);
 void	display_str_token(t_string_token *tok);
 

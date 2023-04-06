@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/04 19:17:37 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/06 23:20:33 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,21 @@
 /*---- prototypes ------------------------------------------------------------*/
 
 static bool	is_builtin(char *string);
+static void	get_command(t_data *data, t_string_token *str_of_tok, char *string);
 
 /*----------------------------------------------------------------------------*/
 
-void	strings_management(t_data *data, char *string)
+void	strings_management(t_data *data, t_string_token *str_of_tok, char *str)
 {
 	(void)data;
-	if (is_builtin(string) == true)
+	(void)str_of_tok;
+	if (is_builtin(str) == true)
 		puts(RED"c'est un builtin"END);
 	else
+	{
 		puts(GREEN"c'est une commande"END);
+		get_command(data, str_of_tok, str);
+	}
 }
 
 static bool	is_builtin(char *string)
@@ -36,4 +41,12 @@ static bool	is_builtin(char *string)
 		return (true);
 	else
 		return (false);
+}
+
+static void	get_command(t_data *data, t_string_token *str_of_tok, char *string)
+{
+	(void)data;
+	(void)str_of_tok;
+	printf(PURPLE"%s\n"END, string);
+	display_str_token(str_of_tok);
 }

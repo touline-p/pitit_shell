@@ -44,7 +44,7 @@ static t_return_status	_syntax_is_valid_ep(t_emt token)
 
 bool	is_a_meta(t_emt token)
 {
-	if (token > 8)
+	if (token > 8 && token != EOL)
 		return (false);
 	return (true);
 }

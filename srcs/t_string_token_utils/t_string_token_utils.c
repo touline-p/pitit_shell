@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_string_token_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:25:09 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/04 15:52:46 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/06 18:58:13 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_return_status str_arr_to_str_token_lst(char **split, t_string_token **str_toke
 	char 			**split_tmp;
 
 	split_tmp = split;
+	new_lst = NULL;
 	if (*split && string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
 		return (FAILED_MALLOC);
 	free(*str_token_pt);
