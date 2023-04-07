@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outfiles_manage.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/06 23:37:52 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:56:53 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	outfiles_management(t_data *data, t_string_token *string_of_tokens)
 
 	i = 0;
 	temp = string_of_tokens;
+	display_str_token(string_of_tokens);
 	while (temp != NULL)
 	{
 		if (temp->token == CHEVRON_OT)
@@ -42,6 +43,7 @@ void	outfiles_management(t_data *data, t_string_token *string_of_tokens)
 		{
 			i++;
 		}
+		temp = temp->next;
 	}
 }
 
@@ -64,3 +66,18 @@ static void	set_appends(t_data *data, char *file, int block_id)
 	if (data->cmds_block[block_id].outfile == -1)
 		perror("open outfile");
 }
+
+/*
+#define TEST_DEBUG
+#ifdef TEST_DEBUG
+#include "../srcs/debug_folder/debug.h"
+
+int    main(void)
+{
+    debug;
+    idebug(12);
+    sdebug("Bonjour Thea");
+    return (0);
+}
+#endif
+*/

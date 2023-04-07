@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/06 23:42:23 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:09:32 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,47 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static bool	is_builtin(char *string);
-static void	get_command(t_data *data, t_string_token *str_of_tok, char *string);
+static void	set_commands(t_data *data, char *string, int block_id);
+// static bool	is_builtin(char *string);
+// static void	get_command(t_data *data, t_string_token *str_of_tok, char *string);
 
 /*----------------------------------------------------------------------------*/
 
-void	strings_management(t_data *data, t_string_token *str_of_tok, char *str)
+void	strings_management(t_data *data, t_string_token *string_of_tokens)
 {
+	(void)data;
+	
+	int				i;
+	t_string_token	*temp;
+
+	i = 0;
+	temp = string_of_tokens;
+	while (temp != NULL)
+	{
+		if (temp->token == STRING)
+		{
+			puts("je n'ai pas encore gerer les string!");
+			set_commands(data, temp->content, i);
+		}
+		if (temp->token == PIPE)
+		{
+			i++;
+		}
+		temp = temp->next;
+	}
+}
+
+static void	set_commands(t_data *data, char *string, int block_id)
+{
+	(void)data;
+	printf(BLUE"%s\n"END, string);
+	printf(BLUE"%d\n"END, block_id);
+	/*
+	premier appel = command[0];
+	second appel = command[0][0];
+	*/
+}
+/*
 	(void)data;
 	(void)str_of_tok;
 	if (is_builtin(str) == true)
@@ -30,13 +64,12 @@ void	strings_management(t_data *data, t_string_token *str_of_tok, char *str)
 		puts(GREEN"c'est une commande"END);
 		get_command(data, str_of_tok, str);
 	}
-}
-
+	
 static bool	is_builtin(char *string)
 {
-	if (ft_strcmp(string, "echo") == 0 || ft_strcmp(string, "cd") == 0 || \
-	ft_strcmp(string, "pwd") == 0 || ft_strcmp(string, "export") == 0 || \
-	ft_strcmp(string, "unset") == 0 || ft_strcmp(string, "env") == 0 || \
+	if (ft_strcmp(string, "echo") == 0 || ft_strcmp(string, "cd") == 0 || 
+	ft_strcmp(string, "pwd") == 0 || ft_strcmp(string, "export") == 0 || 
+	ft_strcmp(string, "unset") == 0 || ft_strcmp(string, "env") == 0 || 
 	ft_strcmp(string, "exit") == 0)
 		return (true);
 	else
@@ -50,3 +83,4 @@ static void	get_command(t_data *data, t_string_token *str_of_tok, char *string)
 	printf(PURPLE"%s\n"END, string);
 	display_str_token(str_of_tok);
 }
+*/

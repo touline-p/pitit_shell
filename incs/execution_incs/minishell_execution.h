@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:11:55 by twang             #+#    #+#             */
-/*   Updated: 2023/03/29 15:02:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/07 18:45:45 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 # include "libft.h"
 
 /*---- includes --------------------------------------------------------------*/

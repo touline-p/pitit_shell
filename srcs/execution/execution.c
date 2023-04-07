@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/06 23:40:32 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:07:01 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	execution(t_string_token *string_of_tokens)
 {
 	t_data	data;
 
-	display_str_token(string_of_tokens);
 	ft_bzero(&data, sizeof(t_data));
 	cmds_block_alloc(&data, string_of_tokens);
 	infiles_management(&data, string_of_tokens);
 	outfiles_management(&data, string_of_tokens);
 	clean_files_token(string_of_tokens);
 	clean_token(string_of_tokens);
-	/*command_management(string_of_tokens);
-	 token_recognition(&data, string_of_tokens);*/
+	display_str_token(string_of_tokens);
+	strings_management(&data, string_of_tokens);
+	string_token_destructor(string_of_tokens);
 }
 
 static void	cmds_block_alloc(t_data *data, t_string_token *string_of_tokens)
@@ -41,12 +41,10 @@ static void	cmds_block_alloc(t_data *data, t_string_token *string_of_tokens)
 	while (temp != NULL)
 	{
 		if (temp->token == PIPE)
-			data->nb_of_cmd++;
-		printf("%s\n", string_of_tokens->content);
+			data->nb_of_pipe++;
 		temp = temp->next;
 	}
-	printf("number of commands is : %d\n", data->nb_of_cmd);
-	data->cmds_block = (t_cmd *)malloc((data->nb_of_cmd + 1) * sizeof(t_cmd));
+	data->cmds_block = (t_cmd *)malloc((data->nb_of_pipe + 1) * sizeof(t_cmd));
 	ft_bzero(data->cmds_block, sizeof(t_cmd));
 }
 
