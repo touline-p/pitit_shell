@@ -22,6 +22,13 @@ Aussi mignon qu’un vrai shell!
 ---
 
 ## About
+</p>
+<h3 align="center">
+This project is focused on creating a minimalistic shell, which is a program that allows users to interact with their operating system by typing commands. By participating in this project, individuals can learn how to create a functional and efficient shell that performs tasks such as running programs, managing input and output, and handling errors.
+
+You can find more detailed information on the project in the [subject](./minishell_subject.pdf).
+</h3>
+
 ## Index
 ## Usage
 ### Instructions
