@@ -12,8 +12,10 @@
 /*----------------------------------------------------------------------------*/
 #define MAIN
 #ifdef MAIN
+int g_ret_val;
 static t_return_status welcome_to_minihell(char ***env_pt)
 {
+	g_ret_val = 0;
 	if (env_init_on(env_pt) != SUCCESS)
 		return (FAILED_MALLOC);
 	printf(ITALIC PURPLE"\nThis is madness\n\n"END);

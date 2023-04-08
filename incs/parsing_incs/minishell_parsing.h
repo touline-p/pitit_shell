@@ -23,6 +23,8 @@
 
 /*---- includes --------------------------------------------------------------*/
 
+extern int	g_ret_val;
+
 # include "defines_parsing.h"
 # include "enums_parsing.h"
 # include "prototypes_parsing.h"
