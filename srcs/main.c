@@ -33,13 +33,16 @@ int	main(int ac, char **av, char **env)
 		add_history(line);
 		printf(BLUE"\nj'ai lu -> %s <-\n" END, line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
-		// if (syntax_is_valid(str_tok_lst) == FAILURE
-		// 	|| cut_all_lines(str_tok_lst) != SUCCESS
-		// 	|| join_all_lines(str_tok_lst, env) != SUCCESS)
-		// {
-		// 	string_token_destructor(str_tok_lst);
-		// 	continue;
-		// }
+		if (syntax_is_valid(str_tok_lst) == FAILURE
+			|| cut_all_lines(str_tok_lst) != SUCCESS
+			|| join_all_lines(str_tok_lst, env) != SUCCESS)
+		{
+			string_token_destructor(str_tok_lst);
+			continue;
+		}
+		debug;
+   		idebug(42);
+    	sdebug("Coucou!");
 		execution(str_tok_lst);
 	}
 	return (0);

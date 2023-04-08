@@ -6,6 +6,10 @@
 # define idebug(x) print_debug_int(x, __FILE__, __LINE__)
 # define sdebug(x) print_debug_string(x, __FILE__, __LINE__)
 
+void    print_debug(char *file, int line);
+void    print_debug_string(char *value, char *file, int line);
+void    print_debug_int(int value, char *file, int line);
+
 # define END "\033[0m"
 # define GREY "\033[1;30m"
 # define RED "\033[1;31m"
