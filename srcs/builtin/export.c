@@ -72,6 +72,8 @@ bool	key_is_not_alnum(char *line)
 {
 	while (*line != '=' && *line)
 	{
+		if (*line == '+' && *(line + 1) == '=')
+			return (false);
 		if (ft_isalnum(*line) == false)
 			return (true);
 		line++;
@@ -87,8 +89,7 @@ t_return_status 	not_in_context_error(char *line, char ***env_pt)
 	return (free(line), SUCCESS);
 }
 
-t_export_ft	_get_ft_to_do(char *line, char **env)
-{
+t_export_ft	_get_ft_to_do(char *line, char **env) {
 	char *eq;
 	char *plus;
 
