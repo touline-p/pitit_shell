@@ -19,17 +19,47 @@ void go_to_next_(t_emt token, t_string_token **str_tok)
 	*str_tok = tmp;
 }
 
+void go_to_next_par(t_string_token **str_tok)
+{
+	t_string_token	*tmp;
+	int 			count;
+
+	tmp = *str_tok;
+	tmp = tmp->next;
+	count = 1;
+	while (tmp->token != C_PRTSS || count != 1)
+	{
+		if (tmp->token == O_PRTSS)
+			count++;
+		if (tmp->token == C_PRTSS)
+			count--;
+		tmp = tmp->next;
+	}
+	*str_tok = tmp;
+}
+
+int profondeur = 0;
 t_return_status	switchman(t_string_token *token_lst)
 {
-	int i = 10;
-	while (i-- && token_lst->token != EOL && token_lst->token != C_PRTSS)
+	profondeur++;
+	printf("profondeur %d\n", profondeur);
+	token_lst = token_lst->next;
+	while (token_lst->token != EOL && token_lst->token != C_PRTSS)
 	{
 		display_str_token_till(token_lst);
+		if (token_lst->next->token == O_PRTSS)
+		{
+			display_str_par(token_lst->next);
+			switchman(token_lst->next);
+			go_to_next_par(&token_lst);
+			printf("retour % d\n", profondeur);
+		}
 		if (g_ret_val == 0)
 			go_to_next_(AND, &token_lst);
 		else
 			go_to_next_(OR, &token_lst);
 	}
+	profondeur --;
 	return (SUCCESS);
 }
 static size_t _count_block(t_string_token *pin)

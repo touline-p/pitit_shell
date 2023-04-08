@@ -57,3 +57,16 @@ void display_str_token_till(t_string_token *tok)
 	}
 	printf("\n");
 }
+
+void display_str_par(t_string_token *tok)
+{
+	display_t_emt_string(tok);
+	tok = tok->next;
+	while (tok->token != C_PRTSS)
+	{
+		display_t_emt_string(tok);
+		tok = tok->next;
+	}
+	display_t_emt_string(tok);
+	printf("\n");
+}
