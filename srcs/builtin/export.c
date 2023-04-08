@@ -102,10 +102,8 @@ t_export_ft	_get_ft_to_do(char *line, char **env) {
 		return (&add_str_to_env);
 	if (eq == NULL)
 		return (&do_nothing_t_export_ft);
-	if (plus == eq - 1) {
-		printf("je suis la \n");
+	if (plus == eq - 1)
 		return (&concat_content_to_line_in_env);
-	}
 	return (&replace_content_in_env_pt);
 }
 
