@@ -10,9 +10,9 @@
 
 
 /*----------------------------------------------------------------------------*/
+int g_ret_val;
 #define MAIN
 #ifdef MAIN
-int g_ret_val;
 static t_return_status welcome_to_minihell(char ***env_pt)
 {
 	g_ret_val = 0;
@@ -36,10 +36,11 @@ int	main(int ac, char **av, char **env)
 		line = readline("Y a quoi ? :");
 		if (line == NULL) {
 			printf("\n");
-			continue;
+			return (clear_history(), ft_free_split(env), free(line), 0);
+			//continue;
 		}
 		if (ft_strncmp("END", line, 4) == 0)
-			return (clear_history(), free(line), 0);
+			return (clear_history(), ft_free_split(env), free(line), 0);
 		add_history(line);
 		printf(BLUE"j'ai lu ->%s<-\n"END, line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
