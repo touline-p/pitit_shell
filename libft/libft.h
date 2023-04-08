@@ -99,6 +99,7 @@ void			ft_swap(int *a, int *b);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
+bool			ft_str_is_ascii(char *str);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_issign(int c);

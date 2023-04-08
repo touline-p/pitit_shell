@@ -18,3 +18,14 @@ int	ft_isascii(int c)
 		return (1);
 	return (0);
 }
+
+bool ft_str_is_ascii(char *str)
+{
+	while (*str)
+	{
+		if (ft_isascii(*str) == false)
+			return (false);
+		str++;
+	}
+	return (true);
+}
