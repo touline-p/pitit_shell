@@ -99,6 +99,7 @@ t_return_status	syntax_is_valid(t_string_token *lst_to_check);
 
 /*** env_utils ***/
 
+t_return_status	env_init_on(char ***env_pt);
 char    		*get_line_from_key(char *key, char **env);
 bool			is_a_key_from_env(char *key, char **env);
 char    		*get_env_content_from_key(char *key, char **env);

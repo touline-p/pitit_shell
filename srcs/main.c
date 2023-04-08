@@ -10,13 +10,18 @@
 
 
 /*----------------------------------------------------------------------------*/
+int g_ret_val;
 #define MAIN
 #ifdef MAIN
-static void	welcome_to_minihell(void)
+static t_return_status welcome_to_minihell(char ***env_pt)
 {
+	g_ret_val = 0;
+	if (env_init_on(env_pt) != SUCCESS)
+		return (FAILED_MALLOC);
 	printf(ITALIC PURPLE"\nThis is madness\n\n"END);
 	printf(PURPLE"by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
 	printf("& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
+	return (SUCCESS);
 }
 
 int	main(int ac, char **av, char **env)
@@ -24,7 +29,8 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	t_string_token	*str_tok_lst;
 	(void)ac; (void)av;
-	welcome_to_minihell();
+	if (welcome_to_minihell(&env) != SUCCESS)
+		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		line = readline("Y a quoi ? :");
@@ -36,6 +42,7 @@ int	main(int ac, char **av, char **env)
 		if (ft_strncmp("END", line, 4) == 0)
 			return (clear_history(), free(line), 0);
 		//add_history(line);
+
 		printf(BLUE"j'ai lu ->%s<-\n"END, line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
 		if (str_tok_lst == NULL || syntax_is_valid(str_tok_lst) == FAILURE
@@ -46,7 +53,8 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		display_str_token(str_tok_lst);
-		//execution(str_tok_lst);
+
+		execution(str_tok_lst);
 		string_token_destructor(str_tok_lst);
 	}
 	return (0);
