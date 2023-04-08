@@ -128,6 +128,7 @@ void	display_tokens(t_token *token_lst);
 void	display_t_emt(t_token *token);
 void	put_esec(t_token *tok);
 void	display_str_token(t_string_token *tok);
+void	display_str_token_till(t_string_token *tok);
 
 
 

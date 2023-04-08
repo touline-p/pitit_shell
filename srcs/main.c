@@ -11,7 +11,7 @@
 
 /*----------------------------------------------------------------------------*/
 int g_ret_val;
-#define MAIN
+//#define MAIN
 #ifdef MAIN
 static t_return_status welcome_to_minihell(char ***env_pt)
 {

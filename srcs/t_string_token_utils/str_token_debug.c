@@ -45,3 +45,15 @@ void	display_t_emt_string(t_string_token *token)
 	printf("<%.5s>", msg);
 	free(msg);
 }
+
+void display_str_token_till(t_string_token *tok)
+{
+	display_t_emt_string(tok);
+	tok = tok->next;
+	while (tok && tok->next && tok->token != AND && tok->token != OR && tok->token != C_PRTSS)
+	{
+		display_t_emt_string(tok);
+		tok = tok->next;
+	}
+	printf("\n");
+}
