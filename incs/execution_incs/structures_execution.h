@@ -18,7 +18,8 @@
 /*---- typedef structures ----------------------------------------------------*/
 
 typedef struct s_string_token	t_string_token;
-typedef struct s_data			t_data;	
+typedef struct s_data			t_data;
+typedef struct s_cmd			t_cmd;
 
 /*---- structures ------------------------------------------------------------*/
 
@@ -32,11 +33,18 @@ struct s_string_token
 
 struct s_data
 {
-	char	***commands;
-	int		nb_of_pipes;
-	int		nb_of_commands;
-	int		**fds;
-	pid_t	*process_ids;
+	t_cmd	*cmds_block;
+	int 	nb_of_cmd;
+	int 	nb_of_pipes;
+	int 	*pid_de_sortie;
+	int		infile;
+	int		outfile;
+};
+
+struct s_cmd
+{
+	char	*commands;
+	char 	**args;
 	int		infile;
 	int		outfile;
 };

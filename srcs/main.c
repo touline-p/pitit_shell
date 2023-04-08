@@ -34,14 +34,15 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		line = readline("Y a quoi ? :");
-		if (line == NULL) {
+		if (line == NULL || ft_str_is_ascii(line) == false) {
 			printf("\n");
-			return (clear_history(), ft_free_split(env), free(line), 0);
-			//continue;
+			free(line);
+			continue;
 		}
 		if (ft_strncmp("END", line, 4) == 0)
-			return (clear_history(), ft_free_split(env), free(line), 0);
-		add_history(line);
+			return (clear_history(), free(line), 0);
+		//add_history(line);
+
 		printf(BLUE"j'ai lu ->%s<-\n"END, line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
 		if (str_tok_lst == NULL || syntax_is_valid(str_tok_lst) == FAILURE
@@ -52,6 +53,7 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		display_str_token(str_tok_lst);
+
 		execution(str_tok_lst);
 		string_token_destructor(str_tok_lst);
 	}

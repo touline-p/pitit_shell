@@ -16,7 +16,6 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
 	preserve_token_lst(simple_tok_lst);
-	display_tokens(simple_tok_lst);
 	split_toklst_on_meta(simple_tok_lst);
 	regroup_meta(simple_tok_lst);
 	str_token_lst = token_lst_to_str_token(simple_tok_lst);
