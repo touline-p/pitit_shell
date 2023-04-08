@@ -72,6 +72,8 @@ bool	key_is_not_alnum(char *line)
 {
 	while (*line != '=' && *line)
 	{
+		if (*line == '+' && *(line + 1) == '=')
+			return (false);
 		if (ft_isalnum(*line) == false)
 			return (true);
 		line++;
@@ -87,8 +89,7 @@ t_return_status 	not_in_context_error(char *line, char ***env_pt)
 	return (free(line), SUCCESS);
 }
 
-t_export_ft	_get_ft_to_do(char *line, char **env)
-{
+t_export_ft	_get_ft_to_do(char *line, char **env) {
 	char *eq;
 	char *plus;
 
@@ -101,8 +102,10 @@ t_export_ft	_get_ft_to_do(char *line, char **env)
 		return (&add_str_to_env);
 	if (eq == NULL)
 		return (&do_nothing_t_export_ft);
-	if (plus == eq - 1)
+	if (plus == eq - 1) {
+		printf("je suis la \n");
 		return (&concat_content_to_line_in_env);
+	}
 	return (&replace_content_in_env_pt);
 }
 
