@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/07 19:09:32 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/08 16:46:01 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ static void	set_commands(t_data *data, char *string, int block_id)
 	(void)data;
 	printf(BLUE"%s\n"END, string);
 	printf(BLUE"%d\n"END, block_id);
+	if (data->cmds_block[block_id].commands[0] == NULL)
+	{
+		data->cmds_block[block_id].commands[0] = ft_strdup(string);
+		printf("commands : %s\n", data->cmds_block[block_id].commands[0]);
+	}
+	// else
+	// {
+		// data->cmds_block[block_id].commands[0][0] = ft_strdup(string);
+		// printf("commands : %s\n", data->cmds_block[block_id].commands[0]);
+		// printf("argument : %s\n", data->cmds_block[block_id].commands[0][0]);
+	// }
 	/*
 	premier appel = command[0];
 	second appel = command[0][0];
