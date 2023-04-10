@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/08 16:46:01 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/10 09:51:20 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	strings_management(t_data *data, t_string_token *string_of_tokens)
 
 	i = 0;
 	temp = string_of_tokens;
+	/*alloue pour *command -une fois commande rempli -join de reste et puis split pour **args */
 	while (temp != NULL)
 	{
 		if (temp->token == STRING)

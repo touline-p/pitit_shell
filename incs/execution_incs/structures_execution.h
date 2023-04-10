@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/07 17:44:29 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/10 09:50:44 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ struct s_data
 
 struct s_cmd
 {
-	char	**commands;
-	// char 	**args;
+	char	*commands;
+	char 	**args;
 	int		infile;
 	int		outfile;
 	int		pipes[2];
