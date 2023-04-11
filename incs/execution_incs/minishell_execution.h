@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_execution.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:11:55 by twang             #+#    #+#             */
-/*   Updated: 2023/04/08 17:56:11 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:59:05 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@
 # include "enums_parsing.h"
 # include "prototypes_execution.h"
 # include "structures_execution.h"
+
+/*---- global ----------------------------------------------------------------*/
+
+extern int	g_ret_val;
 
 #endif

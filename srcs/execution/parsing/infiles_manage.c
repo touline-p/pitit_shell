@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/11 15:45:59 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/11 18:43:01 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ static void	set_heredoc(t_data *data, char *file, int block_id)
 	(void)file;
 	(void)block_id;
 	puts("we have to set the heredoc");
-	/*open pipe, fork, strjoin -> creer t'on un fichier temp ou on join tout 
-	dans le pipe ?*/
+	/*
+		- open pipe
+		- fork
+		- remplir char  -> get_next_line
+		- launch expand
+		- put char * in pipe
+		- infile = 3 [if infile == 3 -> close[fd pipe] ET free char *heredoc?]
+		- check : if (line == NULL) || if (found LIMITER) --> break
+		- else : ft_dprintf(fd, line); ft_dprintf("\n");
+	*/
 }

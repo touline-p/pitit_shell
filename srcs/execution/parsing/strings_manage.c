@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/11 15:22:17 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/11 18:44:11 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,69 +14,64 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-// static void	set_commands(t_data *data, char *string, int block_id);
 // static bool	is_builtin(char *string);
-// static void	get_command(t_data *data, t_string_token *str_of_tok, char *string);
+static void	alloc_command(t_data *data, t_string_token *string_of_tokens);
 
 /*----------------------------------------------------------------------------*/
 
 void	strings_management(t_data *data, t_string_token *string_of_tokens)
 {
-	(void)data;
-	
-	int				i;
+	int				index;
+	int				block_id;
 	t_string_token	*temp;
 
-	i = 0;
+	index = 0;
+	block_id = 0;
 	temp = string_of_tokens;
-	/*alloue pour *command -une fois commande rempli -join de reste et puis split pour **args */
+	alloc_command(data, string_of_tokens);
 	while (temp != NULL)
 	{
 		if (temp->token == STRING)
 		{
-			puts("je n'ai pas encore gerer les string!");
-			// set_commands(data, temp->content, i);
+			data->cmds_block[block_id].commands[index] = \
+			ft_strdup(temp->content);
+			index++;
 		}
 		if (temp->token == PIPE)
 		{
-			i++;
+			block_id++;
+			index = 0;
 		}
 		temp = temp->next;
 	}
 }
-/*
-static void	set_commands(t_data *data, char *string, int block_id)
+
+static void	alloc_command(t_data *data, t_string_token *string_of_tokens)
 {
-	(void)data;
-	printf(BLUE"%s\n"END, string);
-	printf(BLUE"%d\n"END, block_id);
-	if (data->cmds_block[block_id].commands[0] == NULL)
+	t_string_token	*temp;
+	int				size;
+	int				block_id;
+
+	size = 0;
+	block_id = 0;
+	temp = string_of_tokens;
+	while (temp != NULL)
 	{
-		data->cmds_block[block_id].commands[0][0] = ft_strdup(string);
-		printf("commands : %c\n", data->cmds_block[block_id].commands[0]);
+		if (temp->token == STRING)
+			size++;
+		if (temp->token == PIPE)
+		{
+			data->cmds_block[block_id].commands = \
+			malloc(sizeof(char *) * (size + 1));
+			block_id++;
+			size = 0;
+		}
+		temp = temp->next;
 	}
-	// else
-	// {
-		// data->cmds_block[block_id].commands[0][0] = ft_strdup(string);
-		// printf("commands : %s\n", data->cmds_block[block_id].commands[0]);
-		// printf("argument : %s\n", data->cmds_block[block_id].commands[0][0]);
-	// }
-	
-	premier appel = command[0];
-	second appel = command[0][0];
-	
-}*/
+	data->cmds_block[block_id].commands = malloc(sizeof(char *) * (size + 1));
+}
+
 /*
-	(void)data;
-	(void)str_of_tok;
-	if (is_builtin(str) == true)
-		puts(RED"c'est un builtin"END);
-	else
-	{
-		puts(GREEN"c'est une commande"END);
-		get_command(data, str_of_tok, str);
-	}
-	
 static bool	is_builtin(char *string)
 {
 	if (ft_strcmp(string, "echo") == 0 || ft_strcmp(string, "cd") == 0 || 
@@ -86,13 +81,5 @@ static bool	is_builtin(char *string)
 		return (true);
 	else
 		return (false);
-}
-
-static void	get_command(t_data *data, t_string_token *str_of_tok, char *string)
-{
-	(void)data;
-	(void)str_of_tok;
-	printf(PURPLE"%s\n"END, string);
-	display_str_token(str_of_tok);
 }
 */

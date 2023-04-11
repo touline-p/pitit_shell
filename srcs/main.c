@@ -33,7 +33,7 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
-		line = readline("Y a quoi ? :");
+		line = readline("Y a quoi ? ");
 		if (line == NULL || ft_str_is_ascii(line) == false) {
 			printf("\n");
 			free(line);
@@ -41,7 +41,7 @@ int	main(int ac, char **av, char **env)
 		}
 		if (ft_strncmp("END", line, 4) == 0)
 			return (clear_history(), free(line), 0);
-		//add_history(line);
+		add_history(line);
 
 		printf(BLUE"j'ai lu ->%s<-\n"END, line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
@@ -52,12 +52,12 @@ int	main(int ac, char **av, char **env)
 			string_token_destructor(str_tok_lst);
 			continue;
 		}
-		debug;
-   		idebug(42);
-    	sdebug("Coucou!");
+		del_space_token(str_tok_lst);
+		// debug;
+   		// idebug(42);
+    	// sdebug("Coucou!");
 		display_str_token(str_tok_lst);
 		execution(str_tok_lst);
-		string_token_destructor(str_tok_lst);
 	}
 	return (0);
 }

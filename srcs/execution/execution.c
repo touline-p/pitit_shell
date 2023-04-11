@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/07 19:07:01 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/11 18:34:53 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,13 @@ static void	cmds_block_alloc(t_data *data, t_string_token *string_of_tokens)
 	data->cmds_block[2]->outfile = fd_out
 	data->cmds_block[2]->pipes[2] = ignore
 	
-	
-
-	balader dans la liste chainees et faire en fonction
-	create structure init -> fds management	-> fork management -> heredoc
-	check des chevrons	-> infile / outifile - les gerer - les virer
-	check here_docs 	-> here_doc becomes infile 
-	check des pipes		-> checks fds -> prepare for fork
-	check commands 		-> builtins -> call built_in function
-						-> commands to exec -> get_path, ... pipex
-
+	check lst_tokens :
+	check chevrons		-> infile / here_doc
+						-> expand to here_doc
+						-> outfile / append
+	check commands 		-> recup commandes + args
+						-> add path
+						-> check fds -> standart -> pipes ...
+						-> builtins -> call built_in function
+						-> exec command
 */
