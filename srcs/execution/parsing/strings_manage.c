@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/10 09:51:20 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/11 15:22:17 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void	set_commands(t_data *data, char *string, int block_id);
+// static void	set_commands(t_data *data, char *string, int block_id);
 // static bool	is_builtin(char *string);
 // static void	get_command(t_data *data, t_string_token *str_of_tok, char *string);
 
@@ -35,7 +35,7 @@ void	strings_management(t_data *data, t_string_token *string_of_tokens)
 		if (temp->token == STRING)
 		{
 			puts("je n'ai pas encore gerer les string!");
-			set_commands(data, temp->content, i);
+			// set_commands(data, temp->content, i);
 		}
 		if (temp->token == PIPE)
 		{
@@ -44,7 +44,7 @@ void	strings_management(t_data *data, t_string_token *string_of_tokens)
 		temp = temp->next;
 	}
 }
-
+/*
 static void	set_commands(t_data *data, char *string, int block_id)
 {
 	(void)data;
@@ -52,8 +52,8 @@ static void	set_commands(t_data *data, char *string, int block_id)
 	printf(BLUE"%d\n"END, block_id);
 	if (data->cmds_block[block_id].commands[0] == NULL)
 	{
-		data->cmds_block[block_id].commands[0] = ft_strdup(string);
-		printf("commands : %s\n", data->cmds_block[block_id].commands[0]);
+		data->cmds_block[block_id].commands[0][0] = ft_strdup(string);
+		printf("commands : %c\n", data->cmds_block[block_id].commands[0]);
 	}
 	// else
 	// {
@@ -61,11 +61,11 @@ static void	set_commands(t_data *data, char *string, int block_id)
 		// printf("commands : %s\n", data->cmds_block[block_id].commands[0]);
 		// printf("argument : %s\n", data->cmds_block[block_id].commands[0][0]);
 	// }
-	/*
+	
 	premier appel = command[0];
 	second appel = command[0][0];
-	*/
-}
+	
+}*/
 /*
 	(void)data;
 	(void)str_of_tok;

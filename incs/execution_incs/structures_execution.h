@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/10 09:50:44 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/11 15:52:25 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 /*---- typedef structures ----------------------------------------------------*/
 
 typedef struct s_string_token	t_string_token;
+typedef struct s_data			t_data;
+typedef struct s_cmd			t_cmd;
 typedef struct s_data			t_data;
 typedef struct s_cmd			t_cmd;
 
@@ -34,8 +36,12 @@ struct s_string_token
 struct s_data
 {
 	t_cmd	*cmds_block;
+	int 	nb_of_cmd;
 	int 	nb_of_pipe;
-	// int 	*pid_de_sortie;
+	int 	*pid_de_sortie;
+	int		infile;
+	int		outfile;
+	int		pipes[2];
 };
 
 struct s_cmd
