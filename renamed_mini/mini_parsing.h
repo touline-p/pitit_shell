@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:47:29 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/27 12:48:03 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/12 14:23:51 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void	per_n_set_errno(char *msg);
 
 /*** execution parts tests ***/
 
-void	execution(t_string_token *string_of_tokens);
+void	execution(t_string_token *str_of_tokens);
 
 #endif //MINI_PARSING_MINI_PARSING_H

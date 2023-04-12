@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:57:21 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 03:57:39 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:35:50 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_token	*token_lst_constructor_word(char *string, t_esec esec)
 	t_token *pin;
 	t_token *new;
 
+	new = NULL;
 	if (*string != '\0')
 		new = token_constructor_esec(LETTER, *(string++), esec);
 	if (!new)

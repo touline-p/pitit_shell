@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 17:41:03 by twang             #+#    #+#             */
-/*   Updated: 2023/03/27 17:44:46 by twang            ###   ########.fr       */
+/*   Created: 2023/04/12 16:50:36 by twang             #+#    #+#             */
+/*   Updated: 2023/04/12 16:58:24 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	find_path_in_environment(char **env);
 static char	**get_paths(char **env);
 
 /*----------------------------------------------------------------------------*/
+
 char	*get_command_with_path(char **env, char *command)
 {
 	int		i;
@@ -48,28 +49,6 @@ char	*get_command_with_path(char **env, char *command)
 	return (NULL);
 }
 
-static int	get_path_size(char **paths)
-{
-	int	i;
-
-	i = 0;
-	while (paths[i])
-		i++;
-	return (i);
-}
-
-static int	find_path_in_environment(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i] && !ft_strnstr(env[i], "PATH=", 5))
-		i++;
-	if (!env[i])
-		return (-1);
-	return (i);
-}
-
 static char	**get_paths(char **env)
 {
 	int		i;
@@ -88,10 +67,32 @@ static char	**get_paths(char **env)
 		paths[i] = ft_strjoin(paths[i], "/");
 		if (!paths[i])
 		{
-			ft_free((void **)paths, get_path_size(paths));
+			ft_free((void **)paths, 11444);
 			return (NULL);
 		}
 		i++;
 	}
 	return (paths);
+}
+
+static int	find_path_in_environment(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] && !ft_strnstr(env[i], "PATH=", 5))
+		i++;
+	if (!env[i])
+		return (-1);
+	return (i);
+}
+
+static int	get_path_size(char **paths)
+{
+	int	i;
+
+	i = 0;
+	while (paths[i])
+		i++;
+	return (i);
 }

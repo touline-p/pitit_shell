@@ -95,8 +95,6 @@ t_export_ft	_get_ft_to_do(char *line, char **env) {
 
 	eq = ft_strchr(line, '=');
 	plus = ft_strchr(line, '+');
-	if (key_is_not_alnum(line))
-		return (&not_in_context_error);
 	_get_rid_of_plus(line);
 	if (has_a_key_from_env(line, env) == false)
 		return (&add_str_to_env);
@@ -137,7 +135,7 @@ static void	_display_unic_export(char *env_line)
 	*(--content) = '=';
 }
 
-//#define TST_EXPORT
+// #define TST_EXPORT
 #ifdef TST_EXPORT
 int main(int ac, char **av, char **env)
 {
