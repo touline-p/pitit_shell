@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/11 18:34:53 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/12 19:37:24 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,47 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void	cmds_block_alloc(t_data *data, t_string_token *string_of_tokens);
+static t_return_status	alloc_cmd_block(t_data *data, \
+t_string_token *str_of_tok);
 
 /*----------------------------------------------------------------------------*/
 
-void	execution(t_string_token *string_of_tokens)
+void	execution(t_string_token *str_of_tok, char ***env_pt)
 {
 	t_data	data;
 
 	ft_bzero(&data, sizeof(t_data));
-	cmds_block_alloc(&data, string_of_tokens);
-	infiles_management(&data, string_of_tokens);
-	outfiles_management(&data, string_of_tokens);
-	clean_files_token(string_of_tokens);
-	clean_token(string_of_tokens);
-	display_str_token(string_of_tokens);
-	strings_management(&data, string_of_tokens);
-	string_token_destructor(string_of_tokens);
+	alloc_cmd_block(&data, str_of_tok);
+	infiles_management(&data, str_of_tok);
+	outfiles_management(&data, str_of_tok);
+	clean_files_token(str_of_tok);
+	clean_token(str_of_tok);
+	strings_management(&data, str_of_tok, *env_pt);
+	display_str_token(str_of_tok);
+	builtin_switchman(data.cmds_block->id_command, data.cmds_block->commands, env_pt);
+	string_token_destructor(str_of_tok);
 }
 
-static void	cmds_block_alloc(t_data *data, t_string_token *string_of_tokens)
+static t_return_status	alloc_cmd_block(t_data *data, \
+t_string_token *str_of_tok)
 {
 	t_string_token	*temp;
 
-	temp = string_of_tokens;
+	temp = str_of_tok;
 	while (temp != NULL)
 	{
 		if (temp->token == PIPE)
 			data->nb_of_pipe++;
 		temp = temp->next;
 	}
-	data->cmds_block = (t_cmd *)malloc((data->nb_of_pipe + 1) * sizeof(t_cmd));
+	data->cmds_block = (t_cmd *)ft_calloc((data->nb_of_pipe + 2), sizeof(t_cmd));
+	if (!data->cmds_block)
+		return (FAILED_MALLOC);
 	ft_bzero(data->cmds_block, sizeof(t_cmd));
+	return (SUCCESS);
 }
 
 	/*
-	
 	< infile cat -e | cat | cat > outfile
 	
 	data->cmds_block[0]->command = "cat" "-e"
@@ -67,7 +72,7 @@ static void	cmds_block_alloc(t_data *data, t_string_token *string_of_tokens)
 	data->cmds_block[2]->outfile = fd_out
 	data->cmds_block[2]->pipes[2] = ignore
 	
-	check lst_tokens :
+	check lst_tokens
 	check chevrons		-> infile / here_doc
 						-> expand to here_doc
 						-> outfile / append

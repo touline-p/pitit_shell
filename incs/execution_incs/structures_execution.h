@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/11 18:26:19 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/12 19:02:48 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ struct s_string_token
 struct s_data
 {
 	t_cmd	*cmds_block;
-	int 	nb_of_cmd;
 	int 	nb_of_pipe;
 	// int 	*pid_de_sortie;
 	// int		infile;
@@ -46,10 +45,11 @@ struct s_data
 
 struct s_cmd
 {
-	char	**commands;
-	int		infile;
-	int		outfile;
-	int		pipes[2];
+	char		**commands;
+	t_builtin	id_command;
+	int			infile;
+	int			outfile;
+	int			pipes[2];
 };
 
 #endif

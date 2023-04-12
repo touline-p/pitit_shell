@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/11 18:43:01 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/12 14:32:27 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	set_heredoc(t_data *data, char *file, int cmd_block_id);
 
 /*----------------------------------------------------------------------------*/
 
-void	infiles_management(t_data *data, t_string_token *string_of_tokens)
+void	infiles_management(t_data *data, t_string_token *str_of_tok)
 {
 	int				i;
 	t_string_token	*temp;
 
 	i = 0;
-	temp = string_of_tokens;
+	temp = str_of_tok;
 	while (temp != NULL)
 	{
 		if (temp->token == CHEVRON_IN)

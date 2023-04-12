@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/11 18:44:11 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/12 19:37:46 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,49 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-// static bool	is_builtin(char *string);
-static void	alloc_command(t_data *data, t_string_token *string_of_tokens);
+static t_return_status	alloc_cmds(t_data *data, t_string_token *str_of_tok);
+static void				get_raw_cmds(t_data *data, t_string_token *str_of_tok);
+static void				set_id_cmds(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
-void	strings_management(t_data *data, t_string_token *string_of_tokens)
+void	strings_management(t_data *data, t_string_token *str_of_tok, char **env)
+{
+	(void)env;
+	alloc_cmds(data, str_of_tok);
+	get_raw_cmds(data, str_of_tok);
+	set_id_cmds(data);
+}
+
+static t_return_status	alloc_cmds(t_data *data, t_string_token *str_of_tok)
+{
+	t_string_token	*temp;
+	int				size;
+	int				block_id;
+
+	size = 0;
+	block_id = 0;
+	temp = str_of_tok;
+	while (temp != NULL)
+	{
+		if (temp->token == STRING)
+			size++;
+		if (temp->token == PIPE)
+		{
+			data->cmds_block[block_id].commands = \
+			ft_calloc((size + 1), sizeof(char *));
+			block_id++;
+			size = 0;
+		}
+		temp = temp->next;
+	}
+	data->cmds_block[block_id].commands = ft_calloc((size + 1), sizeof(char *));
+	if (!data->cmds_block[block_id].commands)
+		return (FAILED_MALLOC);
+	return (SUCCESS);
+}
+
+static void	get_raw_cmds(t_data *data, t_string_token *str_of_tok)
 {
 	int				index;
 	int				block_id;
@@ -27,14 +64,13 @@ void	strings_management(t_data *data, t_string_token *string_of_tokens)
 
 	index = 0;
 	block_id = 0;
-	temp = string_of_tokens;
-	alloc_command(data, string_of_tokens);
+	temp = str_of_tok;
 	while (temp != NULL)
 	{
 		if (temp->token == STRING)
 		{
 			data->cmds_block[block_id].commands[index] = \
-			ft_strdup(temp->content);
+				ft_strdup(temp->content);
 			index++;
 		}
 		if (temp->token == PIPE)
@@ -46,40 +82,20 @@ void	strings_management(t_data *data, t_string_token *string_of_tokens)
 	}
 }
 
-static void	alloc_command(t_data *data, t_string_token *string_of_tokens)
+static void	set_id_cmds(t_data *data)
 {
-	t_string_token	*temp;
-	int				size;
-	int				block_id;
+	int	block_id;
 
-	size = 0;
 	block_id = 0;
-	temp = string_of_tokens;
-	while (temp != NULL)
+	while (data && data->cmds_block && data->cmds_block[block_id].commands)
 	{
-		if (temp->token == STRING)
-			size++;
-		if (temp->token == PIPE)
-		{
-			data->cmds_block[block_id].commands = \
-			malloc(sizeof(char *) * (size + 1));
-			block_id++;
-			size = 0;
-		}
-		temp = temp->next;
+		data->cmds_block[block_id].id_command = \
+			is_builtin(data->cmds_block[block_id].commands[0]);
+		block_id++;
 	}
-	data->cmds_block[block_id].commands = malloc(sizeof(char *) * (size + 1));
 }
 
-/*
-static bool	is_builtin(char *string)
-{
-	if (ft_strcmp(string, "echo") == 0 || ft_strcmp(string, "cd") == 0 || 
-	ft_strcmp(string, "pwd") == 0 || ft_strcmp(string, "export") == 0 || 
-	ft_strcmp(string, "unset") == 0 || ft_strcmp(string, "env") == 0 || 
-	ft_strcmp(string, "exit") == 0)
-		return (true);
-	else
-		return (false);
-}
-*/
+// static t_return_status	add_path_cmd(t_data *data, t_string_token *str_of_tok, char **env)
+// {
+	
+// }

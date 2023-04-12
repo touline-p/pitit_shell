@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outfiles_manage.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/08 17:56:37 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:32:29 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static void	set_appends(t_data *data, char *file, int block_id);
 
 /*----------------------------------------------------------------------------*/
 
-void	outfiles_management(t_data *data, t_string_token *string_of_tokens)
+void	outfiles_management(t_data *data, t_string_token *str_of_tok)
 {
 	int					i;
 	t_string_token		*temp;
 
 	i = 0;
-	temp = string_of_tokens;
-	display_str_token(string_of_tokens);
+	temp = str_of_tok;
+	display_str_token(str_of_tok);
 	while (temp != NULL)
 	{
 		if (temp->token == CHEVRON_OT)
