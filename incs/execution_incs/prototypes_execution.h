@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/12 19:24:15 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:22:35 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	strings_management(t_data *data, t_string_token *str_of_tok, char **env_pt)
 
 /*-- cmds_utils --*/
 t_builtin	is_builtin(char *string);
+t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt);
 
 /*-- path_utils --*/
 
@@ -53,7 +54,6 @@ void	display_t_emt_string(t_string_token *token);
 
 /*-- Builtin --*/
 
-t_return_status	builtin_switchman(t_builtin builtin, char **av, char ***env_pt);
 t_return_status	cd_builtin(char **av, char ***env_pt);
 t_return_status export_builtin(char **av, char ***env_pt);
 t_return_status	env_builtin(char **av, char ***env_pt);

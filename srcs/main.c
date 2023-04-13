@@ -18,8 +18,10 @@ static t_return_status welcome_to_minihell(char ***env_pt)
 	g_ret_val = 0;
 	if (env_init_on(env_pt) != SUCCESS)
 		return (FAILED_MALLOC);
-	printf(ITALIC PURPLE"\nThis is madness\n\n"END);
-	printf(PURPLE"by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
+	printf(PURPLE"\n-------------------------------------------\t\n"END);
+	printf(PURPLE"\n\t    THIS IS MINIHELL\n"END);
+	printf(PURPLE"\n-------------------------------------------\t\n"END);
+	printf(ITALIC PURPLE"\t\t by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
 	printf("& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
 	return (SUCCESS);
 }
@@ -56,7 +58,6 @@ int	main(int ac, char **av, char **env)
 		// debug;
    		// idebug(42);
     	// sdebug("Coucou!");
-		display_str_token(str_tok_lst);
 		execution(str_tok_lst, &env);
 	}
 	return (0);
