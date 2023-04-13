@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/13 16:22:35 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/13 17:53:23 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@
 /*---- Execution -------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 
-void	execution(t_string_token *str_of_tok, char ***env);
+void	execution(t_string_token *lst_of_tok, char ***env);
 
 /*-- parsing -----------------------------------------------------------------*/
 
 /*-- clean_utils --*/
-void	clean_files_token(t_string_token *str_of_tok);
-void	clean_token(t_string_token *str_of_tok);
+void	clean_files_token(t_string_token *lst_of_tok);
+void	clean_token(t_string_token *lst_of_tok);
 
 /*-- infiles_manage --*/
-void	infiles_management(t_data *data, t_string_token *str_of_tok);
+void	infiles_management(t_data *data, t_string_token *lst_of_tok);
 
 /*-- outfiles_manage --*/
-void	outfiles_management(t_data *data, t_string_token *str_of_tok);
+void	outfiles_management(t_data *data, t_string_token *lst_of_tok);
 
 /*-- string_manage --*/
-void	strings_management(t_data *data, t_string_token *str_of_tok, char **env_pt);
+void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env_pt);
 
 /*-- utils -------------------------------------------------------------------*/
 
@@ -44,7 +44,8 @@ t_builtin	is_builtin(char *string);
 t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt);
 
 /*-- path_utils --*/
-
+int	get_path_size(char **paths);
+char	**get_paths(char **env);
 
 /*-- Genius Brieuc utils --*/
 void	string_token_destructor(t_string_token *trash);
@@ -53,7 +54,6 @@ void	display_str_token(t_string_token *tok);
 void	display_t_emt_string(t_string_token *token);
 
 /*-- Builtin --*/
-
 t_return_status	cd_builtin(char **av, char ***env_pt);
 t_return_status export_builtin(char **av, char ***env_pt);
 t_return_status	env_builtin(char **av, char ***env_pt);

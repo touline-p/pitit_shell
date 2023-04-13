@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/04 20:13:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/13 18:15:07 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,9 @@ size_t			ft_lststrlen(t_list *lst);
 
 /**---- utils ---- **/
 
-int				open_file(const char *av);
+int		open_file(const char *av);
+void	*ft_free(void **s, size_t len);
+char	*strjoin_path_cmd(char *s1, char *s2);
 
 /**---- printf ---- dprintf ---- **/
 

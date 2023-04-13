@@ -78,6 +78,8 @@ FILES	=	ft_atoi.c 				\
 			ft_str_arr.c			\
 			open_file.c				\
 			ft_strnstr.c			\
+			ft_free.c				\
+			ft_strjoin_paths.c		\
 			#ft_printf.c			\
 			check_extension.c		\
 			open_file.c				\

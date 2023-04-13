@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/13 16:24:24 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/13 18:48:07 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,33 @@
 /*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status	alloc_cmd_block(t_data *data, \
-t_string_token *str_of_tok);
+t_string_token *lst_of_tok);
 
 /*----------------------------------------------------------------------------*/
 
-void	execution(t_string_token *str_of_tok, char ***env_pt)
+void	execution(t_string_token *lst_of_tok, char ***env_pt)
 {
 	t_data	data;
 
 	ft_bzero(&data, sizeof(t_data));
-	alloc_cmd_block(&data, str_of_tok);
-	infiles_management(&data, str_of_tok);
-	outfiles_management(&data, str_of_tok);
-	clean_files_token(str_of_tok);
-	clean_token(str_of_tok);
-	strings_management(&data, str_of_tok, *env_pt);
-	builtin_switch(data.cmds_block->id_command, data.cmds_block->commands, env_pt);
-	string_token_destructor(str_of_tok);
+	alloc_cmd_block(&data, lst_of_tok);
+	infiles_management(&data, lst_of_tok);
+	outfiles_management(&data, lst_of_tok);
+	clean_files_token(lst_of_tok);
+	clean_token(lst_of_tok);
+	strings_management(&data, lst_of_tok, *env_pt);
+	string_token_destructor(lst_of_tok);
+	builtin_switch(data.cmds_block->id_command, data.cmds_block->commands, \
+					env_pt);
+	
 }
 
 static t_return_status	alloc_cmd_block(t_data *data, \
-t_string_token *str_of_tok)
+t_string_token *lst_of_tok)
 {
 	t_string_token	*temp;
 
-	temp = str_of_tok;
+	temp = lst_of_tok;
 	while (temp != NULL)
 	{
 		if (temp->token == PIPE)
@@ -72,7 +74,7 @@ t_string_token *str_of_tok)
 	data->cmds_block[2]->pipes[2] = ignore
 	
 	check lst_tokens
-	check chevrons		-> infile / here_doc
+	check chevrons		-> infile / here_doc 
 						-> expand to here_doc
 						-> outfile / append
 	check commands 		-> recup commandes + args
