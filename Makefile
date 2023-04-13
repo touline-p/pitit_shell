@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/04/11 16:47:52 by twang            ###   ########.fr        #
+#    Updated: 2023/04/13 15:05:21 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ include config/sources_parsing.mk
 
 NAME		=	minishell
 DEBUG		=	no
-VALGRIND		=	no
+VALGRIND	=	no
 
 BPOUMEAU	=	\e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a
 TWANG		=	\e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a
@@ -51,7 +51,7 @@ endif
 
 #--leaks flags--------------------------------------------------------#
 
-LEAKS	=	valgrind --leak-check=full --track-fds=yes
+LEAKS	=	valgrind --suppressions=ignore_readline_reachable.txt --leak-check=full --track-fds=yes
 
 #--libs------------------------------------------------------------------------#
 

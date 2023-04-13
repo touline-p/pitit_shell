@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/12 19:37:24 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:24:24 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	execution(t_string_token *str_of_tok, char ***env_pt)
 	clean_files_token(str_of_tok);
 	clean_token(str_of_tok);
 	strings_management(&data, str_of_tok, *env_pt);
-	display_str_token(str_of_tok);
-	builtin_switchman(data.cmds_block->id_command, data.cmds_block->commands, env_pt);
+	builtin_switch(data.cmds_block->id_command, data.cmds_block->commands, env_pt);
 	string_token_destructor(str_of_tok);
 }
 

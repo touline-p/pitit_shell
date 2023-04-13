@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/12 14:32:29 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:25:10 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	outfiles_management(t_data *data, t_string_token *str_of_tok)
 
 	i = 0;
 	temp = str_of_tok;
-	display_str_token(str_of_tok);
 	while (temp != NULL)
 	{
 		if (temp->token == CHEVRON_OT)

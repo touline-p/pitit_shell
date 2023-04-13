@@ -58,7 +58,6 @@ int	main(int ac, char **av, char **env)
 		// debug;
    		// idebug(42);
     	// sdebug("Coucou!");
-		display_str_token(str_tok_lst);
 		execution(str_tok_lst, &env);
 	}
 	return (0);
