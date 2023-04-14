@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/12 19:02:48 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/14 16:05:11 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ struct s_data
 {
 	t_cmd	*cmds_block;
 	int 	nb_of_pipe;
-	// int 	*pid_de_sortie;
-	// int		infile;
-	// int		outfile;
-	// int		pipes[2];
 };
 
 struct s_cmd
@@ -49,7 +45,8 @@ struct s_cmd
 	t_builtin	id_command;
 	int			infile;
 	int			outfile;
-	int			pipes[2];
+	int			fd[2];
+	pid_t		process_ids;
 };
 
 #endif

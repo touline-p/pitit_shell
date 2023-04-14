@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:28:34 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/13 20:03:50 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/14 13:49:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ enum	e_ret_status
 		SUCCESS,
 		FAILURE,
 		FAILED_MALLOC,
-		FAILED_WRITE
+		FAILED_WRITE,
+		FAILED_PIPE
 };
 
 #endif

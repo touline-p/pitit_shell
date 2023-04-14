@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 17:34:06 by twang             #+#    #+#             */
-/*   Updated: 2023/04/13 17:53:02 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/14 15:34:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_builtin	is_builtin(char *string)
 {
+	t_builtin	ret_val;
 	const char	*name_arr[] = {NULL, "env","echo", "export", \
 							"exit", "unset", "cd", "pwd"};
-	t_builtin	ret_val;
 
 	ret_val = ENV;
 	if (!string)
