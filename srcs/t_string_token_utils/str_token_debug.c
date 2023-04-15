@@ -60,13 +60,23 @@ void display_str_token_till(t_string_token *tok)
 
 void display_str_par(t_string_token *tok)
 {
+	int 	count;
+
+	count = 1;
 	display_t_emt_string(tok);
 	tok = tok->next;
-	while (tok->token != C_PRTSS)
+	while (tok->token != EOL)
 	{
+		if (tok->token == O_PRTSS)
+			count++;
+		if (tok->token == C_PRTSS)
+		{
+			count--;
+			if (count == 0)
+				break;
+		}
 		display_t_emt_string(tok);
 		tok = tok->next;
 	}
-	display_t_emt_string(tok);
 	printf("\n");
 }
