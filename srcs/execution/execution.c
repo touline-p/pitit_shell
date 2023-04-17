@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/13 18:48:07 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/17 16:33:18 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,23 @@ void	execution(t_string_token *lst_of_tok, char ***env_pt)
 {
 	t_data	data;
 
+	display_str_token(lst_of_tok);
 	ft_bzero(&data, sizeof(t_data));
 	alloc_cmd_block(&data, lst_of_tok);
 	infiles_management(&data, lst_of_tok);
 	outfiles_management(&data, lst_of_tok);
+	display_str_token(lst_of_tok);
+	// if (expand_for_args(lst_of_tok, *env_pt) != SUCCESS)
+	// 	return ;
+	display_str_token(lst_of_tok);
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
 	strings_management(&data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
 	builtin_switch(data.cmds_block->id_command, data.cmds_block->commands, \
 					env_pt);
-	
+	// if (data.cmds_block->commands)
+	// 	free_commands(&data);
 }
 
 static t_return_status	alloc_cmd_block(t_data *data, \

@@ -81,7 +81,7 @@ FILES	=	ft_atoi.c 				\
 			ft_strnstr.c			\
 			ft_free.c				\
 			ft_strjoin_paths.c		\
-			#ft_printf.c			\
+			ft_printf.c				\
 			check_extension.c		\
 			open_file.c				\
 			ft_putnbr_base_fd.c		\

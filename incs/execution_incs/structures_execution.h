@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/14 16:05:11 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/17 14:14:39 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ struct s_data
 
 struct s_cmd
 {
-	char		**commands;
 	t_builtin	id_command;
+	char		**commands;
+	bool		is_heredoc;
 	int			infile;
 	int			outfile;
 	int			fd[2];
-	pid_t		process_ids;
+	pid_t		process_id;
 };
 
 #endif

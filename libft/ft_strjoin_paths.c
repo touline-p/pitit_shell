@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:58:30 by twang             #+#    #+#             */
-/*   Updated: 2023/04/13 18:14:46 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/17 10:33:33 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ char	*strjoin_path_cmd(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+		s1 = ft_calloc(1, sizeof(char));
+	if (!s2)
+		s2 = ft_calloc(1, sizeof(char));
 	length = s_length((char *)s1, (char *)s2);
 	s_join = ft_calloc(length + 1, sizeof(char));
 	if (!s_join)
