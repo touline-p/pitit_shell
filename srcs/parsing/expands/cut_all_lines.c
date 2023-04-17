@@ -29,3 +29,28 @@ t_return_status join_all_lines(t_string_token *string_token_lst, char **env)
 	}
 	return (SUCCESS);
 }
+
+t_return_status expand_line(char **line_pt, char **env)
+{
+	char	**tmp_arr;
+
+	if (SUCCESS != cut_line_on(*line_pt, &tmp_arr)
+		|| SUCCESS != join_arr_on(tmp_arr, line_pt, env))
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+
+//#define TST_if
+#ifdef TST_if
+
+int main(int ac, char **av, char **env)
+{
+	(void)ac;
+	char	*string;
+
+	string = ft_strdup(av[1]);
+	expand_line(&string, env);
+	printf("%s\n", string);
+}
+#endif

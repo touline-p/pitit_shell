@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/13 16:49:12 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/17 11:25:44 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	outfiles_management(t_data *data, t_string_token *lst_of_tok)
 
 static void	set_outfile(t_data *data, char *file, int block_id)
 {
-	if (data->cmds_block[block_id].outfile != 0)
-		close(data->cmds_block[block_id].outfile);
+	check_opened_files(data, block_id);
 	data->cmds_block[block_id].outfile = open(file, O_WRONLY | O_CREAT | \
 	O_TRUNC, 0644);
 	if (data->cmds_block[block_id].outfile == -1)
@@ -58,8 +57,7 @@ static void	set_outfile(t_data *data, char *file, int block_id)
 
 static void	set_appends(t_data *data, char *file, int block_id)
 {
-	if (data->cmds_block[block_id].outfile != 0)
-		close(data->cmds_block[block_id].outfile);
+	check_opened_files(data, block_id);
 	data->cmds_block[block_id].outfile = open(file, O_WRONLY | O_CREAT | \
 	O_APPEND, 0644);
 	if (data->cmds_block[block_id].outfile == -1)
