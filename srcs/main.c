@@ -47,8 +47,8 @@ int	main(int ac, char **av, char **env)
 
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
 		if (syntax_is_valid(str_tok_lst) == FAILURE)
-		// 	|| cut_all_lines(str_tok_lst) != SUCCESS
-		// 	|| join_all_lines(str_tok_lst, env) != SUCCESS)
+			// || cut_all_lines(str_tok_lst) != SUCCESS
+			// || join_all_lines(str_tok_lst, env) != SUCCESS)
 		{
 		 	string_token_destructor(str_tok_lst);
 		 	continue;

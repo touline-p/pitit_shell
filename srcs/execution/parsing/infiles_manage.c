@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/17 15:58:52 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/17 19:09:07 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,22 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 	else
 		waitpid(data->cmds_block[block_id].process_id, NULL, 0);
 	return (SUCCESS);
-	/*
-		- launch expand
-		- put char * in pipe
-		L'HISTORIQUE DU HEREDOC ??
-	*/
 }
 
 static void	get_heredoc(t_data *data, char *limiter, int block_id)
 {
 	char	*line;
 	char	*here_doc;
+	bool	do_expand;
 	
 	line = NULL;
 	here_doc = NULL;
+	do_expand = false;
+	if (strchr(limiter, -'\'') || strchr(limiter, -'\"'))
+	{
+		do_expand = true;
+		puts("je ne fais pas de expand!");
+	}
 	while (HEREDOC_MUST_GO_ON)
 	{
 		ft_dprintf(2, GREEN"> "END);
@@ -97,15 +99,11 @@ static void	get_heredoc(t_data *data, char *limiter, int block_id)
 		here_doc = strjoin_path_cmd(here_doc, line);
 	}
 	free(line);
-	/*printf(GREEN"%s"END, here_doc);
-	here_doc = la fonction expand du Beau Brieuc*/
+	if (do_expand == true)
+		/*here_doc = la fonction expand du Beau Brieuc*/
 	if (here_doc)
-	{
 		write(data->cmds_block[block_id].fd[1], here_doc, ft_strlen(here_doc));
-		write(1, here_doc, ft_strlen(here_doc));
-	}
 	close(data->cmds_block[block_id].fd[1]);
-	
 	// printf(GREEN"%s"END, here_doc);
 	free(here_doc);
 }
