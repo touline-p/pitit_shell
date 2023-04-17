@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:25:09 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/27 14:28:55 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/17 16:25:31 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	del_space_token(t_string_token *tok)
 	int i = 0;
 
 	pin = tok;
-	while (pin->next->token != EOL)
+	while (pin->next)
 	{
 		if (pin->next->token == E_SPACE || pin->next->token == TABULATION)
 			del_next_string_token(pin);
@@ -115,11 +115,12 @@ t_return_status str_arr_to_str_token_lst(char **split, t_string_token **str_toke
 	char 			**split_tmp;
 
 	split_tmp = split;
-	if (*split == NULL || string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
+	new_lst = NULL;
+	if (*split && string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
 		return (FAILED_MALLOC);
+	free(*str_token_pt);
 	*str_token_pt = new_lst;
-	printf("%s\n", new_lst->content);
-	while (*split != NULL)
+	while (*split)
 	{
 		if (string_token_new_on(*(split++), STRING, &(new_lst->next)) != SUCCESS)
 			return (FAILED_MALLOC);

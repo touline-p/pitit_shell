@@ -12,14 +12,19 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 	(void)env;
 
 	simple_tok_lst = token_lst_constructor(line);
+	free(line);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
 	preserve_token_lst(simple_tok_lst);
 	split_toklst_on_meta(simple_tok_lst);
 	regroup_meta(simple_tok_lst);
 	str_token_lst = token_lst_to_str_token(simple_tok_lst);
+<<<<<<< HEAD
 	del_space_token(str_token_lst);
 	display_str_token(str_token_lst);
+=======
+	// del_space_token(str_token_lst);
+>>>>>>> 0557f7f5ea18576fbe16b8a8d421f4c5b4343b14
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
 	*str_tok_pt = str_token_lst;

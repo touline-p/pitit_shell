@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:11:55 by twang             #+#    #+#             */
-/*   Updated: 2023/03/27 16:26:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/17 11:21:52 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,25 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
+# include <readline/readline.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "libft.h"
+
+#include "../srcs/debug_folder/debug.h"
 
 /*---- includes --------------------------------------------------------------*/
 
 # include "defines_execution.h"
-# include "enums_execution.h"
+# include "enums_parsing.h"
 # include "prototypes_execution.h"
 # include "structures_execution.h"
+
+/*---- global ----------------------------------------------------------------*/
+
+extern int	g_ret_val;
 
 #endif

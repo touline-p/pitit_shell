@@ -101,6 +101,7 @@ t_return_status	syntax_is_valid(t_string_token *lst_to_check);
 
 /*** env_utils ***/
 
+t_return_status	env_init_on(char ***env_pt);
 char    		*get_line_from_key(char *key, char **env);
 bool			is_a_key_from_env(char *key, char **env);
 char    		*get_env_content_from_key(char *key, char **env);
@@ -113,6 +114,12 @@ char 	**get_line_addr_from_key(char *key, char **env);
 void	replace_content_in_env(char *line, char **env);
 bool	has_a_key_from_env(char *line, char **env);
 
+t_return_status	expand_for_args(t_string_token *token_lst, char **env);
+
+
+t_return_status cut_all_lines(t_string_token *string_token_lst);
+t_return_status join_all_lines(t_string_token *string_token_lst, char **env);
+t_return_status	join_arr_on(char **str_arr, char **line_pt, char **env);
 
 void	per_n_set_errno(char *msg);
 
@@ -127,6 +134,9 @@ void	display_str_token(t_string_token *tok);
 
 
 char	*_get_env_variable(t_token *token, char **env);
+void cpy_next_char(unsigned int index, char *str);
+t_return_status	replace_dquotes_str_by_env_value(char **line_pt, char **env);
+t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env);
 
 #endif
 #endif //MINI_PARSING_MINI_PARSING_H

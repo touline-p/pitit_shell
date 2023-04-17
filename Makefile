@@ -6,7 +6,11 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/03/30 23:54:12 by bpoumeau         ###   ########.fr        #
+=======
+#    Updated: 2023/04/17 10:37:59 by twang            ###   ########.fr        #
+>>>>>>> 0557f7f5ea18576fbe16b8a8d421f4c5b4343b14
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +26,7 @@ include config/sources_parsing.mk
 
 NAME		=	minishell
 DEBUG		=	no
+VALGRIND	=	no
 
 BPOUMEAU	=	\e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a
 TWANG		=	\e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a
@@ -50,7 +55,7 @@ endif
 
 #--leaks flags--------------------------------------------------------#
 
-LEAKS	=	valgrind --leak-check=full --track-fds=yes
+LEAKS	=	valgrind --suppressions=ignore_readline_reachable.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes
 
 #--libs------------------------------------------------------------------------#
 
@@ -90,7 +95,7 @@ debug:
 
 leaks:
 	clear
-	$(MAKE) re
+	$(MAKE) re VALGRIND=yes
 	$(LEAKS) ./minishell
 
 #--print header----------------------------------------------------------------#
@@ -98,6 +103,7 @@ leaks:
 header:
 	printf "\n${PURPLE}project:\t${END}${BLUE}minishell${END}\n"
 	printf "${PURPLE}author:\t\t${END}${BLUE}${BPOUMEAU} && ${TWANG}${END}\n"
+	printf "${PURPLE}leaks mode:\t${END}${BLUE}${VALGRIND}${END}\n"
 	printf "${PURPLE}debug mode:\t${END}${BLUE}${DEBUG}${END}\n"
 	printf "${PURPLE}compiler:\t${END}${BLUE}${CC}${END}\n"
 	printf "${PURPLE}flags:\t\t${END}${BLUE}${CFLAGS}${END}\n"

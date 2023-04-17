@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   identify_meta.c                                    :+:      :+:    :+:   */
+/*   split_toklst_on_meta.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 01:07:01 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/09 19:26:36 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:35:46 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_token *split_toklst_on_meta(t_token *tok)
 static	void	_get_signal_from_char(char sign_char, t_emt *emt_pt)
 {
 	const t_emt	emt_arr[] = {PIPE, AMPERSAND, CHEVRON_IN, CHEVRON_OT, \
-						O_PRTSS, C_PRTSS, SEMICOLON, SPACE};
+						O_PRTSS, C_PRTSS, SEMICOLON, E_SPACE};
 	const char 	*metachar_set = METACHAR_SET;
 	char		*signal;
 

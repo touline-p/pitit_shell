@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:32:02 by twang             #+#    #+#              #
-#    Updated: 2023/03/27 16:36:41 by twang            ###   ########.fr        #
+#    Updated: 2023/04/07 18:41:56 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,4 +14,6 @@ HEADERS	=	incs/execution_incs/defines_execution.h							\
 			incs/execution_incs/enums_execution.h							\
 			incs/execution_incs/minishell_execution.h						\
 			incs/execution_incs/prototypes_execution.h						\
-			incs/execution_incs/structures_execution.h
+			incs/execution_incs/structures_execution.h						\
+			srcs/debug_folder/debug.h
+			

@@ -38,7 +38,7 @@ typedef enum 	e_token_minishell
 	O_PRTSS = 9,
 	C_PRTSS = 10,
 	SEMICOLON = 11,
-	SPACE = 12,
+	E_SPACE = 12,
 	TABULATION = 13,
 	LETTER = 14,
 	EOL = 15,

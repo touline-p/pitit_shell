@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/21 18:24:08 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/14 16:52:23 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
-# include <stdarg.h>
 # include <fcntl.h>
 
 # include <stdarg.h>
@@ -35,6 +34,12 @@
 # define BLUE "\033[1;34m"
 # define PURPLE "\033[1;35m"
 
+# define END "\033[0m"
+# define BOLD "\033[1m"
+# define ITALIC "\033[3m"
+# define UNDERLINE "\033[4m"
+# define DEL_LINE "\033[2K\r"
+
 # ifndef ERT
 #  define ERT
 
@@ -43,7 +48,8 @@ typedef enum e_ret_status
 	SUCCESS,
 	FAILURE,
 	FAILED_MALLOC,
-	FAILED_WRITE
+	FAILED_WRITE, 
+	FAILED_PIPE
 }	t_return_status;
 
 # endif
@@ -94,6 +100,7 @@ void			ft_swap(int *a, int *b);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
+bool			ft_str_is_ascii(char *str);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_issign(int c);
@@ -113,10 +120,10 @@ size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *s);
 size_t			ft_ustrlen(unsigned char *s);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int				ft_strncmp(char *s1, char *s2, size_t n);
+int				ft_strncmp(char *s1, char *s2, unsigned int n);
+int				heredoc_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_ustrcmp(t_uchar *s1, t_uchar *s2);
-char			*ft_strnstr(char *big, const char *little, size_t len);
 char			*ft_strrchr(const char *s, int c);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
@@ -182,7 +189,9 @@ size_t			ft_lststrlen(t_list *lst);
 
 /**---- utils ---- **/
 
-int				open_file(const char *av);
+int		open_file(const char *av);
+void	*ft_free(void **s, size_t len);
+char	*strjoin_path_cmd(char *s1, char *s2);
 
 /**---- printf ---- dprintf ---- **/
 
@@ -193,5 +202,11 @@ size_t			ft_putstr_fd(char *s, int fd);
 size_t			ft_putnbr_base(unsigned long nbr, char *base, int fd);
 size_t			ft_putnbr_unsigned_fd(unsigned int n, int fd);
 size_t			ft_putnbr_fd(int n, int fd);
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*get_strchr(char *s, int c);
+char	*get_calloc(size_t count, size_t size);
+char	*get_strjoin(char *s1, char *s2);
+char	*get_next_line(int fd);
 
 #endif

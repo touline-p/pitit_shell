@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:28:34 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/23 12:00:28 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/12 19:03:03 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*---- typedef enums ---------------------------------------------------------*/
 
 typedef enum e_token_minishell	t_token_minishell;
-typedef enum e_secured_status	t_secured_status;
+typedef enum e_builtin			t_builtin;
 
 /*----------------------------------------------------------------------------*/
 
@@ -47,5 +47,17 @@ enum	e_token_minishell
 };
 
 # endif
+
+enum e_builtin
+{
+	CMD,
+	ENV,
+	ECHO,
+	EXPORT,
+	EXIT,
+	UNSET,
+	CD,
+	PWD
+};
 
 #endif
