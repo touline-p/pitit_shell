@@ -151,9 +151,7 @@ static	t_return_status	alloc_each_cells(char *line, char **line_arr)
 }
 
 #ifdef TST_CUT_LINE
-
-#include <stdio.h>
-
+# include <stdio.h>
 void change(char *line)
 {
 	while (*line)
@@ -163,13 +161,8 @@ void change(char *line)
 		line++;
 	}
 }
-<<<<<<< HEAD
-//#define TST_CUT_LINE
-#ifdef TST_CUT_LINE
 
 #include <stdio.h>
-=======
->>>>>>> 0557f7f5ea18576fbe16b8a8d421f4c5b4343b14
 
 int main(int ac, char **av, char **env)
 {

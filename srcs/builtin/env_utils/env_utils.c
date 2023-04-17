@@ -65,11 +65,7 @@ char    *get_env_content_from_key(char *key, char **env)
 	char	*ret_val;
 
 	line = get_line_from_key(key, env);
-<<<<<<< HEAD
-	if (!line)
-=======
 	if (line == NULL)
->>>>>>> 0557f7f5ea18576fbe16b8a8d421f4c5b4343b14
 		return (NULL);
 	ret_val = ft_strchr(line, '=');
 	if (ret_val)
