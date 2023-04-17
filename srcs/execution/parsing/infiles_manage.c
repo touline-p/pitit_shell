@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/17 19:09:07 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/17 19:21:32 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ static void	get_heredoc(t_data *data, char *limiter, int block_id)
 	here_doc = NULL;
 	do_expand = false;
 	if (strchr(limiter, -'\'') || strchr(limiter, -'\"'))
-	{
 		do_expand = true;
-		puts("je ne fais pas de expand!");
-	}
 	while (HEREDOC_MUST_GO_ON)
 	{
 		ft_dprintf(2, GREEN"> "END);
@@ -100,7 +97,10 @@ static void	get_heredoc(t_data *data, char *limiter, int block_id)
 	}
 	free(line);
 	if (do_expand == true)
+	{
+		puts("je ne fais pas de expand!");
 		/*here_doc = la fonction expand du Beau Brieuc*/
+	}
 	if (here_doc)
 		write(data->cmds_block[block_id].fd[1], here_doc, ft_strlen(here_doc));
 	close(data->cmds_block[block_id].fd[1]);
