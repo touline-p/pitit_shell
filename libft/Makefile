@@ -70,6 +70,7 @@ FILES	=	ft_atoi.c 				\
 			per_n_ret.c 			\
 			ft_lststr_to_str.c 		\
 			get_next_line.c 		\
+			get_next_line_utils.c 	\
 			ft_print_split.c 		\
 			close_pipe_arr.c 		\
 			ft_free_int_arr.c 		\
@@ -78,6 +79,8 @@ FILES	=	ft_atoi.c 				\
 			ft_str_arr.c			\
 			open_file.c				\
 			ft_strnstr.c			\
+			ft_free.c				\
+			ft_strjoin_paths.c		\
 			#ft_printf.c			\
 			check_extension.c		\
 			open_file.c				\

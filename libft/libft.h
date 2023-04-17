@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/04 20:13:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/14 16:52:23 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ typedef enum e_ret_status
 	SUCCESS,
 	FAILURE,
 	FAILED_MALLOC,
-	FAILED_WRITE
+	FAILED_WRITE, 
+	FAILED_PIPE
 }	t_return_status;
 
 # endif
@@ -188,7 +189,9 @@ size_t			ft_lststrlen(t_list *lst);
 
 /**---- utils ---- **/
 
-int				open_file(const char *av);
+int		open_file(const char *av);
+void	*ft_free(void **s, size_t len);
+char	*strjoin_path_cmd(char *s1, char *s2);
 
 /**---- printf ---- dprintf ---- **/
 
@@ -201,5 +204,9 @@ size_t			ft_putnbr_unsigned_fd(unsigned int n, int fd);
 size_t			ft_putnbr_fd(int n, int fd);
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*get_strchr(char *s, int c);
+char	*get_calloc(size_t count, size_t size);
+char	*get_strjoin(char *s1, char *s2);
+char	*get_next_line(int fd);
 
 #endif

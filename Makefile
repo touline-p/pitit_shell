@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/04/13 15:05:21 by twang            ###   ########.fr        #
+#    Updated: 2023/04/14 10:48:09 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ endif
 
 #--leaks flags--------------------------------------------------------#
 
-LEAKS	=	valgrind --suppressions=ignore_readline_reachable.txt --leak-check=full --track-fds=yes
+LEAKS	=	valgrind --suppressions=ignore_readline_reachable.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=ye
 
 #--libs------------------------------------------------------------------------#
 

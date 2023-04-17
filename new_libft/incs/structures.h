@@ -1,52 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures_execution.h                             :+:      :+:    :+:   */
+/*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/14 16:05:11 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/13 20:05:17 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_EXECUTION_autre_H
-# define STRUCTURES_EXECUTION_autre_H
+#ifndef STRUCTURES_H
+# define STRUCTURES_H
 
-# include "enums_execution.h"
+# include "enums.h"
 
 /*---- typedef structures ----------------------------------------------------*/
 
-typedef struct s_string_token	t_string_token;
-typedef struct s_data			t_data;
-typedef struct s_cmd			t_cmd;
-typedef struct s_data			t_data;
-typedef struct s_cmd			t_cmd;
+typedef struct s_list	t_list;
 
 /*---- structures ------------------------------------------------------------*/
 
-struct s_string_token
+struct s_list
 {
-	t_token_minishell	token;
-	char				*content;
-	char 				**str_arr;
-	t_string_token		*next;
+	void			*content;
+	struct s_list	*next;
 };
 
-struct s_data
-{
-	t_cmd	*cmds_block;
-	int 	nb_of_pipe;
-};
-
-struct s_cmd
-{
-	char		**commands;
-	t_builtin	id_command;
-	int			infile;
-	int			outfile;
-	int			fd[2];
-	pid_t		process_ids;
-};
 
 #endif

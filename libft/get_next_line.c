@@ -5,65 +5,90 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 18:54:46 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/21 14:08:15 by twang            ###   ########.fr       */
+/*   Created: 2022/11/30 13:27:25 by wangthea          #+#    #+#             */
+/*   Updated: 2023/04/14 16:50:33 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//static t_ert	_read_into_lst(int fd, t_list *head, char *buffer);
-//static t_ert	_gnl_ep(t_list *head, t_ert ert);
-//
-//t_ert	ft_gnl_on(int fd, char **line_pt)
-//{
-//	static char	buffer[BUFFER_SIZE + 1];
-//	t_list		*head;
-//
-//	if (ft_lstnew_onsf(ft_strdup(buffer), &head) != SUCCESS)
-//		return (ft_memcset(buffer, 0, 0, BUFFER_SIZE), FAILED_MALLOC);
-//	ft_memcset(buffer, 0, 0, BUFFER_SIZE);
-//	if (_read_into_lst(fd, head, buffer) != SUCCESS)
-//		return (_gnl_ep(head, FAILED_MALLOC));
-//	if (ft_lststr_to_str(head, line_pt) != SUCCESS)
-//		return (_gnl_ep(head, FAILED_MALLOC));
-//	if (**line_pt == 0)
-//	{
-//		free(*line_pt);
-//		*line_pt = NULL;
-//	}
-//	return (_gnl_ep(head, SUCCESS));
-//}
-//
-//static t_ert	_read_into_lst(int fd, t_list *head, char *buffer)
-//{
-//	t_list	*pin;
-//	char	*endl_pt;
-//	int		signal;
-//
-//	pin = head;
-//	signal = BUFFER_SIZE;
-//	while (ft_strchr(pin->content, '\n') == NULL && signal == BUFFER_SIZE)
-//	{
-//		if (ft_lstnew_onsf(malloc(BUFFER_SIZE + 1), &(pin->next)) != SUCCESS)
-//			return (FAILED_MALLOC);
-//		pin = pin->next;
-//		signal = read(fd, pin->content, BUFFER_SIZE);
-//		if (signal == -1)
-//			return (FAILURE);
-//		((char *)(pin->content))[signal] = 0;
-//	}
-//	endl_pt = ft_strchr(pin->content, '\n');
-//	if (endl_pt)
-//	{
-//		ft_strcpy(buffer, endl_pt + 1);
-//		endl_pt[1] = 0;
-//	}
-//	return (SUCCESS);
-//}
-//
-//static t_ert	_gnl_ep(t_list *head, t_ert ert)
-//{
-//	ft_lstclean(head, free);
-//	return (ert);
-//}
+static char	*get_stash(char *stash)
+{
+	int		i;
+	int		j;
+	char	*new_stash;
+
+	i = 0;
+	if (!stash)
+		return (NULL);
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\0')
+	{	
+		free(stash);
+		return (NULL);
+	}
+	new_stash = get_calloc((ft_strlen(stash) - i) + 1, sizeof(char));
+	if (!new_stash)
+		return (NULL);
+	i++;
+	j = 0;
+	while (stash[i])
+		new_stash[j++] = stash[i++];
+	free(stash);
+	return (new_stash);
+}
+
+static char	*get_line(char *stash)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	if (!stash[0])
+		return (NULL);
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\n')
+		i++;
+	line = get_calloc(i + 1, sizeof(char));
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+	{
+		line[i] = stash[i];
+		i++;
+	}
+	if (stash[i] == '\n')
+		line[i] = '\n';
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	int			i;
+	char		*line;
+	static char	*stash = NULL;
+	char		buffer[BUFFER_SIZE + 1];
+
+	line = NULL;
+	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
+		return (NULL);
+	i = 1;
+	while (i > 0 && get_strchr(stash, '\n') == 0)
+	{
+		i = read(fd, buffer, BUFFER_SIZE);
+		if (i == -1)
+		{
+			free(stash);
+			stash = NULL;
+			return (NULL);
+		}
+		buffer[i] = '\0';
+		stash = get_strjoin(stash, buffer);
+	}
+	line = get_line(stash);
+	stash = get_stash(stash);
+	return (line);
+}
