@@ -29,8 +29,8 @@ void	execution(t_string_token *lst_of_tok, char ***env_pt)
 	infiles_management(&data, lst_of_tok);
 	outfiles_management(&data, lst_of_tok);
 	display_str_token(lst_of_tok);
-	// if (expand_for_args(lst_of_tok, *env_pt) != SUCCESS)
-	// 	return ;
+//	if (expand_for_args(lst_of_tok, *env_pt) != SUCCESS)
+//	 	return ;
 	display_str_token(lst_of_tok);
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
