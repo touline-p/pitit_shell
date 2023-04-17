@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/04/17 10:37:59 by twang            ###   ########.fr        #
+#    Updated: 2023/04/17 17:27:16 by bpoumeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,7 @@ debug:
 
 leaks:
 	clear
-	$(MAKE) re VALGRIND=yes
+	$(MAKE) VALGRIND=yes
 	$(LEAKS) ./minishell
 
 #--print header----------------------------------------------------------------#
