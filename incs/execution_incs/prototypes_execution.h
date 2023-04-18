@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes_execution.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/18 18:04:49 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/18 19:14:47 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ t_builtin		is_builtin(char *string);
 t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt);
 
 /*-- files_utils --*/
-void	check_opened_files(t_data *data, int block_id);
+void	check_opened_infiles(t_data *data, int block_id);
+void	check_opened_outfiles(t_data *data, int block_id);
 
 /*-- path_utils --*/
 int		get_path_size(char **paths);

@@ -11,7 +11,7 @@
 
 /*----------------------------------------------------------------------------*/
 int g_ret_val;
-//#define MAIN
+#define MAIN
 #ifdef MAIN
 static t_return_status welcome_to_minihell(char ***env_pt)
 {
@@ -44,8 +44,7 @@ int	main(int ac, char **av, char **env)
 		if (ft_strncmp("END", line, 4) == 0)
 			return (clear_history(), free(line), 0);
 		add_history(line);
-
-		printf(BLUE"j'ai lu ->%s<-\n"END, line);
+		// printf(BLUE"j'ai lu ->%s<-\n"END, line);
 		get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
 		if (syntax_is_valid(str_tok_lst) == FAILURE)
 			// || cut_all_lines(str_tok_lst) != SUCCESS

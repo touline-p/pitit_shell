@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fds_manage.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:26:01 by twang             #+#    #+#             */
-/*   Updated: 2023/04/18 18:48:14 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/18 19:17:41 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	duplicate_fds(t_data *data, int block_id)
 	}
 }
 
-#define TST_DUP_FD
+// #define TST_DUP_FD
 #ifdef TST_DUP_FD
 static char	*add_path_cmd(int block_id, t_data *data, char **env)
 {
