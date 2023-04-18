@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/17 16:19:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/18 18:04:49 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@
 /*----------------------------------------------------------------------------*/
 
 void	execution(t_string_token *lst_of_tok, char ***env);
+
+
+/*-- execve ------------------------------------------------------------------*/
+
+/*-- childs --*/
+t_return_status	childs_execve(t_data *data, char **env);
+
+/*-- fds_manage --*/
+void	close_fds(t_data *data, int block_id);
+void	close_all_fds(t_data *data, int block_id);
+void	duplicate_fds(t_data *data, int block_id);
 
 /*-- parsing -----------------------------------------------------------------*/
 
@@ -58,6 +69,7 @@ void	string_token_destructor(t_string_token *trash);
 void	del_next_string_token(t_string_token *tok);
 void	display_str_token(t_string_token *tok);
 void	display_t_emt_string(t_string_token *token);
+char 	**join_token_lst(t_string_token **arg);
 t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 
 

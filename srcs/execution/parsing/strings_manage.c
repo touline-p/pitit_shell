@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/17 19:39:52 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/18 18:01:23 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,7 @@ void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env)
 	while (i <= data->nb_of_pipe)
 		ft_print_split(data->cmds_block[i++].commands);
 	set_id_cmds(data);
-	/* ---- to put inside execution loop ------  
-	if (data->cmds_block[0].id_command == CMD)
-		add_path_cmd(0, data, env);*/
 }
-char **join_token_lst(t_string_token **arg);
 
 static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok)
 {

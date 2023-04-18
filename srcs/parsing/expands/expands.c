@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:22:46 by twang             #+#    #+#             */
-/*   Updated: 2023/03/21 18:02:40 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/18 17:21:17 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static size_t	_count_ln(t_string_token *token_lst)
 		count++;
 		token_lst = token_lst->next;
 	}
-	printf("i has a %ld ln\n", count);
 	return (count);
 }
 

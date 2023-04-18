@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/17 19:10:41 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/18 18:26:18 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 static t_return_status	alloc_cmd_block(t_data *data, \
 t_string_token *lst_of_tok);
+static void				wait_for_process_ids(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
@@ -36,6 +37,8 @@ void	execution(t_string_token *lst_of_tok, char ***env_pt)
 	string_token_destructor(lst_of_tok);
 	builtin_switch(data.cmds_block->id_command, data.cmds_block->commands, \
 					env_pt);
+	childs_execve(&data, *env_pt);
+	wait_for_process_ids(&data);
 	if (data.cmds_block->commands)
 		free_commands(&data);
 }
@@ -44,8 +47,10 @@ static t_return_status	alloc_cmd_block(t_data *data, \
 t_string_token *lst_of_tok)
 {
 	t_string_token	*temp;
+	// int				nb_of_pipe;
 
 	temp = lst_of_tok;
+	// nb_of_pipe = 0;
 	while (temp != NULL)
 	{
 		if (temp->token == PIPE)
@@ -59,6 +64,21 @@ t_string_token *lst_of_tok)
 	return (SUCCESS);
 }
 
+static void	wait_for_process_ids(t_data *data)
+{
+	int	block_id;
+	int	status;
+
+	block_id = 0;
+	status = 0;
+	while (block_id < data->nb_of_pipe + 1)
+	{
+		waitpid(data->cmds_block[block_id].process_id, &status, 0);
+		if (WEXITSTATUS(status) && block_id == data->nb_of_pipe)
+			exit(127);
+		block_id++;
+	}
+}
 	/*
 	< infile cat -e | cat | cat > outfile
 	
