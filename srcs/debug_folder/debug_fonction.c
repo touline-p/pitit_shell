@@ -33,7 +33,7 @@ void    print_is_heredoc(bool is)
 
 void    print_fd(char *msg, int fd)
 {
-    dprintf(2,GREEN"%s fd is %d\n"END, msg, fd);
+    dprintf(2,GREEN"%s fd_hd is %d\n"END, msg, fd);
 }
 
 void    print_pid(int pid)
@@ -41,15 +41,14 @@ void    print_pid(int pid)
     dprintf(2, "the pid is %d\n\n", pid);
 }
 
-void    print_cmd_block(t_cmd cmd)
+void    print_cmd_block(char *msg, t_cmd cmd)
 {
+	dprintf(2, "\n%s", msg);
     print_builtin(cmd.id_command);
     ft_eprint_split(cmd.commands);
     print_is_heredoc(cmd.is_heredoc);
     print_fd("infile",cmd.infile);
     print_fd("outfile",cmd.outfile);
-    print_fd("fd[0]",cmd.fd[0]);
-    print_fd("fd[1]",cmd.fd[1]);
     print_pid(cmd.process_id);
 }
 

@@ -36,6 +36,7 @@ struct s_string_token
 struct s_data
 {
 	t_cmd	*cmds_block;
+	int 	fd[2];
 	int 	nb_of_pipe;
 };
 
@@ -46,7 +47,7 @@ struct s_cmd
 	bool		is_heredoc;
 	int			infile;
 	int			outfile;
-	int			fd[2];
+	int 		fd_hd[2];
 	pid_t		process_id;
 };
 

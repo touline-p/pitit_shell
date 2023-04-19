@@ -80,7 +80,7 @@ void    print_pid(int pid);
 void    print_fd(char *msg, int fd);
 void    print_is_heredoc(bool is);
 void    print_builtin(t_builtin built);
-void    print_cmd_block(t_cmd cmd);
+void    print_cmd_block(char *msg, t_cmd cmd);
 
 /*-- Builtin --*/
 t_return_status	cd_builtin(char **av, char ***env_pt);

@@ -36,6 +36,7 @@ void	execution(t_string_token *lst_of_tok, char ***env_pt)
 	string_token_destructor(lst_of_tok);
 	builtin_switch(data.cmds_block->id_command, data.cmds_block->commands, \
 					env_pt);
+	print_cmd_block("pre childs execve", data.cmds_block[0]);
 	childs_execve(&data, *env_pt);
 	wait_for_process_ids(&data);
 	if (data.cmds_block->commands)

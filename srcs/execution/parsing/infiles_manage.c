@@ -14,8 +14,8 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id);
 static void				set_infile(t_data *data, char *file, int cmd_block_id);
+static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id);
 static void				get_heredoc(t_data *data, char *limiter, int block_id, int do_expand);
 static void				trim_limiter(char *s);
 
@@ -69,13 +69,14 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 		do_expand = true;
 		trim_limiter(limiter);
 	}
-	if (pipe(data->cmds_block[block_id].fd) == -1)
+	if (pipe(data->cmds_block[block_id].fd_hd) == -1)
 		return (FAILED_PIPE);
 	data->cmds_block[block_id].process_id = fork();
 	if (data->cmds_block[block_id].process_id == 0)
 		get_heredoc(data, limiter, block_id, do_expand);
 	else
 		waitpid(data->cmds_block[block_id].process_id, NULL, 0);
+	data->cmds_block[block_id].infile = data->cmds_block[block_id].fd_hd[0];
 	return (SUCCESS);
 }
 
@@ -103,8 +104,8 @@ static void	get_heredoc(t_data *data, char *limiter, int block_id, int do_expand
 	if (do_expand == false)
 		puts("je fais mes expands!");
 	if (here_doc)
-		write(data->cmds_block[block_id].fd[1], here_doc, ft_strlen(here_doc));
-	close(data->cmds_block[block_id].fd[1]);
+		write(data->cmds_block[block_id].fd_hd[1], here_doc, ft_strlen(here_doc));
+	close(data->cmds_block[block_id].fd_hd[1]);
 	free(here_doc);
 }
 

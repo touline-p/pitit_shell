@@ -187,7 +187,7 @@ size_t			ft_lststrlen(t_list *lst);
 #  define BUFFER_SIZE 1024
 # endif
 
-//t_ert			ft_gnl_on(int fd, char **line_pt);
+//t_ert			ft_gnl_on(int fd_hd, char **line_pt);
 
 /**---- utils ---- **/
 

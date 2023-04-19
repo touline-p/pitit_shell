@@ -18,6 +18,7 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env);
 
 /*----------------------------------------------------------------------------*/
 
+////to do the piiipe
 t_return_status	childs_execve(t_data *data, char **env)
 {
 	int		block_id;
@@ -26,20 +27,10 @@ t_return_status	childs_execve(t_data *data, char **env)
 	block_id = 0;
 	while (block_id < data->nb_of_pipe + 1)
 	{
-		print_fd("dans set fd[0]", data->cmds_block[0].fd[0]);
-		print_fd("dans set fd[1]", data->cmds_block[0].fd[1]);
-		if (pipe(data->cmds_block[block_id].fd) == -1)
-			return (FAILED_PIPE);
-		print_fd("dans set fd[0]", data->cmds_block[0].fd[0]);
-		print_fd("dans set fd[1]", data->cmds_block[0].fd[1]);
 		data->cmds_block[block_id].process_id = fork();
 		if (data->cmds_block[block_id].process_id == 0)
 		{
-			close_fds(data, block_id);
-
-			duplicate_fds(data, block_id);
 			command = add_path_cmd(block_id, data, env);
-			print_cmd_block(data->cmds_block[block_id]);
 			execve(command, data->cmds_block[block_id].commands, env);
 			exit(FAILURE);
 		}
@@ -50,7 +41,6 @@ t_return_status	childs_execve(t_data *data, char **env)
 		}
 		block_id++;
 	}
-	close_all_fds(data, block_id);
 	return (SUCCESS);
 }
 
@@ -75,9 +65,7 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env)
 		}
 		if (access(paths[i], X_OK) == 0)
 		{
-			printf(BLUE"command without paths? %s\n"END, data->cmds_block[block_id].commands[0]);
 			data->cmds_block[block_id].commands[0] = ft_strdup(paths[i]);
-			printf(BLUE"command with paths? %s\n"END, data->cmds_block[block_id].commands[0]);
 			ft_free((void **)paths, get_path_size(paths));
 			return (data->cmds_block[block_id].commands[0]);
 		}

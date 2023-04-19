@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
-
+/*
 void	close_fds(t_data *data, int block_id)
 {
 	int	i;
@@ -20,9 +20,9 @@ void	close_fds(t_data *data, int block_id)
 	while (i < data->nb_of_pipe)
 	{
 		if (i != block_id - 1)
-			close(data->cmds_block[block_id].fd[0]);
+			close(data->cmds_block[block_id].fd_hd[0]);
 		if (i != block_id)
-			close(data->cmds_block[block_id].fd[1]);
+			close(data->cmds_block[block_id].fd_hd[1]);
 		i++;
 	}
 }
@@ -34,8 +34,8 @@ void	close_all_fds(t_data *data, int block_id)
 	i = 0;
 	while (i < block_id)
 	{
-		close(data->cmds_block[block_id].fd[0]);
-		close(data->cmds_block[block_id].fd[1]);
+		close(data->cmds_block[block_id].fd_hd[0]);
+		close(data->cmds_block[block_id].fd_hd[1]);
 		i++;
 	}
 }
@@ -50,9 +50,9 @@ void	duplicate_fds(t_data *data, int block_id)
 	}
 	else
 	{
-		if (dup2(data->cmds_block[block_id - 1].fd[0], STDIN_FILENO) == -1)
-			perror("issue with : fd[0]");
-		close(data->cmds_block[block_id - 1].fd[0]);
+		if (dup2(data->cmds_block[block_id - 1].fd_hd[0], STDIN_FILENO) == -1)
+			perror("issue with : fd_hd[0]");
+		close(data->cmds_block[block_id - 1].fd_hd[0]);
 	}
 	if (block_id == data->nb_of_pipe)
 	{
@@ -64,11 +64,12 @@ void	duplicate_fds(t_data *data, int block_id)
 	}
 	else
 	{
-		if (dup2(data->cmds_block[block_id - 1].fd[1], STDOUT_FILENO) == -1)
-			perror("issue with : fd[1]");
-		close(data->cmds_block[block_id - 1].fd[1]);
+		if (dup2(data->cmds_block[block_id - 1].fd_hd[1], STDOUT_FILENO) == -1)
+			perror("issue with : fd_hd[1]");
+		close(data->cmds_block[block_id - 1].fd_hd[1]);
 	}
 }
+ */
 
 // #define TST_DUP_FD
 #ifdef TST_DUP_FD
