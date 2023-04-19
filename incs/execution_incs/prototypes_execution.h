@@ -32,7 +32,7 @@ t_return_status	childs_execve(t_data *data, char **env);
 /*-- fds_manage --*/
 void	close_fds(t_data *data, int block_id);
 void	close_all_fds(t_data *data, int block_id);
-void	duplicate_fds(t_data *data, int block_id);
+t_return_status 	duplicate_fds(t_data *data, int block_id);
 
 /*-- parsing -----------------------------------------------------------------*/
 

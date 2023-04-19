@@ -30,6 +30,7 @@ t_return_status	childs_execve(t_data *data, char **env)
 		data->cmds_block[block_id].process_id = fork();
 		if (data->cmds_block[block_id].process_id == 0)
 		{
+			duplicate_fds(data, block_id);
 			command = add_path_cmd(block_id, data, env);
 			execve(command, data->cmds_block[block_id].commands, env);
 			exit(FAILURE);

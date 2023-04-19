@@ -29,47 +29,29 @@ void	close_fds(t_data *data, int block_id)
 
 void	close_all_fds(t_data *data, int block_id)
 {
-	int	i;
-
-	i = 0;
-	while (i < block_id)
-	{
-		close(data->cmds_block[block_id].fd_hd[0]);
-		close(data->cmds_block[block_id].fd_hd[1]);
-		i++;
-	}
-}
-
-void	duplicate_fds(t_data *data, int block_id)
-{
-	if (block_id == 0)
-	{
-		if (dup2(data->cmds_block[block_id].infile, STDIN_FILENO) == -1)
-			perror("issue with : infile");
-		close(data->cmds_block[block_id].infile);
-	}
-	else
-	{
-		if (dup2(data->cmds_block[block_id - 1].fd_hd[0], STDIN_FILENO) == -1)
-			perror("issue with : fd_hd[0]");
-		close(data->cmds_block[block_id - 1].fd_hd[0]);
-	}
-	if (block_id == data->nb_of_pipe)
-	{
-		if (dup2(data->cmds_block[block_id].outfile, STDOUT_FILENO) == -1)
-		{
-			perror("issue with : outfile");
-		}
-		close(data->cmds_block[block_id].outfile);
-	}
-	else
-	{
-		if (dup2(data->cmds_block[block_id - 1].fd_hd[1], STDOUT_FILENO) == -1)
-			perror("issue with : fd_hd[1]");
-		close(data->cmds_block[block_id - 1].fd_hd[1]);
-	}
 }
  */
+
+static	t_return_status _dup_n_close(int to_dup, int to_replace)
+{
+	if (to_dup == to_replace)
+		return (SUCCESS);
+	if (dup2(to_dup, to_replace) == -1)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+t_return_status 	duplicate_fds(t_data *data, int block_id)
+{
+	t_cmd	block;
+
+	block = data->cmds_block[block_id];
+	print_cmd_block("dup",block);
+	if (_dup_n_close(block.infile, STDIN_FILENO) != SUCCESS
+		|| _dup_n_close(block.outfile, STDOUT_FILENO) != SUCCESS)
+		return (FAILURE);
+	return (SUCCESS);
+}
 
 // #define TST_DUP_FD
 #ifdef TST_DUP_FD
