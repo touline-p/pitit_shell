@@ -12,17 +12,18 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
 # include <fcntl.h>
-
 # include <stdarg.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdint.h>
-
+# include <stddef.h>
 # define HEXA_LOW "0123456789abcdef"
 # define HEXA_UP "0123456789ABCDEF"
 

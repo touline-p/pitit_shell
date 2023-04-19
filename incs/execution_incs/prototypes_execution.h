@@ -6,17 +6,14 @@
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2023/04/19 15:24:20 by twang            ###   ########.fr       */
-=======
-/*   Updated: 2023/04/18 19:14:47 by wangthea         ###   ########.fr       */
->>>>>>> b00eec04626577f806687a2cb5b448b83884b5b7
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROTOTYPES_EXECUTION_H
 # define PROTOTYPES_EXECUTION_H
 
+# include "libft.h"
 # include "structures_execution.h"
 # include "structures_parsing.h"
 
