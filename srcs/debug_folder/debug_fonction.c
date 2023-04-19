@@ -43,12 +43,17 @@ void    print_pid(int pid)
 
 void    print_cmd_block(char *msg, t_cmd cmd)
 {
-	dprintf(2, "\n%s", msg);
+		if (*msg == '1')
+			usleep(5000);
+	dprintf(2, "\n\nname : %s\n", msg);
     print_builtin(cmd.id_command);
     ft_eprint_split(cmd.commands);
     print_is_heredoc(cmd.is_heredoc);
     print_fd("infile",cmd.infile);
     print_fd("outfile",cmd.outfile);
+	print_fd("fd[0]",cmd.fd_hd[0]);
+	print_fd("fd[1]",cmd.fd_hd[1]);
+
     print_pid(cmd.process_id);
 }
 
