@@ -30,6 +30,34 @@ You can find more detailed information on the project in the [subject](./minishe
 </h3>
 
 ## Index
+
+< infile cat -e | cat | cat > outfile
+
+data->cmds_block[0]->command = "cat" "-e"
+data->cmds_block[0]->infile = fd_in
+data->cmds_block[0]->outfile = -1
+data->cmds_block[0]->pipes[2] = ignore
+
+data->cmds_block[1]->command = "cat"
+data->cmds_block[1]->infile = -1
+data->cmds_block[1]->outfile = -1
+data->cmds_block[1]->pipes[2] = ignore
+
+data->cmds_block[2]->command = "cat"
+data->cmds_block[2]->infile = -1
+data->cmds_block[2]->outfile = fd_out
+data->cmds_block[2]->pipes[2] = ignore
+
+check lst_tokens
+check chevrons		-> infile / here_doc 
+					-> expand to here_doc
+					-> outfile / append
+check commands 		-> recup commandes + args
+					-> add path
+					-> check fds -> standart -> pipes ...
+					-> builtins -> call built_in function
+					-> exec command
+
 ## Usage
 ### Instructions
 

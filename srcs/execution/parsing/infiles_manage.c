@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infiles_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/17 15:58:52 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 16:41:26 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void	set_infile(t_data *data, char *file, int cmd_block_id);
+static void				set_infile(t_data *data, char *file, int cmd_block_id);
 static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id);
-static void	get_heredoc(t_data *data, char *limiter, int block_id);
+static void				get_heredoc(t_data *data, char *limiter, int block_id, int do_expand);
+static void				trim_limiter(char *s);
 
 /*----------------------------------------------------------------------------*/
 
@@ -49,34 +50,39 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok)
 
 static void	set_infile(t_data *data, char *file, int block_id)
 {
-	check_opened_files(data, block_id);
+	check_opened_infiles(data, block_id);
 	data->cmds_block[block_id].infile = open(file, O_RDONLY, 0644);
+	// print_fd("dans set infile", data->cmds_block[block_id].infile);
 	if (data->cmds_block[block_id].infile == -1)
 		perror("open infile");
 }
 
 static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 {
-	check_opened_files(data, block_id);
+	bool	do_expand;
+
+	do_expand = false;
+	check_opened_infiles(data, block_id);
 	data->cmds_block[block_id].is_heredoc = true;
-	if (pipe(data->cmds_block[block_id].fd) == -1)
+	if (ft_strchr(limiter, -'\'') || ft_strchr(limiter, -'\"'))
+	{
+		do_expand = true;
+		trim_limiter(limiter);
+	}
+	if (pipe(data->cmds_block[block_id].fd_hd) == -1)
 		return (FAILED_PIPE);
 	data->cmds_block[block_id].process_id = fork();
 	if (data->cmds_block[block_id].process_id == 0)
-	{
-		get_heredoc(data, limiter, block_id);
-	}
-	else
+		get_heredoc(data, limiter, block_id, do_expand);
+	else {
+		close(data->cmds_block[block_id].fd_hd[1]);
 		waitpid(data->cmds_block[block_id].process_id, NULL, 0);
+	}
+	data->cmds_block[block_id].infile = data->cmds_block[block_id].fd_hd[0];
 	return (SUCCESS);
-	/*
-		- launch expand
-		- put char * in pipe
-		L'HISTORIQUE DU HEREDOC ??
-	*/
 }
 
-static void	get_heredoc(t_data *data, char *limiter, int block_id)
+static void	get_heredoc(t_data *data, char *limiter, int block_id, int do_expand)
 {
 	char	*line;
 	char	*here_doc;
@@ -97,15 +103,22 @@ static void	get_heredoc(t_data *data, char *limiter, int block_id)
 		here_doc = strjoin_path_cmd(here_doc, line);
 	}
 	free(line);
-	/*printf(GREEN"%s"END, here_doc);
-	here_doc = la fonction expand du Beau Brieuc*/
+	if (do_expand == false)
+		puts("je fais mes expands!");
 	if (here_doc)
-	{
-		write(data->cmds_block[block_id].fd[1], here_doc, ft_strlen(here_doc));
-		write(1, here_doc, ft_strlen(here_doc));
-	}
-	close(data->cmds_block[block_id].fd[1]);
-	
-	// printf(GREEN"%s"END, here_doc);
+		write(data->cmds_block[block_id].fd_hd[1], here_doc, ft_strlen(here_doc));
+	close(data->cmds_block[block_id].fd_hd[1]);
 	free(here_doc);
+}
+
+static void	trim_limiter(char *s)
+{
+	while (*s)
+	{
+		while (*s && (*s != -'\'' && *s != -'\"'))
+			s++;
+		if (*s == '\0')
+			break ;
+		ft_memmove(s, s + 1, ft_strlen(s));
+	}
 }

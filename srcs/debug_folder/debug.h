@@ -23,5 +23,8 @@ void    print_debug_int(int value, char *file, int line);
 # define ITALIC "\033[3m"
 # define UNDERLINE "\033[4m"
 # define DEL_LINE "\033[2K\r"
+# include "minishell_execution.h"
+
+
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 17:34:06 by twang             #+#    #+#             */
-/*   Updated: 2023/04/14 15:34:06 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/18 19:16:59 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ t_return_status 	builtin_switch(t_builtin builtin, char **av, char ***env_pt)
 									&cd_builtin, &pwd_builtin};
 									
 	if (builtin == CMD)
-		return (CMD);
+		return (FAILURE);
 	return ((*ft_arr[builtin])(av, env_pt));
 }

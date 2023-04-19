@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/17 14:14:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 16:14:08 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ struct s_string_token
 struct s_data
 {
 	t_cmd	*cmds_block;
+	int 	fd[2];
 	int 	nb_of_pipe;
 };
 
@@ -46,7 +47,7 @@ struct s_cmd
 	bool		is_heredoc;
 	int			infile;
 	int			outfile;
-	int			fd[2];
+	int 		fd_hd[2];
 	pid_t		process_id;
 };
 

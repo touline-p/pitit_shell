@@ -6,23 +6,24 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/14 16:52:23 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 15:37:22 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
 # include <fcntl.h>
-
 # include <stdarg.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdint.h>
-
+# include <stddef.h>
 # define HEXA_LOW "0123456789abcdef"
 # define HEXA_UP "0123456789ABCDEF"
 
@@ -142,6 +143,7 @@ void			ft_swap(int *a, int *b);
 int				ft_is_overflowing(char *str);
 void			*ft_free_split(char **dst);
 void			ft_free_int_arr(int **int_arr);
+void			ft_eprint_split(char **split);
 void			ft_print_split(char **split);
 char			*ft_strjoin_three(char *a, char *b, char *c);
 void			*per_n_ret(char *msg);
@@ -185,7 +187,7 @@ size_t			ft_lststrlen(t_list *lst);
 #  define BUFFER_SIZE 1024
 # endif
 
-//t_ert			ft_gnl_on(int fd, char **line_pt);
+//t_ert			ft_gnl_on(int fd_hd, char **line_pt);
 
 /**---- utils ---- **/
 
@@ -204,6 +206,7 @@ size_t			ft_putnbr_unsigned_fd(unsigned int n, int fd);
 size_t			ft_putnbr_fd(int n, int fd);
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strndup(char *s1, int size);
 char	*get_strchr(char *s, int c);
 char	*get_calloc(size_t count, size_t size);
 char	*get_strjoin(char *s1, char *s2);

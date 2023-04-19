@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes_execution.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/17 16:19:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 15:24:20 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROTOTYPES_EXECUTION_H
 # define PROTOTYPES_EXECUTION_H
 
+# include "libft.h"
 # include "structures_execution.h"
 # include "structures_parsing.h"
 
@@ -21,6 +22,17 @@
 /*----------------------------------------------------------------------------*/
 
 void	execution(t_string_token *lst_of_tok, char ***env);
+
+
+/*-- execve ------------------------------------------------------------------*/
+
+/*-- childs --*/
+t_return_status	childs_execve(t_data *data, char **env);
+
+/*-- fds_manage --*/
+void	close_fds(t_data *data, int block_id);
+void	close_all_fds(t_data *data, int block_id);
+t_return_status 	duplicate_fds(t_data *data, int block_id);
 
 /*-- parsing -----------------------------------------------------------------*/
 
@@ -44,7 +56,8 @@ t_builtin		is_builtin(char *string);
 t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt);
 
 /*-- files_utils --*/
-void	check_opened_files(t_data *data, int block_id);
+void	check_opened_infiles(t_data *data, int block_id);
+void	check_opened_outfiles(t_data *data, int block_id);
 
 /*-- path_utils --*/
 int		get_path_size(char **paths);
@@ -58,8 +71,16 @@ void	string_token_destructor(t_string_token *trash);
 void	del_next_string_token(t_string_token *tok);
 void	display_str_token(t_string_token *tok);
 void	display_t_emt_string(t_string_token *token);
+char 	**join_token_lst(t_string_token **arg);
 t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 
+
+/*-- debug --*/
+void    print_pid(int pid);
+void    print_fd(char *msg, int fd);
+void    print_is_heredoc(bool is);
+void    print_builtin(t_builtin built);
+void    print_cmd_block(char *msg, t_cmd cmd);
 
 /*-- Builtin --*/
 t_return_status	cd_builtin(char **av, char ***env_pt);

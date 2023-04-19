@@ -6,11 +6,13 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:31:59 by twang             #+#    #+#              #
-#    Updated: 2023/04/17 14:21:11 by twang            ###   ########.fr        #
+#    Updated: 2023/04/18 18:02:50 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES	=																	\
+			srcs/execution/execve/childs.c									\
+			srcs/execution/execve/fds_manage.c								\
 			srcs/execution/parsing/clean_utils.c							\
 			srcs/execution/parsing/infiles_manage.c							\
 			srcs/execution/parsing/outfiles_manage.c						\

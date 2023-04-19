@@ -19,7 +19,6 @@ t_return_status	syntax_is_valid(t_string_token *lst_to_check)
 		return (FAILURE);
 	if (is_a_meta(pin->next->token) == true && is_a_redir(pin->next->token) == false)
 		return (_syntax_is_valid_ep(pin->next->token));
-	printf("i m here\n");
 	pin = pin->next;
 	while (pin->token != EOL)
 	{
