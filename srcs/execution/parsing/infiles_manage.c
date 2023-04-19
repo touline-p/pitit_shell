@@ -74,8 +74,10 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 	data->cmds_block[block_id].process_id = fork();
 	if (data->cmds_block[block_id].process_id == 0)
 		get_heredoc(data, limiter, block_id, do_expand);
-	else
+	else {
+		close(data->cmds_block[block_id].fd_hd[1]);
 		waitpid(data->cmds_block[block_id].process_id, NULL, 0);
+	}
 	data->cmds_block[block_id].infile = data->cmds_block[block_id].fd_hd[0];
 	return (SUCCESS);
 }
