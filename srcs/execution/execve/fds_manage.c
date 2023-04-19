@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:26:01 by twang             #+#    #+#             */
-/*   Updated: 2023/04/18 18:48:14 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 10:19:33 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	duplicate_fds(t_data *data, int block_id)
 	}
 }
 
-#define TST_DUP_FD
+// #define TST_DUP_FD
 #ifdef TST_DUP_FD
 static char	*add_path_cmd(int block_id, t_data *data, char **env)
 {
@@ -103,6 +103,7 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env)
 	}
 	return (NULL);
 }
+
 int	main(int ac, char **av, char **env)
 {
 	int	block_id = 0;
