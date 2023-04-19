@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/18 18:04:49 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 15:24:20 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ t_builtin		is_builtin(char *string);
 t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt);
 
 /*-- files_utils --*/
-void	check_opened_files(t_data *data, int block_id);
+void	check_opened_infiles(t_data *data, int block_id);
+void	check_opened_outfiles(t_data *data, int block_id);
 
 /*-- path_utils --*/
 int		get_path_size(char **paths);
@@ -72,6 +73,13 @@ void	display_t_emt_string(t_string_token *token);
 char 	**join_token_lst(t_string_token **arg);
 t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 
+
+/*-- debug --*/
+void    print_pid(int pid);
+void    print_fd(char *msg, int fd);
+void    print_is_heredoc(bool is);
+void    print_builtin(t_builtin built);
+void    print_cmd_block(t_cmd cmd);
 
 /*-- Builtin --*/
 t_return_status	cd_builtin(char **av, char ***env_pt);

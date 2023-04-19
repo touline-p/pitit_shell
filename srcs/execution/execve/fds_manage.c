@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:26:01 by twang             #+#    #+#             */
-/*   Updated: 2023/04/19 10:19:33 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 14:55:57 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,27 @@ void	duplicate_fds(t_data *data, int block_id)
 	if (block_id == 0)
 	{
 		if (dup2(data->cmds_block[block_id].infile, STDIN_FILENO) == -1)
-			exit(3);
+			perror("issue with : infile");
 		close(data->cmds_block[block_id].infile);
 	}
 	else
 	{
 		if (dup2(data->cmds_block[block_id - 1].fd[0], STDIN_FILENO) == -1)
-			exit(3);
+			perror("issue with : fd[0]");
 		close(data->cmds_block[block_id - 1].fd[0]);
 	}
 	if (block_id == data->nb_of_pipe)
 	{
 		if (dup2(data->cmds_block[block_id].outfile, STDOUT_FILENO) == -1)
 		{
-			exit(3);
+			perror("issue with : outfile");
 		}
 		close(data->cmds_block[block_id].outfile);
 	}
 	else
 	{
 		if (dup2(data->cmds_block[block_id - 1].fd[1], STDOUT_FILENO) == -1)
-			exit(3);
+			perror("issue with : fd[1]");
 		close(data->cmds_block[block_id - 1].fd[1]);
 	}
 }

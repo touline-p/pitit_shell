@@ -55,16 +55,9 @@ int	main(int ac, char **av, char **env)
 		 	continue;
 		}
 		del_space_token(str_tok_lst);
-		// debug;
-   		// idebug(42);
-    	// sdebug("Coucou!");
 		execution(str_tok_lst, &env);
 	}
 	return (0);
 }
-/*
-go check the limiter for those char -> if have this, do not send expand
--'\''
--'\"'
-*/
+
 #endif

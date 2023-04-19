@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/18 18:35:03 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 16:47:57 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,20 @@ t_return_status	childs_execve(t_data *data, char **env)
 	block_id = 0;
 	while (block_id < data->nb_of_pipe + 1)
 	{
+		print_fd("dans set fd[0]", data->cmds_block[0].fd[0]);
+		print_fd("dans set fd[1]", data->cmds_block[0].fd[1]);
 		if (pipe(data->cmds_block[block_id].fd) == -1)
 			return (FAILED_PIPE);
+		print_fd("dans set fd[0]", data->cmds_block[0].fd[0]);
+		print_fd("dans set fd[1]", data->cmds_block[0].fd[1]);
 		data->cmds_block[block_id].process_id = fork();
 		if (data->cmds_block[block_id].process_id == 0)
 		{
 			close_fds(data, block_id);
+
 			duplicate_fds(data, block_id);
 			command = add_path_cmd(block_id, data, env);
+			print_cmd_block(data->cmds_block[block_id]);
 			execve(command, data->cmds_block[block_id].commands, env);
 			exit(FAILURE);
 		}

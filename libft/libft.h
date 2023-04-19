@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/18 16:07:22 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 15:37:22 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void			ft_swap(int *a, int *b);
 int				ft_is_overflowing(char *str);
 void			*ft_free_split(char **dst);
 void			ft_free_int_arr(int **int_arr);
+void			ft_eprint_split(char **split);
 void			ft_print_split(char **split);
 char			*ft_strjoin_three(char *a, char *b, char *c);
 void			*per_n_ret(char *msg);
