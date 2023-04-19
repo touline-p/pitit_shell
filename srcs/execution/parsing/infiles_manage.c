@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   infiles_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/04/19 16:41:26 by twang            ###   ########.fr       */
+=======
+/*   Updated: 2023/04/18 19:15:50 by wangthea         ###   ########.fr       */
+>>>>>>> b00eec04626577f806687a2cb5b448b83884b5b7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +68,7 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 	do_expand = false;
 	check_opened_infiles(data, block_id);
 	data->cmds_block[block_id].is_heredoc = true;
-	if (strchr(limiter, -'\'') || strchr(limiter, -'\"'))
+	if (ft_strchr(limiter, -'\'') || ft_strchr(limiter, -'\"'))
 	{
 		do_expand = true;
 		trim_limiter(limiter);
