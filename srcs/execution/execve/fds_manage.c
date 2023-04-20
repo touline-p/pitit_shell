@@ -3,46 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   fds_manage.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:26:01 by twang             #+#    #+#             */
-/*   Updated: 2023/04/19 14:55:57 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/20 18:32:31 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
-/*
-void	close_fds(t_data *data, int block_id)
-{
-	int	i;
 
-	i = 0;
-	while (i < data->nb_of_pipe)
-	{
-		if (i != block_id - 1)
-			close(data->cmds_block[block_id].fd_hd[0]);
-		if (i != block_id)
-			close(data->cmds_block[block_id].fd_hd[1]);
-		i++;
-	}
-}
+/*---- prototypes ------------------------------------------------------------*/
 
-void	close_all_fds(t_data *data, int block_id)
-{
-}
- */
+static	t_return_status _dup_n_close(int to_dup, int to_replace);
 
-static	t_return_status _dup_n_close(int to_dup, int to_replace)
-{
-	if (to_dup == to_replace)
-		return (SUCCESS);
-	if (dup2(to_dup, to_replace) == -1) {
-		close(to_dup);
-		return (FAILURE);
-	}
-	close(to_dup);
-	return (SUCCESS);
-}
+/*----------------------------------------------------------------------------*/
 
 t_return_status 	duplicate_fds(t_data *data, int block_id)
 {
@@ -52,6 +26,19 @@ t_return_status 	duplicate_fds(t_data *data, int block_id)
 	if (_dup_n_close(block.infile, STDIN_FILENO) != SUCCESS
 		|| _dup_n_close(block.outfile, STDOUT_FILENO) != SUCCESS)
 		return (FAILURE);
+	return (SUCCESS);
+}
+
+static	t_return_status _dup_n_close(int to_dup, int to_replace)
+{
+	if (to_dup == to_replace)
+		return (SUCCESS);
+	if (dup2(to_dup, to_replace) == -1)
+	{
+		close(to_dup);
+		return (FAILURE);
+	}
+	close(to_dup);
 	return (SUCCESS);
 }
 
