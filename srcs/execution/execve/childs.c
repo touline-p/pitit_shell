@@ -49,16 +49,10 @@ t_return_status	childs_execve(t_data *data, char **env)
 			ft_dprintf(2, RED"Fork Issue: Resource temporarily unavailable\n"END);
 			break ;
 		}
-		if (block_id == 1)
-			_close_this(data->cmds_block[block_id].infile);
-		if (block_id <= data->nb_of_pipe)
-			_close_this(data->cmds_block[block_id].fd_hd[1]);
-		if (block_id > 0)
-			_close_this(data->cmds_block[block_id - 1].fd_hd[0]);
+		_close_this(data->cmds_block[block_id].infile);
+		_close_this(data->cmds_block[block_id].outfile);
 		block_id++;
 	}
-	if (block_id != 0)
-		_close_this(data->cmds_block[block_id - 1].fd_hd[0]);
 	return (SUCCESS);
 }
 

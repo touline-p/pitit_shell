@@ -16,7 +16,7 @@
 
 static void				set_infile(t_data *data, char *file, int cmd_block_id);
 static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id);
-static void				get_heredoc(t_data *data, char *limiter, int block_id, int do_expand);
+static void				get_heredoc(char *limiter, int do_expand, int *fd_hd);
 static void				trim_limiter(char *s);
 
 /*----------------------------------------------------------------------------*/
@@ -59,6 +59,7 @@ static void	set_infile(t_data *data, char *file, int block_id)
 
 static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 {
+	int 	fd_hd[2];
 	bool	do_expand;
 
 	do_expand = false;
@@ -69,21 +70,18 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 		do_expand = true;
 		trim_limiter(limiter);
 	}
-	if (pipe(data->cmds_block[block_id].fd_hd) == -1)
+	if (pipe(fd_hd) == -1)
 		return (FAILED_PIPE);
 	data->cmds_block[block_id].process_id = fork();
 	if (data->cmds_block[block_id].process_id == 0)
-		get_heredoc(data, limiter, block_id, do_expand);
+		get_heredoc(limiter, do_expand, fd_hd);
 	else 
-	{
-		close(data->cmds_block[block_id].fd_hd[1]);
-		waitpid(data->cmds_block[block_id].process_id, NULL, 0);
-	}
-	data->cmds_block[block_id].infile = data->cmds_block[block_id].fd_hd[0];
+		close(fd_hd[1]);
+	data->cmds_block[block_id].infile = fd_hd[0];
 	return (SUCCESS);
 }
 
-static void	get_heredoc(t_data *data, char *limiter, int block_id, int do_expand)
+static void	get_heredoc(char *limiter, int do_expand, int *fd_hd)
 {
 	char	*line;
 	char	*here_doc;
@@ -100,16 +98,21 @@ static void	get_heredoc(t_data *data, char *limiter, int block_id, int do_expand
 			break ;
 		}
 		if (!ft_strncmp(limiter, line, ft_strlen(line) - 1))
-			break ;
+		{
+			break;
+		}
 		here_doc = strjoin_path_cmd(here_doc, line);
+		free(line);
 	}
 	free(line);
 	if (do_expand == false)
 		puts("je fais mes expands!");
 	if (here_doc)
-		write(data->cmds_block[block_id].fd_hd[1], here_doc, ft_strlen(here_doc));
-	close(data->cmds_block[block_id].fd_hd[1]);
+		write(fd_hd[1], here_doc, ft_strlen(here_doc));
+	close(fd_hd[0]);
+	close(fd_hd[1]);
 	free(here_doc);
+	exit(EXIT_SUCCESS);
 }
 
 static void	trim_limiter(char *s)
