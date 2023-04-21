@@ -8,35 +8,33 @@
 #include "../incs/parsing_incs/minishell_parsing.h"
 /*---- prototypes ------------------------------------------------------------*/
 
+static t_return_status welcome_to_minihell(char ***env_pt);
+static void	handle_signal_pt(int signal);
+
+/*---- global definition -----------------------------------------------------*/
+
+int g_ret_val;
 
 /*----------------------------------------------------------------------------*/
-int g_ret_val;
+
 #define MAIN
 #ifdef MAIN
-static t_return_status welcome_to_minihell(char ***env_pt)
-{
-	g_ret_val = 0;
-	if (env_init_on(env_pt) != SUCCESS)
-		return (FAILED_MALLOC);
-	ft_dprintf(2, PURPLE"\n------------------------------------------------------------------------------\t\n"END);
-	printf(PURPLE" __    __   __   __   __   __   ______   __  __   ______   __       __        \n");
-	printf("/\\ \"-./  \\ /\\ \\ /\\ \"-.\\ \\ /\\ \\ /\\  ___\\ /\\ \\_\\ \\ /\\  ___\\ /\\ \\     /\\ \\       \n");
-	printf("\\ \\ \\-./\\ \\\\ \\ \\\\ \\ \\-.  \\\\ \\ \\\\ \\___  \\\\ \\  __ \\\\ \\  __\\ \\ \\ \\____\\ \\ \\____  \n");
-	printf(" \\ \\_\\ \\ \\_\\\\ \\_\\\\ \\_\\\\\"\\_\\\\ \\_\\\\/\\_____\\\\ \\_\\ \\_\\\\ \\_____\\\\ \\_____\\\\ \\_____\\ \n");
-	printf("  \\/_/  \\/_/ \\/_/ \\/_/ \\/_/ \\/_/ \\/_____/ \\/_/\\/_/ \\/_____/ \\/_____/ \\/_____/ \n");
-	ft_dprintf(2, PURPLE" \n------------------------------------------------------------------------------\t\n"END);
-	ft_dprintf(2, ITALIC PURPLE"\t\t\t\t\t\t by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
-	ft_dprintf(2, "& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
-	return (SUCCESS);
-}
 
 int	main(int ac, char **av, char **env)
 {
+	(void)ac; (void)av;
+
+	struct sigaction signals;
 	char	*line;
 	t_string_token	*str_tok_lst;
-	(void)ac; (void)av;
+
 	if (welcome_to_minihell(&env) != SUCCESS)
 		return (1);
+
+	signals.sa_handler = &handle_signal_pt;
+	signals.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &signals, NULL);
+
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		line = readline("Y a quoi ? ");
@@ -61,6 +59,30 @@ int	main(int ac, char **av, char **env)
 		execution(str_tok_lst, &env);
 	}
 	return (0);
+}
+
+static t_return_status welcome_to_minihell(char ***env_pt)
+{
+	g_ret_val = 0;
+	if (env_init_on(env_pt) != SUCCESS)
+		return (FAILED_MALLOC);
+	ft_dprintf(2, PURPLE"\n------------------------------------------------------------------------------\t\n"END);
+	printf(PURPLE" __    __   __   __   __   __   ______   __  __   ______   __       __        \n");
+	printf("/\\ \"-./  \\ /\\ \\ /\\ \"-.\\ \\ /\\ \\ /\\  ___\\ /\\ \\_\\ \\ /\\  ___\\ /\\ \\     /\\ \\       \n");
+	printf("\\ \\ \\-./\\ \\\\ \\ \\\\ \\ \\-.  \\\\ \\ \\\\ \\___  \\\\ \\  __ \\\\ \\  __\\ \\ \\ \\____\\ \\ \\____  \n");
+	printf(" \\ \\_\\ \\ \\_\\\\ \\_\\\\ \\_\\\\\"\\_\\\\ \\_\\\\/\\_____\\\\ \\_\\ \\_\\\\ \\_____\\\\ \\_____\\\\ \\_____\\ \n");
+	printf("  \\/_/  \\/_/ \\/_/ \\/_/ \\/_/ \\/_/ \\/_____/ \\/_/\\/_/ \\/_____/ \\/_____/ \\/_____/ \n");
+	ft_dprintf(2, PURPLE" \n------------------------------------------------------------------------------\t\n"END);
+	ft_dprintf(2, ITALIC PURPLE"\t\t\t\t\t\t by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
+	ft_dprintf(2, "& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
+	return (SUCCESS);
+}
+
+static void	handle_signal_pt(int signal)
+{
+	(void)signal;
+	dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
+	dprintf(2, "Y a quoi ? ");
 }
 
 #endif
