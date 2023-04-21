@@ -26,6 +26,8 @@ void	execution(t_string_token *lst_of_tok, char ***env);
 
 /*-- execve ------------------------------------------------------------------*/
 
+void	replace_space_by_minus(unsigned int nb, char *content);
+
 /*-- childs --*/
 t_return_status	childs_execve(t_data *data, char **env);
 
@@ -41,7 +43,7 @@ void	clean_files_token(t_string_token *lst_of_tok);
 void	clean_token(t_string_token *lst_of_tok);
 
 /*-- infiles_manage --*/
-void	infiles_management(t_data *data, t_string_token *lst_of_tok);
+void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env);
 
 /*-- outfiles_manage --*/
 void	outfiles_management(t_data *data, t_string_token *lst_of_tok);

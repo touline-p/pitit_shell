@@ -64,12 +64,12 @@ char **join_token_lst(t_string_token **arg)
 	while (token_lst->token != EOL && token_lst->token != PIPE)
 	{
 		tmp = ft_strcpy_rn(tmp, token_lst->content);
-		*(tmp++) = ' ';
+		*(tmp++) = -' ';
 		token_lst = token_lst->next;
 	}
 	*tmp = 0;
 	*arg = token_lst;
-	return (ft_split(ret, ' '));
+	return (ft_split(ret, -' '));
 }
 
 

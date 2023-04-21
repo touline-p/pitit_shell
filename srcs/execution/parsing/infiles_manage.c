@@ -14,14 +14,14 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void				set_infile(t_data *data, char *file, int cmd_block_id);
+static void				set_infile(t_data *data, char *file, int cmd_block_id, char **env);
 static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id);
 static void				get_heredoc(t_data *data, char *limiter, int block_id, int do_expand);
 static void				trim_limiter(char *s);
 
 /*----------------------------------------------------------------------------*/
 
-void	infiles_management(t_data *data, t_string_token *lst_of_tok)
+void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 {
 	int				i;
 	t_string_token	*temp;
@@ -33,7 +33,7 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok)
 		if (temp->token == CHEVRON_IN)
 		{
 			temp = temp->next;
-			set_infile(data, temp->content, i);
+			set_infile(data, temp->content, i, env);
 		}
 		if (temp->token == HERE_DOC)
 		{
@@ -48,11 +48,30 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok)
 	}
 }
 
-static void	set_infile(t_data *data, char *file, int block_id)
+#include "../../incs/parsing_incs/minishell_parsing.h"
+static void	set_infile(t_data *data, char *file, int block_id, char **env)
 {
+	char **arr;
+
 	check_opened_infiles(data, block_id);
+	cut_line_on(file, &arr);
+	join_arr_on(arr, &file, env);
+	char *tmp;
+	tmp = file;
+	while (*tmp)
+	{
+		printf("%c : %d\n", *tmp, *tmp);
+		tmp++;
+	}
+	printf("file post expand->%s<-\n", file);
+	if (ft_strchr(file, -32) != NULL)
+	{
+		printf("je ne suis pas la\n");
+		data->cmds_block[block_id].infile = -1;
+		data->cmds_block[block_id].is_ambiguous = true;
+		return ;
+	}
 	data->cmds_block[block_id].infile = open(file, O_RDONLY, 0644);
-	// print_fd("dans set infile", data->cmds_block[block_id].infile);
 	if (data->cmds_block[block_id].infile == -1)
 		perror("open infile");
 }
