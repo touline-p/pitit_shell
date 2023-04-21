@@ -51,7 +51,7 @@ endif
 
 #--leaks flags--------------------------------------------------------#
 
-LEAKS	=	valgrind --suppressions=ignore_readline_reachable.txt --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes
+LEAKS	=	valgrind --suppressions=ignore_rl_reachable.txt --leak-check=full --track-fds=yes #--show-leak-kinds=all --trace-children=yes
 
 #--libs------------------------------------------------------------------------#
 
