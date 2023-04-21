@@ -32,6 +32,7 @@ static t_return_status welcome_to_minihell(char ***env_pt)
 
 int	main(int ac, char **av, char **env)
 {
+	t_sig
 	char	*line;
 	t_string_token	*str_tok_lst;
 	(void)ac; (void)av;
