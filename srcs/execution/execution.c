@@ -28,18 +28,15 @@ void	execution(t_string_token *lst_of_tok, char ***env_pt)
 	ft_bzero(&data, sizeof(t_data));
 	alloc_cmd_block(&data, lst_of_tok);
 	infiles_management(&data, lst_of_tok, *env_pt);
-	outfiles_management(&data, lst_of_tok);
+	outfiles_management(&data, lst_of_tok, *env_pt);
 //	if (expand_for_args(lst_of_tok, *env_pt) != SUCCESS)
 //		return ;
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
 	strings_management(&data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
-	print_cmd_block("bonjour" , data.cmds_block[0]);
-	return ;
-	builtin_switch(data.cmds_block->id_command, data.cmds_block->commands, \
-					env_pt);
-	childs_execve(&data, *env_pt);
+	childs_execve(&data, env_pt);
+	printf("done");
 	wait_for_process_ids(&data);
 	if (data.cmds_block->commands)
 		free_commands(&data);
@@ -70,15 +67,16 @@ t_string_token *lst_of_tok)
 static void	wait_for_process_ids(t_data *data)
 {
 	int	block_id;
-	int	status;
 
 	block_id = 0;
-	status = 0;
 	while (block_id < data->nb_of_pipe + 1)
 	{
-		waitpid(data->cmds_block[block_id].process_id, &status, 0);
-		if (WEXITSTATUS(status) && block_id == data->nb_of_pipe)
-			exit(127);
+		waitpid(data->cmds_block[block_id].process_id, &g_ret_val, 0);
+		if (block_id == data->nb_of_pipe)
+		{
+			g_ret_val = WEXITSTATUS(g_ret_val);
+			break;
+		}
 		block_id++;
 	}
 }

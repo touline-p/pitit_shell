@@ -51,10 +51,12 @@ static size_t	_count_ln(t_string_token *token_lst)
 	return (count);
 }
 
-char **join_token_lst(t_string_token **arg)
+char **join_token_lst(t_string_token **arg, char **env)
 {
+	char **arr;
 	char *tmp;
 	char *ret;
+
 	t_string_token *token_lst;
 
 	token_lst = *arg;
@@ -69,6 +71,10 @@ char **join_token_lst(t_string_token **arg)
 	}
 	*tmp = 0;
 	*arg = token_lst;
+	if (cut_line_on(ret, &arr) != SUCCESS
+		|| join_arr_on(arr, &ret, env))
+		return (NULL);
+
 	return (ft_split(ret, -' '));
 }
 

@@ -39,6 +39,7 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
+		printf("%d : %s : ", g_ret_val, strerror(g_ret_val));
 		line = readline("Y a quoi ? ");
 		if (line == NULL || ft_str_is_ascii(line) == false) {
 			printf("\n");
@@ -59,6 +60,7 @@ int	main(int ac, char **av, char **env)
 		}
 		del_space_token(str_tok_lst);
 		execution(str_tok_lst, &env);
+		printf("i m here\n");
 	}
 	return (0);
 }

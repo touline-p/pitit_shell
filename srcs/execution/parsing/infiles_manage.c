@@ -56,17 +56,8 @@ static void	set_infile(t_data *data, char *file, int block_id, char **env)
 	check_opened_infiles(data, block_id);
 	cut_line_on(file, &arr);
 	join_arr_on(arr, &file, env);
-	char *tmp;
-	tmp = file;
-	while (*tmp)
-	{
-		printf("%c : %d\n", *tmp, *tmp);
-		tmp++;
-	}
-	printf("file post expand->%s<-\n", file);
 	if (ft_strchr(file, -32) != NULL)
 	{
-		printf("je ne suis pas la\n");
 		data->cmds_block[block_id].infile = -1;
 		data->cmds_block[block_id].is_ambiguous = true;
 		return ;

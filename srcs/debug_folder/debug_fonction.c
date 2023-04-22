@@ -33,7 +33,7 @@ void    print_is_heredoc(bool is)
 
 void    print_fd(char *msg, int fd)
 {
-    dprintf(2,GREEN"%s fd_hd is %d\n"END, msg, fd);
+    dprintf(2,"%s fd_hd is %d\n", msg, fd);
 }
 
 void    print_pid(int pid)

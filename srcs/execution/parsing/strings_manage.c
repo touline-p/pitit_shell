@@ -14,22 +14,21 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok);
+static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, char **env);
 static void				set_id_cmds(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
 void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env)
 {
-	(void)env;
-	get_raw_cmds(data, lst_of_tok);
+	get_raw_cmds(data, lst_of_tok, env);
 	// int i = 0;
 	// while (i <= data->nb_of_pipe)
 	// 	ft_eprint_split(data->cmds_block[i++].commands);
 	set_id_cmds(data);
 }
 
-static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok)
+static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, char **env)
 {
 	t_string_token	*temp;
 	int				block_id;
@@ -37,7 +36,7 @@ static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok)
 	block_id = 0;
 	temp = lst_of_tok;
 	while (temp->token != EOL)
-		data->cmds_block[block_id++].commands = join_token_lst(&temp);
+		data->cmds_block[block_id++].commands = join_token_lst(&temp, env);
 	data->cmds_block[block_id].commands = NULL;
 	if (!data->cmds_block[block_id].commands)
 		return (FAILED_MALLOC);

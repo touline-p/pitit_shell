@@ -29,7 +29,7 @@ void	execution(t_string_token *lst_of_tok, char ***env);
 void	replace_space_by_minus(unsigned int nb, char *content);
 
 /*-- childs --*/
-t_return_status	childs_execve(t_data *data, char **env);
+t_return_status	childs_execve(t_data *data, char ***env);
 
 /*-- fds_manage --*/
 void	close_fds(t_data *data, int block_id);
@@ -46,7 +46,7 @@ void	clean_token(t_string_token *lst_of_tok);
 void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env);
 
 /*-- outfiles_manage --*/
-void	outfiles_management(t_data *data, t_string_token *lst_of_tok);
+void	outfiles_management(t_data *data, t_string_token *lst_of_tok, char **env);
 
 /*-- string_manage --*/
 void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env_pt);
@@ -73,7 +73,7 @@ void	string_token_destructor(t_string_token *trash);
 void	del_next_string_token(t_string_token *tok);
 void	display_str_token(t_string_token *tok);
 void	display_t_emt_string(t_string_token *token);
-char 	**join_token_lst(t_string_token **arg);
+char 	**join_token_lst(t_string_token **arg, char **env);
 t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 
 
