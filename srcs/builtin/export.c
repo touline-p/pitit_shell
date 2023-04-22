@@ -114,9 +114,10 @@ static t_return_status	_export_display(char **env)
 	char *line;
 
 	line = get_first_line_in_env(env);
-	while (line != NULL && (line[0] == '_' && line[1] == '=') == false)
+	while (line != NULL )//&& (line[0] == '_' && line[1] == '=') == false)
 	{
-		_display_unic_export(line);
+		if (!(line[0] == '_' && line[1] == '='))
+			_display_unic_export(line);
 		line = get_next_line_in_env(line, env);
 	}
 	return (SUCCESS);
