@@ -42,9 +42,9 @@ int	main(int ac, char **av, char **env)
 		printf("%d : %s : ", g_ret_val, strerror(g_ret_val));
 		line = readline("Y a quoi ? ");
 		if (line == NULL || ft_str_is_ascii(line) == false) {
-			printf("\n");
 			free(line);
-			continue;
+			printf("exit\n");
+			exit(g_ret_val);
 		}
 		if (ft_strncmp("END", line, 4) == 0)
 			return (clear_history(), free(line), 0);
@@ -60,7 +60,6 @@ int	main(int ac, char **av, char **env)
 		}
 		del_space_token(str_tok_lst);
 		execution(str_tok_lst, &env);
-		printf("i m here\n");
 	}
 	return (0);
 }

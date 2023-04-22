@@ -85,6 +85,7 @@ void    print_builtin(t_builtin built);
 void    print_cmd_block(char *msg, t_cmd cmd);
 
 /*-- Builtin --*/
+t_return_status	switchman_once(t_data *data, char ***env_pt);
 t_return_status	cd_builtin(char **av, char ***env_pt);
 t_return_status export_builtin(char **av, char ***env_pt);
 t_return_status	env_builtin(char **av, char ***env_pt);

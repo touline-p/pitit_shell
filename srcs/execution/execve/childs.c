@@ -42,7 +42,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 				_close_this(data->cmds_block[block_id].fd_hd[0]);
 			duplicate_fds(data, block_id);
 			command = add_path_cmd(block_id, data, *env);
-			print_cmd_block("pre exec", data->cmds_block[block_id]);
+			//print_cmd_block("pre exec", data->cmds_block[block_id]);
 			if (data->cmds_block->id_command != CMD)
 			{
 				exit(builtin_switch(data->cmds_block->id_command, data->cmds_block->commands, \
@@ -50,7 +50,6 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			}
 			else if (access(*data->cmds_block[block_id].commands, F_OK) == 0)
 			{
-				printf("i exec\n");
 				execve(command, data->cmds_block[block_id].commands, *env);
 				perror(command);
 			}

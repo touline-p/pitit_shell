@@ -19,7 +19,8 @@ void	free_commands(t_data *data)
 	i = 0;
 	while (i < data->nb_of_pipe + 1)
 	{
-		ft_free((void **)data->cmds_block[i].commands, data->nb_of_pipe + 1);
+		if (data->cmds_block[i].id_command == CMD)
+			ft_free((void **)data->cmds_block[i].commands, data->nb_of_pipe + 1);
 		i++;
 	}
 }

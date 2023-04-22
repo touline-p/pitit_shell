@@ -35,11 +35,13 @@ void	execution(t_string_token *lst_of_tok, char ***env_pt)
 	clean_token(lst_of_tok);
 	strings_management(&data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
-	childs_execve(&data, env_pt);
-	printf("done");
+	if (data.nb_of_pipe == 0 && data.cmds_block->id_command != CMD)
+		switchman_once(&data, env_pt);
+	else
+		childs_execve(&data, env_pt);
 	wait_for_process_ids(&data);
-	if (data.cmds_block->commands)
-		free_commands(&data);
+
+	free_commands(&data);
 }
 
 static t_return_status	alloc_cmd_block(t_data *data, \
