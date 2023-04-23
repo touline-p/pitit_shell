@@ -83,6 +83,13 @@ static void	handle_signal_pt(int signal)
 	(void)signal;
 	dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
 	dprintf(2, "Y a quoi ? ");
+	/* ----- a tester -------------------------------------------------------
+	rl_replace_line("Y a quoi ? ", 0);
+	dprintf(2, "\n");
+	rl_on_new_line();
+	rl_redisplay();
+	g_ret_val = 1;
+	-----------------------------------------------------------------------*/
 }
 
 #endif
