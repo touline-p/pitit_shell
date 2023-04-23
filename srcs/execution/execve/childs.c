@@ -22,12 +22,14 @@ static char				*add_path_cmd(int block_id, t_data *data, char **env);
 /*----------------------------------------------------------------------------*/
 
 
-t_return_status	childs_execve(t_data *data, char **env)
+t_return_status	childs_execve(t_data *data, char ***env)
 {
 	int		block_id;
 	char	*command;
 
 	block_id = 0;
+//	if (data->nb_of_pipe == 0)
+//		return (_one_execution(data, env));
 	while (block_id < data->nb_of_pipe + 1)
 	{
 		if (_do_the_pipe(&(data->cmds_block[block_id]), data->nb_of_pipe, block_id) != SUCCESS)
@@ -39,9 +41,18 @@ t_return_status	childs_execve(t_data *data, char **env)
 			if (block_id <= data->nb_of_pipe)
 				_close_this(data->cmds_block[block_id].fd_hd[0]);
 			duplicate_fds(data, block_id);
-			command = add_path_cmd(block_id, data, env);
-			execve(command, data->cmds_block[block_id].commands, env);
-			perror(command);
+			command = add_path_cmd(block_id, data, *env);
+			//print_cmd_block("pre exec", data->cmds_block[block_id]);
+			if (data->cmds_block->id_command != CMD)
+			{
+				exit(builtin_switch(data->cmds_block->id_command, data->cmds_block->commands, \
+                    env));
+			}
+			else if (access(*data->cmds_block[block_id].commands, F_OK) == 0)
+			{
+				execve(command, data->cmds_block[block_id].commands, *env);
+				perror(command);
+			}
 			exit(EXIT_FAILURE);
 		}
 		else if (data->cmds_block[block_id].process_id < 0)

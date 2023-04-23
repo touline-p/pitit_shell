@@ -1,6 +1,14 @@
 #include "minishell_parsing.h"
 #include "../../../incs/parsing_incs/minishell_parsing.h"
 
+void	replace_space_by_minus(unsigned int nb, char *content)
+{
+	(void) nb;
+	if (*content == ' ')
+			*content = -' ';
+	content++;
+}
+
 t_return_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 {
 	char	*content;
@@ -15,6 +23,8 @@ t_return_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 		*pin_pt = ft_strdup(content);
 	if (*pin_pt == NULL)
 		return (FAILED_MALLOC);
+	ft_striteri(*pin_pt, &replace_space_by_minus);
+	printf("j'ai expand :%s\n", *pin_pt);
 	return (SUCCESS);
 }
 

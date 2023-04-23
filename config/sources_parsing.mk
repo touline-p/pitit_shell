@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:31:59 by twang             #+#    #+#              #
-#    Updated: 2023/03/27 16:34:22 by twang            ###   ########.fr        #
+#    Updated: 2023/04/22 23:20:04 by bpoumeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,4 +50,6 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/builtin/pwd.c												\
 			srcs/builtin/unset.c											\
 			srcs/builtin/export.c											\
+			srcs/builtin/switchman_once.c											\
+
 

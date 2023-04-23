@@ -96,6 +96,8 @@ t_export_ft	_get_ft_to_do(char *line, char **env) {
 	eq = ft_strchr(line, '=');
 	plus = ft_strchr(line, '+');
 	_get_rid_of_plus(line);
+	if (key_is_not_alnum(line))
+		return (&not_in_context_error);
 	if (has_a_key_from_env(line, env) == false)
 		return (&add_str_to_env);
 	if (eq == NULL)
@@ -112,9 +114,10 @@ static t_return_status	_export_display(char **env)
 	char *line;
 
 	line = get_first_line_in_env(env);
-	while (line != NULL && (line[0] == '_' && line[1] == '=') == false)
+	while (line != NULL )//&& (line[0] == '_' && line[1] == '=') == false)
 	{
-		_display_unic_export(line);
+		if (!(line[0] == '_' && line[1] == '='))
+			_display_unic_export(line);
 		line = get_next_line_in_env(line, env);
 	}
 	return (SUCCESS);
