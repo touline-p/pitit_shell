@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/20 18:36:16 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/23 11:35:28 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ t_return_status	childs_execve(t_data *data, char **env)
 
 static t_return_status _do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id)
 {
+	/* ----- a tester -------------------------------------------------------
+	if (cmd_block[block_id].infile < 0 || cmd_block[block_id].fd_hd < 0)
+		return (FAILURE);
+	-----------------------------------------------------------------------*/
 	if (block_id == nb_of_pipe)
 		return (SUCCESS);
 	if (pipe(cmd_block->fd_hd) != 0)
