@@ -37,6 +37,7 @@ static	bool	_is_option_n(char *arg)
 		arg++;
 	if (*arg)
 		return (false);
+
 	return (true);
 }
 
