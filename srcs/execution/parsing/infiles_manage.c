@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 15:50:20 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 17:00:43 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 }
 
 #include "../../incs/parsing_incs/minishell_parsing.h"
+
 static void	set_infile(t_data *data, char *file, int block_id, char **env)
 {
 	char **arr;
@@ -82,11 +83,12 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, ch
 	}
 	if (pipe(fd_hd) == -1)
 		return (FAILED_PIPE);
-	signal(SIGINT, SIG_IGN);
+	// signal(SIGINT, SIG_IGN);
 	data->cmds_block[block_id].process_id = fork();
 	if (data->cmds_block[block_id].process_id == 0)
 	{
 		signal(SIGINT, &handle_signal_heredoc);
+		signal(SIGQUIT, &handle_signal_heredoc_sigquit);
 		get_heredoc(limiter, do_expand, fd_hd, env);
 	}
 	else
@@ -133,10 +135,7 @@ static void	get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	}
 	free(line);
 	if (do_expand == false)
-	{
 		expand_hd(&here_doc, env);
-		printf(RED"je fais mes expands! ->%s<-\n"END, here_doc);
-	}
 	if (here_doc)
 		write(fd_hd[1], here_doc, ft_strlen(here_doc));
 	close(fd_hd[0]);

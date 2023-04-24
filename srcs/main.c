@@ -30,6 +30,7 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
 		line = readline("Y a quoi ? ");
 		if (line == NULL || ft_str_is_ascii(line) == false) {
