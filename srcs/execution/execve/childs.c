@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/20 18:36:16 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 16:39:43 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,19 @@ static char				*add_path_cmd(int block_id, t_data *data, char **env);
 
 /*----------------------------------------------------------------------------*/
 
-
 t_return_status	childs_execve(t_data *data, char ***env)
 {
 	int		block_id;
 	char	*command;
 
 	block_id = 0;
-//	if (data->nb_of_pipe == 0)
-//		return (_one_execution(data, env));
 	while (block_id < data->nb_of_pipe + 1)
 	{
 		if (_do_the_pipe(&(data->cmds_block[block_id]), data->nb_of_pipe, block_id) != SUCCESS)
 			return (FAILURE);
 		_manage_the_pipe(data, block_id);
+		// signal(SIGINT, SIG_IGN);
+		signal(SIGINT, &handle_signal_child);
 		data->cmds_block[block_id].process_id = fork();
 		if (data->cmds_block[block_id].process_id == 0)
 		{
@@ -52,6 +51,8 @@ t_return_status	childs_execve(t_data *data, char ***env)
 				execve(command, data->cmds_block[block_id].commands, *env);
 				perror(command);
 			}
+				dprintf(2,"je suis la\n");
+			ft_free_split(data->cmds_block[block_id].commands);
 			exit(EXIT_FAILURE);
 		}
 		else if (data->cmds_block[block_id].process_id < 0)
@@ -59,21 +60,17 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			ft_dprintf(2, RED"Fork Issue: Resource temporarily unavailable\n"END);
 			break ;
 		}
-		if (block_id == 1)
-			_close_this(data->cmds_block[block_id].infile);
-		if (block_id <= data->nb_of_pipe)
-			_close_this(data->cmds_block[block_id].fd_hd[1]);
-		if (block_id > 0)
-			_close_this(data->cmds_block[block_id - 1].fd_hd[0]);
+		_close_this(data->cmds_block[block_id].infile);
+		_close_this(data->cmds_block[block_id].outfile);
 		block_id++;
 	}
-	if (block_id != 0)
-		_close_this(data->cmds_block[block_id - 1].fd_hd[0]);
 	return (SUCCESS);
 }
 
 static t_return_status _do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id)
 {
+	if (cmd_block[block_id].infile < 0 || cmd_block[block_id].fd_hd[0] < 0)
+		return (FAILURE);
 	if (block_id == nb_of_pipe)
 		return (SUCCESS);
 	if (pipe(cmd_block->fd_hd) != 0)
@@ -132,5 +129,6 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env)
 		}
 		i++;
 	}
+	ft_free((void **)paths, get_path_size(paths));
 	return (NULL);
 }

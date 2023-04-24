@@ -63,7 +63,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-//void		put_ert(t_ert signal);
+//void		put_return_status(t_return_status signal);
 t_return_status ft_join_str_arr_on(char **str_arr, char **line_pt);
 char		*ft_strdup(const char *src);
 t_return_status	ft_strdup_on(const char *src, char **str_pt);
@@ -94,7 +94,7 @@ size_t 		ft_str_array_len(char **str_arr);
 char 		**ft_str_array_dup(char **str_arr);
 char 		**ft_strarray_join(char **first, char **second);
 
-//t_ert		ft_atoi_on(const char *str, int *int_pt);
+//t_return_status		ft_atoi_on(const char *str, int *int_pt);
 int	ft_dprintf(int fd, const char *str, ...);
 
 void			ft_swap(int *a, int *b);
@@ -154,7 +154,7 @@ int				ft_max(int a, int b);
 char			*ft_get_env(char *key, char **env);
 t_uchar			*ft_ustrdup(unsigned char *str);
 
-//t_ert			ft_atoi_on(const char *str, int *int_pt);
+t_return_status			ft_atoi_on(const char *str, int *int_pt);
 
 /** Pipes utils **/
 
@@ -173,12 +173,12 @@ char			*ft_strcpy(char *dst, char *src);
 /** LST **/
 
 void			ft_lstclean(t_list *head, void (*del)(void *));
-//t_ert			ft_lstnew_on(void *content, t_list **list_ptr);
-//t_ert			ft_lstnew_onsf(void *content, t_list **list_ptr);
+t_return_status			ft_lstnew_on(void *content, t_list **list_ptr);
+t_return_status			ft_lstnew_onsf(void *content, t_list **list_ptr);
 
 /**	LSTSTR **/
 
-//t_ert			ft_lststr_to_str(t_list *lst, char **str);
+t_return_status			ft_lststr_to_str(t_list *lst, char **str);
 size_t			ft_lststrlen(t_list *lst);
 
 /** GNL **/
@@ -187,7 +187,7 @@ size_t			ft_lststrlen(t_list *lst);
 #  define BUFFER_SIZE 1024
 # endif
 
-//t_ert			ft_gnl_on(int fd_hd, char **line_pt);
+t_return_status			ft_gnl_on(int fd_hd, char **line_pt);
 
 /**---- utils ---- **/
 

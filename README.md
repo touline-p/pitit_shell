@@ -1,12 +1,10 @@
-<h3 align="center">
+<h1 align="center">
 LE PITIT_SHELL
-</h3>
+</h1>
 
----
-
-<h3 align="center">
+<h4 align="center">
 Aussi mignon qu’un vrai shell!
-</h3>
+</h4>
 </p>
 
 <h3 align="center">
@@ -22,60 +20,78 @@ Aussi mignon qu’un vrai shell!
 ---
 
 ## About
-</p>
-<h3 align="center">
+___
 This project is focused on creating a minimalistic shell, which is a program that allows users to interact with their operating system by typing commands. By participating in this project, individuals can learn how to create a functional and efficient shell that performs tasks such as running programs, managing input and output, and handling errors.
 
-You can find more detailed information on the project in the [subject](./minishell_subject.pdf).
-</h3>
-
+____
 ## Index
+___
+### Project Objectives
 
-< infile cat -e | cat | cat > outfile
+The objectives of the project are:
+- Create a program that simulates a shell.
+- Handle errors and signals.
+- Handle environment variables.
+- Handle local variables.
+- Handle simple redirections (< and >).
+- Handle pipes (|).
 
-data->cmds_block[0]->command = "cat" "-e"
-data->cmds_block[0]->infile = fd_in
-data->cmds_block[0]->outfile = -1
-data->cmds_block[0]->pipes[2] = ignore
+### Implemented Features
 
-data->cmds_block[1]->command = "cat"
-data->cmds_block[1]->infile = -1
-data->cmds_block[1]->outfile = -1
-data->cmds_block[1]->pipes[2] = ignore
+The implemented features in this project are:
+- Handling errors and signals.
+- Handling environment variables.
+- Handling local variables.
+- Handling simple redirections (< and >).
+- Handling advanced redirections (<< and >>).
+- Handling pipes (|).
+- Handling the "echo" command.
+- Handling the "cd" command.
+- Handling the "env" command.
+- Handling the "export" command.
+- Handling the "unset" command.
+- Handling the "exit" command.
 
-data->cmds_block[2]->command = "cat"
-data->cmds_block[2]->infile = -1
-data->cmds_block[2]->outfile = fd_out
-data->cmds_block[2]->pipes[2] = ignore
+Bonus Part :
+- Handling logical operators (&& and ||).
 
-check lst_tokens
-check chevrons		-> infile / here_doc 
-					-> expand to here_doc
-					-> outfile / append
-check commands 		-> recup commandes + args
-					-> add path
-					-> check fds -> standart -> pipes ...
-					-> builtins -> call built_in function
-					-> exec command
+### Non-Implemented Features
 
+The non-implemented features in this project are:
+- Handling globbing with *.
+- Handling the semi-colon command separator ;
+
+### Conclusion
+
+The Minishell project at École 42 was an excellent opportunity to put into practice the programming skills acquired throughout the curriculum. Handling errors and signals, environment variables, local variables, redirections, and pipes was a very enriching experience and helped to better understand how a shell works.
+
+___
 ## Usage
+___
 ### Instructions
 
-**1. Compiling the program**
+**1. Compiling & Executing the program**
 
-To compile the program, run:
+To compile and execute the program, run:
 
 ```shell
 $ make
-```
-
-**2. Executing the program**
-
-To execute the program, run:
-
-```shell
 $ ./minishell
 ```
+**3. Special Compiling Rules**
+
+To compile the program with fsanitize, run:
+
+```shell
+$ make debug
+$ ./minishell
+```
+To compile the program with valgrind, run:
+
+```shell
+$ make leaks
+```
+
 
 ## Useful Links
 * [42 Docs - minishell](https://harm-smits.github.io/42docs/projects/minishell)

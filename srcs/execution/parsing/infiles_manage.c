@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infiles_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/19 16:41:26 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 17:19:28 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /*---- prototypes ------------------------------------------------------------*/
 
 static void				set_infile(t_data *data, char *file, int cmd_block_id, char **env);
-static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id);
-static void				get_heredoc(t_data *data, char *limiter, int block_id, int do_expand);
+static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, char **env);
+static void				get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env);
 static void				trim_limiter(char *s);
 
 /*----------------------------------------------------------------------------*/
@@ -38,7 +38,7 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 		if (temp->token == HERE_DOC)
 		{
 			temp = temp->next;
-			set_heredoc(data, temp->content, i);
+			set_heredoc(data, temp->content, i, env);
 		}
 		if (temp->token == PIPE)
 		{
@@ -49,6 +49,7 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 }
 
 #include "../../incs/parsing_incs/minishell_parsing.h"
+
 static void	set_infile(t_data *data, char *file, int block_id, char **env)
 {
 	char **arr;
@@ -67,8 +68,9 @@ static void	set_infile(t_data *data, char *file, int block_id, char **env)
 		perror("open infile");
 }
 
-static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
+static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, char **env)
 {
+	int 	fd_hd[2];
 	bool	do_expand;
 
 	do_expand = false;
@@ -79,21 +81,36 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 		do_expand = true;
 		trim_limiter(limiter);
 	}
-	if (pipe(data->cmds_block[block_id].fd_hd) == -1)
+	if (pipe(fd_hd) == -1)
 		return (FAILED_PIPE);
+	signal(SIGINT, SIG_IGN);
 	data->cmds_block[block_id].process_id = fork();
 	if (data->cmds_block[block_id].process_id == 0)
-		get_heredoc(data, limiter, block_id, do_expand);
-	else 
 	{
-		close(data->cmds_block[block_id].fd_hd[1]);
-		waitpid(data->cmds_block[block_id].process_id, NULL, 0);
+		signal(SIGINT, &handle_signal_heredoc);
+		signal(SIGQUIT, &handle_signal_heredoc_sigquit);
+		get_heredoc(limiter, do_expand, fd_hd, env);
 	}
-	data->cmds_block[block_id].infile = data->cmds_block[block_id].fd_hd[0];
+	else
+	 {
+		waitpid(data->cmds_block[block_id].process_id, &g_ret_val, 0);
+		close(fd_hd[1]);
+	 }
+	data->cmds_block[block_id].infile = fd_hd[0];
 	return (SUCCESS);
 }
 
-static void	get_heredoc(t_data *data, char *limiter, int block_id, int do_expand)
+static t_return_status expand_hd(char **here_doc, char **env)
+{
+	char	**arr;
+
+	if (cut_line_on(*here_doc, &arr) != SUCCESS
+		|| join_arr_on(arr, here_doc, env) != SUCCESS)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+static void	get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 {
 	char	*line;
 	char	*here_doc;
@@ -110,16 +127,21 @@ static void	get_heredoc(t_data *data, char *limiter, int block_id, int do_expand
 			break ;
 		}
 		if (!ft_strncmp(limiter, line, ft_strlen(line) - 1))
-			break ;
+		{
+			break;
+		}
 		here_doc = strjoin_path_cmd(here_doc, line);
+		free(line);
 	}
 	free(line);
 	if (do_expand == false)
-		puts("je fais mes expands!");
+		expand_hd(&here_doc, env);
 	if (here_doc)
-		write(data->cmds_block[block_id].fd_hd[1], here_doc, ft_strlen(here_doc));
-	close(data->cmds_block[block_id].fd_hd[1]);
+		write(fd_hd[1], here_doc, ft_strlen(here_doc));
+	close(fd_hd[0]);
+	close(fd_hd[1]);
 	free(here_doc);
+	exit(EXIT_SUCCESS);
 }
 
 static void	trim_limiter(char *s)
