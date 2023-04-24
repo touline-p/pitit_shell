@@ -9,7 +9,6 @@
 /*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status welcome_to_minihell(char ***env_pt);
-static void	handle_signal_pt(int signal);
 
 /*---- global definition -----------------------------------------------------*/
 
@@ -24,19 +23,20 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac; (void)av;
 
-	struct sigaction signals;
+	// struct sigaction signals;
 	char	*line;
 	t_string_token	*str_tok_lst;
 
 	if (welcome_to_minihell(&env) != SUCCESS)
 		return (1);
 
-	signals.sa_handler = &handle_signal_pt;
-	signals.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &signals, NULL);
 
 	while (MINI_SHELL_MUST_GO_ON)
 	{
+		signal(SIGINT, &handle_signal_main);
+		// signals.sa_handler = &handle_signal_main;
+		// signals.sa_flags = SA_RESTART;
+		// sigaction(SIGINT, &signals, NULL);
 		line = readline("Y a quoi ? ");
 		if (line == NULL || ft_str_is_ascii(line) == false) {
 			printf("\n");
@@ -76,20 +76,6 @@ static t_return_status welcome_to_minihell(char ***env_pt)
 	ft_dprintf(2, ITALIC PURPLE"\t\t\t\t\t\t by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
 	ft_dprintf(2, "& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
 	return (SUCCESS);
-}
-
-static void	handle_signal_pt(int signal)
-{
-	(void)signal;
-	dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
-	dprintf(2, "Y a quoi ? ");
-	/* ----- a tester -------------------------------------------------------
-	rl_replace_line("Y a quoi ? ", 0);
-	dprintf(2, "\n");
-	rl_on_new_line();
-	rl_redisplay();
-	g_ret_val = 1;
-	-----------------------------------------------------------------------*/
 }
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outfiles_manage.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/18 19:14:04 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:42:49 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	outfiles_management(t_data *data, t_string_token *lst_of_tok)
 static void	set_outfile(t_data *data, char *file, int block_id)
 {
 	check_opened_outfiles(data, block_id);
+	if (data->cmds_block[block_id].infile < 0 || data->cmds_block[block_id].fd_hd[0] < 0)
+		return ;
 	data->cmds_block[block_id].outfile = open(file, O_WRONLY | O_CREAT | \
 	O_TRUNC, 0644);
 	if (data->cmds_block[block_id].outfile == -1)
@@ -58,6 +60,8 @@ static void	set_outfile(t_data *data, char *file, int block_id)
 static void	set_appends(t_data *data, char *file, int block_id)
 {
 	check_opened_outfiles(data, block_id);
+	if (data->cmds_block[block_id].infile < 0 || data->cmds_block[block_id].fd_hd[0] < 0)
+		return ;
 	data->cmds_block[block_id].outfile = open(file, O_WRONLY | O_CREAT | \
 	O_APPEND, 0644);
 	if (data->cmds_block[block_id].outfile == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infiles_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/23 21:07:10 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/24 11:44:13 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 		return (FAILED_PIPE);
 	data->cmds_block[block_id].process_id = fork();
 	if (data->cmds_block[block_id].process_id == 0)
+	{
+		signal(SIGINT, &handle_signal_heredoc);
 		get_heredoc(limiter, do_expand, fd_hd);
+	}
 	/* ----- a tester -------------------------------------------------------
 	if (data->cmds_block[block_id].process_id == 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes_execution.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/19 15:24:20 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 12:36:31 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 /*----------------------------------------------------------------------------*/
 
 void	execution(t_string_token *lst_of_tok, char ***env);
-
 
 /*-- execve ------------------------------------------------------------------*/
 
@@ -65,6 +64,15 @@ char	**get_paths(char **env);
 
 /*-- struct_utils --*/
 void	free_commands(t_data *data);
+
+/*----------------------------------------------------------------------------*/
+/*---- Signals ---------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+
+/*-- signals --*/
+void	handle_signal_main(int signal);
+void	handle_signal_child(int signal);
+void	handle_signal_heredoc(int signal);
 
 /*-- Genius Brieuc utils --*/
 void	string_token_destructor(t_string_token *trash);
