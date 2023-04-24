@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 16:51:01 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 17:14:54 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	handle_signal_main(int signal)
 {
 	(void)signal;
-	dprintf(2, "\n");
+	dprintf(2, "\tPLEASE DON'T STOP THE MUSIC\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
