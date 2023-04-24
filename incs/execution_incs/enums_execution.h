@@ -54,10 +54,10 @@ enum e_builtin
 	ENV,
 	ECHO,
 	EXPORT,
+	PWD,
 	EXIT,
 	UNSET,
-	CD,
-	PWD
+	CD
 };
 
 #endif

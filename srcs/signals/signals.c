@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 13:45:25 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 15:51:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ void	handle_signal_heredoc(int signal)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	g_ret_val = 1;
+	exit (g_ret_val);
 }

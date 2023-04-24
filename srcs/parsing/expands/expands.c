@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:22:46 by twang             #+#    #+#             */
-/*   Updated: 2023/04/18 17:21:17 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 14:57:13 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ static size_t	_count_ln(t_string_token *token_lst)
 	return (count);
 }
 
-char **join_token_lst(t_string_token **arg)
+char **join_token_lst(t_string_token **arg, char **env)
 {
+	char **arr;
 	char *tmp;
 	char *ret;
+
 	t_string_token *token_lst;
 
 	token_lst = *arg;
@@ -64,12 +66,17 @@ char **join_token_lst(t_string_token **arg)
 	while (token_lst->token != EOL && token_lst->token != PIPE)
 	{
 		tmp = ft_strcpy_rn(tmp, token_lst->content);
-		*(tmp++) = ' ';
+		*(tmp++) = -' ';
 		token_lst = token_lst->next;
 	}
 	*tmp = 0;
 	*arg = token_lst;
-	return (ft_split(ret, ' '));
+	if (cut_line_on(ret, &arr) != SUCCESS
+		|| join_arr_on(arr, &ret, env))
+		return (NULL);
+	arr = ft_split(ret, -' ');
+	free(ret);
+	return (arr);
 }
 
 

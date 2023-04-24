@@ -16,7 +16,7 @@ t_builtin	is_builtin(char *string)
 {
 	t_builtin	ret_val;
 	const char	*name_arr[] = {NULL, "env","echo", "export", \
-							"exit", "unset", "cd", "pwd"};
+							 "pwd","exit", "unset", "cd"};
 
 	ret_val = ENV;
 	if (!string)
@@ -33,8 +33,8 @@ t_builtin	is_builtin(char *string)
 t_return_status 	builtin_switch(t_builtin builtin, char **av, char ***env_pt)
 {
 	const t_builtin_ft	ft_arr[] = {NULL, &env_builtin, &echo_builtin, \
-									&export_builtin, NULL, &unset_builtin, \
-									&cd_builtin, &pwd_builtin};
+									&export_builtin, &pwd_builtin, NULL, &unset_builtin, \
+									&cd_builtin};
 									
 	if (builtin == CMD)
 		return (FAILURE);

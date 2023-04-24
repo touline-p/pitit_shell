@@ -44,6 +44,7 @@ struct s_cmd
 {
 	t_builtin	id_command;
 	char		**commands;
+	bool		is_ambiguous;
 	bool		is_heredoc;
 	int			infile;
 	int			outfile;

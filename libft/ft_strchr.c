@@ -31,7 +31,7 @@ char	*ft_strchr(const char *s, int c)
 	tmp = (char *)s;
 	while (1)
 	{
-		if (*tmp == (unsigned char)c)
+		if (*tmp == c)
 			return (tmp);
 		if (!*tmp)
 			return (NULL);

@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 13:46:46 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 15:57:56 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char				*add_path_cmd(int block_id, t_data *data, char **env);
 
 /*----------------------------------------------------------------------------*/
 
-t_return_status	childs_execve(t_data *data, char **env)
+t_return_status	childs_execve(t_data *data, char ***env)
 {
 	int		block_id;
 	char	*command;
@@ -40,9 +40,19 @@ t_return_status	childs_execve(t_data *data, char **env)
 			if (block_id <= data->nb_of_pipe)
 				_close_this(data->cmds_block[block_id].fd_hd[0]);
 			duplicate_fds(data, block_id);
-			command = add_path_cmd(block_id, data, env);
-			execve(command, data->cmds_block[block_id].commands, env);
-			perror(command);
+			command = add_path_cmd(block_id, data, *env);
+			if (data->cmds_block[block_id].id_command != CMD)
+			{
+				exit(builtin_switch(data->cmds_block->id_command, data->cmds_block->commands, \
+                    env));
+			}
+			else if (access(*data->cmds_block[block_id].commands, F_OK) == 0)
+			{
+				execve(command, data->cmds_block[block_id].commands, *env);
+				perror(command);
+			}
+				dprintf(2,"je suis la\n");
+			ft_free_split(data->cmds_block[block_id].commands);
 			exit(EXIT_FAILURE);
 		}
 		else if (data->cmds_block[block_id].process_id < 0)
@@ -119,5 +129,6 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env)
 		}
 		i++;
 	}
+	ft_free((void **)paths, get_path_size(paths));
 	return (NULL);
 }

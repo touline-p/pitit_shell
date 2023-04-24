@@ -27,3 +27,19 @@ char *get_next_line_in_env(char *last, char **env)
 	}
 	return (line);
 }
+
+
+//#define TST_GNL
+#ifdef TST_GNL
+
+int main(int ac, char **av)
+{
+	(void)ac;
+	char *string;
+	printf("%s\n", string = get_first_line_in_env(av + 1));
+	while (string)
+		printf("%s\n", string = get_next_line_in_env(string ,av + 1));
+
+}
+
+#endif
