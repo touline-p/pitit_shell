@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/23 11:30:55 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:23:58 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ static void				wait_for_process_ids(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
+static t_return_status	check_if_token(t_string_token *lst_of_tok)
+{
+	t_string_token	*temp;
+	
+	temp = lst_of_tok;
+	while (temp != NULL)
+	{
+		if (temp->token != START && temp->token != EOL)
+			return (SUCCESS);
+		temp = temp->next;
+	}
+	return (FAILURE);
+}
+
 void	execution(t_string_token *lst_of_tok, char ***env_pt)
 {
 	t_data	data;
@@ -28,10 +42,10 @@ void	execution(t_string_token *lst_of_tok, char ***env_pt)
 	alloc_cmd_block(&data, lst_of_tok);
 	infiles_management(&data, lst_of_tok);
 	outfiles_management(&data, lst_of_tok);
-//	if (expand_for_args(lst_of_tok, *env_pt) != SUCCESS)
-//		return ;
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
+	if (check_if_token(lst_of_tok) != SUCCESS)
+		return ;
 	strings_management(&data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
 	builtin_switch(data.cmds_block->id_command, data.cmds_block->commands, \

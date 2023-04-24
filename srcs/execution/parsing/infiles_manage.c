@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 11:44:13 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 13:42:42 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,32 +75,15 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id)
 	data->cmds_block[block_id].process_id = fork();
 	if (data->cmds_block[block_id].process_id == 0)
 	{
-		signal(SIGINT, &handle_signal_heredoc);
+		// signal(SIGINT, &handle_signal_heredoc);
 		get_heredoc(limiter, do_expand, fd_hd);
+		// waitpid(data->cmds_block[block_id].process_id, &g_ret_val, 0);
 	}
-	/* ----- a tester -------------------------------------------------------
-	if (data->cmds_block[block_id].process_id == 0)
-	{
-		sigaction(SIGINT, &signals, NULL);
-		get_heredoc(limiter, do_expand, fd_hd);
-	}
-	-----------------------------------------------------------------------*/
 	else 
 		close(fd_hd[1]);
 	data->cmds_block[block_id].infile = fd_hd[0];
 	return (SUCCESS);
 }
-
-/* ----- a tester --- faire fichier signals.c --------------------------
-void	signal_heredoc(int signal)
-{
-	(void) signal;
-	dprintf(2, GREEN"\tDAMN YOU STOPPED THE MUSIC!\n"END);
-	dprintf(2, "\n");
-	g_ret_val = 1;
-	exit(g_ret_val);
-}
------------------------------------------------------------------------*/
 
 static void	get_heredoc(char *limiter, int do_expand, int *fd_hd)
 {
@@ -127,7 +110,7 @@ static void	get_heredoc(char *limiter, int do_expand, int *fd_hd)
 	}
 	free(line);
 	if (do_expand == false)
-		puts("je fais mes expands!");
+		puts(RED"je fais mes expands!"END);
 	if (here_doc)
 		write(fd_hd[1], here_doc, ft_strlen(here_doc));
 	close(fd_hd[0]);

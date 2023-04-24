@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 12:39:25 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 13:46:46 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static char				*add_path_cmd(int block_id, t_data *data, char **env);
 
 t_return_status	childs_execve(t_data *data, char **env)
 {
-	// struct sigaction signals;
 	int		block_id;
 	char	*command;
 
@@ -36,10 +35,8 @@ t_return_status	childs_execve(t_data *data, char **env)
 		data->cmds_block[block_id].process_id = fork();
 		if (data->cmds_block[block_id].process_id == 0)
 		{
+			signal(SIGINT, SIG_IGN);
 			signal(SIGINT, &handle_signal_child);
-			// signals.sa_handler = &handle_signal_child;
-			// signals.sa_flags = SA_RESTART;
-			// sigaction(SIGINT, &signals, NULL);
 			if (block_id <= data->nb_of_pipe)
 				_close_this(data->cmds_block[block_id].fd_hd[0]);
 			duplicate_fds(data, block_id);

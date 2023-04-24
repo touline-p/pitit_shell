@@ -22,21 +22,15 @@ int g_ret_val;
 int	main(int ac, char **av, char **env)
 {
 	(void)ac; (void)av;
-
-	// struct sigaction signals;
 	char	*line;
 	t_string_token	*str_tok_lst;
 
 	if (welcome_to_minihell(&env) != SUCCESS)
 		return (1);
-
-
 	while (MINI_SHELL_MUST_GO_ON)
 	{
+		signal(SIGINT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
-		// signals.sa_handler = &handle_signal_main;
-		// signals.sa_flags = SA_RESTART;
-		// sigaction(SIGINT, &signals, NULL);
 		line = readline("Y a quoi ? ");
 		if (line == NULL || ft_str_is_ascii(line) == false) {
 			printf("\n");
