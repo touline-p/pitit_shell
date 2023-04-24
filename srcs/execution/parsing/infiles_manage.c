@@ -6,7 +6,7 @@
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 19:49:01 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/24 22:47:48 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,9 @@ static void	get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	close(fd_hd[1]);
 	free(here_doc);
 	exit(EXIT_SUCCESS);
+	/*
+	exit(g_ret_value);
+	*/
 }
 
 static void	trim_limiter(char *s)
