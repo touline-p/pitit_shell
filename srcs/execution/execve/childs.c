@@ -42,16 +42,13 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			duplicate_fds(data, block_id);
 			command = add_path_cmd(block_id, data, *env);
 			if (data->cmds_block[block_id].id_command != CMD)
-			{
 				exit(builtin_switch(data->cmds_block->id_command, data->cmds_block->commands, \
                     env));
-			}
-			else if (access(*data->cmds_block[block_id].commands, F_OK) == 0)
+			if (command != NULL)
 			{
 				execve(command, data->cmds_block[block_id].commands, *env);
-				perror(command);
+				perror(data->cmds_block[block_id].commands[0]);
 			}
-				dprintf(2,"je suis la\n");
 			ft_free_split(data->cmds_block[block_id].commands);
 			exit(EXIT_FAILURE);
 		}
@@ -106,9 +103,11 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env)
 {
 	int		i;
 	char	**paths;
+	char 	*ret_val;
 
-	if (access(data->cmds_block[block_id].commands[0], X_OK) == 0)
+	if (is_path(data->cmds_block[block_id].commands[0]))
 		return (data->cmds_block[block_id].commands[0]);
+	puts("j'entre");
 	paths = get_paths(env);
 	if (!paths)
 		return (NULL);
@@ -123,12 +122,12 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env)
 		}
 		if (access(paths[i], X_OK) == 0)
 		{
-			data->cmds_block[block_id].commands[0] = ft_strdup(paths[i]);
+			ret_val = ft_strdup(paths[i]);
 			ft_free((void **)paths, get_path_size(paths));
-			return (data->cmds_block[block_id].commands[0]);
+			return (ret_val);
 		}
 		i++;
 	}
-	ft_free((void **)paths, get_path_size(paths));
+	ft_dprintf(2, "%s : command not found\n", data->cmds_block[block_id].commands[0]);
 	return (NULL);
 }
