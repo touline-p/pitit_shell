@@ -15,7 +15,7 @@
 
 static t_return_status	_export_display(char **env);
 static void				_display_unic_export(char *env_line);
-static t_export_ft		_get_ft_to_do(char *line, char **env);
+static t_export_ft		get_ft_to_do(char *line, char **env);
 
 t_return_status	export_builtin(char **args, char ***env_pt)
 {
@@ -26,7 +26,7 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 	tmp = args + 1;
 	while (*tmp != NULL)
 	{
-		if ((*_get_ft_to_do(*tmp, *env_pt))(*tmp, env_pt) != SUCCESS)
+		if ((*get_ft_to_do(*tmp, *env_pt))(*tmp, env_pt) != SUCCESS)
 			return (free(*args), ft_free_split(tmp), FAILED_MALLOC);
 		tmp++;
 	}
@@ -97,7 +97,7 @@ t_return_status	not_in_context_error(char *line, char ***env_pt)
 	return (free(line), SUCCESS);
 }
 
-static t_export_ft	_get_ft_to_do(char *line, char **env)
+static t_export_ft	get_ft_to_do(char *line, char **env)
 {
 	char	*eq;
 	char	*plus;

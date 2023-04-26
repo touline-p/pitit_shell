@@ -44,12 +44,14 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/main.c														\
 			srcs/builtin/env_utils/ordering_env_export.c					\
 			srcs/builtin/env_utils/env_utils.c								\
+			srcs/builtin/env_utils/get_in_env.c								\
 			srcs/builtin/env.c												\
 			srcs/builtin/cd.c												\
 			srcs/builtin/echo.c												\
 			srcs/builtin/pwd.c												\
 			srcs/builtin/unset.c											\
 			srcs/builtin/export.c											\
-			srcs/builtin/switchman_once.c											\
+			srcs/builtin/export_get_ft_to_do.c								\
+			srcs/builtin/switchman_once.c									\
 
 
