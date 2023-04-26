@@ -32,6 +32,7 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/lexing_parsing/2_metachar_managing/split_on_meta.c			\
 			srcs/lexing_parsing/parsing_token_utils/simple_tokens_utils.c	\
 			srcs/lexing_parsing/parsing_token_utils/token_lst_utils.c		\
+			srcs/lexing_parsing/parsing_token_utils/token_lst_utils_2.c		\
 			srcs/lexing_parsing/parsing_token_utils/testing_utils.c			\
 			srcs/lexing_parsing/lexing_line_to_token_lst.c					\
 			srcs/lexing_parsing/syntax_checking/syntax_is_valid.c			\

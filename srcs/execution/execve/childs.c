@@ -114,7 +114,7 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env)
 	while (paths[i])
 	{
 		paths[i] = strjoin_path_cmd(paths[i], data->cmds_block[block_id].commands[0]);
-		if (paths[i] != NULL)
+		if (paths[i] == NULL)
 		{
 			ft_free((void **)paths, ft_str_array_len(paths));
 			return (NULL);
