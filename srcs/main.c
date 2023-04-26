@@ -34,8 +34,8 @@ int	main(int ac, char **av, char **env)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
-		printf("%d\n", g_ret_val);
-		line = readline("Y a quoi ? ");
+		printf("%d %s", g_ret_val, get_env_content_from_key("PWD", env));
+		line = readline(" y a quoi ? :");
 
 		if (line == NULL || ft_str_is_ascii(line) == false) {
 			free(line);
