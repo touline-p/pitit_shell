@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_articulation.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/27 00:20:01 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/04/27 00:20:38 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../incs/parsing_incs/minishell_parsing.h"
 #include "../../incs/parsing_incs/prototypes_parsing.h"
 #include "../../incs/execution_incs/structures_execution.h"
 
 #include "../../libft/libft.h"
 
-t_return_status	get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env)
+t_return_status	get_lexed_str_token_lst_from_line(char *line, \
+		t_string_token **str_tok_pt, char **env)
 {
 	t_token			*simple_tok_lst;
 	t_string_token	*str_token_lst;
 
 	(void)env;
-
 	simple_tok_lst = token_lst_constructor(line);
 	free(line);
 	if (simple_tok_lst == NULL)
@@ -20,7 +32,6 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, t_string_token **s
 	split_toklst_on_meta(simple_tok_lst);
 	regroup_meta(simple_tok_lst);
 	str_token_lst = token_lst_to_str_token(simple_tok_lst);
-	// del_space_token(str_token_lst);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
 	*str_tok_pt = str_token_lst;
