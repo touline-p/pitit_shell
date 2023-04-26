@@ -36,8 +36,8 @@ int	main(int ac, char **av, char **env)
 		signal(SIGINT, &handle_signal_main);
 		printf("%d %s", g_ret_val, get_env_content_from_key("PWD", env));
 		line = readline(" y a quoi ? :");
-
-		if (line == NULL || ft_str_is_ascii(line) == false) {
+		if (line == NULL || ft_str_is_ascii(line) == false)
+		{
 			free(line);
 			printf("exit\n");
 			exit(g_ret_val);
