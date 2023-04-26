@@ -40,3 +40,22 @@ t_return_status 	builtin_switch(t_builtin builtin, char **av, char ***env_pt)
 		return (FAILURE);
 	return ((*ft_arr[builtin])(av, env_pt));
 }
+
+bool	is_path(char *line)
+{
+	return (ft_strchr(line, '/') != NULL);
+}
+
+bool	is_cmd(char *line)
+{
+	return (ft_strchr(line, '/') == NULL);
+}
+
+#ifdef TST_IS_CMD
+
+int main()
+{
+	printf("cmd : %d\npaths : %d\n", is_cmd("minishell"), is_cmd("./minishell"));
+}
+
+#endif

@@ -6,10 +6,6 @@
 
 #include "../incs/execution_incs/minishell_execution.h"
 #include "../incs/parsing_incs/minishell_parsing.h"
-/*---- prototypes ------------------------------------------------------------*/
-
-static t_return_status welcome_to_minihell(char ***env_pt);
-
 /*---- global definition -----------------------------------------------------*/
 
 int g_ret_val;
@@ -18,6 +14,12 @@ int g_ret_val;
 
 #define MAIN
 #ifdef MAIN
+/*---- prototypes ------------------------------------------------------------*/
+
+static t_return_status welcome_to_minihell(char ***env_pt);
+
+/*----------------------------------------------------------------------------*/
+
 
 int	main(int ac, char **av, char **env)
 {
@@ -32,7 +34,9 @@ int	main(int ac, char **av, char **env)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
+		printf("%d\n", g_ret_val);
 		line = readline("Y a quoi ? ");
+
 		if (line == NULL || ft_str_is_ascii(line) == false) {
 			free(line);
 			printf("exit\n");
