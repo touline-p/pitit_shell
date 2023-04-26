@@ -15,7 +15,7 @@
 
 void	suppress_quotes(t_token *tok)
 {
-	t_token *pin;
+	t_token	*pin;
 
 	pin = tok;
 	while (pin->next->token != EOL)
