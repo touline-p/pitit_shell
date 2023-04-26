@@ -60,3 +60,16 @@ char	*get_env_content_from_key(char *key, char **env)
 		return (ret_val + 1);
 	return (NULL);
 }
+
+bool	key_is_not_alnum(char *line)
+{
+	while (*line != '=' && *line)
+	{
+		if (*line == '+' && *(line + 1) == '=')
+			return (false);
+		if (ft_isalnum(*line) == false)
+			return (true);
+		line++;
+	}
+	return (false);
+}

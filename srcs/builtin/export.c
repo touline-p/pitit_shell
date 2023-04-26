@@ -33,7 +33,7 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 	return (free(*args), free(args), SUCCESS);
 }
 
-void	_get_rid_of_plus(char *line)
+void	get_rid_of_plus(char *line)
 {
 	if (line == NULL)
 		return ;
@@ -51,69 +51,6 @@ void	_get_rid_of_plus(char *line)
 t_return_status	replace_content_in_env_pt(char *line, char ***env_pt)
 {
 	return (replace_content_in_env(line, *env_pt), SUCCESS);
-}
-
-t_return_status	do_nothing_t_export_ft(char *line, char ***env_pt)
-{
-	(void)line;
-	(void)env_pt;
-	return (SUCCESS);
-}
-
-t_return_status	concat_content_to_line_in_env(char *line, char ***env_pt)
-{
-	char	*content;
-	char	**env_line;
-	char	*tmp;
-
-	content = ft_strchr(line, '=');
-	*(content++) = 0;
-	env_line = get_line_addr_from_key(line, *env_pt);
-	tmp = *env_line;
-	*env_line = ft_strjoin(*env_line, content);
-	free(tmp);
-	free(line);
-	return (SUCCESS);
-}
-
-bool	key_is_not_alnum(char *line)
-{
-	while (*line != '=' && *line)
-	{
-		if (*line == '+' && *(line + 1) == '=')
-			return (false);
-		if (ft_isalnum(*line) == false)
-			return (true);
-		line++;
-	}
-	return (false);
-}
-
-t_return_status	not_in_context_error(char *line, char ***env_pt)
-{
-	(void)env_pt;
-	if (dprintf(2, "export : '%s': not a valid identifier\n", line) == -1)
-		return (free(line), FAILED_WRITE);
-	return (free(line), SUCCESS);
-}
-
-static t_export_ft	get_ft_to_do(char *line, char **env)
-{
-	char	*eq;
-	char	*plus;
-
-	eq = ft_strchr(line, '=');
-	plus = ft_strchr(line, '+');
-	_get_rid_of_plus(line);
-	if (key_is_not_alnum(line))
-		return (&not_in_context_error);
-	if (has_a_key_from_env(line, env) == false)
-		return (&add_str_to_env);
-	if (eq == NULL)
-		return (&do_nothing_t_export_ft);
-	if (plus == eq - 1)
-		return (&concat_content_to_line_in_env);
-	return (&replace_content_in_env_pt);
 }
 
 static t_return_status	_export_display(char **env)
