@@ -14,15 +14,18 @@
 
 static t_return_status	_dquoting_process_ep(void);
 
-t_return_status	dquoting_process(t_token *last_token, t_token *token, t_token **end_of_quot_pt)
+t_return_status	dquoting_process(t_token *last_token, \
+	t_token *token, t_token **end_of_quot_pt)
 {
 	t_token	*pin;
 
 	pin = token->next;
-	token->sign_char = -'\"';
-	while ((pin->token != EOL && pin->sign_char != '\"') || pin->esec == SECURED)
+	token->sign_char = - '\"';
+	while ((pin->token != EOL && pin->sign_char != '\"')
+		|| pin->esec == SECURED)
 	{
-		if (pin->sign_char == '\\' && is_from(pin->next->sign_char, "\\\"$"))
+		if (pin->sign_char == '\\'
+			&& is_from(pin->next->sign_char, "\\\"$"))
 			escape_process(last_token, pin, &last_token);
 		else if (pin->sign_char != '$')
 			pin->esec = SECURED;
@@ -31,13 +34,16 @@ t_return_status	dquoting_process(t_token *last_token, t_token *token, t_token **
 	}
 	if (pin->token == EOL)
 		return (_dquoting_process_ep());
-	pin->sign_char = -'\"';
+	pin->sign_char = - '\"';
 	*end_of_quot_pt = pin;
 	return (SUCCESS);
 }
 
 static t_return_status	_dquoting_process_ep(void)
 {
-	write(2, "syntax error near newline.\nLine can't end with open double quote\n", 65);
+	char	*str;
+
+	str = "syntax error near newline.\nLine can't end with open : \"\n";
+	write(2, str, 65);
 	return (FAILURE);
 }

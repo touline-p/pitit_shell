@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 23:15:32 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/04/26 23:15:40 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../libft/libft.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
@@ -8,7 +20,7 @@ static int				_get_shlvl_nb(char *str);
 
 t_return_status	env_init_on(char ***env_pt)
 {
-	char *line_cwd;
+	char	*line_cwd;
 
 	if (*env_pt == NULL)
 		return (_reconstruct_env(env_pt));
@@ -28,9 +40,9 @@ t_return_status	env_init_on(char ***env_pt)
 
 static t_return_status	_increment_shlvl(char ***env_pt)
 {
-	char *line;
-	char *line_to_add;
-	int shlvl;
+	char	*line;
+	char	*line_to_add;
+	int		shlvl;
 
 	line = get_line_from_key("SHLVL", *env_pt);
 	if (line == NULL)
@@ -50,7 +62,7 @@ static t_return_status	_increment_shlvl(char ***env_pt)
 
 static int	_get_shlvl_nb(char *str)
 {
-	char *pin;
+	char	*pin;
 
 	pin = str;
 	while (*pin)
@@ -64,7 +76,7 @@ static int	_get_shlvl_nb(char *str)
 
 static t_return_status	_reconstruct_env(char ***env_pt)
 {
-	char **new_env;
+	char	**new_env;
 
 	printf("here\n");
 	new_env = malloc(sizeof(char *) * 4);
@@ -75,12 +87,13 @@ static t_return_status	_reconstruct_env(char ***env_pt)
 	new_env[2] = ft_strdup("SHLVL=\"1\"");
 	new_env[3] = NULL;
 	if (new_env[0] == NULL || new_env[1] == NULL || new_env[2] == NULL)
-		return (free(new_env[0]), free(new_env[1]), free(new_env[2]), free(new_env), FAILED_MALLOC);
+		return (free(new_env[0]), free(new_env[1]), \
+			free(new_env[2]), free(new_env), FAILED_MALLOC);
 	*env_pt = new_env;
 	return (SUCCESS);
 }
 
-static char *_get_cwd_var(void)
+static char	*_get_cwd_var(void)
 {
 	char	*cwd;
 	char	*dst;
@@ -97,16 +110,3 @@ static char *_get_cwd_var(void)
 	free(cwd);
 	return (dst);
 }
-
-#ifdef  TST_GET_CMD_VAR
-
-int main(int ac, char **av, char **env)
-{
-	char *line;
-	(void)ac; (void)av; (void)env;
-	env_init_on(&env);
-	ft_print_split(env);
-	ft_free_split(env);
-}
-
-#endif

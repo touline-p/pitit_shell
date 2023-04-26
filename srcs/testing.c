@@ -13,7 +13,7 @@ int	main(int ac, char **av, char **env)
 	return (0);
 }
 #endif
-//#define TST_GNL
+
 #ifdef TST_GNL
 
 int main(int ac, char **av)
@@ -28,6 +28,19 @@ int main(int ac, char **av)
 
 #endif
 
+
+#ifdef  TST_GET_CMD_VAR
+
+int main(int ac, char **av, char **env)
+{
+	char *line;
+	(void)ac; (void)av; (void)env;
+	env_init_on(&env);
+	ft_print_split(env);
+	ft_free_split(env);
+}
+
+#endif
 // #define TST_EXPORT
 #ifdef TST_EXPORT
 int main(int ac, char **av, char **env)

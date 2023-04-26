@@ -15,7 +15,7 @@
 
 static t_return_status	_export_display(char **env);
 static void				_display_unic_export(char *env_line);
-static t_export_ft		get_ft_to_do(char *line, char **env);
+t_export_ft				get_ft_to_do(char *line, char **env);
 
 t_return_status	export_builtin(char **args, char ***env_pt)
 {
