@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   switchman_once.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 22:58:48 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/04/26 22:58:49 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //
 // Created by bpoumeau on 4/22/23.
 //
@@ -7,15 +19,18 @@
 
 t_return_status	switchman_once(t_data *data, char ***env_pt)
 {
-	int pid;
-	if (data->cmds_block->id_command > PWD
-		|| (data->cmds_block->id_command == EXPORT && data->cmds_block->commands[1] != NULL))
-		return (builtin_switch(data->cmds_block->id_command, data->cmds_block->commands, env_pt));
+	int		pid;
+	t_cmd	*cmd;
+
+	cmd = data->cmds_block;
+	if (cmd->id_command > PWD
+		|| (cmd->id_command == EXPORT && cmd->commands[1] != NULL))
+		return (builtin_switch(cmd->id_command, cmd->commands, env_pt));
 	pid = fork();
 	if (pid == 0)
 	{
 		duplicate_fds(data, 0);
-		builtin_switch(data->cmds_block->id_command, data->cmds_block->commands, env_pt);
+		builtin_switch(cmd->id_command, cmd->commands, env_pt);
 		exit(g_ret_val);
 	}
 	return (SUCCESS);

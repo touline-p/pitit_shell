@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ordering_env_export.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 23:00:27 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/04/26 23:00:29 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../libft/libft.h"
 #include "../../../incs/parsing_incs/minishell_parsing.h"
 
-char *get_first_line_in_env(char **env)
+char	*get_first_line_in_env(char **env)
 {
-	char *ret_val;
+	char	*ret_val;
 
 	ret_val = *(env++);
-	while (*env != NULL) {
+	while (*env != NULL)
+	{
 		if (ft_strcmp(ret_val, *env) > 0)
 			ret_val = *env;
 		env++;
@@ -14,9 +27,10 @@ char *get_first_line_in_env(char **env)
 	return (ret_val);
 }
 
-char *get_next_line_in_env(char *last, char **env)
+char	*get_next_line_in_env(char *last, char **env)
 {
-	char *line;
+	char	*line;
+
 	line = NULL;
 	while (*env)
 	{
@@ -27,19 +41,3 @@ char *get_next_line_in_env(char *last, char **env)
 	}
 	return (line);
 }
-
-
-//#define TST_GNL
-#ifdef TST_GNL
-
-int main(int ac, char **av)
-{
-	(void)ac;
-	char *string;
-	printf("%s\n", string = get_first_line_in_env(av + 1));
-	while (string)
-		printf("%s\n", string = get_next_line_in_env(string ,av + 1));
-
-}
-
-#endif

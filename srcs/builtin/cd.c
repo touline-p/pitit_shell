@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 22:57:56 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/04/26 22:58:03 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../libft/libft.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
@@ -9,7 +21,8 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 
 	(void)env_pt;
 	if (ft_str_array_len(av) != 2)
-		return (dprintf(2, "cd: bad arguments number\n"), ft_free_split(av), SUCCESS);
+		return (dprintf(2, "cd: bad arguments number\n"), \
+						ft_free_split(av), SUCCESS);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 		return (FAILURE);
@@ -43,17 +56,3 @@ static t_return_status	_update_pwd_var(char *pwd, char **env)
 	replace_content_in_env(new_pwd, env);
 	return (SUCCESS);
 }
-
-
-#ifdef TST_CD
-int main(int ac, char **av, char **env)
-{
-	(void)ac; (void)av; (void)env;
-
-	env = ft_str_array_dup(env);
-	av = ft_str_array_dup(av);
-	cd_builtin(av, &env);
-	ft_free_split(env);
-	return (0);
-}
-#endif
