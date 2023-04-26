@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes_parsing.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/20 19:20:56 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:26:35 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ void	display_str_token(t_string_token *tok);
 
 
 
-char	*_get_env_variable(t_token *token, char **env);
-void cpy_next_char(unsigned int index, char *str);
+char			*_get_env_variable(t_token *token, char **env);
+void 			cpy_next_char(unsigned int index, char *str);
 t_return_status	replace_dquotes_str_by_env_value(char **line_pt, char **env);
 t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env);
 

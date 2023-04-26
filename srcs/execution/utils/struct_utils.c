@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 13:10:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 20:56:11 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:13:58 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	free_commands(t_data *data)
 t_return_status free_data(t_data *data)
 {
 	int	i;
-	int	j;
 	
     if (!data || !data->cmds_block)
 		return (FAILURE);
@@ -42,6 +41,6 @@ t_return_status free_data(t_data *data)
 		i++;
 	}
     free(data->cmds_block);
-	free(data);
+	// free(data);
 	return (SUCCESS);
 }

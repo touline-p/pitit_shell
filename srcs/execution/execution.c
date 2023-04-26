@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/24 14:51:55 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/25 11:46:19 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,30 @@
 
 static t_return_status	alloc_cmd_block(t_data *data, \
 t_string_token *lst_of_tok);
+static t_return_status	check_if_token(t_string_token *lst_of_tok);
 static void				wait_for_process_ids(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
-static t_return_status	check_if_token(t_string_token *lst_of_tok)
+void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 {
-	t_string_token	*temp;
-	
-	temp = lst_of_tok;
-	while (temp != NULL)
-	{
-		if (temp->token != START && temp->token != EOL)
-			return (SUCCESS);
-		temp = temp->next;
-	}
-	return (FAILURE);
-}
-
-void	execution(t_string_token *lst_of_tok, char ***env_pt)
-{
-	t_data	data;
-
 	display_str_token(lst_of_tok);
-	ft_bzero(&data, sizeof(t_data));
-	alloc_cmd_block(&data, lst_of_tok);
-	infiles_management(&data, lst_of_tok, *env_pt);
-	outfiles_management(&data, lst_of_tok, *env_pt);
+	ft_bzero(data, sizeof(t_data));
+	alloc_cmd_block(data, lst_of_tok);
+	infiles_management(data, lst_of_tok, *env_pt);
+	outfiles_management(data, lst_of_tok, *env_pt);
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
 	if (check_if_token(lst_of_tok) != SUCCESS)
 		return ;
-	strings_management(&data, lst_of_tok, *env_pt);
-	
-	if (data.nb_of_pipe == 0 && data.cmds_block->id_command != CMD)
-		switchman_once(&data, env_pt);
+	strings_management(data, lst_of_tok, *env_pt);
+	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD)
+		switchman_once(data, env_pt);
 	else
-		childs_execve(&data, env_pt);
-	wait_for_process_ids(&data);
-
-	free_commands(&data);
+		childs_execve(data, env_pt);
+	wait_for_process_ids(data);
+	free_data(data);
+	// free_commands(data);
 }
 
 static t_return_status	alloc_cmd_block(t_data *data, \
@@ -78,6 +62,20 @@ t_string_token *lst_of_tok)
 	while (i < data->nb_of_pipe + 1)
 		data->cmds_block[i++].outfile = 1;
 	return (SUCCESS);
+}
+
+static t_return_status	check_if_token(t_string_token *lst_of_tok)
+{
+	t_string_token	*temp;
+	
+	temp = lst_of_tok;
+	while (temp != NULL)
+	{
+		if (temp->token != START && temp->token != EOL)
+			return (SUCCESS);
+		temp = temp->next;
+	}
+	return (FAILURE);
 }
 
 static void	wait_for_process_ids(t_data *data)

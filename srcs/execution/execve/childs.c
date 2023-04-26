@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 19:48:37 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:24:39 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		if (_do_the_pipe(&(data->cmds_block[block_id]), data->nb_of_pipe, block_id) != SUCCESS)
 			return (FAILURE);
 		_manage_the_pipe(data, block_id);
-		// signal(SIGINT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
 		signal(SIGINT, &handle_signal_child);
 		data->cmds_block[block_id].process_id = fork();
 		/*-----------------------------------------------------------
