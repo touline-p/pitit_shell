@@ -1,12 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 22:58:27 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/04/26 22:58:28 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../libft/libft.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
 static t_return_status	_export_display(char **env);
 static void				_display_unic_export(char *env_line);
-
-typedef t_return_status (*t_export_ft)(char *arg, char ***env_pt);
-
-t_export_ft	_get_ft_to_do(char *line, char **env);
+t_export_ft				get_ft_to_do(char *line, char **env);
 
 t_return_status	export_builtin(char **args, char ***env_pt)
 {
@@ -17,15 +26,14 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 	tmp = args + 1;
 	while (*tmp != NULL)
 	{
-		if ((*_get_ft_to_do(*tmp, *env_pt))(*tmp, env_pt) != SUCCESS)
+		if ((*get_ft_to_do(*tmp, *env_pt))(*tmp, env_pt) != SUCCESS)
 			return (free(*args), ft_free_split(tmp), FAILED_MALLOC);
 		tmp++;
 	}
 	return (free(*args), free(args), SUCCESS);
 }
 
-
-void _get_rid_of_plus(char *line)
+void	get_rid_of_plus(char *line)
 {
 	if (line == NULL)
 		return ;
@@ -40,81 +48,17 @@ void _get_rid_of_plus(char *line)
 	}
 }
 
-t_return_status replace_content_in_env_pt(char *line, char ***env_pt)
+t_return_status	replace_content_in_env_pt(char *line, char ***env_pt)
 {
 	return (replace_content_in_env(line, *env_pt), SUCCESS);
 }
 
-t_return_status do_nothing_t_export_ft(char *line, char ***env_pt)
-{
-	(void)line;
-	(void)env_pt;
-	return (SUCCESS);
-}
-
-t_return_status concat_content_to_line_in_env(char *line, char ***env_pt)
-{
-	char	*content;
-	char	**env_line;
-	char 	*tmp;
-
-	content = ft_strchr(line, '=');
-	*(content++) = 0;
-	env_line = get_line_addr_from_key(line, *env_pt);
-	tmp = *env_line;
-	*env_line = ft_strjoin(*env_line, content);
-	free(tmp);
-	free(line);
-	return (SUCCESS);
-}
-
-bool	key_is_not_alnum(char *line)
-{
-	while (*line != '=' && *line)
-	{
-		if (*line == '+' && *(line + 1) == '=')
-			return (false);
-		if (ft_isalnum(*line) == false)
-			return (true);
-		line++;
-	}
-	return (false);
-}
-
-t_return_status 	not_in_context_error(char *line, char ***env_pt)
-{
-	(void)env_pt;
-	if (dprintf(2, "export : '%s': not a valid identifier\n", line) == -1)
-		return (free(line), FAILED_WRITE);
-	return (free(line), SUCCESS);
-}
-
-t_export_ft	_get_ft_to_do(char *line, char **env) {
-	char *eq;
-	char *plus;
-
-	eq = ft_strchr(line, '=');
-	plus = ft_strchr(line, '+');
-	_get_rid_of_plus(line);
-	if (key_is_not_alnum(line))
-		return (&not_in_context_error);
-	if (has_a_key_from_env(line, env) == false)
-		return (&add_str_to_env);
-	if (eq == NULL)
-		return (&do_nothing_t_export_ft);
-	if (plus == eq - 1)
-		return (&concat_content_to_line_in_env);
-	return (&replace_content_in_env_pt);
-}
-
-
-
 static t_return_status	_export_display(char **env)
 {
-	char *line;
+	char	*line;
 
 	line = get_first_line_in_env(env);
-	while (line != NULL )//&& (line[0] == '_' && line[1] == '=') == false)
+	while (line != NULL )
 	{
 		if (!(line[0] == '_' && line[1] == '='))
 			_display_unic_export(line);
@@ -137,21 +81,3 @@ static void	_display_unic_export(char *env_line)
 	printf("declare -x %s=\"%s\"\n", env_line, content);
 	*(--content) = '=';
 }
-
-// #define TST_EXPORT
-#ifdef TST_EXPORT
-int main(int ac, char **av, char **env)
-{
-	(void)ac;
-	(void)av;
-
-	av = ft_str_array_dup(av);
-	env = ft_str_array_dup(env);
-	export_builtin(av, &env);
-	ft_print_split(env);
-	del_str_from_env(get_line_from_key("USER", env), &env);
-	printf("\n\n\nyouhou\n\n\n");
-	ft_print_split(env);
-	ft_free_split(env);
-}
-#endif

@@ -10,17 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//
-// Created by bpoumeau on 2/21/23.
-//
-
-# include "minishell_parsing.h"
+#include "minishell_parsing.h"
 #include "../../../incs/parsing_incs/minishell_parsing.h"
-
 
 void	display_tokens(t_token *token_lst)
 {
-	t_token *next_block;
+	t_token	*next_block;
 
 	while (token_lst)
 	{
@@ -38,10 +33,14 @@ void	display_tokens(t_token *token_lst)
 
 void	display_t_emt(t_token *token)
 {
-	const char	*msgarr[] = {"start", "pipe_", "_and_", "fd_in", "fd_ot", "_or__", "ifnot", "hrdoc", "appnd", "lfpar", "rtpar", "smcln", "space", "_tab_", "_ltr_","end_l", "_str_", "dolrs"};
+	const char	*msgarr[] = {"start", "pipe_", "_and_", "fd_in", \
+	"fd_ot", "_or__", "ifnot", "hrdoc", "appnd", "lfpar", \
+	"rtpar", "smcln", "space", "_tab_", "_ltr_", \
+	"end_l", "_str_", "dolrs"};
 	char		*msg;
 
-	if (token->token == LETTER) {
+	if (token->token == LETTER)
+	{
 		msg = ft_strdup("     ");
 		if (token->esec == SECURED)
 		{

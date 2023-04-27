@@ -63,6 +63,8 @@ void	check_opened_outfiles(t_data *data, int block_id);
 /*-- path_utils --*/
 int		get_path_size(char **paths);
 char	**get_paths(char **env);
+bool	is_path(char *line);
+bool	is_cmd(char *line);
 
 /*-- struct_utils --*/
 void			free_commands(t_data *data);

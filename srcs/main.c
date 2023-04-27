@@ -6,10 +6,6 @@
 
 #include "../incs/execution_incs/minishell_execution.h"
 #include "../incs/parsing_incs/minishell_parsing.h"
-/*---- prototypes ------------------------------------------------------------*/
-
-static t_return_status welcome_to_minihell(char ***env_pt);
-
 /*---- global definition -----------------------------------------------------*/
 
 int g_ret_val;
@@ -18,6 +14,12 @@ int g_ret_val;
 
 #define MAIN
 #ifdef MAIN
+/*---- prototypes ------------------------------------------------------------*/
+
+static t_return_status welcome_to_minihell(char ***env_pt);
+
+/*----------------------------------------------------------------------------*/
+
 
 int	main(int ac, char **av, char **env)
 {
@@ -33,12 +35,13 @@ int	main(int ac, char **av, char **env)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
-		// if (g_ret_val = 130)
-			// dprintf(2, "\n");
-		line = readline("Y a quoi ? ");
-		if (line == NULL || ft_str_is_ascii(line) == false) {
+		printf("%d %s", g_ret_val, get_env_content_from_key("PWD", env));
+		line = readline(" y a quoi ? :");
+		if (line == NULL || ft_str_is_ascii(line) == false)
+		{
 			free(line);
-			free_data(&data);
+			if (data.cmds_block)
+				free_data(&data);
 			g_ret_val = 0;
 			exit_builtin(NULL, &data, &env);
 		}
@@ -55,7 +58,7 @@ int	main(int ac, char **av, char **env)
 		execution(&data, str_tok_lst, &env);
 		string_token_destructor(str_tok_lst);
 	}
-	return (7768);
+	return (0);
 }
 
 static t_return_status welcome_to_minihell(char ***env_pt)

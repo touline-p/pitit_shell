@@ -13,9 +13,9 @@
 #include "minishell_parsing.h"
 #include "../../../incs/parsing_incs/minishell_parsing.h"
 
-t_return_status		_substitute_for_env_variable(t_token **token, char **env);
-char		*_get_env_variable(t_token *token, char **env);
-static char *_check_for_env_variable(t_token *tok, char *env);
+t_return_status	_substitute_for_env_variable(t_token **token, char **env);
+char			*_get_env_variable(t_token *token, char **env);
+static char		*_check_for_env_variable(t_token *tok, char *env);
 
 t_return_status	expand_dollars(t_token *token_lst, char **env)
 {
@@ -35,32 +35,33 @@ t_return_status	expand_dollars(t_token *token_lst, char **env)
 
 t_return_status	_substitute_for_env_variable(t_token **last_token, char **env)
 {
-	char *variable_string;
+	char	*variable_string;
 
 	variable_string = _get_env_variable((*last_token)->next, env);
 	del_next_token(*last_token);
 	del_next_word(*last_token);
-	if (variable_string != NULL &&
-		insert_str_in_tkn_lst(*last_token, variable_string, UNSECURED) != SUCCESS)
+	if (variable_string != NULL
+		&& insert_str_in_tkn_lst(*last_token, \
+		variable_string, \
+		UNSECURED) != SUCCESS)
 		return (FAILED_MALLOC);
 	return (SUCCESS);
 }
 
-char *_get_env_variable(t_token *token, char **env)
+char	*_get_env_variable(t_token *token, char **env)
 {
-	char *variable_str;
+	char	*variable_str;
 
 	variable_str = NULL;
 	while (variable_str == NULL && *env)
 	{
-
 		variable_str = _check_for_env_variable(token->next, *env);
 		env++;
 	}
 	return (variable_str);
 }
 
-static char 	*_check_for_env_variable(t_token *tok, char *env_str)
+static char	*_check_for_env_variable(t_token *tok, char *env_str)
 {
 	(void)tok;
 	(void)env_str;

@@ -53,6 +53,7 @@ void	del_next_token(t_token *token);
 void	del_next_word(t_token *token);
 t_return_status 	insert_str_in_tkn_lst(t_token *token_lst, char *str, t_esec essec);
 int		len_to_next_type(t_token *pin);
+t_token	*token_constructor_esec(t_emt emt, char msg, t_esec esec);
 
 /*** t_emt utils ***/
 
@@ -98,6 +99,8 @@ void			del_empty_tokens(t_string_token *token_lst);
 t_return_status	syntax_is_valid(t_string_token *lst_to_check);
 
 /*** env_utils ***/
+
+typedef	t_return_status (*t_export_ft)(char *arg, char ***env_pt);
 
 t_return_status	env_init_on(char ***env_pt);
 char    		*get_line_from_key(char *key, char **env);

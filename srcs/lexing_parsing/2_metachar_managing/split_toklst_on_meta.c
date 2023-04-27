@@ -13,12 +13,12 @@
 #include "minishell_parsing.h"
 #include "../../../incs/parsing_incs/minishell_parsing.h"
 
-static	void	_get_signal_from_char(char sign_char, t_emt *emt_pt);
+static void		_get_signal_from_char(char sign_char, t_emt *emt_pt);
 static void		_regroup_ft(t_token *tok);
 
-t_token *split_toklst_on_meta(t_token *tok)
+t_token	*split_toklst_on_meta(t_token *tok)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = tok;
 	while (tok && tok->token != EOL)
@@ -34,7 +34,7 @@ static	void	_get_signal_from_char(char sign_char, t_emt *emt_pt)
 {
 	const t_emt	emt_arr[] = {PIPE, AMPERSAND, CHEVRON_IN, CHEVRON_OT, \
 						O_PRTSS, C_PRTSS, SEMICOLON, E_SPACE};
-	const char 	*metachar_set = METACHAR_SET;
+	const char	*metachar_set = METACHAR_SET;
 	char		*signal;
 
 	signal = ft_strchr(metachar_set, sign_char);
@@ -42,9 +42,9 @@ static	void	_get_signal_from_char(char sign_char, t_emt *emt_pt)
 		*emt_pt = emt_arr[signal - metachar_set];
 }
 
-t_token *regroup_meta(t_token *tok)
+t_token	*regroup_meta(t_token *tok)
 {
-	t_token *ret;
+	t_token	*ret;
 
 	ret = tok;
 	while (tok->next && tok->next->token != EOL)
@@ -58,7 +58,7 @@ t_token *regroup_meta(t_token *tok)
 
 static void	_regroup_ft(t_token *tok)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	if (tok->token >= OR)
 		return ;
