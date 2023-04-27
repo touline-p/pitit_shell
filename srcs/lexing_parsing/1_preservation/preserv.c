@@ -26,7 +26,6 @@ t_return_status	preserve_token_lst(t_token *token)
 			dquoting_process, \
 			do_nothing};
 
-	display_tokens(token);
 	pin = token->next;
 	while (token->token != EOL)
 	{

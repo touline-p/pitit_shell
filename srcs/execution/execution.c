@@ -23,7 +23,6 @@ static void				wait_for_process_ids(t_data *data);
 
 void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 {
-	display_str_token(lst_of_tok);
 	ft_bzero(data, sizeof(t_data));
 	alloc_cmd_block(data, lst_of_tok);
 	infiles_management(data, lst_of_tok, *env_pt);
