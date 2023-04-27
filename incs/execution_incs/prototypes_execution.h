@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/24 16:51:15 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/26 15:19:14 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 /*---- Execution -------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 
-void	execution(t_string_token *lst_of_tok, char ***env);
+void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt);
 
 /*-- execve ------------------------------------------------------------------*/
 
@@ -67,7 +67,8 @@ bool	is_path(char *line);
 bool	is_cmd(char *line);
 
 /*-- struct_utils --*/
-void	free_commands(t_data *data);
+void			free_commands(t_data *data);
+t_return_status free_data(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 /*---- Signals ---------------------------------------------------------------*/
@@ -103,5 +104,6 @@ t_return_status	env_builtin(char **av, char ***env_pt);
 t_return_status	pwd_builtin(char **av, char ***env_pt);
 t_return_status	unset_builtin(char **av, char ***env_pt);
 t_return_status	echo_builtin(char **av, char ***env_pt);
+t_return_status	exit_builtin(char **av, t_data *data, char ***env_pt);
 
 #endif

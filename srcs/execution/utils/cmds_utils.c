@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 17:34:06 by twang             #+#    #+#             */
-/*   Updated: 2023/04/18 19:16:59 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:07:02 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_builtin	is_builtin(char *string)
 t_return_status 	builtin_switch(t_builtin builtin, char **av, char ***env_pt)
 {
 	const t_builtin_ft	ft_arr[] = {NULL, &env_builtin, &echo_builtin, \
-									&export_builtin, &pwd_builtin, NULL, &unset_builtin, \
+									&export_builtin, &pwd_builtin, &exit_builtin, &unset_builtin, \
 									&cd_builtin};
 									
 	if (builtin == CMD)

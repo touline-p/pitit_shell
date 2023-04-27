@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 16:39:43 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/26 14:24:39 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,18 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		if (_do_the_pipe(&(data->cmds_block[block_id]), data->nb_of_pipe, block_id) != SUCCESS)
 			return (FAILURE);
 		_manage_the_pipe(data, block_id);
-		// signal(SIGINT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
 		signal(SIGINT, &handle_signal_child);
 		data->cmds_block[block_id].process_id = fork();
+		/*-----------------------------------------------------------
+		if (data->cmds_block[block_id].process_id == -1)
+			perror("fork");
+		else if (data->cmds_block[block_id].process_id > 0)
+		{
+			waitpid(data->cmds_block[block_id].process_id, &g_ret_value, 0);
+			kill(data->cmds_block[block_id].process_id, SIGTERM);
+		}
+		--------------------------------------------------------------*/
 		if (data->cmds_block[block_id].process_id == 0)
 		{
 			if (block_id <= data->nb_of_pipe)
@@ -52,6 +61,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			ft_free_split(data->cmds_block[block_id].commands);
 			exit(EXIT_FAILURE);
 		}
+		
 		else if (data->cmds_block[block_id].process_id < 0)
 		{
 			ft_dprintf(2, RED"Fork Issue: Resource temporarily unavailable\n"END);
