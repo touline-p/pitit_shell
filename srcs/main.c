@@ -27,6 +27,7 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	t_string_token	*str_tok_lst;
 
+	str_tok_lst = NULL;
 	if (welcome_to_minihell(&env) != SUCCESS)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
