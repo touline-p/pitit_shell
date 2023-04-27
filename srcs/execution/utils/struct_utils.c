@@ -29,7 +29,7 @@ t_return_status free_data(t_data *data)
 {
 	int	i;
 	
-    if (!data || !data->cmds_block)
+    if (!data->cmds_block)
 		return (FAILURE);
 	i = 0;
 	while (i < data->nb_of_pipe + 2)
@@ -41,6 +41,6 @@ t_return_status free_data(t_data *data)
 		i++;
 	}
     free(data->cmds_block);
-	// free(data);
+	ft_bzero(data, sizeof(data));
 	return (SUCCESS);
 }
