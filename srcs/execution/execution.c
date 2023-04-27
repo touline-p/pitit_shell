@@ -38,11 +38,10 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 		childs_execve(data, env_pt);
 	wait_for_process_ids(data);
 	free_data(data);
-	// free_commands(data);
 }
 
 static t_return_status	alloc_cmd_block(t_data *data, \
-t_string_token *lst_of_tok)
+									t_string_token *lst_of_tok)
 {
 	t_string_token	*temp;
 	int				i;

@@ -32,14 +32,14 @@ t_return_status free_data(t_data *data)
     if (!data->cmds_block)
 		return (FAILURE);
 	i = 0;
-	while (i < data->nb_of_pipe + 2)
-	{
-		if (data->cmds_block[i].commands != NULL)
-		{
-			ft_free((void **)data->cmds_block[i].commands, data->nb_of_pipe + 1);
-		}
-		i++;
-	}
+//	while (i < data->nb_of_pipe + 2)
+//	{
+//		if (data->cmds_block[i].commands != NULL)
+//		{
+//			ft_free((void **)data->cmds_block[i].commands, data->nb_of_pipe + 1);
+//		}
+//		i++;
+//	}
     free(data->cmds_block);
 	ft_bzero(data, sizeof(data));
 	return (SUCCESS);

@@ -61,12 +61,13 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			ft_free_split(data->cmds_block[block_id].commands);
 			exit(EXIT_FAILURE);
 		}
-		
 		else if (data->cmds_block[block_id].process_id < 0)
 		{
+			ft_free_split(data->cmds_block[block_id].commands);
 			ft_dprintf(2, RED"Fork Issue: Resource temporarily unavailable\n"END);
 			break ;
 		}
+		ft_free_split(data->cmds_block[block_id].commands);
 		_close_this(data->cmds_block[block_id].infile);
 		_close_this(data->cmds_block[block_id].outfile);
 		block_id++;

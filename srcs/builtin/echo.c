@@ -37,6 +37,7 @@ t_return_status	echo_builtin(char **av, char ***env_pt)
 	}
 	if (option == false)
 		printf("\n");
+	ft_free_split(av);
 	return (SUCCESS);
 }
 
