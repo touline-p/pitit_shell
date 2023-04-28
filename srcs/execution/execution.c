@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/28 15:06:09 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 16:06:42 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	else
 		childs_execve(data, env_pt);
 	wait_for_process_ids(data);
-	free_data(data);
-	// free_commands(data);
 }
 
 static t_return_status	alloc_cmd_block(t_data *data, \

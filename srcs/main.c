@@ -28,7 +28,6 @@ int	main(int ac, char **av, char **env)
 	t_data	data;
 	t_string_token	*str_tok_lst;
 
-data = NULL;
 	if (welcome_to_minihell(&env) != SUCCESS)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
@@ -37,13 +36,12 @@ data = NULL;
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
 		printf(GREEN"%s "END, get_env_content_from_key("SHLVL", env));
-		printf(END":");
+		printf(END":");	
 		printf(RED" %d"END, g_ret_val);
 		line = readline(" - Y a quoi ? ");
 		if (line == NULL || ft_str_is_ascii(line) == false)
 		{
 			free(line);
-			free_data(&data);
 			g_ret_val = 0;
 			exit(g_ret_val);
 		}
@@ -53,13 +51,14 @@ data = NULL;
 		if (line != NULL)
 		{
 			get_lexed_str_token_lst_from_line(line, &str_tok_lst, env);
-			if (syntax_is_valid(str_tok_lst) == FAILURE)
+			if (str_tok_lst == NULL || syntax_is_valid(str_tok_lst) == FAILURE)
 			{
 				string_token_destructor(str_tok_lst);
 				continue;
 			}
 			del_space_token(str_tok_lst);
 			execution(&data, str_tok_lst, &env);
+			free(data.cmds_block);
 			string_token_destructor(str_tok_lst);
 		}
 		

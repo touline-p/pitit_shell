@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:15:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/28 16:00:02 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 16:14:19 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_return_status	exit_builtin(char **av, char ***env_pt, t_data *data)
 			return (FAILURE);
 	}
 	g_ret_val = 0;
-	// ft_free_split(av);
 	exit(g_ret_val);
 	return (SUCCESS);
 	/* parser le **av : - voir que les options sont correctes
@@ -52,7 +51,6 @@ static t_return_status	check_exit_args(t_data *data, char **av)
 			ft_dprintf(2, RED"minishell: exit: %s: numeric argument required\n"END, av[1]);
 			g_ret_val = 2;
 			ft_free_split(av);
-			// free_commands(data);
 			exit(g_ret_val);
 		}
 		i++;
@@ -61,7 +59,6 @@ static t_return_status	check_exit_args(t_data *data, char **av)
 	{
 		ft_dprintf(2, RED"minishell: exit: too many arguments\n"END);
 		ft_free_split(av);
-		// free_commands(data);
 		return (FAILURE);	
 	}
 	g_ret_val = ft_atoi(av[1]);

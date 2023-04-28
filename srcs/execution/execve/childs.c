@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/28 15:26:18 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 16:13:34 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			ft_dprintf(2, RED"Fork Issue: Resource temporarily unavailable\n"END);
 			break ;
 		}
+		ft_free_split(data->cmds_block[block_id].commands);
 		_close_this(data->cmds_block[block_id].infile);
 		_close_this(data->cmds_block[block_id].outfile);
 		block_id++;
