@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/28 16:06:42 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 20:17:20 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,33 @@ static void	wait_for_process_ids(t_data *data)
 		}
 		block_id++;
 	}
-	/*man waitpid wifexited   wifexitstatus */
 }
+/**/
+static void	wait_for_process_ids(t_data *data)
+{
+	int		block_id;
+	int		status;
+	bool	have_signal;
+
+	block_id = 0;
+	status = 0;
+	have_signal = false;
+	while (block_id < data->nb_of_pipe + 1)
+	{
+		if (waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED) == -1)
+		{
+			ft_dprintf(2, RED"minishell: waitpid: process %d failed\n"END, block_id);
+			break ;
+		}
+		else if (WIFEXITED(status))
+			g_ret_val = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status) && have_signal == false)
+		{
+			handle_signal_child(WTERMSIG(status));
+			have_signal = true;
+		}
+		block_id++;
+	}
+
+}
+/**/

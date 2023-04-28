@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
+#    By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/04/24 14:26:46 by twang            ###   ########.fr        #
+#    Updated: 2023/04/28 19:45:31 by wangthea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ all:
 	$(MAKE) $(NAME)
 
 $(NAME): $(OBJECTS)
-	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@ -lreadline
+	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@ -l readline
 	$(PRINT_CREATING)
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS) $(LIBFT)

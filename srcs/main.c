@@ -32,6 +32,10 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
+		/* ---- test it like it's hot ------------
+		init_signals();
+		display_info(env);
+		----------------------------------------- */
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
@@ -84,5 +88,17 @@ static t_return_status welcome_to_minihell(char ***env_pt)
 	ft_dprintf(2, "& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
 	return (SUCCESS);
 }
+
+/* ---- test it like it's hot ------------
+static void display_info(char ***env_pt)
+{
+	ft_dprintf(2, GRAY"%s "END, get_env_content_from_key("PWD", env));
+	ft_dprintf(2, GREEN"%s "END, get_env_content_from_key("SHLVL", env));
+	ft_dprintf(2, END":");	
+	ft_dprintf(2, RED" %d"END, g_ret_val);
+}
+
+
+----------------------------------------- */
 
 #endif
