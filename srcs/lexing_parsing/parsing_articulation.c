@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_articulation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 00:20:01 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/27 00:20:38 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:38:21 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 	free(line);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
-	display_tokens(simple_tok_lst);
+	// display_tokens(simple_tok_lst);
 	preserve_token_lst(simple_tok_lst);
 	split_toklst_on_meta(simple_tok_lst);
 	regroup_meta(simple_tok_lst);
@@ -50,6 +50,6 @@ t_string_token	*parsing_constructor(char *str, char **env)
 	regroup_meta(tok);
 	str_tok = token_lst_to_str_token(tok);
 	del_space_token(str_tok);
-	display_str_token(str_tok);
+	// display_str_token(str_tok);
 	return (str_tok);
 }

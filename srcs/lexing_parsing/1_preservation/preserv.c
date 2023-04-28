@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preserv.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 03:57:05 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 02:08:26 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:38:26 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_return_status	preserve_token_lst(t_token *token)
 			dquoting_process, \
 			do_nothing};
 
-	display_tokens(token);
+	// display_tokens(token);
 	pin = token->next;
 	while (token->token != EOL)
 	{

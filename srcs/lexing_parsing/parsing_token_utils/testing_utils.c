@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:58:54 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/09 13:43:05 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:38:40 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	display_tokens(t_token *token_lst)
 		next_block = token_lst->next_word;
 		while (token_lst != NULL)
 		{
-			display_t_emt(token_lst);
+			// display_t_emt(token_lst);
 			token_lst = token_lst->next;
 		}
 		printf("\n");

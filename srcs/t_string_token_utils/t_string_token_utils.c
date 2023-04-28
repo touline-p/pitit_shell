@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:25:09 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/17 16:25:31 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 15:42:53 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,10 @@ t_return_status	split_t_string_token_on_space(t_string_token **token)
 	ft_print_split(split);
 	if (split == NULL)
 		return (FAILED_MALLOC);
-	printf("je suis lla\n");
+	// printf("je suis la\n");
 	if (str_arr_to_str_token_lst(split, &token_lst) != SUCCESS)
 		return (FAILED_MALLOC);
-	display_str_token(token_lst);
+	// display_str_token(token_lst);
 	*token = token_lst;
 	return (SUCCESS);
 }

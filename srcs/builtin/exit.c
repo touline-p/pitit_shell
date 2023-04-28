@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:15:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/28 15:15:49 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 16:00:02 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void	check_exit_args(t_data *data, char **av);
+static t_return_status	check_exit_args(t_data *data, char **av);
 
 /*----------------------------------------------------------------------------*/
 
@@ -24,11 +24,13 @@ t_return_status	exit_builtin(char **av, char ***env_pt, t_data *data)
 	(void)env_pt;
 	
 	ft_dprintf(2, RED"exit\n"END);
-	ft_dprintf(2, RED"%p\n"END, av[1]);
 	if (av[1])
-		check_exit_args(data, av);
-	free_data(data);
+	{
+		if (check_exit_args(data, av) != SUCCESS)
+			return (FAILURE);
+	}
 	g_ret_val = 0;
+	// ft_free_split(av);
 	exit(g_ret_val);
 	return (SUCCESS);
 	/* parser le **av : - voir que les options sont correctes
@@ -38,7 +40,7 @@ t_return_status	exit_builtin(char **av, char ***env_pt, t_data *data)
 	/* nettoyer toute les allocations de memoires donnees */
 }
 
-static void	check_exit_args(t_data *data, char **av)
+static t_return_status	check_exit_args(t_data *data, char **av)
 {
 	int	i;
 
@@ -49,17 +51,25 @@ static void	check_exit_args(t_data *data, char **av)
 		{
 			ft_dprintf(2, RED"minishell: exit: %s: numeric argument required\n"END, av[1]);
 			g_ret_val = 2;
-			free_data(data);
+			ft_free_split(av);
+			// free_commands(data);
 			exit(g_ret_val);
 		}
 		i++;
 	}
 	if (av[2])
+	{
 		ft_dprintf(2, RED"minishell: exit: too many arguments\n"END);
+		ft_free_split(av);
+		// free_commands(data);
+		return (FAILURE);	
+	}
 	g_ret_val = ft_atoi(av[1]);
 	if (g_ret_val >= 255)
 	{
-		free_data(data);
+		ft_free_split(av);
 		exit(g_ret_val);
 	}
+	ft_free_split(av);
+	return (SUCCESS);
 }
