@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:57:56 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 22:58:03 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:19:53 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 static t_return_status	_update_pwd_var(char *pwd, char **env);
 
-t_return_status	cd_builtin(char **av, char ***env_pt)
+t_return_status	cd_builtin(char **av, char ***env_pt, t_data *data)
 {
 	char	*pwd;
 
 	(void)env_pt;
+	(void)data;
 	if (ft_str_array_len(av) != 2)
 		return (dprintf(2, "cd: bad arguments number\n"), \
 						ft_free_split(av), SUCCESS);

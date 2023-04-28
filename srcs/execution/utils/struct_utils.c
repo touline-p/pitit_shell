@@ -6,16 +6,18 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 13:10:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/26 14:13:58 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 13:57:30 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
 
-void	free_commands(t_data *data)
+t_return_status	free_commands(t_data *data)
 {
 	int	i;
 
+ 	if (!data->cmds_block)
+		return (FAILURE);
 	i = 0;
 	while (i < data->nb_of_pipe + 1)
 	{
@@ -23,13 +25,14 @@ void	free_commands(t_data *data)
 			ft_free((void **)data->cmds_block[i].commands, data->nb_of_pipe + 1);
 		i++;
 	}
+	return (SUCCESS);
 }
 
 t_return_status free_data(t_data *data)
 {
 	int	i;
 	
-    if (!data || !data->cmds_block)
+    if (!data->cmds_block)
 		return (FAILURE);
 	i = 0;
 	while (i < data->nb_of_pipe + 2)
@@ -41,6 +44,5 @@ t_return_status free_data(t_data *data)
 		i++;
 	}
     free(data->cmds_block);
-	// free(data);
 	return (SUCCESS);
 }

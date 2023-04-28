@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:28:34 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/12 19:03:03 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 15:25:12 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ enum	e_token_minishell
 	PIPE,
 	AMPERSAND,
 	CHEVRON_IN,
-	CHEVRON_OUT,
+	CHEVRON_OT,
 	OR,
 	AND,
 	HERE_DOC,

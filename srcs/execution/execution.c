@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/25 11:46:19 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 15:06:09 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void				wait_for_process_ids(t_data *data);
 
 void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 {
-	display_str_token(lst_of_tok);
 	ft_bzero(data, sizeof(t_data));
 	alloc_cmd_block(data, lst_of_tok);
 	infiles_management(data, lst_of_tok, *env_pt);
@@ -93,4 +92,5 @@ static void	wait_for_process_ids(t_data *data)
 		}
 		block_id++;
 	}
+	/*man waitpid wifexited   wifexitstatus */
 }

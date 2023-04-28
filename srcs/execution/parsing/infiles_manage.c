@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infiles_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 22:47:48 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:06:20 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, ch
 	signal(SIGINT, SIG_IGN);
 	data->cmds_block[block_id].process_id = fork();
 	/*
+	
 	if (data->cmds_block[block_id].process_id == -1)
 			perror("fork");
 	*/

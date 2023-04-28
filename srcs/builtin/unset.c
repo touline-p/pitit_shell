@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:54 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 22:58:55 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:21:53 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 static	t_return_status	_unset_builtin_ep(char *msg, char **trash, \
 							t_return_status ret_val);
 
-t_return_status	unset_builtin(char **args, char ***env_pt)
+t_return_status	unset_builtin(char **args, char ***env_pt, t_data *data)
 {
+	(void)data;
 	char	**tmp;
 	char	*line_to_del;
 

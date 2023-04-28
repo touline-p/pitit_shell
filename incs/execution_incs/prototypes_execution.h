@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/26 15:19:14 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 15:25:48 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env_pt)
 
 /*-- cmds_utils --*/
 t_builtin		is_builtin(char *string);
-t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt);
+t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt, t_data *data);
 
 /*-- files_utils --*/
 void	check_opened_infiles(t_data *data, int block_id);
@@ -67,7 +67,7 @@ bool	is_path(char *line);
 bool	is_cmd(char *line);
 
 /*-- struct_utils --*/
-void			free_commands(t_data *data);
+t_return_status	free_commands(t_data *data);
 t_return_status free_data(t_data *data);
 
 /*----------------------------------------------------------------------------*/
@@ -98,12 +98,12 @@ void    print_cmd_block(char *msg, t_cmd cmd);
 
 /*-- Builtin --*/
 t_return_status	switchman_once(t_data *data, char ***env_pt);
-t_return_status	cd_builtin(char **av, char ***env_pt);
-t_return_status export_builtin(char **av, char ***env_pt);
-t_return_status	env_builtin(char **av, char ***env_pt);
-t_return_status	pwd_builtin(char **av, char ***env_pt);
-t_return_status	unset_builtin(char **av, char ***env_pt);
-t_return_status	echo_builtin(char **av, char ***env_pt);
-t_return_status	exit_builtin(char **av, t_data *data, char ***env_pt);
+t_return_status	cd_builtin(char **av, char ***env_pt, t_data *data);
+t_return_status export_builtin(char **av, char ***env_pt, t_data *data);
+t_return_status	env_builtin(char **av, char ***env_pt, t_data *data);
+t_return_status	pwd_builtin(char **av, char ***env_pt, t_data *data);
+t_return_status	unset_builtin(char **av, char ***env_pt, t_data *data);
+t_return_status	echo_builtin(char **av, char ***env_pt, t_data *data);
+t_return_status	exit_builtin(char **av, char ***env_pt, t_data *data);
 
 #endif

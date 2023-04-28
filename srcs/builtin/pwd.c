@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:42 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 22:58:43 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:21:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
-t_return_status	pwd_builtin(char **args, char ***env_pt)
+t_return_status	pwd_builtin(char **args, char ***env_pt, t_data *data)
 {
 	char	*pwd;
 
+	(void)data;
 	(void)env_pt;
 	if (ft_str_array_len(args) > 1)
 		return (dprintf(2, "pwd: too many arguments\n"), \

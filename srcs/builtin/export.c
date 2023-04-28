@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:27 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 22:58:28 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:20:51 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static t_return_status	_export_display(char **env);
 static void				_display_unic_export(char *env_line);
 t_export_ft				get_ft_to_do(char *line, char **env);
 
-t_return_status	export_builtin(char **args, char ***env_pt)
+t_return_status	export_builtin(char **args, char ***env_pt, t_data *data)
 {
+	(void)data;
 	char		**tmp;
 
 	if (ft_str_array_len(args) == 1)
