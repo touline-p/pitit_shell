@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:15:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/28 16:14:19 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/28 22:00:05 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static t_return_status	check_exit_args(t_data *data, char **av);
+static t_return_status	check_exit_args(char **av);
 
 /*----------------------------------------------------------------------------*/
 
@@ -26,7 +26,7 @@ t_return_status	exit_builtin(char **av, char ***env_pt, t_data *data)
 	ft_dprintf(2, RED"exit\n"END);
 	if (av[1])
 	{
-		if (check_exit_args(data, av) != SUCCESS)
+		if (check_exit_args(av) != SUCCESS)
 			return (FAILURE);
 	}
 	g_ret_val = 0;
@@ -39,7 +39,7 @@ t_return_status	exit_builtin(char **av, char ***env_pt, t_data *data)
 	/* nettoyer toute les allocations de memoires donnees */
 }
 
-static t_return_status	check_exit_args(t_data *data, char **av)
+static t_return_status	check_exit_args(char **av)
 {
 	int	i;
 

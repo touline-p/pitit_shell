@@ -89,7 +89,32 @@ static t_return_status welcome_to_minihell(char ***env_pt)
 	return (SUCCESS);
 }
 
-/* ---- test it like it's hot ------------
+/* ---- test it like it's hot -------------
+
+static t_return_status welcome_to_minihell(char ***env_pt)
+{
+	g_ret_val = 0;
+	if (env_init_on(env_pt) != SUCCESS)
+		return (FAILED_MALLOC);
+	printf(PURPLE"\n--------------------------------------------------");
+	printf("----------------------------\t\n"END);
+	printf(PURPLE" __    __   __   __   __   __   ______   __  __   __");
+	printf("____   __       __        \n");
+	printf("/\\ \"-./  \\ /\\ \\ /\\ \"-.\\ \\ /\\ \\ /\\  ___\\ /\\ \ ");
+	printf("\_\\ \\ /\\  ___\\ /\\ \\     /\\ \\       \n");
+	printf("\\ \\ \\-./\\ \\\\ \\ \\\\ \\ \\-.  \\\\ \\ \\\\ \\___  \\");
+	printf("\\ \\  __ \\\\ \\  __\\ \\ \\ \\____\\ \\ \\____  \n");
+	printf(" \\ \\_\\ \\ \\_\\\\ \\_\\\\ \\_\\\\\"\\_\\\\ \\_\\\\/\\__");
+	printf("___\\\\ \\_\\ \\_\\\\ \\_____\\\\ \\_____\\\\ \\_____\\ \n");
+	printf("  \\/_/  \\/_/ \\/_/ \\/_/ \\/_/ \\/_/ \\/_____/ \\/_/\\/_");
+	printf("/ \\/_____/ \\/_____/ \\/_____/ \n");
+	printf(PURPLE"\n--------------------------------------------------");
+	printf("----------------------------\t\n"END);
+	printf(ITALIC PURPLE"\t\t\t\t\t\t by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
+	printf("& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
+	return (SUCCESS);
+}
+
 static void display_info(char ***env_pt)
 {
 	ft_dprintf(2, GRAY"%s "END, get_env_content_from_key("PWD", env));
@@ -97,7 +122,6 @@ static void display_info(char ***env_pt)
 	ft_dprintf(2, END":");	
 	ft_dprintf(2, RED" %d"END, g_ret_val);
 }
-
 
 ----------------------------------------- */
 

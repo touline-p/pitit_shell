@@ -6,7 +6,7 @@
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/28 20:17:20 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/28 21:47:37 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ static void	wait_for_process_ids(t_data *data)
 		block_id++;
 	}
 }
-/**/
+/* ---- test it like it's hot ------------
+
 static void	wait_for_process_ids(t_data *data)
 {
 	int		block_id;
@@ -119,4 +120,4 @@ static void	wait_for_process_ids(t_data *data)
 	}
 
 }
-/**/
+----------------------------------------- */
