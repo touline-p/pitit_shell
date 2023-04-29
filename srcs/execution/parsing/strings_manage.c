@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/04 19:17:37 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/24 14:56:13 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,41 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static bool	is_builtin(char *string);
+static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, char **env);
+static void				set_id_cmds(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
-void	strings_management(t_data *data, char *string)
+void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env)
 {
-	(void)data;
-	if (is_builtin(string) == true)
-		puts(RED"c'est un builtin"END);
-	else
-		puts(GREEN"c'est une commande"END);
+	get_raw_cmds(data, lst_of_tok, env);
+	set_id_cmds(data);
 }
 
-static bool	is_builtin(char *string)
+static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, char **env)
 {
-	if (ft_strcmp(string, "echo") == 0 || ft_strcmp(string, "cd") == 0 || \
-	ft_strcmp(string, "pwd") == 0 || ft_strcmp(string, "export") == 0 || \
-	ft_strcmp(string, "unset") == 0 || ft_strcmp(string, "env") == 0 || \
-	ft_strcmp(string, "exit") == 0)
-		return (true);
-	else
-		return (false);
+	t_string_token	*temp;
+	int				block_id;
+
+	block_id = 0;
+	temp = lst_of_tok;
+	while (temp->token != EOL)
+		data->cmds_block[block_id++].commands = join_token_lst(&temp, env);
+	data->cmds_block[block_id].commands = NULL;
+	if (!data->cmds_block[block_id].commands)
+		return (FAILED_MALLOC);
+	return (SUCCESS);
+}
+
+static void	set_id_cmds(t_data *data)
+{
+	int	block_id;
+
+	block_id = 0;
+	while (data->cmds_block[block_id].commands)
+	{
+		data->cmds_block[block_id].id_command =
+			is_builtin(data->cmds_block[block_id].commands[0]);
+		block_id++;
+	}
 }

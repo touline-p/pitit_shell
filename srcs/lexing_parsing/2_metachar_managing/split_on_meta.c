@@ -15,7 +15,7 @@
 
 t_token	*split_on_meta(t_token *tok)
 {
-	t_token *ret_val;
+	t_token	*ret_val;
 
 	ret_val = tok;
 	while (tok->next)
@@ -29,7 +29,7 @@ t_token	*split_on_meta(t_token *tok)
 t_token	*get_next_emt(t_token *tok)
 {
 	t_emt	tmp;
-	t_token *first;
+	t_token	*first;
 
 	first = tok;
 	tmp = tok->token;

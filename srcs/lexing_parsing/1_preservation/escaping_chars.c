@@ -14,13 +14,9 @@
 
 static t_return_status	_escaping_chars_ep(void);
 
-////TO DO cette fonction parcours toute la chaine pour tout les escape
-//// Ce n'est pas le bon fonctionnement.
-////SI TU CHANGE ESCAPING CHANGE AUSSI CE COMMENT
-
 t_return_status	escaping_chars(t_token *tok)
 {
-	t_token *pin;
+	t_token	*pin;
 
 	pin = tok->next;
 	while (pin->token != EOL)

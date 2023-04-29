@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:57:21 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 03:57:39 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:35:50 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_token	*token_constructor(t_emt emt, char msg)
 	return (new);
 }
 
-t_token *token_constructor_esec(t_emt emt, char msg, t_esec esec)
+t_token	*token_constructor_esec(t_emt emt, char msg, t_esec esec)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = malloc(sizeof(t_token));
 	if (!new)
@@ -45,7 +45,7 @@ t_token *token_constructor_esec(t_emt emt, char msg, t_esec esec)
 
 void	token_lst_clear(t_token *trash)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	while (trash)
 	{
@@ -57,7 +57,7 @@ void	token_lst_clear(t_token *trash)
 
 void	del_next_token(t_token *token)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = token->next->next;
 	del_token(token->next);
@@ -66,83 +66,9 @@ void	del_next_token(t_token *token)
 
 void	del_first_token(t_token **token)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = *token;
 	*token = tmp->next;
 	del_token(tmp);
-}
-
-void	del_next_word(t_token *token)
-{
-	while (ft_isalnum(token->next->sign_char))
-	{
-		del_next_token(token);
-	}
-}
-
-void	del_token(t_token *token)
-{
-	token_lst_clear(token->next_word);
-	free(token);
-}
-
-t_token	*token_lst_constructor_word(char *string, t_esec esec)
-{
-	t_token *pin;
-	t_token *new;
-
-	if (*string != '\0')
-		new = token_constructor_esec(LETTER, *(string++), esec);
-	if (!new)
-		return (NULL);
-	pin = new;
-	while (*string != '\0')
-	{
-		pin->next = token_constructor_esec(LETTER, *(string++), esec);
-		if (!pin->next)
-		{
-			token_lst_clear(new);
-			return (NULL);
-		}
-		pin = pin->next;
-	}
-	return (new);
-}
-
-t_return_status	insert_str_in_tkn_lst(t_token *token_lst, char *str, t_esec insert_esec)
-{
-	t_token *next;
-	t_token *new;
-
-	next = token_lst->next;
-	new = token_lst_constructor_word(str, insert_esec);
-	if (!new)
-		return (FAILED_MALLOC);
-	token_lst->next = new;
-	while (token_lst->next != NULL)
-	{
-		token_lst = token_lst->next;
-		token_lst->esec = insert_esec;
-	}
-	token_lst->next = next;
-	return (SUCCESS);
-}
-
-int		len_to_next_type(t_token *pin)
-{
-	int i;
-
-	if (pin->token == LETTER)
-	{
-		i = 0;
-		while (pin->token == LETTER)
-		{
-			pin = pin->next;
-			i++;
-		}
-		return (i);
-	}
-	else
-		return (1);
 }

@@ -6,23 +6,24 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/04 20:13:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/04/19 15:37:22 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
 # include <fcntl.h>
-
 # include <stdarg.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdint.h>
-
+# include <stddef.h>
 # define HEXA_LOW "0123456789abcdef"
 # define HEXA_UP "0123456789ABCDEF"
 
@@ -48,7 +49,8 @@ typedef enum e_ret_status
 	SUCCESS,
 	FAILURE,
 	FAILED_MALLOC,
-	FAILED_WRITE
+	FAILED_WRITE, 
+	FAILED_PIPE
 }	t_return_status;
 
 # endif
@@ -61,7 +63,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-//void		put_ert(t_ert signal);
+//void		put_return_status(t_return_status signal);
 t_return_status ft_join_str_arr_on(char **str_arr, char **line_pt);
 char		*ft_strdup(const char *src);
 t_return_status	ft_strdup_on(const char *src, char **str_pt);
@@ -92,7 +94,7 @@ size_t 		ft_str_array_len(char **str_arr);
 char 		**ft_str_array_dup(char **str_arr);
 char 		**ft_strarray_join(char **first, char **second);
 
-//t_ert		ft_atoi_on(const char *str, int *int_pt);
+//t_return_status		ft_atoi_on(const char *str, int *int_pt);
 int	ft_dprintf(int fd, const char *str, ...);
 
 void			ft_swap(int *a, int *b);
@@ -141,6 +143,7 @@ void			ft_swap(int *a, int *b);
 int				ft_is_overflowing(char *str);
 void			*ft_free_split(char **dst);
 void			ft_free_int_arr(int **int_arr);
+void			ft_eprint_split(char **split);
 void			ft_print_split(char **split);
 char			*ft_strjoin_three(char *a, char *b, char *c);
 void			*per_n_ret(char *msg);
@@ -151,7 +154,7 @@ int				ft_max(int a, int b);
 char			*ft_get_env(char *key, char **env);
 t_uchar			*ft_ustrdup(unsigned char *str);
 
-//t_ert			ft_atoi_on(const char *str, int *int_pt);
+t_return_status			ft_atoi_on(const char *str, int *int_pt);
 
 /** Pipes utils **/
 
@@ -170,12 +173,12 @@ char			*ft_strcpy(char *dst, char *src);
 /** LST **/
 
 void			ft_lstclean(t_list *head, void (*del)(void *));
-//t_ert			ft_lstnew_on(void *content, t_list **list_ptr);
-//t_ert			ft_lstnew_onsf(void *content, t_list **list_ptr);
+t_return_status			ft_lstnew_on(void *content, t_list **list_ptr);
+t_return_status			ft_lstnew_onsf(void *content, t_list **list_ptr);
 
 /**	LSTSTR **/
 
-//t_ert			ft_lststr_to_str(t_list *lst, char **str);
+t_return_status			ft_lststr_to_str(t_list *lst, char **str);
 size_t			ft_lststrlen(t_list *lst);
 
 /** GNL **/
@@ -184,11 +187,13 @@ size_t			ft_lststrlen(t_list *lst);
 #  define BUFFER_SIZE 1024
 # endif
 
-//t_ert			ft_gnl_on(int fd, char **line_pt);
+t_return_status			ft_gnl_on(int fd_hd, char **line_pt);
 
 /**---- utils ---- **/
 
-int				open_file(const char *av);
+int		open_file(const char *av);
+void	*ft_free(void **s, size_t len);
+char	*strjoin_path_cmd(char *s1, char *s2);
 
 /**---- printf ---- dprintf ---- **/
 
@@ -201,5 +206,10 @@ size_t			ft_putnbr_unsigned_fd(unsigned int n, int fd);
 size_t			ft_putnbr_fd(int n, int fd);
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strndup(char *s1, int size);
+char	*get_strchr(char *s, int c);
+char	*get_calloc(size_t count, size_t size);
+char	*get_strjoin(char *s1, char *s2);
+char	*get_next_line(int fd);
 
 #endif

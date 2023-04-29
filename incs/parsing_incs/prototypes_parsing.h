@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes_parsing.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/20 19:20:56 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:26:35 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	del_next_token(t_token *token);
 void	del_next_word(t_token *token);
 t_return_status 	insert_str_in_tkn_lst(t_token *token_lst, char *str, t_esec essec);
 int		len_to_next_type(t_token *pin);
+t_token	*token_constructor_esec(t_emt emt, char msg, t_esec esec);
 
 /*** t_emt utils ***/
 
@@ -99,6 +100,8 @@ t_return_status	syntax_is_valid(t_string_token *lst_to_check);
 
 /*** env_utils ***/
 
+typedef	t_return_status (*t_export_ft)(char *arg, char ***env_pt);
+
 t_return_status	env_init_on(char ***env_pt);
 char    		*get_line_from_key(char *key, char **env);
 bool			is_a_key_from_env(char *key, char **env);
@@ -133,8 +136,8 @@ void	display_str_token_till(t_string_token *tok);
 
 
 
-char	*_get_env_variable(t_token *token, char **env);
-void cpy_next_char(unsigned int index, char *str);
+char			*_get_env_variable(t_token *token, char **env);
+void 			cpy_next_char(unsigned int index, char *str);
 t_return_status	replace_dquotes_str_by_env_value(char **line_pt, char **env);
 t_return_status get_lexed_str_token_lst_from_line(char *line, t_string_token **str_tok_pt, char **env);
 

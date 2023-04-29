@@ -13,15 +13,18 @@
 #include "minishell_parsing.h"
 #include "../../../incs/parsing_incs/minishell_parsing.h"
 
-#define DONO_INDX 3
+#define DONO_INDX 2
 
 static size_t	_code_from(char code);
-t_return_status			do_nothing(t_token *voided, t_token *also_voided, t_token **this_one_too);
+t_return_status	do_nothing(t_token *voided, \
+							t_token *also_voided, t_token **this_one_too);
 
 t_return_status	preserve_token_lst(t_token *token)
 {
-	t_token *pin;
-	const t_preserv_act	act[] = {escape_process, squoting_process, dquoting_process, do_nothing};
+	t_token				*pin;
+	const t_preserv_act	act[] = {squoting_process, \
+			dquoting_process, \
+			do_nothing};
 
 	pin = token->next;
 	while (token->token != EOL)
@@ -34,10 +37,10 @@ t_return_status	preserve_token_lst(t_token *token)
 	return (SUCCESS);
 }
 
-static size_t _code_from(char code)
+static size_t	_code_from(char code)
 {
-	const char	*charset = "\\\'\"";
-	char 		*tmp;
+	const char	*charset = "\'\"";
+	char		*tmp;
 
 	tmp = ft_strchr(charset, code);
 	if (tmp == NULL)
@@ -45,7 +48,8 @@ static size_t _code_from(char code)
 	return (tmp - charset);
 }
 
-t_return_status	do_nothing(t_token *voided, t_token *also_voided, t_token **this_one_too)
+t_return_status	do_nothing(t_token *voided, t_token *also_voided, \
+							t_token **this_one_too)
 {
 	(void)voided;
 	(void)also_voided;

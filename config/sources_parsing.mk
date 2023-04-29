@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:31:59 by twang             #+#    #+#              #
-#    Updated: 2023/03/27 16:34:22 by twang            ###   ########.fr        #
+#    Updated: 2023/04/26 14:10:19 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,9 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/lexing_parsing/2_metachar_managing/split_on_meta.c			\
 			srcs/lexing_parsing/parsing_token_utils/simple_tokens_utils.c	\
 			srcs/lexing_parsing/parsing_token_utils/token_lst_utils.c		\
+			srcs/lexing_parsing/parsing_token_utils/token_lst_utils_2.c		\
 			srcs/lexing_parsing/parsing_token_utils/testing_utils.c			\
-			srcs/lexing_parsing/lexing_line_to_token_lst.c					\
-			srcs/lexing_parsing/syntax_checking/syntax_is_valid.c			\
+			srcs/lexing_parsing/syntax_is_valid.c							\
 			srcs/t_string_token_utils/t_string_token_utils.c				\
 			srcs/t_string_token_utils/str_token_debug.c						\
 			srcs/t_string_token_utils/token_to_str_token.c					\
@@ -44,10 +44,15 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/main.c														\
 			srcs/builtin/env_utils/ordering_env_export.c					\
 			srcs/builtin/env_utils/env_utils.c								\
+			srcs/builtin/env_utils/get_in_env.c								\
 			srcs/builtin/env.c												\
+			srcs/builtin/exit.c												\
 			srcs/builtin/cd.c												\
 			srcs/builtin/echo.c												\
 			srcs/builtin/pwd.c												\
 			srcs/builtin/unset.c											\
 			srcs/builtin/export.c											\
+			srcs/builtin/export_get_ft_to_do.c								\
+			srcs/builtin/switchman_once.c									\
+
 
