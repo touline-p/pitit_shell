@@ -68,3 +68,6 @@ minishell
 # Program name
 minishell
 >>>>>>> master
+
+#nfs
+.nfs*

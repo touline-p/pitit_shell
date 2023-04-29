@@ -42,7 +42,7 @@ void	display_t_emt_string(t_string_token *token)
 	}
 	else
 		msg = ft_strdup((char *)msgarr[token->token]);
-	printf("<%.5s>", msg);
+	printf("<%s>", msg);
 	free(msg);
 }
 

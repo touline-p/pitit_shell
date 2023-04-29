@@ -24,7 +24,7 @@ t_return_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 
 	if (ft_strlen(*pin_pt) == 1)
 		return (SUCCESS);
-	if (ft_strcmp(*pin_pt, "?"))
+	if (ft_strcmp(*pin_pt, "$?") == 0)
 		return (_expand_the_g_ret_val(pin_pt));
 	content = get_env_content_from_key(*pin_pt + 1, env);
 	free(*pin_pt);
