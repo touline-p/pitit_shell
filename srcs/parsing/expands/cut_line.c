@@ -32,7 +32,7 @@ bool	is_eq_to(char obj, void *to_compare)
 bool	isnotalnum(char obj, void *to_ignore)
 {
 	(void)to_ignore;
-	return (ft_isalnum(obj) == false);
+	return (ft_isalnum(obj) == false && obj != '_');
 }
 
 bool	is_from_base(char obj, void *base)

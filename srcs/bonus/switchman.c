@@ -1,7 +1,6 @@
 //
 // Created by bpoumeau on 4/5/23.
 //
-/*
 #include "../../libft/libft.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
@@ -35,7 +34,9 @@ void go_to_next_logical_door(t_string_token *src, t_string_token **dst)
 	go_to_next_(AND, src, &and_pt);
 	go_to_next_(OR, src, &or_pt);
 	if (and_pt < or_pt)
-
+		*dst = and_pt;
+	else
+		*dst = or_pt;
 }
 
 size_t	count_instructions_node(t_string_token *str_tok_lst)
@@ -50,6 +51,20 @@ size_t	count_instructions_node(t_string_token *str_tok_lst)
 		count++;
 		go_to_next_logical_door(tmp, &tmp);
 	}
+	return (count);
+}
+
+void fill(t_string_token **instructions_arr, t_string_token *str_tok_lst)
+{
+	size_t	i;
+
+	i = 0;
+	while (str_tok_lst->token != EOL)
+	{
+		instructions_arr[i++] = str_tok_lst;
+		go_to_next_logical_door(str_tok_lst, &str_tok_lst);
+	}
+	instructions_arr[i] = NULL;
 }
 
 t_return_status	switchman(t_string_token *token_lst)
@@ -60,13 +75,11 @@ t_return_status	switchman(t_string_token *token_lst)
 	if (instructions_arr == NULL)
 		return (FAILURE);
 	fill(instructions_arr, token_lst);
-	if (put_eol(instructions_arr) != SUCCESS
-		|| launch_instructions_arr(instructions_arr))
-		return (FAILURE);
+//	if (put_eol(instructions_arr) != SUCCESS)
+//		return (FAILURE);
 	return (SUCCESS);
 }
 
-/*
 static size_t _count_block(t_string_token *pin)
 {
 	size_t	count;
@@ -101,10 +114,8 @@ int main(int ac, char **av, char **env)
 		add_history(line);
 		get_lexed_str_token_lst_from_line(line, &str_tok, env);
 		del_space_token(str_tok);
-		switchman(str_tok, NULL);
+		switchman(str_tok);
 		string_token_destructor(str_tok);
 	}
 }
 #endif
-
-*/
