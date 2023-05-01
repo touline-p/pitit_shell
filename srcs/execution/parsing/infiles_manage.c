@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infiles_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/28 14:06:20 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/01 21:56:20 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void				set_infile(t_data *data, char *file, int cmd_block_id, char **env
 static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, char **env);
 static void				get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env);
 static void				trim_limiter(char *s);
+
+/*static void	wait_for_heredoc_process(t_data *data, int block_id);*/
 
 /*----------------------------------------------------------------------------*/
 
@@ -98,6 +100,9 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, ch
 	}
 	else
 	 {
+	/*
+		wait_for_heredoc_process(data, block_id);
+	*/
 		waitpid(data->cmds_block[block_id].process_id, &g_ret_val, 0);
 		close(fd_hd[1]);
 	 }
@@ -163,3 +168,14 @@ static void	trim_limiter(char *s)
 		ft_memmove(s, s + 1, ft_strlen(s));
 	}
 }
+/* ---- test it like it's hot ------------
+
+static void	wait_for_heredoc_process(t_data *data, int block_id)
+{
+	int	status;
+
+	waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED);
+	if (WIFEXITED(status))
+		g_ret_val = WEXITSTATUS(status);
+}
+----------------------------------------- */
