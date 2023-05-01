@@ -17,9 +17,9 @@ int g_ret_val;
 /*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status welcome_to_minihell(char ***env_pt);
+static void print_box(char **env);
 
 /*----------------------------------------------------------------------------*/
-
 
 int	main(int ac, char **av, char **env)
 {
@@ -35,13 +35,14 @@ int	main(int ac, char **av, char **env)
 		/* ---- test it like it's hot ------------
 		init_signals();
 		display_info(env);
-		----------------------------------------- */
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
+		----------------------------------------- */
 		printf(GREEN"%s "END, get_env_content_from_key("SHLVL", env));
 		printf(END":");	
 		printf(RED" %d"END, g_ret_val);
+		print_box(env);
 		line = readline(" - Y a quoi ? ");
 		if (line == NULL || ft_str_is_ascii(line) == false)
 		{
@@ -67,7 +68,7 @@ int	main(int ac, char **av, char **env)
 		}
 		
 	}
-	return (0);
+	return (g_ret_val);
 }
 
 static t_return_status welcome_to_minihell(char ***env_pt)
@@ -87,6 +88,31 @@ static t_return_status welcome_to_minihell(char ***env_pt)
 	ft_dprintf(2, ITALIC PURPLE"\t\t\t\t\t\t by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
 	ft_dprintf(2, "& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
 	return (SUCCESS);
+}
+
+static void print_box(char **env)
+{
+	int	box_width;
+	int	i;
+
+	box_width = (ft_strlen(get_env_content_from_key("PWD", env)) + 4);
+	i = 0;
+	ft_dprintf(2, GREEN"\u2554");
+	while (i < box_width)
+	{
+		ft_dprintf(2, "\u2550");
+		i++;
+	}
+	ft_dprintf(2, "\u2557\n");
+	ft_dprintf(2, "\u2551  %s  \u2551\n", get_env_content_from_key("PWD", env));
+    ft_dprintf(2, "\u255A");
+	i = 0;
+	while (i < box_width)
+	{
+		ft_dprintf(2, "\u2550");
+		i++;
+	}
+	ft_dprintf(2, "\u255D\n"END);
 }
 
 /* ---- test it like it's hot -------------
@@ -113,14 +139,6 @@ static t_return_status welcome_to_minihell(char ***env_pt)
 	printf(ITALIC PURPLE"\t\t\t\t\t\t by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
 	printf("& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
 	return (SUCCESS);
-}
-
-static void display_info(char ***env_pt)
-{
-	ft_dprintf(2, GRAY"%s "END, get_env_content_from_key("PWD", env));
-	ft_dprintf(2, GREEN"%s "END, get_env_content_from_key("SHLVL", env));
-	ft_dprintf(2, END":");	
-	ft_dprintf(2, RED" %d"END, g_ret_val);
 }
 
 ----------------------------------------- */

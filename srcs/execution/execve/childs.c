@@ -6,7 +6,7 @@
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/28 19:51:20 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/01 10:53:40 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			{
 				execve(command, data->cmds_block[block_id].commands, *env);
 				perror(data->cmds_block[block_id].commands[0]);
+		/*-----------------------------------------------------------
+				ft_dprintf(2, RED"minishell: command nor found\n"END);
+				g_ret_val = 127;
+				exit(g_ret_val);
+		--------------------------------------------------------------*/
 			}
 			ft_free_split(data->cmds_block[block_id].commands);
 			exit(EXIT_FAILURE);

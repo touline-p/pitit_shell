@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:42 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/28 15:21:06 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/01 10:46:58 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ t_return_status	pwd_builtin(char **args, char ***env_pt, t_data *data)
 						FAILURE);
 	printf("%s\n", pwd);
 	free(pwd);
+	g_ret_val = 0;
 	return (SUCCESS);
 }

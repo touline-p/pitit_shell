@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enums_execution.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:28:34 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/28 15:25:12 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/01 13:12:15 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ enum e_builtin
 {
 	CMD,
 	ENV,
-	ECHO,
+	// ECHO,
 	EXPORT,
 	PWD,
 	EXIT,
