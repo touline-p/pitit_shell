@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/26 14:24:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/02 17:36:18 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			if (block_id <= data->nb_of_pipe)
 				_close_this(data->cmds_block[block_id].fd_hd[0]);
 			duplicate_fds(data, block_id);
-			command = add_path_cmd(block_id, data, *env);
 			if (data->cmds_block[block_id].id_command != CMD)
-				exit(builtin_switch(data->cmds_block->id_command, data->cmds_block->commands, \
+			{
+				exit(builtin_switch(data->cmds_block[block_id].id_command, data->cmds_block[block_id].commands, \
                     env));
+			}
+			command = add_path_cmd(block_id, data, *env);
 			if (command != NULL)
 			{
 				execve(command, data->cmds_block[block_id].commands, *env);
