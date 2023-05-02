@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infiles_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 22:47:48 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:29:18 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void				set_infile(t_data *data, char *file, int cmd_block_id, char **env);
+static void				set_infile(t_data *data, char **file, int cmd_block_id, char **env);
 static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, char **env);
 static void				get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env);
 static void				trim_limiter(char *s);
@@ -33,7 +33,7 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 		if (temp->token == CHEVRON_IN)
 		{
 			temp = temp->next;
-			set_infile(data, temp->content, i, env);
+			set_infile(data, &(temp->content), i, env);
 		}
 		if (temp->token == HERE_DOC)
 		{
@@ -50,20 +50,20 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
-static void	set_infile(t_data *data, char *file, int block_id, char **env)
+static void	set_infile(t_data *data, char **file, int block_id, char **env)
 {
 	char **arr;
 
 	check_opened_infiles(data, block_id);
-	cut_line_on(file, &arr);
-	join_arr_on(arr, &file, env);
-	if (ft_strchr(file, -32) != NULL)
+	cut_line_on(*file, &arr);
+	join_arr_on(arr, file, env);
+	if (ft_strchr(*file, -32) != NULL)
 	{
 		data->cmds_block[block_id].infile = -1;
 		data->cmds_block[block_id].is_ambiguous = true;
 		return ;
 	}
-	data->cmds_block[block_id].infile = open(file, O_RDONLY, 0644);
+	data->cmds_block[block_id].infile = open(*file, O_RDONLY, 0644);
 	if (data->cmds_block[block_id].infile == -1)
 		perror("open infile");
 }
