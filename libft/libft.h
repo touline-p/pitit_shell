@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/28 13:18:03 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/02 16:40:40 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
 bool			ft_str_is_ascii(char *str);
+bool			ft_isnbr(char *c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_issign(int c);

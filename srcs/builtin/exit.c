@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:15:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/02 13:16:34 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/02 16:45:54 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,12 @@ t_return_status	exit_builtin(char **av, char ***env_pt, t_data *data)
 
 static t_return_status	check_exit_args(char **av)
 {
-	int	i;
-
-	i = 0;
-	while (av[1][i])
+	if (ft_isnbr(av[1]) == false)
 	{
-		if ((ft_isdigit(av[1][i]) != 1))
-		{
-			ft_dprintf(2, RED"minishell: exit: %s: numeric argument required\n"END, av[1]);
-			g_ret_val = 2;
-			ft_free_split(av);
-			exit(g_ret_val);
-		}
-		i++;
+		ft_dprintf(2, RED"minishell: exit: %s: numeric argument required\n"END, av[1]);
+		g_ret_val = 2;
+		ft_free_split(av);
+		exit(g_ret_val);
 	}
 	if (av[2])
 	{
