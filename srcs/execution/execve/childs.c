@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/02 17:36:18 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/02 18:27:13 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,33 @@
 static t_return_status	_do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id);
 static void 			_manage_the_pipe(t_data *data, int block_id);
 static void				_close_this(int fd);
-static char				*add_path_cmd(int block_id, t_data *data, char **env);
+static char				*add_path_cmd(t_cmd *cmd, char **env);
 
 /*----------------------------------------------------------------------------*/
+
+void	child_launch_act(t_cmd *command_block, int nb_of_pipe, char ***env, int block_id)
+{
+	char *command;
+	
+	command = NULL;
+	if (block_id <= nb_of_pipe)
+		_close_this(command_block->fd_hd[0]);
+	duplicate_fds(*command_block);
+	if (command_block->id_command != CMD)
+	{
+		exit(builtin_switch(command_block->id_command, command_block->commands, \
+			env));
+	}
+	command = add_path_cmd(command_block, *env);
+	if (command != NULL)
+	{
+		execve(command, command_block->commands, *env);
+		perror(command_block->commands[0]);
+	}
+	ft_free_split(command_block->commands);
+	exit(EXIT_FAILURE);
+
+}
 
 t_return_status	childs_execve(t_data *data, char ***env)
 {
@@ -46,22 +70,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		--------------------------------------------------------------*/
 		if (data->cmds_block[block_id].process_id == 0)
 		{
-			if (block_id <= data->nb_of_pipe)
-				_close_this(data->cmds_block[block_id].fd_hd[0]);
-			duplicate_fds(data, block_id);
-			if (data->cmds_block[block_id].id_command != CMD)
-			{
-				exit(builtin_switch(data->cmds_block[block_id].id_command, data->cmds_block[block_id].commands, \
-                    env));
-			}
-			command = add_path_cmd(block_id, data, *env);
-			if (command != NULL)
-			{
-				execve(command, data->cmds_block[block_id].commands, *env);
-				perror(data->cmds_block[block_id].commands[0]);
-			}
-			ft_free_split(data->cmds_block[block_id].commands);
-			exit(EXIT_FAILURE);
+			child_launch_act(&(data->cmds_block[block_id]), data->nb_of_pipe, env, block_id);
 		}
 		else if (data->cmds_block[block_id].process_id < 0)
 		{
@@ -112,21 +121,21 @@ static void _close_this(int fd)
 		close(fd);
 }
 
-static char	*add_path_cmd(int block_id, t_data *data, char **env)
+static char	*add_path_cmd(t_cmd *cmd, char **env)
 {
 	int		i;
 	char	**paths;
 	char 	*ret_val;
 
-	if (is_path(data->cmds_block[block_id].commands[0]))
-		return (data->cmds_block[block_id].commands[0]);
+	if (is_path(cmd->commands[0]))
+		return (cmd->commands[0]);
 	paths = get_paths(env);
 	if (!paths)
 		return (NULL);
 	i = 0;
 	while (paths[i])
 	{
-		paths[i] = strjoin_path_cmd(paths[i], data->cmds_block[block_id].commands[0]);
+		paths[i] = strjoin_path_cmd(paths[i], cmd->commands[0]);
 		if (paths[i] == NULL)
 		{
 			ft_free((void **)paths, ft_str_array_len(paths));
@@ -141,6 +150,6 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env)
 		i++;
 	}
 	ft_free((void **)paths, ft_str_array_len(paths));
-	ft_dprintf(2, "%s : command not found\n", data->cmds_block[block_id].commands[0]);
+	ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
 	return (NULL);
 }

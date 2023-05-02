@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/26 15:19:14 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/02 18:23:47 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_return_status	childs_execve(t_data *data, char ***env);
 /*-- fds_manage --*/
 void	close_fds(t_data *data, int block_id);
 void	close_all_fds(t_data *data, int block_id);
-t_return_status 	duplicate_fds(t_data *data, int block_id);
+t_return_status 	duplicate_fds(t_cmd block);
 
 /*-- parsing -----------------------------------------------------------------*/
 
