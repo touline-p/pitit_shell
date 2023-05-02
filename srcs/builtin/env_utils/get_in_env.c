@@ -67,7 +67,7 @@ bool	key_is_not_alnum(char *line)
 	{
 		if (*line == '+' && *(line + 1) == '=')
 			return (false);
-		if (ft_isalnum(*line) == false)
+		if (ft_isalnum(*line) == false && *line != '_')
 			return (true);
 		line++;
 	}
