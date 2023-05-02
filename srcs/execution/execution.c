@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/28 21:47:37 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:18:28 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 }
 
 static t_return_status	alloc_cmd_block(t_data *data, \
-t_string_token *lst_of_tok)
+									t_string_token *lst_of_tok)
 {
 	t_string_token	*temp;
 	int				i;

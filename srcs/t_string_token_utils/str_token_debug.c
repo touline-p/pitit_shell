@@ -42,6 +42,41 @@ void	display_t_emt_string(t_string_token *token)
 	}
 	else
 		msg = ft_strdup((char *)msgarr[token->token]);
-	printf("<%.5s>", msg);
+	printf("<%s>", msg);
 	free(msg);
+}
+
+void display_str_token_till(t_string_token *tok)
+{
+	display_t_emt_string(tok);
+	tok = tok->next;
+	while (tok && tok->next && tok->token != AND && tok->token != OR && tok->token != C_PRTSS)
+	{
+		display_t_emt_string(tok);
+		tok = tok->next;
+	}
+	printf("\n");
+}
+
+void display_str_par(t_string_token *tok)
+{
+	int 	count;
+
+	count = 1;
+	display_t_emt_string(tok);
+	tok = tok->next;
+	while (tok->token != EOL)
+	{
+		if (tok->token == O_PRTSS)
+			count++;
+		if (tok->token == C_PRTSS)
+		{
+			count--;
+			if (count == 0)
+				break;
+		}
+		display_t_emt_string(tok);
+		tok = tok->next;
+	}
+	printf("\n");
 }

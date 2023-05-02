@@ -26,7 +26,7 @@ t_return_status	performe_expand_on_line(char **line_pt, char **env)
 	while (pin && *pin)
 	{
 		if (**pin == '$' && \
-		replace_dollar_str_by_env_value(pin, env) != SUCCESS)
+			replace_dollar_str_by_env_value(pin, env) != SUCCESS)
 			return (ft_free_split(line_arr), FAILED_MALLOC);
 		pin++;
 	}

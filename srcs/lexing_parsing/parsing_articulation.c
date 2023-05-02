@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 00:20:01 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/28 15:38:21 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/02 16:17:14 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 	free(line);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
-	// display_tokens(simple_tok_lst);
 	preserve_token_lst(simple_tok_lst);
 	split_toklst_on_meta(simple_tok_lst);
 	regroup_meta(simple_tok_lst);

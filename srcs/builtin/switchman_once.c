@@ -33,5 +33,7 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 		builtin_switch(cmd->id_command, cmd->commands, env_pt, data);
 		exit(g_ret_val);
 	}
+	waitpid(-1, &g_ret_val, 0);
+	ft_free_split(cmd->commands);
 	return (SUCCESS);
 }

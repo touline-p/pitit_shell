@@ -32,7 +32,7 @@ bool	is_eq_to(char obj, void *to_compare)
 bool	isnotalnum(char obj, void *to_ignore)
 {
 	(void)to_ignore;
-	return (ft_isalnum(obj) == false);
+	return (ft_isalnum(obj) == false && obj != '_');
 }
 
 bool	is_from_base(char obj, void *base)
@@ -57,6 +57,8 @@ static void	_increment_count_and_reset_pin(size_t *count_pt, char **line_pt)
 	(*count_pt)++;
 	if (**line_pt == - '"')
 		increment_till_true(&is_eq_to, (void *)- '"', line_pt);
+	else if (**line_pt == '$' && *(*line_pt + 1) == '?')
+		*line_pt += 2;
 	else if (**line_pt == - '\'')
 		increment_till_true(&is_eq_to, (void *)- '\'', line_pt);
 	else if (**line_pt == '$')
@@ -122,6 +124,11 @@ size_t	count_word_ln_reset_pin(char **line_pt)
 	ln = 0;
 	if (**line_pt == - '"')
 		increment_ln_reset_pin(&is_eq_to, &ln, line_pt, (void *)- '"');
+	else if (**line_pt == '$' && *(*line_pt + 1) == '?')
+	{
+		*line_pt += 2;
+		ln = 2;
+	}
 	else if (**line_pt == - '\'')
 		increment_ln_reset_pin(&is_eq_to, &ln, line_pt, (void *)- '\'');
 	else if (**line_pt == '$')

@@ -34,8 +34,7 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/lexing_parsing/parsing_token_utils/token_lst_utils.c		\
 			srcs/lexing_parsing/parsing_token_utils/token_lst_utils_2.c		\
 			srcs/lexing_parsing/parsing_token_utils/testing_utils.c			\
-			srcs/lexing_parsing/lexing_line_to_token_lst.c					\
-			srcs/lexing_parsing/syntax_checking/syntax_is_valid.c			\
+			srcs/lexing_parsing/syntax_is_valid.c							\
 			srcs/t_string_token_utils/t_string_token_utils.c				\
 			srcs/t_string_token_utils/str_token_debug.c						\
 			srcs/t_string_token_utils/token_to_str_token.c					\
