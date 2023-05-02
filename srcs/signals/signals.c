@@ -3,15 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/01 13:30:53 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:11:27 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
 
+static void	disable_signal_display(void);
+
+void	init_signals(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	disable_signal_display();
+	signal(SIGINT, &handle_signal_main);
+}
+
+static void	disable_signal_display(void)
+{
+	struct termios attribute;
+    tcgetattr(STDIN_FILENO, &attribute);
+    attribute.c_lflag &= ~ISIG;
+    tcsetattr(STDIN_FILENO, TCSANOW, &attribute);
+}
 
 void	handle_signal_main(int signal)
 {
@@ -69,21 +86,5 @@ void	handle_signal_heredoc(int signal)
 }
 
 static void	disable_signal_display(void);
-
-void	init_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	disable_signal_display();
-	signal(SIGINT, &handle_signal_main);
-}
-
-static void	disable_signal_display(void)
-{
-	struct termios attribute;
-    tcgetattr(STDIN_FILENO, &attribute);
-    attribute.c_lflag &= ~ISIG;
-    tcsetattr(STDIN_FILENO, TCSANOW, &attribute);
-}
 
 ----------------------------------------- */
