@@ -44,8 +44,8 @@ int	main(int ac, char **av, char **env)
 			free(line);
 			if (data.cmds_block)
 				free_data(&data);
-			g_ret_val = 0;
-			exit_builtin(NULL, &data, &env);
+			ft_dprintf(2, RED"exit\n"END);
+			exit(0);
 		}
 		if (ft_strncmp("END", line, 4) == 0)
 			return (clear_history(), free(line), 0);
