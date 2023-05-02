@@ -32,17 +32,16 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
-		/* ---- test it like it's hot ------------
 		init_signals();
-		display_info(env);
+		/* ---- test it like it's hot ------------
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
 		----------------------------------------- */
+		print_box(env);
 		printf(GREEN"%s "END, get_env_content_from_key("SHLVL", env));
 		printf(END":");	
 		printf(RED" %d"END, g_ret_val);
-		print_box(env);
 		line = readline(" - Y a quoi ? ");
 		if (line == NULL || ft_str_is_ascii(line) == false)
 		{

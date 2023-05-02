@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:15:52 by twang             #+#    #+#             */
-/*   Updated: 2023/04/28 22:00:05 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:16:34 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ t_return_status	exit_builtin(char **av, char ***env_pt, t_data *data)
 	g_ret_val = 0;
 	exit(g_ret_val);
 	return (SUCCESS);
-	/* parser le **av : - voir que les options sont correctes
-			(-que une option -seulement des numeros -checker le overflow)*/
-	/* que entre 0 et 255 >= 0 && <= 255  && if > INT_MAX : je veux une valeure numerique
-		if >= 255 && <= INT_MAX : exit (nombre donne) il le prend, arrete le programme */
-	/* nettoyer toute les allocations de memoires donnees */
 }
 
 static t_return_status	check_exit_args(char **av)
@@ -58,15 +53,12 @@ static t_return_status	check_exit_args(char **av)
 	if (av[2])
 	{
 		ft_dprintf(2, RED"minishell: exit: too many arguments\n"END);
+		g_ret_val = 1;
 		ft_free_split(av);
 		return (FAILURE);	
 	}
 	g_ret_val = ft_atoi(av[1]);
-	if (g_ret_val >= 255)
-	{
-		ft_free_split(av);
-		exit(g_ret_val);
-	}
+	exit(g_ret_val);
 	ft_free_split(av);
 	return (SUCCESS);
 }
