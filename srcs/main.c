@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_main);
 		----------------------------------------- */
-		// print_box(env);
+		print_box(env);
 		printf(GREEN"%s "END, get_env_content_from_key("SHLVL", env));
 		printf(END":");	
 		printf(RED" %d"END, g_ret_val);
