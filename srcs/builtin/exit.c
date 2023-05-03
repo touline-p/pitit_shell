@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:15:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/02 18:45:03 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 11:04:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_return_status	exit_builtin(char **av, char ***env_pt)
 {
 	(void)env_pt;
 	
-	ft_print_split(av);
 	ft_dprintf(2, RED"exit\n"END);
 	if (av[1])
 	{
