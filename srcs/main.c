@@ -13,18 +13,18 @@ int g_ret_val;
 /*----------------------------------------------------------------------------*/
 
 #define MAIN
-
 #ifdef MAIN
+
 /*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status	welcome_to_minihell(char ***env_pt);
-static t_return_status get_allocated_line_prompt_on(char **line_pt, char **env);
-static t_return_status get_allocated_box_on(char **box_pt, char **env);
+static t_return_status	get_allocated_line_prompt_on(char **line_pt, char **env);
+static t_return_status	get_allocated_box_on(char **box_pt, char **env);
 
 /*----------------------------------------------------------------------------*/
 
 
-t_return_status	_get_prompt_on(char **prompt_pt, char **env)
+t_return_status	get_prompt_on(char **prompt_pt, char **env)
 {
 	char	*prompt;
 	char	*line;
@@ -46,8 +46,6 @@ t_return_status	_get_prompt_on(char **prompt_pt, char **env)
 	return (SUCCESS);
 }
 
-
-
 int	main(int ac, char **av, char **env)
 {
 	(void)ac; (void)av;
@@ -64,7 +62,7 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-		_get_prompt_on(&prompt, env);
+		get_prompt_on(&prompt, env);
 		if (g_ret_val == 131)
 			ft_dprintf(2, RED"Quit (core dumped)\n"END);
 		if (g_ret_val == 130)
