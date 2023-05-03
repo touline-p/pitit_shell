@@ -35,9 +35,10 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, &handle_signal_main);
+		// signal(SIGINT, SIG_IGN);
+		// signal(SIGQUIT, SIG_IGN);
+		// signal(SIGINT, &handle_signal_main);
+		init_signals();
 		print_box(env);
 		printf(GREEN"%s "END, get_env_content_from_key("SHLVL", env));
 		printf(END":");	
@@ -62,8 +63,6 @@ int	main(int ac, char **av, char **env)
 		}
 		del_space_token(str_tok_lst);
 		execution(&data, str_tok_lst, &env);
-		if (data.cmds_block)
-			free(data.cmds_block);
 		string_token_destructor(str_tok_lst);
 	}
 	return (0);

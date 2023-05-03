@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/03 11:08:38 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 11:26:02 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		else if (data->cmds_block[block_id].process_id < 0)
 		{
 			ft_free_split(data->cmds_block[block_id].commands);
-			ft_dprintf(2, RED"Fork Issue: Resource temporarily unavailable\n"END);
+			ft_dprintf(2, RED"minishell: fork: ressource temporarily unavailable\n"END);
 			break ;
 		}
 		ft_free_split(data->cmds_block[block_id].commands);
@@ -103,10 +103,7 @@ static void	_manage_the_pipe(t_data *data, int block_id)
 	if (data->cmds_block[block_id].outfile == STDOUT_FILENO)
 		data->cmds_block[block_id].outfile = data->cmds_block[block_id].fd_hd[1];
 	else
-	{
-		print_cmd_block("je ferme le fd_ecriture pour \n", data->cmds_block[block_id]);
 		close(data->cmds_block[block_id].fd_hd[1]);
-	}
 	if (data->cmds_block[block_id + 1].infile == STDIN_FILENO)
 		data->cmds_block[block_id + 1].infile = data->cmds_block[block_id].fd_hd[0];
 	else
@@ -149,6 +146,7 @@ static char	*add_path_cmd(t_cmd *cmd, char **env)
 		i++;
 	}
 	ft_free((void **)paths, ft_str_array_len(paths));
+	g_ret_val = 127;
 	ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
 	return (NULL);
 }
