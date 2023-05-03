@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/03 11:46:32 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 12:58:56 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,28 @@ void	handle_signal_child(int signal)
 	{
 		ft_dprintf(2, "\n");
 		g_ret_val = 130;
+		exit(130);
 	}
 	else if (signal == SIGQUIT)
 	{
 		ft_dprintf(2, "\n");
 		ft_dprintf(2, RED"minishell: Quit (core dumped)\n"END);
 		g_ret_val = 131;
+		exit(131);
 	}
 }
 
 void	handle_signal_heredoc(int signal)
 {
+	puts("je ne vais pas la?");
 	if (signal == SIGINT)
 	{
+	(void)signal;
+	dprintf(2, "\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	g_ret_val = 1;
+	exit (g_ret_val);
 		ft_dprintf(2, "\n");
 		g_ret_val = 1;
 		exit (g_ret_val);

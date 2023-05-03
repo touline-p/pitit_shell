@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/03 10:57:55 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 12:51:46 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,44 @@ static t_return_status	check_if_token(t_string_token *lst_of_tok)
 
 static void	wait_for_process_ids(t_data *data)
 {
-	int	block_id;
+	int		block_id;
+	int		status;
+	bool	have_signal;
 
 	block_id = 0;
+	status = 0;
+	have_signal = false;
 	while (block_id < data->nb_of_pipe + 1)
 	{
-		waitpid(data->cmds_block[block_id].process_id, &g_ret_val, 0);
-		if (block_id == data->nb_of_pipe)
+		if (waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED) == -1)
 		{
-			g_ret_val = WEXITSTATUS(g_ret_val);
-			break;
+			ft_dprintf(2, RED"minishell: waitpid: process %d failed\n"END, block_id);
+			break ;
+		}
+		else if (WIFEXITED(status))
+			g_ret_val = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status) && have_signal == false)
+		{
+			handle_signal_child(WTERMSIG(status));
+			have_signal = true;
 		}
 		block_id++;
 	}
+
 }
+// static void	wait_for_process_ids(t_data *data)
+// {
+// 	int	block_id;
+
+// 	block_id = 0;
+// 	while (block_id < data->nb_of_pipe + 1)
+// 	{
+// 		waitpid(data->cmds_block[block_id].process_id, &g_ret_val, 0);
+// 		if (block_id == data->nb_of_pipe)
+// 		{
+// 			g_ret_val = WEXITSTATUS(g_ret_val);
+// 			break;
+// 		}
+// 		block_id++;
+// 	}
+// }

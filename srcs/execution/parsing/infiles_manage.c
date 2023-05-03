@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/03 11:46:55 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 12:57:00 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, ch
 	}
 	if (pipe(fd_hd) == -1)
 		return (FAILED_PIPE);
-	// signal(SIGINT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	data->cmds_block[block_id].process_id = fork();
 	/*
 	if (data->cmds_block[block_id].process_id == -1)
