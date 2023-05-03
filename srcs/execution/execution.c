@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/25 11:46:19 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 17:29:13 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	else
 		childs_execve(data, env_pt);
 	wait_for_process_ids(data);
-	free_data(data);
 }
 
 static t_return_status	alloc_cmd_block(t_data *data, \
@@ -78,17 +77,44 @@ static t_return_status	check_if_token(t_string_token *lst_of_tok)
 
 static void	wait_for_process_ids(t_data *data)
 {
-	int	block_id;
+	int		block_id;
+	int		status;
+	bool	have_signal;
 
 	block_id = 0;
+	status = 0;
+	have_signal = false;
 	while (block_id < data->nb_of_pipe + 1)
 	{
-		waitpid(data->cmds_block[block_id].process_id, &g_ret_val, 0);
-		if (block_id == data->nb_of_pipe)
+		if (data->cmds_block[block_id].id_command == CMD)
 		{
-			g_ret_val = WEXITSTATUS(g_ret_val);
-			break;
+			if (waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED) == -1)
+			{
+				ft_dprintf(2, RED"minishell: waitpid: process %d failed\n"END, block_id);
+				break ;
+			}
+			else if (WIFEXITED(status))
+				g_ret_val = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status) && have_signal == false)
+				have_signal = true;
 		}
 		block_id++;
 	}
+
 }
+// static void	wait_for_process_ids(t_data *data)
+// {
+// 	int	block_id;
+
+// 	block_id = 0;
+// 	while (block_id < data->nb_of_pipe + 1)
+// 	{
+// 		waitpid(data->cmds_block[block_id].process_id, &g_ret_val, 0);
+// 		if (block_id == data->nb_of_pipe)
+// 		{
+// 			g_ret_val = WEXITSTATUS(g_ret_val);
+// 			break;
+// 		}
+// 		block_id++;
+// 	}
+// }

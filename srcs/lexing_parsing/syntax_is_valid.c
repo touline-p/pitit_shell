@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexing_line_to_token_lst.c                         :+:      :+:    :+:   */
+/*   syntax_is_valid.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 00:19:36 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/27 00:19:38 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:02:14 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_return_status	syntax_is_valid(t_string_token *lst_to_check)
 	t_string_token	*pin;
 
 	pin = lst_to_check;
-	if (lst_to_check->next->token == EOL)
+	if (!lst_to_check)
+		return (FAILURE);
+	if (lst_to_check->next == NULL || lst_to_check->next->token == EOL)
 		return (FAILURE);
 	if (is_a_meta(pin->next->token) == true
 		&& is_a_redir(pin->next->token) == false)

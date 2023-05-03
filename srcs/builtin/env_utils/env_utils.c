@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:00:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 23:00:21 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:01:36 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_return_status	del_str_from_env(char *line, char ***env_pt)
 	char	**env;
 	size_t	i;
 
-	new_env = (char **)malloc(sizeof(char *) * (ft_str_array_len(*env_pt)));
+	new_env = (char **)malloc(sizeof(char *) * (ft_str_array_len(*env_pt) + 1));
 	if (new_env == NULL)
 		return (FAILED_MALLOC);
 	env = *env_pt;

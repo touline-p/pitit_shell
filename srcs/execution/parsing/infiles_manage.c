@@ -6,18 +6,20 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/02 16:29:18 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 14:16:18 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
+#include "../../incs/parsing_incs/minishell_parsing.h"
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void				set_infile(t_data *data, char **file, int cmd_block_id, char **env);
-static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, char **env);
-static void				get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env);
-static void				trim_limiter(char *s);
+static void				_set_infile(t_data *data, char **file, int cmd_block_id, char **env);
+static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, char **env);
+static void				_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env);
+static t_return_status	_expand_hd(char **here_doc, char **env);
+static void				_trim_limiter(char *s);
 
 /*----------------------------------------------------------------------------*/
 
@@ -33,12 +35,12 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 		if (temp->token == CHEVRON_IN)
 		{
 			temp = temp->next;
-			set_infile(data, &(temp->content), i, env);
+			_set_infile(data, &(temp->content), i, env);
 		}
 		if (temp->token == HERE_DOC)
 		{
 			temp = temp->next;
-			set_heredoc(data, temp->content, i, env);
+			_set_heredoc(data, temp->content, i, env);
 		}
 		if (temp->token == PIPE)
 		{
@@ -48,9 +50,8 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 	}
 }
 
-#include "../../incs/parsing_incs/minishell_parsing.h"
 
-static void	set_infile(t_data *data, char **file, int block_id, char **env)
+static void	_set_infile(t_data *data, char **file, int block_id, char **env)
 {
 	char **arr;
 
@@ -68,7 +69,7 @@ static void	set_infile(t_data *data, char **file, int block_id, char **env)
 		perror("open infile");
 }
 
-static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, char **env)
+static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, char **env)
 {
 	int 	fd_hd[2];
 	bool	do_expand;
@@ -79,21 +80,19 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, ch
 	if (ft_strchr(limiter, -'\'') || ft_strchr(limiter, -'\"'))
 	{
 		do_expand = true;
-		trim_limiter(limiter);
+		_trim_limiter(limiter);
 	}
 	if (pipe(fd_hd) == -1)
 		return (FAILED_PIPE);
 	signal(SIGINT, SIG_IGN);
 	data->cmds_block[block_id].process_id = fork();
-	/*
 	if (data->cmds_block[block_id].process_id == -1)
-			perror("fork");
-	*/
+		perror("fork");
 	if (data->cmds_block[block_id].process_id == 0)
 	{
 		signal(SIGINT, &handle_signal_heredoc);
-		signal(SIGQUIT, &handle_signal_heredoc_sigquit);
-		get_heredoc(limiter, do_expand, fd_hd, env);
+		signal(SIGQUIT, &handle_signal_heredoc);
+		_get_heredoc(limiter, do_expand, fd_hd, env);
 	}
 	else
 	 {
@@ -104,30 +103,23 @@ static t_return_status	set_heredoc(t_data *data, char *limiter, int block_id, ch
 	return (SUCCESS);
 }
 
-static t_return_status expand_hd(char **here_doc, char **env)
-{
-	char	**arr;
-
-	if (cut_line_on(*here_doc, &arr) != SUCCESS
-		|| join_arr_on(arr, here_doc, env) != SUCCESS)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-static void	get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
+static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 {
 	char	*line;
 	char	*here_doc;
+	int		nb_of_line;
 	
 	line = NULL;
 	here_doc = NULL;
+	nb_of_line = 0;
 	while (HEREDOC_MUST_GO_ON)
 	{
+		nb_of_line++;
 		ft_dprintf(2, GREEN"> "END);
 		line = get_next_line(0);
 		if (!line)
 		{
-			ft_dprintf(2, "\n");
+			ft_dprintf(2, RED"minishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n"END, nb_of_line, limiter);
 			break ;
 		}
 		if (!ft_strncmp(limiter, line, ft_strlen(line) - 1))
@@ -139,19 +131,26 @@ static void	get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	}
 	free(line);
 	if (do_expand == false)
-		expand_hd(&here_doc, env);
+		_expand_hd(&here_doc, env);
 	if (here_doc)
 		write(fd_hd[1], here_doc, ft_strlen(here_doc));
 	close(fd_hd[0]);
 	close(fd_hd[1]);
 	free(here_doc);
 	exit(EXIT_SUCCESS);
-	/*
-	exit(g_ret_value);
-	*/
 }
 
-static void	trim_limiter(char *s)
+static t_return_status _expand_hd(char **here_doc, char **env)
+{
+	char	**arr;
+
+	if (cut_line_on(*here_doc, &arr) != SUCCESS
+		|| join_arr_on(arr, here_doc, env) != SUCCESS)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+static void	_trim_limiter(char *s)
 {
 	while (*s)
 	{

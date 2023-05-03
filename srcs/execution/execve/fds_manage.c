@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:26:01 by twang             #+#    #+#             */
-/*   Updated: 2023/04/20 18:32:31 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/02 18:23:08 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ static	t_return_status _dup_n_close(int to_dup, int to_replace);
 
 /*----------------------------------------------------------------------------*/
 
-t_return_status 	duplicate_fds(t_data *data, int block_id)
+t_return_status 	duplicate_fds(t_cmd block)
 {
-	t_cmd	block;
-
-	block = data->cmds_block[block_id];
 	if (_dup_n_close(block.infile, STDIN_FILENO) != SUCCESS
 		|| _dup_n_close(block.outfile, STDOUT_FILENO) != SUCCESS)
 		return (FAILURE);

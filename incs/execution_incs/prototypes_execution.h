@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/26 15:19:14 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 11:43:35 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_return_status	childs_execve(t_data *data, char ***env);
 /*-- fds_manage --*/
 void	close_fds(t_data *data, int block_id);
 void	close_all_fds(t_data *data, int block_id);
-t_return_status 	duplicate_fds(t_data *data, int block_id);
+t_return_status 	duplicate_fds(t_cmd block);
 
 /*-- parsing -----------------------------------------------------------------*/
 
@@ -68,14 +68,13 @@ bool	is_cmd(char *line);
 
 /*-- struct_utils --*/
 void			free_commands(t_data *data);
-t_return_status free_data(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 /*---- Signals ---------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 
 /*-- signals --*/
-void	handle_signal_main(int signal);
+void	init_signals(void);
 void	handle_signal_child(int signal);
 void	handle_signal_heredoc(int signal);
 void	handle_signal_heredoc_sigquit(int signal);
@@ -104,6 +103,6 @@ t_return_status	env_builtin(char **av, char ***env_pt);
 t_return_status	pwd_builtin(char **av, char ***env_pt);
 t_return_status	unset_builtin(char **av, char ***env_pt);
 t_return_status	echo_builtin(char **av, char ***env_pt);
-t_return_status	exit_builtin(char **av, t_data *data, char ***env_pt);
+t_return_status	exit_builtin(char **av, char ***env_pt);
 
 #endif

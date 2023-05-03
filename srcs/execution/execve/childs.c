@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/02 17:36:18 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 15:21:52 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 
 static t_return_status	_do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id);
 static void 			_manage_the_pipe(t_data *data, int block_id);
+static void				_child_launch_act(t_cmd *command_block, int nb_of_pipe, char ***env, int block_id);
+static char				*add_path_cmd(t_cmd *cmd, char **env);
 static void				_close_this(int fd);
-static char				*add_path_cmd(int block_id, t_data *data, char **env);
 
 /*----------------------------------------------------------------------------*/
 
 t_return_status	childs_execve(t_data *data, char ***env)
 {
 	int		block_id;
-	char	*command;
 
 	block_id = 0;
 	while (block_id < data->nb_of_pipe + 1)
@@ -33,11 +33,13 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			return (FAILURE);
 		_manage_the_pipe(data, block_id);
 		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_child);
+		signal(SIGQUIT, &handle_signal_child);
 		data->cmds_block[block_id].process_id = fork();
-		/*-----------------------------------------------------------
 		if (data->cmds_block[block_id].process_id == -1)
 			perror("fork");
+		/*-----------------------------------------------------------
 		else if (data->cmds_block[block_id].process_id > 0)
 		{
 			waitpid(data->cmds_block[block_id].process_id, &g_ret_value, 0);
@@ -46,27 +48,12 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		--------------------------------------------------------------*/
 		if (data->cmds_block[block_id].process_id == 0)
 		{
-			if (block_id <= data->nb_of_pipe)
-				_close_this(data->cmds_block[block_id].fd_hd[0]);
-			duplicate_fds(data, block_id);
-			if (data->cmds_block[block_id].id_command != CMD)
-			{
-				exit(builtin_switch(data->cmds_block[block_id].id_command, data->cmds_block[block_id].commands, \
-                    env));
-			}
-			command = add_path_cmd(block_id, data, *env);
-			if (command != NULL)
-			{
-				execve(command, data->cmds_block[block_id].commands, *env);
-				perror(data->cmds_block[block_id].commands[0]);
-			}
-			ft_free_split(data->cmds_block[block_id].commands);
-			exit(EXIT_FAILURE);
+			_child_launch_act(&(data->cmds_block[block_id]), data->nb_of_pipe, env, block_id);
 		}
 		else if (data->cmds_block[block_id].process_id < 0)
 		{
 			ft_free_split(data->cmds_block[block_id].commands);
-			ft_dprintf(2, RED"Fork Issue: Resource temporarily unavailable\n"END);
+			ft_dprintf(2, RED"minishell: fork: ressource temporarily unavailable\n"END);
 			break ;
 		}
 		ft_free_split(data->cmds_block[block_id].commands);
@@ -77,7 +64,30 @@ t_return_status	childs_execve(t_data *data, char ***env)
 	return (SUCCESS);
 }
 
-static t_return_status _do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id)
+static void	_child_launch_act(t_cmd *command_block, int nb_of_pipe, char ***env, int block_id)
+{
+	char *command;
+	
+	command = NULL;
+	if (block_id <= nb_of_pipe)
+		_close_this(command_block->fd_hd[0]);
+	duplicate_fds(*command_block);
+	if (command_block->id_command != CMD)
+	{
+		exit(builtin_switch(command_block->id_command, command_block->commands, \
+			env));
+	}
+	command = add_path_cmd(command_block, *env);
+	if (command != NULL)
+	{
+		execve(command, command_block->commands, *env);
+		perror(command_block->commands[0]);
+	}
+	ft_free_split(command_block->commands);
+	exit(EXIT_FAILURE);
+}
+
+static t_return_status	_do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id)
 {
 	if (cmd_block[block_id].infile < 0 || cmd_block[block_id].fd_hd[0] < 0)
 		return (FAILURE);
@@ -95,10 +105,7 @@ static void	_manage_the_pipe(t_data *data, int block_id)
 	if (data->cmds_block[block_id].outfile == STDOUT_FILENO)
 		data->cmds_block[block_id].outfile = data->cmds_block[block_id].fd_hd[1];
 	else
-	{
-		print_cmd_block("je ferme le fd_ecriture pour \n", data->cmds_block[block_id]);
 		close(data->cmds_block[block_id].fd_hd[1]);
-	}
 	if (data->cmds_block[block_id + 1].infile == STDIN_FILENO)
 		data->cmds_block[block_id + 1].infile = data->cmds_block[block_id].fd_hd[0];
 	else
@@ -106,27 +113,27 @@ static void	_manage_the_pipe(t_data *data, int block_id)
 
 }
 
-static void _close_this(int fd)
+static void	_close_this(int fd)
 {
 	if (fd > 2)
 		close(fd);
 }
 
-static char	*add_path_cmd(int block_id, t_data *data, char **env)
+static char	*add_path_cmd(t_cmd *cmd, char **env)
 {
 	int		i;
 	char	**paths;
 	char 	*ret_val;
 
-	if (is_path(data->cmds_block[block_id].commands[0]))
-		return (data->cmds_block[block_id].commands[0]);
+	if (is_path(cmd->commands[0]))
+		return (cmd->commands[0]);
 	paths = get_paths(env);
 	if (!paths)
 		return (NULL);
 	i = 0;
 	while (paths[i])
 	{
-		paths[i] = strjoin_path_cmd(paths[i], data->cmds_block[block_id].commands[0]);
+		paths[i] = strjoin_path_cmd(paths[i], cmd->commands[0]);
 		if (paths[i] == NULL)
 		{
 			ft_free((void **)paths, ft_str_array_len(paths));
@@ -141,6 +148,7 @@ static char	*add_path_cmd(int block_id, t_data *data, char **env)
 		i++;
 	}
 	ft_free((void **)paths, ft_str_array_len(paths));
-	ft_dprintf(2, "%s : command not found\n", data->cmds_block[block_id].commands[0]);
+	g_ret_val = 127;
+	ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
 	return (NULL);
 }

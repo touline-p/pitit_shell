@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   switchman_once.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:48 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 22:58:49 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/02 18:25:57 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 	pid = fork();
 	if (pid == 0)
 	{
-		duplicate_fds(data, 0);
+		duplicate_fds(*cmd);
 		builtin_switch(cmd->id_command, cmd->commands, env_pt);
 		exit(g_ret_val);
 	}
