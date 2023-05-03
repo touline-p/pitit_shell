@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/03 12:53:17 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 15:21:52 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			return (FAILURE);
 		_manage_the_pipe(data, block_id);
 		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_child);
 		signal(SIGQUIT, &handle_signal_child);
 		data->cmds_block[block_id].process_id = fork();
-		/*-----------------------------------------------------------
 		if (data->cmds_block[block_id].process_id == -1)
 			perror("fork");
+		/*-----------------------------------------------------------
 		else if (data->cmds_block[block_id].process_id > 0)
 		{
 			waitpid(data->cmds_block[block_id].process_id, &g_ret_value, 0);

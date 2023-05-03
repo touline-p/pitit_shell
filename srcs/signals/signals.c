@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/03 12:58:56 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 17:55:59 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void	disable_signal_display(void);
+// static void	disable_signal_display(void);
 static void	handle_signal_main(int signal);
 
 /*----------------------------------------------------------------------------*/
@@ -23,57 +23,26 @@ void	init_signals(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	disable_signal_display();
+	// disable_signal_display();
 	signal(SIGINT, &handle_signal_main);
-}
-
-static void	disable_signal_display(void)
-{
-	struct termios attribute;
-    tcgetattr(STDIN_FILENO, &attribute);
-    attribute.c_lflag &= ~ISIG;
-    tcsetattr(STDIN_FILENO, TCSANOW, &attribute);
 }
 
 static void	handle_signal_main(int signal)
 {
 	(void)signal;
-	dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
+	ft_dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 	g_ret_val = 1;
 }
 
-void	handle_signal_child(int signal)
-{
-	if (signal == SIGINT)
-	{
-		ft_dprintf(2, "\n");
-		g_ret_val = 130;
-		exit(130);
-	}
-	else if (signal == SIGQUIT)
-	{
-		ft_dprintf(2, "\n");
-		ft_dprintf(2, RED"minishell: Quit (core dumped)\n"END);
-		g_ret_val = 131;
-		exit(131);
-	}
-}
-
 void	handle_signal_heredoc(int signal)
 {
-	puts("je ne vais pas la?");
 	if (signal == SIGINT)
 	{
-	(void)signal;
-	dprintf(2, "\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	g_ret_val = 1;
-	exit (g_ret_val);
-		ft_dprintf(2, "\n");
+		(void)signal;
+		dprintf(2, "\n");
 		g_ret_val = 1;
 		exit (g_ret_val);
 	}
@@ -84,37 +53,19 @@ void	handle_signal_heredoc(int signal)
 }
 
 /*
-void	handle_signal_main(int signal)
+static void	disable_signal_display(void)
 {
-	(void)signal;
-	dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	g_ret_val = 1;
+	struct termios attribute;
+    tcgetattr(STDIN_FILENO, &attribute);
+    attribute.c_lflag &= ~ISIG;
+    tcsetattr(STDIN_FILENO, TCSANOW, &attribute);
 }
+*/
 
 void	handle_signal_child(int signal)
 {
-	(void)signal;
-	dprintf(2, "\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	// g_ret_val = 130;
+	if (signal == SIGINT)
+		g_ret_val = 130;
+	else if (signal == SIGQUIT)
+		g_ret_val = 131;
 }
-
-void	handle_signal_heredoc(int signal)
-{
-	(void)signal;
-	dprintf(2, "\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	g_ret_val = 1;
-	exit (g_ret_val);
-}
-
-void	handle_signal_heredoc_sigquit(int signal)
-{
-	(void)signal;
-}
-*/

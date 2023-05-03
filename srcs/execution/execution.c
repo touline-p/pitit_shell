@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/03 12:51:46 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/03 17:29:13 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,17 @@ static void	wait_for_process_ids(t_data *data)
 	have_signal = false;
 	while (block_id < data->nb_of_pipe + 1)
 	{
-		if (waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED) == -1)
+		if (data->cmds_block[block_id].id_command == CMD)
 		{
-			ft_dprintf(2, RED"minishell: waitpid: process %d failed\n"END, block_id);
-			break ;
-		}
-		else if (WIFEXITED(status))
-			g_ret_val = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status) && have_signal == false)
-		{
-			handle_signal_child(WTERMSIG(status));
-			have_signal = true;
+			if (waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED) == -1)
+			{
+				ft_dprintf(2, RED"minishell: waitpid: process %d failed\n"END, block_id);
+				break ;
+			}
+			else if (WIFEXITED(status))
+				g_ret_val = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status) && have_signal == false)
+				have_signal = true;
 		}
 		block_id++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:54 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 22:58:55 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:20:47 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_return_status	unset_builtin(char **args, char ***env_pt)
 	char	*line_to_del;
 
 	if (ft_str_array_len(args) == 1)
-		return (_unset_builtin_ep("unset: not enough arguments", \
+		return (_unset_builtin_ep("", \
 				args, SUCCESS));
 	tmp = args + 1;
 	while (*tmp)
@@ -30,7 +30,7 @@ t_return_status	unset_builtin(char **args, char ***env_pt)
 		line_to_del = get_line_from_key(*tmp, *env_pt);
 		if (line_to_del != NULL)
 			if (del_str_from_env(line_to_del, env_pt))
-				return (_unset_builtin_ep("unset: malloc_failed", \
+				return (_unset_builtin_ep("unset: malloc_failed\n", \
 				args, FAILED_MALLOC));
 		tmp++;
 	}
@@ -43,6 +43,6 @@ static	t_return_status	_unset_builtin_ep(char *msg, char **trash, \
 {
 	if (trash != NULL)
 		ft_free_split(trash);
-	dprintf(2, "%s\n", msg);
+	dprintf(2, "%s", msg);
 	return (ret_val);
 }
