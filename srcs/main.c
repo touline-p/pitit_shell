@@ -156,7 +156,7 @@ static t_return_status get_allocated_line_prompt_on(char **line_pt, char **env)
 
 	shlvl = get_env_content_from_key("SHLVL", env);
 	if (shlvl == NULL)
-		shlvl = "At least THREE THOUSANDS : ";
+		shlvl = "At least THREE THOUSANDS";
 	g_ret_str = ft_itoa(g_ret_val);
 	if (g_ret_str == NULL)
 		return (FAILED_MALLOC);
