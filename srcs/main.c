@@ -59,16 +59,17 @@ int	main(int ac, char **av, char **env)
 	str_tok_lst = NULL;
 	if (welcome_to_minihell(&env) != SUCCESS)
 		return (1);
-	init_signals(); //tu testes
 	while (MINI_SHELL_MUST_GO_ON)
 	{
+		init_signals();
 		if (g_ret_val == 131)
 			ft_dprintf(2, RED"Quit (core dumped)\n"END);
 		if (g_ret_val == 130)
 			dprintf(2, "\n");
 		get_prompt_on(&prompt, env);
 		line = readline(prompt);
-		if (line == NULL || ft_str_is_ascii(line) == false)
+		printf(RED"%s-\n"END, line);
+		if (line == NULL)
 		{
 			free(line);
 			ft_dprintf(2, RED"exit\n"END);
@@ -79,8 +80,10 @@ int	main(int ac, char **av, char **env)
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
+			display_str_token(str_tok_lst);
 		if (syntax_is_valid(str_tok_lst) != SUCCESS)
 		{
+			puts("here");
 			string_token_destructor(str_tok_lst);
 			continue;
 		}
@@ -125,25 +128,25 @@ static t_return_status get_allocated_box_on(char **box_pt, char **env)
 		return (perror("prompt"), FAILED_MALLOC);
 	*box_pt = box;
 
-	box = ft_strcpy_rn(box, GREEN"\001\u2554\002");
+	box = ft_strcpy_rn(box, GREEN"\001\u2554");
 	i = 0;
 	while (i < box_width)
 	{
-		box = ft_strcpy_rn(box, "\001\u2550\002");
+		box = ft_strcpy_rn(box, "\u2550");
 		i++;
 	}
-	box = ft_strcpy_rn(box, "\001\u2557\002\n");
-	box = ft_strcpy_rn(box, "\001\u2551\002  ");
+	box = ft_strcpy_rn(box, "\u2557\n");
+	box = ft_strcpy_rn(box, "\u2551  ");
 	box = ft_strcpy_rn(box, pwd);
-	box = ft_strcpy_rn(box, "  \001\u2551\002\n");
-    box = ft_strcpy_rn(box, "\001\u255A\002");
+	box = ft_strcpy_rn(box, "  \u2551\n");
+    box = ft_strcpy_rn(box, "\u255A");
 	i = 0;
 	while (i < box_width)
 	{
-		box = ft_strcpy_rn(box, "\001\u2550\002");
+		box = ft_strcpy_rn(box, "\u2550");
 		i++;
 	}
-	box = ft_strcpy_rn(box, "\001\u255D\002\n"END);
+	box = ft_strcpy_rn(box, "\u255D\002\n"END);
 	*box = 0;
 	return (SUCCESS);
 }

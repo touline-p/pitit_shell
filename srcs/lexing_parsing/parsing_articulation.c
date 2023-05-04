@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 00:20:01 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/03 15:02:23 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 17:20:54 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 	(void)env;
 	simple_tok_lst = token_lst_constructor(line);
 	free(line);
+	
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
 	preserve_token_lst(simple_tok_lst);

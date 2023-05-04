@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:27:48 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/04 10:43:40 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 16:35:05 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define EOSTR 0
 # define METACHAR_SET "|&<>(); "
 # define IFS " \t\n"
-# define PROMPT_MESSAGE " - Balance mon bon Bro : "
+# define PROMPT_MESSAGE " - Y a quoi : "
 
 typedef t_return_status (*t_builtin_ft)(char **av, char ***env_pt);
 
