@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/03 14:16:18 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 13:41:36 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void				_set_infile(t_data *data, char **file, int cmd_block_id, char **env);
+static t_return_status	_set_infile(t_data *data, char **file, int block_id, char **env);
 static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, char **env);
 static void				_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env);
 static t_return_status	_expand_hd(char **here_doc, char **env);
@@ -23,7 +23,7 @@ static void				_trim_limiter(char *s);
 
 /*----------------------------------------------------------------------------*/
 
-void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
+t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 {
 	int				i;
 	t_string_token	*temp;
@@ -35,7 +35,8 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 		if (temp->token == CHEVRON_IN)
 		{
 			temp = temp->next;
-			_set_infile(data, &(temp->content), i, env);
+			if (_set_infile(data, &(temp->content), i, env) == FAILURE)
+				return (FAILURE);
 		}
 		if (temp->token == HERE_DOC)
 		{
@@ -48,10 +49,11 @@ void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 		}
 		temp = temp->next;
 	}
+	return (SUCCESS);
 }
 
 
-static void	_set_infile(t_data *data, char **file, int block_id, char **env)
+static t_return_status	_set_infile(t_data *data, char **file, int block_id, char **env)
 {
 	char **arr;
 
@@ -62,11 +64,15 @@ static void	_set_infile(t_data *data, char **file, int block_id, char **env)
 	{
 		data->cmds_block[block_id].infile = -1;
 		data->cmds_block[block_id].is_ambiguous = true;
-		return ;
+		return (FAILURE);
 	}
 	data->cmds_block[block_id].infile = open(*file, O_RDONLY, 0644);
 	if (data->cmds_block[block_id].infile == -1)
+	{
 		perror("open infile");
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }
 
 static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, char **env)

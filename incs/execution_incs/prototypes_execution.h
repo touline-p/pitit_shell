@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/03 11:43:35 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 14:27:44 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	clean_files_token(t_string_token *lst_of_tok);
 void	clean_token(t_string_token *lst_of_tok);
 
 /*-- infiles_manage --*/
-void	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env);
+t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env);
 
 /*-- outfiles_manage --*/
-void	outfiles_management(t_data *data, t_string_token *lst_of_tok, char **env);
+t_return_status	outfiles_management(t_data *data, t_string_token *lst_of_tok, char **env);
 
 /*-- string_manage --*/
 void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env_pt);

@@ -59,9 +59,9 @@ int	main(int ac, char **av, char **env)
 	str_tok_lst = NULL;
 	if (welcome_to_minihell(&env) != SUCCESS)
 		return (1);
+	init_signals(); //tu testes
 	while (MINI_SHELL_MUST_GO_ON)
 	{
-		init_signals();
 		if (g_ret_val == 131)
 			ft_dprintf(2, RED"Quit (core dumped)\n"END);
 		if (g_ret_val == 130)

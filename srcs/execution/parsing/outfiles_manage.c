@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/02 16:24:55 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 14:30:09 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void	set_outfile(t_data *data, char **file, int block_id, char **env);
-static void	set_appends(t_data *data, char **file, int block_id, char **env);
+static t_return_status	_set_outfile(t_data *data, char **file, int block_id, char **env);
+static t_return_status	_set_appends(t_data *data, char **file, int block_id, char **env);
 
 /*----------------------------------------------------------------------------*/
 
-void	outfiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
+t_return_status	outfiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 {
 	int					i;
 	t_string_token		*temp;
@@ -32,12 +32,14 @@ void	outfiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 		if (temp->token == CHEVRON_OT)
 		{
 			temp = temp->next;
-			set_outfile(data, &(temp->content), i, env);
+			if (_set_outfile(data, &(temp->content), i, env) == FAILURE)
+				return (FAILURE);
 		}
 		if (temp->token == APPENDS)
 		{
 			temp = temp->next;
-			set_appends(data, &(temp->content), i, env);
+			if (_set_appends(data, &(temp->content), i, env) == FAILURE)
+				return (FAILURE);
 		}
 		if (temp->token == PIPE)
 		{
@@ -45,49 +47,59 @@ void	outfiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 		}
 		temp = temp->next;
 	}
+	return (SUCCESS);
 }
 
-static void	set_outfile(t_data *data, char **file, int block_id, char **env)
+static t_return_status	_set_outfile(t_data *data, char **file, int block_id, char **env)
 {
 	char **arr;
 
 	check_opened_outfiles(data, block_id);
 	if (data->cmds_block[block_id].infile < 0 || data->cmds_block[block_id].fd_hd[0] < 0
 		|| data->cmds_block[block_id].is_ambiguous == true)
-		return ;
+		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
-	// printf("le file c'est : ->%s<-\n", file);
 	if (ft_strchr(*file, -32) != NULL)
 	{
 		data->cmds_block[block_id].outfile = -1;
 		data->cmds_block[block_id].is_ambiguous = true;
 		printf("je suis ambigue\n");
-		return ;
+		return (SUCCESS);
 	}
 	data->cmds_block[block_id].outfile = open(*file, O_WRONLY | O_CREAT | \
 	O_TRUNC, 0644);
 	if (data->cmds_block[block_id].outfile == -1)
+	{
 		perror("open outfile");
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }
 
-static void	set_appends(t_data *data, char **file, int block_id, char **env)
-{	char **arr;
+static t_return_status	_set_appends(t_data *data, char **file, int block_id, char **env)
+{	
+	char **arr;
 
 	check_opened_outfiles(data, block_id);
 	if (data->cmds_block[block_id].infile < 0 || data->cmds_block[block_id].fd_hd[0] < 0
 		|| data->cmds_block[block_id].is_ambiguous == true)
-		return ;
+		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
 	if (ft_strchr(*file, -32) != NULL)
 	{
 		data->cmds_block[block_id].outfile = -1;
 		data->cmds_block[block_id].is_ambiguous = true;
-		return ;
+		printf("je suis ambigue\n");
+		return (SUCCESS);
 	}
 	data->cmds_block[block_id].outfile = open(*file, O_WRONLY | O_CREAT | \
 	O_APPEND, 0644);
 	if (data->cmds_block[block_id].outfile == -1)
+	{
 		perror("open outfile");
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }

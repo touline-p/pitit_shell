@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/02 18:29:45 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 14:33:55 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef enum e_ret_status
 	SUCCESS,
 	FAILURE,
 	FAILED_MALLOC,
-	FAILED_WRITE, 
+	FAILED_WRITE,
 	FAILED_PIPE
 }	t_return_status;
 
