@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/03 18:42:01 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 10:41:04 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void	disable_signal_display(int signal);
 static void	handle_signal_main(int signal);
 
 /*----------------------------------------------------------------------------*/
@@ -23,7 +22,6 @@ void	init_signals(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	disable_signal_display(SIGQUIT);
 	signal(SIGINT, &handle_signal_main);
 }
 
@@ -34,7 +32,7 @@ static void	handle_signal_main(int signal)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	g_ret_val = 1;
+	g_ret_val = 130;
 }
 
 void	handle_signal_heredoc(int signal)
@@ -47,9 +45,7 @@ void	handle_signal_heredoc(int signal)
 		exit (g_ret_val);
 	}
 	else if (signal == SIGQUIT)
-	{
 		(void)signal;
-	}
 }
 
 void	handle_signal_child(int signal)
@@ -58,12 +54,4 @@ void	handle_signal_child(int signal)
 		g_ret_val = 130;
 	else if (signal == SIGQUIT)
 		g_ret_val = 131;
-}
-
-static void	disable_signal_display(int signal)
-{
-	struct termios attribute;
-    tcgetattr(STDIN_FILENO, &attribute);
-    attribute.c_lflag &= ~ISIG;
-    tcsetattr(STDIN_FILENO, TCSANOW, &attribute);
 }

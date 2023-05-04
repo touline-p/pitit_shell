@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/03 15:21:52 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 10:16:47 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,11 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		if (_do_the_pipe(&(data->cmds_block[block_id]), data->nb_of_pipe, block_id) != SUCCESS)
 			return (FAILURE);
 		_manage_the_pipe(data, block_id);
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, &handle_signal_child);
 		signal(SIGQUIT, &handle_signal_child);
 		data->cmds_block[block_id].process_id = fork();
 		if (data->cmds_block[block_id].process_id == -1)
 			perror("fork");
-		/*-----------------------------------------------------------
-		else if (data->cmds_block[block_id].process_id > 0)
-		{
-			waitpid(data->cmds_block[block_id].process_id, &g_ret_value, 0);
-			kill(data->cmds_block[block_id].process_id, SIGTERM);
-		}
-		--------------------------------------------------------------*/
 		if (data->cmds_block[block_id].process_id == 0)
 		{
 			_child_launch_act(&(data->cmds_block[block_id]), data->nb_of_pipe, env, block_id);
@@ -84,7 +75,8 @@ static void	_child_launch_act(t_cmd *command_block, int nb_of_pipe, char ***env,
 		perror(command_block->commands[0]);
 	}
 	ft_free_split(command_block->commands);
-	exit(EXIT_FAILURE);
+	g_ret_val = 127;
+	exit(g_ret_val);
 }
 
 static t_return_status	_do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id)
@@ -148,7 +140,6 @@ static char	*add_path_cmd(t_cmd *cmd, char **env)
 		i++;
 	}
 	ft_free((void **)paths, ft_str_array_len(paths));
-	g_ret_val = 127;
 	ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
 	return (NULL);
 }

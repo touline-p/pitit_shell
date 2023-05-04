@@ -62,17 +62,15 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-		get_prompt_on(&prompt, env);
 		if (g_ret_val == 131)
 			ft_dprintf(2, RED"Quit (core dumped)\n"END);
 		if (g_ret_val == 130)
 			dprintf(2, "\n");
+		get_prompt_on(&prompt, env);
 		line = readline(prompt);
 		if (line == NULL || ft_str_is_ascii(line) == false)
 		{
 			free(line);
-			// if (data.cmds_block)
-			// 	free(data.cmds_block);
 			ft_dprintf(2, RED"exit\n"END);
 			exit(0);
 		}
@@ -83,8 +81,8 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		if (syntax_is_valid(str_tok_lst) != SUCCESS)
 		{
-		 	string_token_destructor(str_tok_lst);
-		 	continue;
+			string_token_destructor(str_tok_lst);
+			continue;
 		}
 		del_space_token(str_tok_lst);
 		execution(&data, str_tok_lst, &env);
@@ -149,7 +147,7 @@ static t_return_status get_allocated_box_on(char **box_pt, char **env)
 	*box = 0;
 	return (SUCCESS);
 }
-#define PROMPT_MESSAGE " - Balance mon bon Bro : "
+
 static t_return_status get_allocated_line_prompt_on(char **line_pt, char **env)
 {
 	char	*line;
