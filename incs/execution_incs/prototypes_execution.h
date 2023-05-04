@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/04 14:27:44 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 17:56:43 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	del_next_string_token(t_string_token *tok);
 void	display_str_token(t_string_token *tok);
 void	display_t_emt_string(t_string_token *token);
 char 	**join_token_lst(t_string_token **arg, char **env);
+void	manage_ambiguous(t_cmd *cmd, char *file);
 t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 
 

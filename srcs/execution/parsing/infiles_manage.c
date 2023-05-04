@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/04 16:51:00 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 17:57:58 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,15 @@ static t_return_status	_set_infile(t_data *data, char **file, int block_id, char
 	check_opened_infiles(data, block_id);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
-	if (ft_strchr(*file, -32) != NULL)
+	if (ft_strchr(*file, -32) != NULL || **file == 0)
 	{
-		data->cmds_block[block_id].infile = -1;
-		data->cmds_block[block_id].is_ambiguous = true;
+		manage_ambiguous(&(data->cmds_block[block_id]), *file);
 		return (FAILURE);
 	}
 	data->cmds_block[block_id].infile = open(*file, O_RDONLY, 0644);
 	if (data->cmds_block[block_id].infile == -1)
 	{
-		perror("open infile");
+		perror(*file);
 		return (FAILURE);
 	}
 	return (SUCCESS);

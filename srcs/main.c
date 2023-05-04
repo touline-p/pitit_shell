@@ -68,7 +68,11 @@ int	main(int ac, char **av, char **env)
 			dprintf(2, "\n");
 		get_prompt_on(&prompt, env);
 		line = readline(prompt);
-		printf(RED"%s-\n"END, line);
+		if (errno)
+		{
+			perror("realdine");
+			errno = SUCCESS;
+		}
 		if (line == NULL)
 		{
 			free(line);
@@ -80,10 +84,8 @@ int	main(int ac, char **av, char **env)
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
-			display_str_token(str_tok_lst);
 		if (syntax_is_valid(str_tok_lst) != SUCCESS)
 		{
-			puts("here");
 			string_token_destructor(str_tok_lst);
 			continue;
 		}

@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/04 14:30:09 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 17:56:01 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,35 @@ static t_return_status	_set_outfile(t_data *data, char **file, int block_id, cha
 static t_return_status	_set_appends(t_data *data, char **file, int block_id, char **env);
 
 /*----------------------------------------------------------------------------*/
+
+
+
+
+
+void	false_space_to_space(char *str)
+{
+	while (*str)
+	{
+		if (*str == -32)
+			*str = 32;
+		str++;
+	}
+}
+
+void	manage_ambiguous(t_cmd *cmd, char *file)
+{
+	cmd->outfile = -1;
+	cmd->is_ambiguous = true;
+	false_space_to_space(file);
+	ft_dprintf(2, "minishell: %s: ambiguous redirect", file);
+}
+
+
+
+
+
+
+
 
 t_return_status	outfiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 {
@@ -60,22 +89,22 @@ static t_return_status	_set_outfile(t_data *data, char **file, int block_id, cha
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
-	if (ft_strchr(*file, -32) != NULL)
+	if (ft_strchr(*file, -32) != NULL || **file == 0)
 	{
-		data->cmds_block[block_id].outfile = -1;
-		data->cmds_block[block_id].is_ambiguous = true;
-		printf("je suis ambigue\n");
+		manage_ambiguous(&(data->cmds_block[block_id]), *file);
 		return (SUCCESS);
 	}
 	data->cmds_block[block_id].outfile = open(*file, O_WRONLY | O_CREAT | \
 	O_TRUNC, 0644);
 	if (data->cmds_block[block_id].outfile == -1)
 	{
-		perror("open outfile");
+		perror(*file);
 		return (FAILURE);
 	}
 	return (SUCCESS);
 }
+
+
 
 static t_return_status	_set_appends(t_data *data, char **file, int block_id, char **env)
 {	
@@ -87,18 +116,17 @@ static t_return_status	_set_appends(t_data *data, char **file, int block_id, cha
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
-	if (ft_strchr(*file, -32) != NULL)
+	
+	if (ft_strchr(*file, -32) != NULL || **file == 0)
 	{
-		data->cmds_block[block_id].outfile = -1;
-		data->cmds_block[block_id].is_ambiguous = true;
-		printf("je suis ambigue\n");
+		manage_ambiguous(&(data->cmds_block[block_id]), *file);
 		return (SUCCESS);
 	}
 	data->cmds_block[block_id].outfile = open(*file, O_WRONLY | O_CREAT | \
 	O_APPEND, 0644);
 	if (data->cmds_block[block_id].outfile == -1)
 	{
-		perror("open outfile");
+		perror(*file);
 		return (FAILURE);
 	}
 	return (SUCCESS);

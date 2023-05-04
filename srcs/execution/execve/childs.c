@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/04 16:55:44 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 17:43:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ static void	_child_launch_act(t_cmd *command_block, int nb_of_pipe, char ***env,
 	command = NULL;
 	if (block_id <= nb_of_pipe)
 		_close_this(command_block->fd_hd[0]);
-	duplicate_fds(*command_block);
+	if (duplicate_fds(*command_block) != SUCCESS)
+	{
+		ft_free_split(command_block->commands);
+		exit(1);
+	}
 	if (command_block->id_command != CMD)
 	{
 		exit(builtin_switch(command_block->id_command, command_block->commands, \
