@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/04 17:34:09 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/05 17:08:45 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	if (check_if_token(lst_of_tok) != SUCCESS)
 		return ;
 	strings_management(data, lst_of_tok, *env_pt);
+	if (g_ret_val == 130)
+		return ;
 	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD)
 		switchman_once(data, env_pt);
 	else
@@ -88,10 +90,10 @@ static void	wait_for_process_ids(t_data *data)
 		{
 			if (waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED) == -1)
 			{
-				ft_dprintf(2, RED"minishell: waitpid: process %d failed\n"END, block_id);
+				g_ret_val = 1;
 				break ;
 			}
-			else if (WIFEXITED(status))
+			if (WIFEXITED(status))
 				g_ret_val = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 			{

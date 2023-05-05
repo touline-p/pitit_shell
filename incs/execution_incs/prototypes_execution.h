@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/04 17:56:43 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/05 16:42:04 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	init_signals(void);
 void	handle_signal_child(int signal);
 void	handle_signal_heredoc(int signal);
 void	handle_signal_heredoc_sigquit(int signal);
+void	handle_signal_father_process(int signal);
 
 /*-- Genius Brieuc utils --*/
 void	string_token_destructor(t_string_token *trash);
