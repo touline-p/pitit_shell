@@ -70,7 +70,7 @@ int	main(int ac, char **av, char **env)
 		line = readline(prompt);
 		if (errno)
 		{
-			perror("realdine");
+			perror("readline");
 			errno = SUCCESS;
 		}
 		if (line == NULL)
@@ -90,6 +90,7 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		del_space_token(str_tok_lst);
+		g_ret_val = 0;
 		execution(&data, str_tok_lst, &env);
 		if (data.cmds_block)
 			free(data.cmds_block);

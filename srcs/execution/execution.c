@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/05 14:13:19 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/05 17:08:45 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	if (check_if_token(lst_of_tok) != SUCCESS)
 		return ;
 	strings_management(data, lst_of_tok, *env_pt);
+	if (g_ret_val == 130)
+		return ;
 	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD)
 		switchman_once(data, env_pt);
 	else

@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/04 17:09:02 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/05 17:10:34 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void	handle_signal_heredoc(int signal)
 	if (signal == SIGINT)
 	{
 		(void)signal;
-		dprintf(2, "\n");
-		g_ret_val = 1;
+		g_ret_val = 130;
 		exit (g_ret_val);
 	}
 	else if (signal == SIGQUIT)
@@ -54,4 +53,10 @@ void	handle_signal_child(int signal)
 		g_ret_val = 130;
 	else if (signal == SIGQUIT)
 		g_ret_val = 131;
+}
+
+void	handle_signal_father_process(int signal)
+{
+	(void)signal;
+	g_ret_val = 130;
 }

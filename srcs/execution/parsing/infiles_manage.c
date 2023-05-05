@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/04 17:57:58 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/05 17:17:40 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 		if (temp->token == HERE_DOC)
 		{
 			temp = temp->next;
-			_set_heredoc(data, temp->content, i, env);
+			if (_set_heredoc(data, temp->content, i, env) != SUCCESS)
+				return (FAILURE);
 		}
 		if (temp->token == PIPE)
 		{
@@ -77,8 +78,10 @@ static t_return_status	_set_infile(t_data *data, char **file, int block_id, char
 static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, char **env)
 {
 	int 	fd_hd[2];
+	int		status;
 	bool	do_expand;
 
+	status = 0;
 	do_expand = false;
 	check_opened_infiles(data, block_id);
 	data->cmds_block[block_id].is_heredoc = true;
@@ -101,9 +104,14 @@ static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, c
 	}
 	else
 	 {
-		waitpid(data->cmds_block[block_id].process_id, &g_ret_val, 0);
+		if (waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED) == -1)
+			g_ret_val = WEXITSTATUS(status);
+		else if (WIFEXITED(status))
+			g_ret_val = WEXITSTATUS(status);
 		close(fd_hd[1]);
 	 }
+	if (g_ret_val == 130)
+		return (FAILURE);
 	data->cmds_block[block_id].infile = fd_hd[0];
 	return (SUCCESS);
 }
@@ -127,10 +135,10 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 			ft_dprintf(2, RED"minishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n"END, nb_of_line, limiter);
 			break ;
 		}
-		if (!ft_strncmp(limiter, line, ft_strlen(line) - 1))
-		{
+		*ft_strchr(line, '\n') = 0;
+		if (!ft_strncmp(limiter, line, ft_strlen(limiter) + 1))
 			break;
-		}
+		*ft_strchr(line, '\0') = '\n';
 		here_doc = strjoin_path_cmd(here_doc, line);
 		free(line);
 	}
@@ -142,7 +150,7 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	close(fd_hd[0]);
 	close(fd_hd[1]);
 	free(here_doc);
-	exit(EXIT_SUCCESS);
+	exit(g_ret_val);
 }
 
 static t_return_status _expand_hd(char **here_doc, char **env)
