@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 17:34:06 by twang             #+#    #+#             */
-/*   Updated: 2023/05/02 17:32:38 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/04 13:54:02 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ t_return_status 	builtin_switch(t_builtin builtin, char **av, char ***env_pt)
 									&cd_builtin};
 									
 	if (builtin == CMD)
-	{
-		puts("je rentre");
 		return (FAILURE);
-	}
 	return ((*ft_arr[builtin])(av, env_pt));
 }
 

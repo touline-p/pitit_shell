@@ -10,19 +10,19 @@ void    print_debug(char *file, int line);
 void    print_debug_string(char *value, char *file, int line);
 void    print_debug_int(int value, char *file, int line);
 
-# define END "\033[0m"
-# define GREY "\033[1;30m"
-# define RED "\033[1;31m"
-# define GREEN "\033[1;32m"
-# define YELLOW "\033[1;33m"
-# define BLUE "\033[1;34m"
-# define PURPLE "\033[1;35m"
+# define END "\001\033[0m\002"
+# define GREY "\001\033[1;30m\002"
+# define RED "\001\033[1;31m\002"
+# define GREEN "\001\033[1;32m\002"
+# define YELLOW "\001\033[1;33m\002"
+# define BLUE "\001\033[1;34m\002"
+# define PURPLE "\001\033[1;35m\002"
 
-# define END "\033[0m"
-# define BOLD "\033[1m"
-# define ITALIC "\033[3m"
-# define UNDERLINE "\033[4m"
-# define DEL_LINE "\033[2K\r"
+# define END "\001\033[0m\002"
+# define BOLD "\001\033[1m\002"
+# define ITALIC "\001\033[3m\002"
+# define UNDERLINE "\001\033[4m\002"
+# define DEL_LINE "\001\033[2K\r\002"
 # include "minishell_execution.h"
 
 
