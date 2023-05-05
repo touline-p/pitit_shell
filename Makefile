@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/04/24 14:26:46 by twang            ###   ########.fr        #
+#    Updated: 2023/05/05 15:31:32 by bpoumeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,13 +87,30 @@ lib:
 	$(MAKE) -C $(LIBFT_DIR)
 
 debug:
-	$(MAKE) re DEBUG=yes
+	$(MAKE) re -j DEBUG=yes
 
 leaks:
 	clear
 	$(MAKE) VALGRIND=yes
 	$(LEAKS) ./minishell
 
+leak_all:    all
+	echo "{" > valgrind_ignore_leaks.txt
+	echo "leak readline" >> valgrind_ignore_leaks.txt
+	echo "    Memcheck:Leak" >> valgrind_ignore_leaks.txt
+	echo "    ..." >> valgrind_ignore_leaks.txt
+	echo "    fun:readline" >> valgrind_ignore_leaks.txt
+	echo "}" >> valgrind_ignore_leaks.txt
+	echo "{" >> valgrind_ignore_leaks.txt
+	echo "    leak add_history" >> valgrind_ignore_leaks.txt
+	echo "    Memcheck:Leak" >> valgrind_ignore_leaks.txt
+	echo "    ..." >> valgrind_ignore_leaks.txt
+	echo "    fun:add_history" >> valgrind_ignore_leaks.txt
+	echo "}" >> valgrind_ignore_leaks.txt
+	   valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full \
+	            --show-leak-kinds=all --track-fds=yes \
+	            --show-mismatched-frees=yes --read-var-info=yes \
+	            --log-file=valgrind.txt ./${NAME}
 #--print header----------------------------------------------------------------#
 
 header:

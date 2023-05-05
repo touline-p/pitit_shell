@@ -76,6 +76,8 @@ int	main(int ac, char **av, char **env)
 		if (line == NULL)
 		{
 			free(line);
+			free(prompt);
+			ft_free_split(env);
 			ft_dprintf(2, RED"exit\n"END);
 			exit(0);
 		}
@@ -84,12 +86,12 @@ int	main(int ac, char **av, char **env)
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
+		del_space_token(str_tok_lst);
 		if (syntax_is_valid(str_tok_lst) != SUCCESS)
 		{
 			string_token_destructor(str_tok_lst);
 			continue;
 		}
-		del_space_token(str_tok_lst);
 		execution(&data, str_tok_lst, &env);
 		if (data.cmds_block)
 			free(data.cmds_block);

@@ -19,6 +19,7 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 {
 	char	*pwd;
 
+	pwd = NULL;
 	(void)env_pt;
 	if (ft_str_array_len(av) != 2)
 		return (dprintf(2, "cd: bad arguments number\n"), \
@@ -29,9 +30,12 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 	if (chdir(av[1]) == -1)
 	{
 		perror(av[1]);
+		free(pwd);
+		ft_free_split(av);
 		return (FAILURE);
 	}
 	ft_free_split(av);
+	printf("%s, %p\n", pwd, *env_pt);
 	if (_update_pwd_var(pwd, *env_pt) != SUCCESS)
 		return (FAILURE);
 	return (SUCCESS);
