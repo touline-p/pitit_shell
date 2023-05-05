@@ -22,9 +22,11 @@ t_return_status	echo_builtin(char **av, char ***env_pt)
 
 	(void)env_pt;
 	tmp = av + 1;
-	option = _is_option_n(*tmp);
-	if (option == true)
+	while (_is_option_n(*tmp))
+	{
+		option = true;
 		tmp++;
+	}
 	if (*tmp)
 	{
 		printf("%s", *tmp);

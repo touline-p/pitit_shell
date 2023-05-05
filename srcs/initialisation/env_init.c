@@ -22,7 +22,7 @@ t_return_status	env_init_on(char ***env_pt)
 {
 	char	*line_cwd;
 
-	if (*env_pt == NULL)
+	if (**env_pt == NULL)
 		return (_reconstruct_env(env_pt));
 	*env_pt = ft_str_array_dup(*env_pt);
 	if (get_line_from_key("OLDPWD", *env_pt) == NULL)
@@ -78,13 +78,12 @@ static t_return_status	_reconstruct_env(char ***env_pt)
 {
 	char	**new_env;
 
-	printf("here\n");
 	new_env = malloc(sizeof(char *) * 4);
 	if (new_env == NULL)
 		return (FAILED_MALLOC);
 	new_env[0] = ft_strdup("OLDPWD");
 	new_env[1] = _get_cwd_var();
-	new_env[2] = ft_strdup("SHLVL=\"1\"");
+	new_env[2] = ft_strdup("SHLVL=1");
 	new_env[3] = NULL;
 	if (new_env[0] == NULL || new_env[1] == NULL || new_env[2] == NULL)
 		return (free(new_env[0]), free(new_env[1]), \
