@@ -110,8 +110,10 @@ static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, c
 			g_ret_val = WEXITSTATUS(status);
 		close(fd_hd[1]);
 	 }
-	if (g_ret_val == 130)
+	if (g_ret_val == 130) {
+		data->cmds_block[block_id].infile = -1;
 		return (FAILURE);
+	}
 	data->cmds_block[block_id].infile = fd_hd[0];
 	return (SUCCESS);
 }

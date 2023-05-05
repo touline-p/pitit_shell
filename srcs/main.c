@@ -92,11 +92,7 @@ int	main(int ac, char **av, char **env)
 			string_token_destructor(str_tok_lst);
 			continue;
 		}
-<<<<<<< HEAD
 		del_space_token(str_tok_lst);
-		g_ret_val = 0;
-=======
->>>>>>> master
 		execution(&data, str_tok_lst, &env);
 		if (data.cmds_block)
 			free(data.cmds_block);

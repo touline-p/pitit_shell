@@ -21,6 +21,17 @@ static void				wait_for_process_ids(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
+bool	check_cmd(t_cmd *cmd)
+{
+	while (cmd->commands)
+	{
+		if (cmd->infile == -1 && cmd->is_heredoc == true)
+			return (true);
+		cmd++;
+	}
+	return (false);
+}
+
 void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 {
 	ft_bzero(data, sizeof(t_data));
@@ -32,7 +43,7 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	if (check_if_token(lst_of_tok) != SUCCESS)
 		return ;
 	strings_management(data, lst_of_tok, *env_pt);
-	if (g_ret_val == 130)
+	if (g_ret_val == 130 && check_cmd(data->cmds_block))
 		return ;
 	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD)
 		switchman_once(data, env_pt);
