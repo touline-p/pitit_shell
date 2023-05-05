@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:48 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/05 14:09:07 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/05 14:18:42 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 	pid = fork();
 	if (pid == 0)
 	{
-		//duplicate_fds(*cmd);
 		if (duplicate_fds(*cmd) != SUCCESS)
 		{
 			ft_free_split(cmd->commands);
@@ -42,7 +41,7 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 		exit(g_ret_val);
 	}
 	if (waitpid(pid, &status, WUNTRACED) == -1)
-		ft_dprintf(2, RED"minishell: waitpid: process %d failed\n"END, pid);
+		g_ret_val = 1;
 	else if (WIFEXITED(status))
 		g_ret_val = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
