@@ -34,7 +34,7 @@ t_return_status	syntax_is_valid(t_string_token *lst_to_check)
 	while (pin->token != EOL)
 	{
 		if ((is_a_meta(pin->token) == true
-			&& is_a_meta(pin->next->token) == true)
+			&& (is_a_meta(pin->next->token) == true && !is_a_redir(pin->next->token) == true))
 			|| (is_a_redir(pin->token) && is_a_redir(pin->next->token)))
 			return (_syntax_is_valid_ep(pin->next->token));
 		pin = pin->next;
