@@ -36,6 +36,7 @@ struct s_string_token
 struct s_data
 {
 	t_cmd	*cmds_block;
+	char 	*prompt;
 	int 	fd[2];
 	int 	nb_of_pipe;
 };

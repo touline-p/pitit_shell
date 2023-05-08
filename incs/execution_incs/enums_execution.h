@@ -29,7 +29,7 @@ enum	e_token_minishell
 	PIPE,
 	AMPERSAND,
 	CHEVRON_IN,
-	CHEVRON_OUT,
+	CHEVRON_OT,
 	OR,
 	AND,
 	HERE_DOC,

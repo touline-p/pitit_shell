@@ -21,8 +21,10 @@ t_return_status	env_builtin(char **av, char ***env_pt)
 	pin = *env_pt;
 	while (*pin)
 	{
-		printf("%s\n", *pin);
+		if (ft_strchr(*pin, '='))
+			printf("%s\n", *pin);
 		pin++;
 	}
+	ft_free_split(*env_pt);
 	return (SUCCESS);
 }

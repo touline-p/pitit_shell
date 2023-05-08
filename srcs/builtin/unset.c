@@ -27,6 +27,11 @@ t_return_status	unset_builtin(char **args, char ***env_pt)
 	tmp = args + 1;
 	while (*tmp)
 	{
+		if (ft_strchr(*tmp, '=') != NULL)
+		{
+			tmp++;
+			continue ;
+		}
 		line_to_del = get_line_from_key(*tmp, *env_pt);
 		if (line_to_del != NULL)
 			if (del_str_from_env(line_to_del, env_pt))

@@ -28,5 +28,6 @@ t_return_status	pwd_builtin(char **args, char ***env_pt)
 						FAILURE);
 	printf("%s\n", pwd);
 	free(pwd);
+	ft_free_split(*env_pt);
 	return (SUCCESS);
 }

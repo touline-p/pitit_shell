@@ -124,6 +124,7 @@ t_return_status join_all_lines(t_string_token *string_token_lst, char **env);
 t_return_status	join_arr_on(char **str_arr, char **line_pt, char **env);
 
 void	per_n_set_errno(char *msg);
+bool file_is_empty(char *file);
 
 #ifndef TEST_MINI_H
 # define TEST_MINI_H

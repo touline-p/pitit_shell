@@ -64,6 +64,7 @@ static t_return_status	_export_display(char **env)
 			_display_unic_export(line);
 		line = get_next_line_in_env(line, env);
 	}
+	ft_free_split(env);
 	return (SUCCESS);
 }
 

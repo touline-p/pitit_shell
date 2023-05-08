@@ -22,6 +22,21 @@ static void				_close_this(int fd);
 
 /*----------------------------------------------------------------------------*/
 
+void free_all_others(t_cmd *cmds, int block_id, int nb_of_pipes)
+{
+	int i;
+
+	i = 0;
+	while (i < nb_of_pipes + 1)
+	{
+		if (i != block_id)
+			ft_free_split(cmds[block_id].commands);
+		i++;
+	}
+	(void)cmds; (void)block_id; (void)(nb_of_pipes);
+	return ;
+}
+
 t_return_status	childs_execve(t_data *data, char ***env)
 {
 	int		block_id;
@@ -39,6 +54,8 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			perror("fork");
 		if (data->cmds_block[block_id].process_id == 0)
 		{
+			free(data->prompt);
+			//free_all_others(data->cmds_block, block_id, data->nb_of_pipe);
 			_child_launch_act(&(data->cmds_block[block_id]), data->nb_of_pipe, env, block_id);
 		}
 		else if (data->cmds_block[block_id].process_id < 0)
@@ -127,6 +144,11 @@ static char	*add_path_cmd(t_cmd *cmd, char **env)
 	if (!paths)
 		return (NULL);
 	i = 0;
+	if (ft_strcmp("", cmd->commands[0]) == 0)
+	{
+		ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
+		return (ft_free_split(paths), NULL);
+	}
 	while (paths[i])
 	{
 		paths[i] = strjoin_path_cmd(paths[i], cmd->commands[0]);
