@@ -25,5 +25,6 @@ t_return_status	env_builtin(char **av, char ***env_pt)
 			printf("%s\n", *pin);
 		pin++;
 	}
+	ft_free_split(*env_pt);
 	return (SUCCESS);
 }

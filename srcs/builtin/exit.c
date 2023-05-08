@@ -21,15 +21,17 @@ static t_return_status	check_exit_args(char **av);
 
 t_return_status	exit_builtin(char **av, char ***env_pt)
 {
-	(void)env_pt;
-	
+
+	ft_free_split(*env_pt);
 	ft_dprintf(2, RED"exit\n"END);
 	if (av[1])
 	{
 		if (check_exit_args(av) != SUCCESS)
 			return (FAILURE);
 	}
+
 	g_ret_val = 0;
+	ft_free_split(av);
 	exit(g_ret_val);
 	return (SUCCESS);
 }
@@ -51,7 +53,7 @@ static t_return_status	check_exit_args(char **av)
 		return (FAILURE);
 	}
 	g_ret_val = ft_atoi(av[1]);
-	exit(g_ret_val);
 	ft_free_split(av);
+	exit(g_ret_val);
 	return (SUCCESS);
 }
