@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/05 17:08:45 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/08 12:58:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,11 @@ static void	wait_for_process_ids(t_data *data)
 {
 	int		block_id;
 	int		status;
+	bool	signals;
 
 	block_id = 0;
 	status = 0;
+	signals = false;
 	while (block_id < data->nb_of_pipe + 1)
 	{
 		if (data->cmds_block[block_id].id_command == CMD)
@@ -143,13 +145,12 @@ static void	wait_for_process_ids(t_data *data)
 				g_ret_val = 1;
 				break ;
 			}
-			if (WIFEXITED(status))
+			else if (WIFEXITED(status))
 				g_ret_val = WEXITSTATUS(status);
-			else if (WIFSIGNALED(status))
+			else if (WIFSIGNALED(status) && signals == false)
 			{
-				g_ret_val = WTERMSIG(status);
-				if (g_ret_val != 131)
-					g_ret_val += 128;
+				handle_signal_child(WTERMSIG(status));
+				signals = true;
 			}
 		}
 		block_id++;

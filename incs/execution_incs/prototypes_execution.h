@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/05 16:42:04 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/08 15:56:10 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 # include "libft.h"
 # include "structures_execution.h"
 # include "structures_parsing.h"
+
+/*----------------------------------------------------------------------------*/
+/*---- Bonus -----------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+
+/*-- wildcards ---------------------------------------------------------------*/
+
+/*-- wildcards --*/
+t_return_status	get_wild_args(char *line);
 
 /*----------------------------------------------------------------------------*/
 /*---- Execution -------------------------------------------------------------*/
@@ -31,8 +40,8 @@ void	replace_space_by_minus(unsigned int nb, char *content);
 t_return_status	childs_execve(t_data *data, char ***env);
 
 /*-- fds_manage --*/
-void	close_fds(t_data *data, int block_id);
-void	close_all_fds(t_data *data, int block_id);
+void				close_fds(t_data *data, int block_id);
+void				close_all_fds(t_data *data, int block_id);
 t_return_status 	duplicate_fds(t_cmd block);
 
 /*-- parsing -----------------------------------------------------------------*/
@@ -67,7 +76,7 @@ bool	is_path(char *line);
 bool	is_cmd(char *line);
 
 /*-- struct_utils --*/
-void			free_commands(t_data *data);
+void	free_commands(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 /*---- Signals ---------------------------------------------------------------*/
@@ -81,14 +90,21 @@ void	handle_signal_heredoc_sigquit(int signal);
 void	handle_signal_father_process(int signal);
 
 /*-- Genius Brieuc utils --*/
-void	string_token_destructor(t_string_token *trash);
-void	del_next_string_token(t_string_token *tok);
-void	display_str_token(t_string_token *tok);
-void	display_t_emt_string(t_string_token *token);
-char 	**join_token_lst(t_string_token **arg, char **env);
-void	manage_ambiguous(t_cmd *cmd, char *file);
+void			string_token_destructor(t_string_token *trash);
+void			del_next_string_token(t_string_token *tok);
+void			display_str_token(t_string_token *tok);
+void			display_t_emt_string(t_string_token *token);
+char 			**join_token_lst(t_string_token **arg, char **env);
+void			manage_ambiguous(t_cmd *cmd, char *file);
 t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 
+/*----------------------------------------------------------------------------*/
+/*---- Main ------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+
+/*-- main_utils --*/
+t_return_status	check_arguments(int ac, char **av);
+void			clean_the_prompt(char *prompt, char *line, char **env);
 
 /*-- debug --*/
 void    print_pid(int pid);

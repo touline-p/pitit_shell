@@ -12,7 +12,7 @@ int g_ret_val;
 
 /*----------------------------------------------------------------------------*/
 
-#define MAIN
+// #define MAIN
 #ifdef MAIN
 
 /*---- prototypes ------------------------------------------------------------*/
@@ -22,7 +22,6 @@ static t_return_status	get_allocated_line_prompt_on(char **line_pt, char **env);
 static t_return_status	get_allocated_box_on(char **box_pt, char **env);
 
 /*----------------------------------------------------------------------------*/
-
 
 t_return_status	get_prompt_on(char **prompt_pt, char **env)
 {
@@ -45,39 +44,35 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac; (void)av;
 	char	*line;
 	t_data	data;
 	t_string_token	*str_tok_lst;
 
 	data.prompt = NULL;
+
 	line = NULL;
 	str_tok_lst = NULL;
+	display_files();
+	if (check_arguments(ac, av) != SUCCESS)
+		return (1);
 	if (welcome_to_minihell(&env) != SUCCESS)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-		if (g_ret_val == 131)
-			ft_dprintf(2, RED"Quit (core dumped)\n"END);
-		if (g_ret_val == 130)
-			dprintf(2, "\n");
+
 		get_prompt_on(&(data.prompt), env);
 		line = readline(data.prompt);
+
 		if (errno)
 		{
 			perror("readline");
 			errno = SUCCESS;
 		}
 		if (line == NULL)
-		{
-			free(line);
-			free(data.prompt);
-			ft_free_split(env);
-			ft_dprintf(2, RED"exit\n"END);
-			clear_history();
-			exit(0);
-		}
+
+			clean_the_prompt(prompt, line, env);
+	
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
@@ -88,6 +83,9 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		del_space_token(str_tok_lst);
+
+		g_ret_val = 0;
+
 		execution(&data, str_tok_lst, &env);
 		if (data.cmds_block)
 			free(data.cmds_block);
