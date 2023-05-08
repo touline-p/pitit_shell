@@ -24,10 +24,7 @@ t_return_status	dquoting_process(t_token *last_token, \
 	while ((pin->token != EOL && pin->sign_char != '\"')
 		|| pin->esec == SECURED)
 	{
-		if (pin->sign_char == '\\'
-			&& is_from(pin->next->sign_char, "\\\"$"))
-			escape_process(last_token, pin, &last_token);
-		else if (pin->sign_char != '$')
+		if (pin->sign_char != '$')
 			pin->esec = SECURED;
 		last_token = last_token->next;
 		pin = last_token->next;
