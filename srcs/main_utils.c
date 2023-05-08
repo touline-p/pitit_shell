@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:03:57 by twang             #+#    #+#             */
-/*   Updated: 2023/05/08 10:44:29 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/08 14:58:30 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,12 @@ t_return_status	check_arguments(int ac, char **av)
 		return (SUCCESS);
 }
 
-void	check_return_value(void)
-{
-	if (g_ret_val == 131)
-		ft_dprintf(2, RED"Quit (core dumped)\n"END);
-	if (g_ret_val == 130)
-		ft_dprintf(2, "\n");
-}
-
 void	clean_the_prompt(char *prompt, char *line, char **env)
 {
 	free(line);
 	free(prompt);
 	ft_free_split(env);
+	clear_history();
 	ft_dprintf(2, RED"exit\n"END);
+	exit(0);
 }

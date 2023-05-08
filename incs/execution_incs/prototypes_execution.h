@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/08 10:44:46 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/08 15:56:10 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 # include "libft.h"
 # include "structures_execution.h"
 # include "structures_parsing.h"
+
+/*----------------------------------------------------------------------------*/
+/*---- Bonus -----------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+
+/*-- wildcards ---------------------------------------------------------------*/
+
+/*-- wildcards --*/
+t_return_status	get_wild_args(char *line);
 
 /*----------------------------------------------------------------------------*/
 /*---- Execution -------------------------------------------------------------*/
@@ -95,7 +104,6 @@ t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 
 /*-- main_utils --*/
 t_return_status	check_arguments(int ac, char **av);
-void			check_return_value(void);
 void			clean_the_prompt(char *prompt, char *line, char **env);
 
 /*-- debug --*/

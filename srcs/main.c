@@ -12,7 +12,7 @@ int g_ret_val;
 
 /*----------------------------------------------------------------------------*/
 
-#define MAIN
+// #define MAIN
 #ifdef MAIN
 
 /*---- prototypes ------------------------------------------------------------*/
@@ -22,7 +22,6 @@ static t_return_status	get_allocated_line_prompt_on(char **line_pt, char **env);
 static t_return_status	get_allocated_box_on(char **box_pt, char **env);
 
 /*----------------------------------------------------------------------------*/
-
 
 t_return_status	get_prompt_on(char **prompt_pt, char **env)
 {
@@ -56,6 +55,7 @@ int	main(int ac, char **av, char **env)
 	prompt = NULL;
 	line = NULL;
 	str_tok_lst = NULL;
+	display_files();
 	if (check_arguments(ac, av) != SUCCESS)
 		return (1);
 	if (welcome_to_minihell(&env) != SUCCESS)
@@ -63,7 +63,6 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-		// check_return_value();
 		get_prompt_on(&prompt, env);
 		line = readline(prompt);
 		if (errno)
@@ -72,17 +71,8 @@ int	main(int ac, char **av, char **env)
 			errno = SUCCESS;
 		}
 		if (line == NULL)
-		{
 			clean_the_prompt(prompt, line, env);
-			// free(line);
-			// free(prompt);
-			// ft_free_split(env);
-			// ft_dprintf(2, RED"exit\n"END);
-			exit(0);
-		}
 		if (ft_strncmp("END", line, 4) == 0)
-			return (clear_history(), free(line), 0);
-		/*est ce qu'on garde END, on ne clear_history nulle part ailleurs ? */
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
