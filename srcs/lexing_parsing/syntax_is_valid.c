@@ -23,19 +23,14 @@ t_return_status	syntax_is_valid(t_string_token *lst_to_check)
 	t_string_token	*pin;
 
 	pin = lst_to_check;
-	if (!lst_to_check)
-		return (FAILURE);
-	if (lst_to_check->next == NULL || lst_to_check->next->token == EOL)
-		return (FAILURE);
 	if (is_a_meta(pin->next->token) == true
 		&& is_a_redir(pin->next->token) == false)
 		return (_syntax_is_valid_ep(pin->next->token));
 	pin = pin->next;
 	while (pin->token != EOL)
 	{
-		if ((is_a_meta(pin->token) == true
-			&& (is_a_meta(pin->next->token) == true && !is_a_redir(pin->next->token) == true))
-			|| (is_a_redir(pin->token) && is_a_redir(pin->next->token)))
+		if (is_a_meta(pin->token) == true
+			&& ((is_a_meta(pin->next->token) == true) && !is_a_redir(pin->next->token)))
 			return (_syntax_is_valid_ep(pin->next->token));
 		pin = pin->next;
 	}

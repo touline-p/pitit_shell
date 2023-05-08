@@ -79,10 +79,9 @@ int	main(int ac, char **av, char **env)
 			free(prompt);
 			ft_free_split(env);
 			ft_dprintf(2, RED"exit\n"END);
+			clear_history();
 			exit(0);
 		}
-		if (ft_strncmp("END", line, 4) == 0)
-			return (clear_history(), free(line), 0);
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
