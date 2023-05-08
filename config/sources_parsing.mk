@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:31:59 by twang             #+#    #+#              #
-#    Updated: 2023/04/26 14:10:19 by twang            ###   ########.fr        #
+#    Updated: 2023/05/08 10:23:26 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/builtin/export.c 											\
 			srcs/initialisation/env_init.c									\
 			srcs/main.c														\
+			srcs/main_utils.c												\
 			srcs/builtin/env_utils/ordering_env_export.c					\
 			srcs/builtin/env_utils/env_utils.c								\
 			srcs/builtin/env_utils/get_in_env.c								\

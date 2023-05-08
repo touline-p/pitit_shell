@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/05 17:10:34 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/08 12:39:32 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_signals(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, &handle_signal_main);
 }
 
@@ -47,12 +48,18 @@ void	handle_signal_heredoc(int signal)
 		(void)signal;
 }
 
-void	handle_signal_child(int signal)
+void	handle_signal_child(int signo)
 {
-	if (signal == SIGINT)
+	if (signo == SIGINT)
+	{
 		g_ret_val = 130;
-	else if (signal == SIGQUIT)
+		ft_dprintf(2, "\n");
+	}
+	else if (signo == SIGQUIT)
+	{
 		g_ret_val = 131;
+		ft_dprintf(2, RED"Quit (core dumped)\n"END);
+	}
 }
 
 void	handle_signal_father_process(int signal)

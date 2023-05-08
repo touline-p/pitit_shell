@@ -48,24 +48,22 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac; (void)av;
 	char	*line;
 	t_data	data;
 	t_string_token	*str_tok_lst;
 	char	*prompt;
-
+	
 	prompt = NULL;
 	line = NULL;
 	str_tok_lst = NULL;
+	if (check_arguments(ac, av) != SUCCESS)
+		return (1);
 	if (welcome_to_minihell(&env) != SUCCESS)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-		if (g_ret_val == 131)
-			ft_dprintf(2, RED"Quit (core dumped)\n"END);
-		if (g_ret_val == 130)
-			dprintf(2, "\n");
+		// check_return_value();
 		get_prompt_on(&prompt, env);
 		line = readline(prompt);
 		if (errno)
@@ -75,14 +73,16 @@ int	main(int ac, char **av, char **env)
 		}
 		if (line == NULL)
 		{
-			free(line);
-			free(prompt);
-			ft_free_split(env);
-			ft_dprintf(2, RED"exit\n"END);
+			clean_the_prompt(prompt, line, env);
+			// free(line);
+			// free(prompt);
+			// ft_free_split(env);
+			// ft_dprintf(2, RED"exit\n"END);
 			exit(0);
 		}
 		if (ft_strncmp("END", line, 4) == 0)
 			return (clear_history(), free(line), 0);
+		/*est ce qu'on garde END, on ne clear_history nulle part ailleurs ? */
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
@@ -92,11 +92,8 @@ int	main(int ac, char **av, char **env)
 			string_token_destructor(str_tok_lst);
 			continue;
 		}
-<<<<<<< HEAD
 		del_space_token(str_tok_lst);
 		g_ret_val = 0;
-=======
->>>>>>> master
 		execution(&data, str_tok_lst, &env);
 		if (data.cmds_block)
 			free(data.cmds_block);
