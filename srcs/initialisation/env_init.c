@@ -47,7 +47,7 @@ static t_return_status	_increment_shlvl(char ***env_pt)
 	line = get_line_from_key("SHLVL", *env_pt);
 	if (line == NULL)
 	{
-		line_to_add = ft_strdup("SHLVL=0");
+		line_to_add = ft_strdup("SHLVL=1");
 		if (add_str_to_env(line_to_add, env_pt) != SUCCESS)
 			return (FAILED_MALLOC);
 		return (SUCCESS);

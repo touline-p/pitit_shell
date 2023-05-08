@@ -25,23 +25,20 @@ static t_return_status	get_allocated_box_on(char **box_pt, char **env);
 
 t_return_status	get_prompt_on(char **prompt_pt, char **env)
 {
-	char	*prompt;
 	char	*line;
 	char	*box;
 
-	if (*prompt_pt != NULL)
-		free(*prompt_pt);
-	*prompt_pt = NULL;
 	box = NULL;
 	line = NULL;
+	free(*prompt_pt);
+	*prompt_pt = NULL;
 	if (get_allocated_box_on(&box, env) != SUCCESS
 		|| box == NULL
 		|| get_allocated_line_prompt_on(&line, env) != SUCCESS)
 		return (free(box), free(line), SUCCESS);
-	prompt = ft_strjoin(box, line);
+	*prompt_pt = ft_strjoin(box, line);
 	free(box);
 	free(line);
-	*prompt_pt = prompt;
 	return (SUCCESS);
 }
 
@@ -50,9 +47,9 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	t_data	data;
 	t_string_token	*str_tok_lst;
-	char	*prompt;
-	
-	prompt = NULL;
+
+	data.prompt = NULL;
+
 	line = NULL;
 	str_tok_lst = NULL;
 	display_files();
@@ -63,16 +60,19 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-		get_prompt_on(&prompt, env);
-		line = readline(prompt);
+
+		get_prompt_on(&(data.prompt), env);
+		line = readline(data.prompt);
+
 		if (errno)
 		{
 			perror("readline");
 			errno = SUCCESS;
 		}
 		if (line == NULL)
+
 			clean_the_prompt(prompt, line, env);
-		if (ft_strncmp("END", line, 4) == 0)
+	
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
@@ -83,11 +83,12 @@ int	main(int ac, char **av, char **env)
 			continue;
 		}
 		del_space_token(str_tok_lst);
+
 		g_ret_val = 0;
+
 		execution(&data, str_tok_lst, &env);
 		if (data.cmds_block)
 			free(data.cmds_block);
-		string_token_destructor(str_tok_lst);
 	}
 	return (0);
 }

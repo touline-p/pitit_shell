@@ -71,14 +71,16 @@ t_return_status	outfiles_management(t_data *data, t_string_token *lst_of_tok, ch
 static t_return_status	_set_outfile(t_data *data, char **file, int block_id, char **env)
 {
 	char **arr;
+	bool	signal;
 
+	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
 	if (data->cmds_block[block_id].infile < 0 || data->cmds_block[block_id].fd_hd[0] < 0
 		|| data->cmds_block[block_id].is_ambiguous == true)
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
-	if (ft_strchr(*file, -32) != NULL || **file == 0)
+	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
 		return (SUCCESS);
@@ -96,7 +98,9 @@ static t_return_status	_set_outfile(t_data *data, char **file, int block_id, cha
 static t_return_status	_set_appends(t_data *data, char **file, int block_id, char **env)
 {	
 	char **arr;
+	bool	signal;
 
+	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
 	if (data->cmds_block[block_id].infile < 0 || data->cmds_block[block_id].fd_hd[0] < 0
 		|| data->cmds_block[block_id].is_ambiguous == true)
@@ -104,7 +108,7 @@ static t_return_status	_set_appends(t_data *data, char **file, int block_id, cha
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
 	
-	if (ft_strchr(*file, -32) != NULL || **file == 0)
+	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
 		return (SUCCESS);

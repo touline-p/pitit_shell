@@ -21,18 +21,68 @@ static void				wait_for_process_ids(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
+bool	check_cmd(t_cmd *cmd)
+{
+	while (cmd->commands)
+	{
+		if (cmd->infile == -1 && cmd->is_heredoc == true)
+			return (true);
+		cmd++;
+	}
+	return (false);
+}
+
+void init_data(t_data *data)
+{
+	data->cmds_block = NULL;
+	data->fd[0] = 0;
+	data->fd[1] = 0;
+	data->nb_of_pipe = 0;
+}
+
+t_return_status	fix_string(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < data->nb_of_pipe + 1)
+	{
+		if (data->cmds_block[i].commands[0] == NULL)
+		{
+			free(data->cmds_block);
+			data->cmds_block[i].commands = malloc(sizeof(char *) * 2);
+			if (data->cmds_block[i].commands == NULL)
+				return (FAILED_MALLOC);
+			data->cmds_block[i].commands[0] = ft_strdup("");
+			if (data->cmds_block[i].commands[0] == NULL)
+			{
+				data->cmds_block[i].commands = NULL;
+				return (free(data->cmds_block[i].commands), FAILED_MALLOC);
+			}
+			data->cmds_block[i].commands[1] = NULL;
+		}
+		i++;
+	}
+	return (SUCCESS);
+}
+
 void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 {
-	ft_bzero(data, sizeof(t_data));
+	init_data(data);
 	alloc_cmd_block(data, lst_of_tok);
 	infiles_management(data, lst_of_tok, *env_pt);
 	outfiles_management(data, lst_of_tok, *env_pt);
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
 	if (check_if_token(lst_of_tok) != SUCCESS)
+	{
+		string_token_destructor(lst_of_tok);
 		return ;
+	}
 	strings_management(data, lst_of_tok, *env_pt);
-	if (g_ret_val == 130)
+	fix_string(data);
+	string_token_destructor(lst_of_tok);
+	if (g_ret_val == 130 && check_cmd(data->cmds_block))
 		return ;
 	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD)
 		switchman_once(data, env_pt);

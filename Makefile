@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/05/05 15:31:32 by bpoumeau         ###   ########.fr        #
+#    Updated: 2023/05/05 18:51:29 by bpoumeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,14 +69,14 @@ OBJECTS	=	$(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
 all:
 	$(MAKE) header
-	$(MAKE) lib
+	$(MAKE) -C ./libft 
 	$(MAKE) $(NAME)
 
-$(NAME): $(OBJECTS)
+$(NAME): $(OBJECTS) $(LIBFT)
 	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@ -lreadline
 	$(PRINT_CREATING)
 
-$(OBJ_DIR)/%.o: %.c $(HEADERS) $(LIBFT)
+$(OBJ_DIR)/%.o: %.c $(HEADERS) 
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 	$(PRINT_COMPILING)
