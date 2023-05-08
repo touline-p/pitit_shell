@@ -21,11 +21,11 @@ static t_return_status 	_expand_lines(char **str_arr, char **env)
 {
 	while (*str_arr)
 	{
-		if (**str_arr == - '"' \
-			&& replace_dquotes_str_by_env_value(str_arr, env) != SUCCESS)
-			return (FAILED_MALLOC);
-		else if (**str_arr == '$' \
+		if (**str_arr == '$' \
 			&& replace_dollar_str_by_env_value(str_arr, env) != SUCCESS)
+			return (FAILED_MALLOC);
+		else if (**str_arr == - '"' \
+			&& replace_dquotes_str_by_env_value(str_arr, env) != SUCCESS)
 			return (FAILED_MALLOC);
 		str_arr++;
 	}
