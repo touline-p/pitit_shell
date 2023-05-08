@@ -17,7 +17,6 @@
 # define HEREDOC_MUST_GO_ON 1
 # define STRT_CHR -1
 # define EOSTR 0
-# define METACHAR_SET "|&<>(); "
 # define IFS " \t\n"
 # define PROMPT_MESSAGE " - Y a quoi : "
 
