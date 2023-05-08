@@ -45,9 +45,7 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 				return (FAILURE);
 		}
 		if (temp->token == PIPE)
-		{
 			i++;
-		}
 		temp = temp->next;
 	}
 	return (SUCCESS);
@@ -56,12 +54,14 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 
 static t_return_status	_set_infile(t_data *data, char **file, int block_id, char **env)
 {
-	char **arr;
+	char	**arr;
+	bool	signal;
 
 	check_opened_infiles(data, block_id);
+	signal = file_is_empty(*file);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
-	if (ft_strchr(*file, -32) != NULL || **file == 0)
+	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
 		return (FAILURE);

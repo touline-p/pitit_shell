@@ -44,7 +44,6 @@ t_return_status	childs_execve(t_data *data, char ***env)
 	block_id = 0;
 	while (block_id < data->nb_of_pipe + 1)
 	{
-		print_cmd_block(ft_itoa(block_id), data->cmds_block[block_id]);
 		if (_do_the_pipe(&(data->cmds_block[block_id]), data->nb_of_pipe, block_id) != SUCCESS)
 			return (FAILURE);
 		_manage_the_pipe(data, block_id);
