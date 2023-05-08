@@ -85,7 +85,7 @@ static	t_return_status	find_corresponding_files(char *line, char *name)
 	return (SUCCESS);
 }
 
-#define TST_WILD
+//#define TST_WILD
 #ifdef TST_WILD
 
 int main(int ac, char **av)

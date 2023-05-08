@@ -12,7 +12,7 @@ int g_ret_val;
 
 /*----------------------------------------------------------------------------*/
 
-// #define MAIN
+ #define MAIN
 #ifdef MAIN
 
 /*---- prototypes ------------------------------------------------------------*/
@@ -52,7 +52,7 @@ int	main(int ac, char **av, char **env)
 
 	line = NULL;
 	str_tok_lst = NULL;
-	display_files();
+	//display_files();
 	if (check_arguments(ac, av) != SUCCESS)
 		return (1);
 	if (welcome_to_minihell(&env) != SUCCESS)
@@ -70,9 +70,7 @@ int	main(int ac, char **av, char **env)
 			errno = SUCCESS;
 		}
 		if (line == NULL)
-
-			clean_the_prompt(prompt, line, env);
-	
+			clean_the_prompt(data.prompt, line, env);
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
