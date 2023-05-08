@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:27:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/08 20:06:42 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/08 20:19:18 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ t_return_status	get_wild_args(char *line)
 
 static	t_return_status	find_corresponding_files(char *line, char *name)
 {
-	char	**files;
+	char	**to_find;
 	int		i;
 	
-	files = NULL;
+	to_find = NULL;
 	i = 0;
 	// printf("%s\n", name);
 	if (ft_strcmp(line, "*") == 0)
@@ -72,18 +72,17 @@ static	t_return_status	find_corresponding_files(char *line, char *name)
 			return (SUCCESS);
 		}
 	}
-	files = ft_split(line, '*');
-	while (files[i])
+	to_find = ft_split(line, '*');
+	while (to_find[i])
 	{
-		if ((strstr(files[i], name)) == NULL)
+		if ((strstr(to_find[i], name)) == NULL)
 		{
 			puts("nope");
-			printf("files[i]: %s \tname: %s\n", files[i], name);
+			printf("to_find[i]: %s \tname: %s\n", to_find[i], name);
 		}
 		i++;
 	}
 	return (SUCCESS);
-	// ft_print_split(files);
 }
 
 #define TST_WILD
