@@ -28,7 +28,7 @@ t_lstc	*init_lstc_first_read(int fd)
 	return (new);
 }
 
-t_lstc 	*lstc_clear(t_lstc *trash)
+t_lstc	*lstc_clear(t_lstc *trash)
 {
 	t_lstc	*pin;
 
@@ -37,12 +37,10 @@ t_lstc 	*lstc_clear(t_lstc *trash)
 		pin = trash->next;
 		free(trash);
 		trash = pin;
-
 	}
 	free(trash);
 	return (NULL);
 }
-
 
 t_lstc	*lstc_new(char c)
 {
@@ -107,7 +105,7 @@ size_t	lstc_size(t_lstc *lst)
 	return (ret_val);
 }
 
-void read_lst(t_lstc *lst)
+void	read_lst(t_lstc *lst)
 {
 	while (lst)
 	{
@@ -115,7 +113,7 @@ void read_lst(t_lstc *lst)
 	}
 }
 
-t_return_status 	read_fd_in_str(int fd, char **dst)
+t_return_status	read_fd_in_str(int fd, char **dst)
 {
 	t_lstc	*lst;
 
