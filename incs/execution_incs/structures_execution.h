@@ -22,6 +22,7 @@ typedef struct s_data			t_data;
 typedef struct s_cmd			t_cmd;
 typedef struct s_data			t_data;
 typedef struct s_cmd			t_cmd;
+typedef struct s_list_of_char	t_lstc;
 
 /*---- structures ------------------------------------------------------------*/
 
@@ -47,12 +48,19 @@ struct s_cmd
 {
 	t_builtin	id_command;
 	char		**commands;
+	char 		*heredoc_data;
 	bool		is_ambiguous;
 	bool		is_heredoc;
 	int			infile;
 	int			outfile;
 	int 		fd_hd[2];
 	pid_t		process_id;
+};
+
+struct	s_list_of_char
+{
+	t_lstc	*next;
+	char 	c;
 };
 
 #endif

@@ -18,8 +18,10 @@ static	t_return_status _dup_n_close(int to_dup, int to_replace);
 
 /*----------------------------------------------------------------------------*/
 
-t_return_status 	duplicate_fds(t_cmd block)
+t_return_status 	duplicate_fds(t_cmd block, t_data *data)
 {
+	if (block.is_heredoc == true)
+		heredoc_child_management(&block, data);
 	if (block.infile == -1 || block.outfile == -1)
 		return (FAILURE);
 	if (block.is_ambiguous)
@@ -40,6 +42,52 @@ static	t_return_status _dup_n_close(int to_dup, int to_replace)
 		return (FAILURE);
 	}
 	close(to_dup);
+	return (SUCCESS);
+}
+
+t_return_status	_write_all(char *str, int fd)
+{
+	int flag;
+
+	if (!str)
+		return (close(fd), FAILURE);
+	flag = write(fd, str, 1);
+	while (flag == 1 && *str)
+	{
+		str++;
+		flag = write(fd, str, 1);
+	}
+	close(fd);
+	if (flag == -1)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+t_return_status heredoc_child_management(t_cmd *cmd, t_data *data)
+{
+	int fd[2];
+	int pid;
+
+	if (pipe(fd) == -1)
+		return (FAILURE);
+	pid = fork();
+	if (pid == -1)
+		return (FAILURE);
+	if (pid == 0)
+	{
+		close(cmd->infile);
+		close(cmd->outfile);
+		close(fd[0]);
+		if (_write_all(cmd->heredoc_data, fd[1]) != SUCCESS)
+		{
+			free(cmd->heredoc_data);
+			exit(FAILURE);
+		}
+		free(cmd->heredoc_data);
+		exit(SUCCESS);
+	}
+	close(fd[1]);
+	cmd->infile = fd[0];
 	return (SUCCESS);
 }
 

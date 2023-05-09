@@ -75,7 +75,7 @@ static void	_child_launch_act(t_data *data, t_cmd *command_block, int nb_of_pipe
 	command = NULL;
 	if (block_id <= nb_of_pipe)
 		_close_this(command_block->fd_hd[0]);
-	if (duplicate_fds(*command_block) != SUCCESS)
+	if (duplicate_fds(*command_block, data) != SUCCESS)
 	{
 		ft_free_split(command_block->commands);
 		exit(1);

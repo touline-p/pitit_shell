@@ -74,7 +74,11 @@ char	*get_next_line(int fd)
 
 	line = NULL;
 	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
+	{
+		free(stash);
+		stash = NULL;
 		return (NULL);
+	}
 	i = 1;
 	while (i > 0 && get_strchr(stash, '\n') == 0)
 	{
