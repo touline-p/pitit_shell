@@ -24,17 +24,8 @@ static void				_close_this(int fd);
 
 void free_all_others(t_cmd *cmds, int block_id, int nb_of_pipes)
 {
-	int i;
-
-	i = 0;
-	while (i < nb_of_pipes + 1)
-	{
-		if (i != block_id)
-			ft_free_split(cmds[block_id].commands);
-		i++;
-	}
-	(void)cmds; (void)block_id; (void)(nb_of_pipes);
-	return ;
+	while (block_id++ < nb_of_pipes + 1)
+		ft_free_split(cmds[block_id].commands);
 }
 
 t_return_status	childs_execve(t_data *data, char ***env)
@@ -59,7 +50,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			signal(SIGQUIT, &handle_signal_child);
 
 			free(data->prompt);
-			//free_all_others(data->cmds_block, block_id, data->nb_of_pipe);
+			free_all_others(data->cmds_block, block_id, data->nb_of_pipe);
 
 			_child_launch_act(data,&(data->cmds_block[block_id]), data->nb_of_pipe, env, block_id);
 		}
@@ -108,7 +99,7 @@ static void	_child_launch_act(t_data *data, t_cmd *command_block, int nb_of_pipe
 
 static t_return_status	_do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id)
 {
-	if (cmd_block[block_id].infile < 0 || cmd_block[block_id].fd_hd[0] < 0)
+	if (cmd_block->infile < 0 || cmd_block->fd_hd[0] < 0)
 		return (FAILURE);
 	if (block_id == nb_of_pipe)
 		return (SUCCESS);
