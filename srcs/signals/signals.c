@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/09 15:57:59 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/09 21:04:30 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	handle_signal_main(int signal)
 	g_ret_val = 130;
 	ft_dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	// rl_replace_line("", 0);
 	rl_redisplay();
 }
 

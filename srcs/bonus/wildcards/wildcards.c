@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:27:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/09 19:50:56 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/09 21:09:41 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_return_status	where_are_the_stars(t_w_data *w_data, char *line, \
 char *name);
 
 /*----------------------------------------------------------------------------*/
-
+#include <string.h>
 t_return_status	get_wild_args(char *line)
 {
 	t_w_data		w_data;
@@ -38,7 +38,7 @@ t_return_status	get_wild_args(char *line)
 		perror ("minishell: opendir: cannot open current directory");
 		return (FAILURE);
 	}
-	bzero(&w_data, sizeof(t_w_data));
+	ft_bzero((void *)&w_data, sizeof(t_w_data));
 	if (check_line(&w_data, line) != SUCCESS)
 		return (FAILURE);
 	while (1)
@@ -73,6 +73,7 @@ static	t_return_status	find_matching_files(t_w_data *w_data, char *line, \
 static t_return_status	where_is_the_star(t_w_data *w_data, char *line, \
 											char *name)
 {
+	int	size_line;
 	if (strcmp(line, "*") == 0)
 	{
 		if (name[0] != '.')
@@ -84,13 +85,20 @@ static t_return_status	where_is_the_star(t_w_data *w_data, char *line, \
 	else if (w_data->first == '*')
 	{
 		line++;
-		if (ft_strnstr(name, line, ft_strlen(line)) != NULL)
+		size_line = ft_strlen(line);
+		if (ft_strncmp(name + ft_strlen(name) - size_line, line, size_line) == 0)
 			printf("%s\n", name);
 	}
 	else if (w_data->last == '*')
-		puts("il n'y a que une etoile et elle est a la fin");
+	{
+		size_line = ft_strlen(line) - 1;
+		if (ft_strncmp(name, line, size_line) == 0)
+			printf("%s\n", name);
+	}
 	else
-		puts("il va falloir split ???");
+	{
+		puts("split?");
+	}
 	return (FAILURE);
 }
 
@@ -110,7 +118,7 @@ static t_return_status	where_are_the_stars(t_w_data *w_data, char *line, \
 int	main(int ac, char **av)
 {
 	(void)ac; (void)av;
-	char *line = "*l";
+	char *line = "l*l";
 
 	get_wild_args(line);
 	return (0);
