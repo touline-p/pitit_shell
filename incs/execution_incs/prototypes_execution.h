@@ -42,7 +42,7 @@ t_return_status	childs_execve(t_data *data, char ***env);
 /*-- fds_manage --*/
 void				close_fds(t_data *data, int block_id);
 void				close_all_fds(t_data *data, int block_id);
-t_return_status 	duplicate_fds(t_cmd block, t_data *data);
+t_return_status 	duplicate_fds(t_cmd block, t_data *data, char ***env_pt);
 
 /*-- parsing -----------------------------------------------------------------*/
 
@@ -100,7 +100,7 @@ t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 t_return_status	switchman(t_data *data, t_string_token *token_lst, char ***env_pt);
 void 			ft_free_all_str_lst(t_data *data, int index);
 t_return_status read_fd_in_str(int fd, char **dst);
-t_return_status heredoc_child_management(t_cmd *cmd, t_data *data);
+t_return_status heredoc_child_management(t_cmd *cmd, t_data *data, char **env_pt);
 
 /*----------------------------------------------------------------------------*/
 /*---- Main ------------------------------------------------------------------*/

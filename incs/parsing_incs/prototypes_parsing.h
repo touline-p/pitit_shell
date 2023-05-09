@@ -92,6 +92,7 @@ void			del_next_string_token(t_string_token *tok);
 void			del_space_token(t_string_token *tok);
 t_return_status	split_t_string_token_on_space(t_string_token **token_pt);
 void			del_empty_tokens(t_string_token *token_lst);
+void			free_all_str(t_data *data);
 
 /*** checking syntax ***/
 

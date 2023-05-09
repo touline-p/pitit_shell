@@ -34,7 +34,7 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 		free(data->cmds_block);
 		free(data->prompt);
 		ft_free_all_str_lst(data, data->index);
-		if (duplicate_fds(cmd, data) != SUCCESS)
+		if (duplicate_fds(cmd, data, env_pt) != SUCCESS)
 		{
 			ft_free_split(cmd.commands);
 			exit(1);

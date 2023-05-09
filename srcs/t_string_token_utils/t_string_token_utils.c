@@ -50,6 +50,18 @@ void	string_token_destructor(t_string_token *trash)
 	string_token_destructor(tmp);
 }
 
+void free_all_str(t_data *data)
+{
+	int i;
+
+	i = data->index;
+	while (data->instructions_arr[i])
+	{
+		string_token_destructor(data->instructions_arr[i]);
+		i++;
+	}
+}
+
 void	cpy_token_lst_to_str(t_token *tok, char *str)
 {
 	int i;

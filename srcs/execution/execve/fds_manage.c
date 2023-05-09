@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
+#include "minishell_parsing.h"
 
 /*---- prototypes ------------------------------------------------------------*/
 
@@ -18,10 +19,10 @@ static	t_return_status _dup_n_close(int to_dup, int to_replace);
 
 /*----------------------------------------------------------------------------*/
 
-t_return_status 	duplicate_fds(t_cmd block, t_data *data)
+t_return_status 	duplicate_fds(t_cmd block, t_data *data, char ***env_pt)
 {
 	if (block.is_heredoc == true)
-		heredoc_child_management(&block, data);
+		heredoc_child_management(&block, data, *env_pt);
 	if (block.infile == -1 || block.outfile == -1)
 		return (FAILURE);
 	if (block.is_ambiguous)
@@ -63,7 +64,7 @@ t_return_status	_write_all(char *str, int fd)
 	return (SUCCESS);
 }
 
-t_return_status heredoc_child_management(t_cmd *cmd, t_data *data)
+t_return_status heredoc_child_management(t_cmd *cmd, t_data *data, char **env_pt)
 {
 	int fd[2];
 	int pid;
@@ -75,6 +76,9 @@ t_return_status heredoc_child_management(t_cmd *cmd, t_data *data)
 		return (FAILURE);
 	if (pid == 0)
 	{
+
+		ft_free_split(env_pt);
+		ft_free_split(cmd->commands);
 		close(cmd->infile);
 		close(cmd->outfile);
 		close(fd[0]);
@@ -83,9 +87,12 @@ t_return_status heredoc_child_management(t_cmd *cmd, t_data *data)
 			free(cmd->heredoc_data);
 			exit(FAILURE);
 		}
+		close(fd[1]);
 		free(cmd->heredoc_data);
+		free(data->cmds_block);
 		exit(SUCCESS);
 	}
+	free(cmd->heredoc_data);
 	close(fd[1]);
 	cmd->infile = fd[0];
 	return (SUCCESS);
