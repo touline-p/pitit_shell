@@ -49,9 +49,9 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			signal(SIGINT, &handle_signal_child);
 			signal(SIGQUIT, &handle_signal_child);
 
+			ft_free_all_str_lst(data, data->index);
 			free(data->prompt);
 			free_all_others(data->cmds_block, block_id, data->nb_of_pipe);
-
 			_child_launch_act(data,&(data->cmds_block[block_id]), data->nb_of_pipe, env, block_id);
 		}
 		else if (data->cmds_block[block_id].process_id < 0)

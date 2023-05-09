@@ -31,8 +31,9 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 	pid = fork();
 	if (pid == 0)
 	{
-		free(data->prompt);
 		free(data->cmds_block);
+		free(data->prompt);
+		ft_free_all_str_lst(data, data->index);
 		if (duplicate_fds(cmd) != SUCCESS)
 		{
 			ft_free_split(cmd.commands);

@@ -12,7 +12,7 @@ int g_ret_val;
 
 /*----------------------------------------------------------------------------*/
 
- #define MAIN
+#define MAIN
 #ifdef MAIN
 
 /*---- prototypes ------------------------------------------------------------*/
@@ -84,9 +84,7 @@ int	main(int ac, char **av, char **env)
 
 		g_ret_val = 0;
 
-		execution(&data, str_tok_lst, &env);
-		if (data.cmds_block)
-			free(data.cmds_block);
+		switchman(&data, str_tok_lst, &env);
 	}
 	return (0);
 }

@@ -97,6 +97,8 @@ void			display_t_emt_string(t_string_token *token);
 char 			**join_token_lst(t_string_token **arg, char **env);
 void			manage_ambiguous(t_cmd *cmd, char *file);
 t_return_status	expand_for_args(t_string_token *token_lst, char **env);
+t_return_status	switchman(t_data *data, t_string_token *token_lst, char ***env_pt);
+void 			ft_free_all_str_lst(t_data *data, int index);
 
 /*----------------------------------------------------------------------------*/
 /*---- Main ------------------------------------------------------------------*/
