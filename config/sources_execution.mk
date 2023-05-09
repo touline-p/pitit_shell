@@ -14,7 +14,6 @@ SOURCES	=																	\
 			srcs/bonus/wildcards/wildcards.c								\
 			srcs/execution/execve/childs.c									\
 			srcs/execution/execve/fds_manage.c								\
-			srcs/execution/execve/heredoc_child_management.c				\
 			srcs/execution/parsing/clean_utils.c							\
 			srcs/execution/parsing/infiles_manage.c							\
 			srcs/execution/parsing/outfiles_manage.c						\

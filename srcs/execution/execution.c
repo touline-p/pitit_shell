@@ -32,7 +32,7 @@ bool	check_cmd(t_cmd *cmd)
 	return (false);
 }
 
-void init_data(t_data *data)
+void	init_data(t_data *data)
 {
 	data->cmds_block = NULL;
 	data->fd[0] = 0;
@@ -42,7 +42,7 @@ void init_data(t_data *data)
 
 t_return_status	fix_string(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->nb_of_pipe + 1)
@@ -105,7 +105,7 @@ static t_return_status	alloc_cmd_block(t_data *data, \
 			data->nb_of_pipe++;
 		temp = temp->next;
 	}
-	data->cmds_block = (t_cmd *)ft_calloc((data->nb_of_pipe + 2), sizeof(t_cmd));
+	data->cmds_block = ft_calloc((data->nb_of_pipe + 2), sizeof(t_cmd));
 	if (!data->cmds_block)
 		return (FAILED_MALLOC);
 	i = 0;
@@ -117,7 +117,7 @@ static t_return_status	alloc_cmd_block(t_data *data, \
 static t_return_status	check_if_token(t_string_token *lst_of_tok)
 {
 	t_string_token	*temp;
-	
+
 	temp = lst_of_tok;
 	while (temp != NULL)
 	{
@@ -126,6 +126,23 @@ static t_return_status	check_if_token(t_string_token *lst_of_tok)
 		temp = temp->next;
 	}
 	return (FAILURE);
+}
+
+t_return_status	wait_for_command(int pid, int *status, bool *signals)
+{
+	if (waitpid(pid, status, WUNTRACED) == -1)
+	{
+		g_ret_val = 1;
+		return (false);
+	}
+	else if (WIFEXITED(*status))
+		g_ret_val = WEXITSTATUS(*status);
+	else if (WIFSIGNALED(*status) && *signals == false)
+	{
+		handle_signal_child(WTERMSIG(*status));
+		*signals = true;
+	}
+	return (true);
 }
 
 static void	wait_for_process_ids(t_data *data)
@@ -141,18 +158,9 @@ static void	wait_for_process_ids(t_data *data)
 	{
 		if (data->cmds_block[block_id].id_command == CMD)
 		{
-			if (waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED) == -1)
-			{
-				g_ret_val = 1;
-				break ;
-			}
-			else if (WIFEXITED(status))
-				g_ret_val = WEXITSTATUS(status);
-			else if (WIFSIGNALED(status) && signals == false)
-			{
-				handle_signal_child(WTERMSIG(status));
-				signals = true;
-			}
+			if (wait_for_command(data->cmds_block[block_id].process_id, \
+								&status, &signals) == false)
+				break;
 		}
 		block_id++;
 	}
