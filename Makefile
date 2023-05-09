@@ -39,7 +39,7 @@ OBJ_DIR		=	.objs
 
 #--flags-----------------------------------------------------------------------#
 
-CFLAGS		=	-g3 -Wall -Wextra -I $(LIBFT_DIR) -I $(INC_DIR)/execution_incs -I $(INC_DIR)/parsing_incs #-Werror
+CFLAGS		=	-g3 -Wall -Wextra -I $(LIBFT_DIR) -I $(INC_DIR)/execution_incs -I $(INC_DIR)/parsing_incs -o2 #-Werror
 
 #--debug flags--------------------------------------------------------#
 

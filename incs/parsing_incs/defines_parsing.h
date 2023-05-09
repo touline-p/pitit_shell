@@ -16,7 +16,7 @@
 # define MINI_SHELL_MUST_GO_ON 1
 # define STRT_CHR -1
 # define EOSTR 0
-# define METACHAR_SET "|&<>(); \t\v\f\r\n"
+# define METACHAR_SET "|&<>() \t\v\f\r\n"
 # define IFS " \t\n"
 # define NAME_OF_EXE "Pitit shell"
 #endif 
