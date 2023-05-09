@@ -24,3 +24,11 @@ void	free_commands(t_data *data)
 		i++;
 	}
 }
+void	ft_free_all_str_lst(t_data *data, int index)
+{
+	index++;
+	while (data->instructions_arr[index])
+		string_token_destructor(data->instructions_arr[index++]);
+	free(data->instructions_arr);
+	return ;
+}

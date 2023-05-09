@@ -89,6 +89,7 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	else
 		childs_execve(data, env_pt);
 	wait_for_process_ids(data);
+	free(data->cmds_block);
 }
 
 static t_return_status	alloc_cmd_block(t_data *data, \

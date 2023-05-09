@@ -35,10 +35,12 @@ struct s_string_token
 
 struct s_data
 {
-	t_cmd	*cmds_block;
-	char 	*prompt;
-	int 	fd[2];
-	int 	nb_of_pipe;
+	t_cmd			*cmds_block;
+	t_string_token	**instructions_arr;
+	int				index;
+	char 			*prompt;
+	int 			fd[2];
+	int 			nb_of_pipe;
 };
 
 struct s_cmd
