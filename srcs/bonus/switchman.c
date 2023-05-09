@@ -54,58 +54,126 @@ size_t	count_instructions_node(t_string_token *str_tok_lst)
 	return (count);
 }
 
-void fill(t_string_token **instructions_arr, t_string_token *str_tok_lst)
+t_return_status fill(t_string_token **instructions_arr, t_string_token *str_tok_lst)
 {
-	size_t	i;
+	size_t			i;
+	t_string_token	*next;
 
 	i = 0;
 	while (str_tok_lst->token != EOL)
 	{
 		instructions_arr[i++] = str_tok_lst;
-		go_to_next_logical_door(str_tok_lst, &str_tok_lst);
+		go_to_next_logical_door(str_tok_lst, &next);
+		while (str_tok_lst->next != next)
+			str_tok_lst = str_tok_lst->next;
+		str_tok_lst->next = string_token_creator();
+		str_tok_lst->next->token = EOL;
+		str_tok_lst->next->next = NULL;
+		str_tok_lst = next;
 	}
 	instructions_arr[i] = NULL;
-}
-
-t_return_status	switchman(t_string_token *token_lst)
-{
-	t_string_token	**instructions_arr;
-
-	instructions_arr = malloc(sizeof(void *) * (count_instructions_node(token_lst) + 1));
-	if (instructions_arr == NULL)
-		return (FAILURE);
-	fill(instructions_arr, token_lst);
-//	if (put_eol(instructions_arr) != SUCCESS)
-//		return (FAILURE);
 	return (SUCCESS);
 }
 
-static size_t _count_block(t_string_token *pin)
+static	void _free_all_other(t_string_token **instruction_arr)
 {
-	size_t	count;
-
-	count = 1;
-	while (pin->token != EOL)
-	{
-		if (pin->token == AND || pin->token == OR)
-			count++;
-		if (pin->token == O_PRTSS)
-		{
-			while (pin->token != C_PRTSS)
-				pin = pin->next;
-		}
-		pin = pin->next;
-	}
-	return (count);
+	instruction_arr++;
+	while (*instruction_arr)
+		string_token_destructor(*(instruction_arr++));
 }
 
-//#define TST_SWITCHMAN
+int _get_next_index(int last, t_string_token **instructions_arr)
+{
+	t_emt to_search;
+
+	to_search = AND;
+	if (last == -1)
+		return (0);
+	if (g_ret_val != 0)
+		to_search = OR;
+	while (instructions_arr[last] && instructions_arr[last]->token != to_search)
+		last++;
+	if (instructions_arr[last])
+		return (last);
+	return (-1);
+}
+
+t_return_status	launch_instructions_arr(t_data *data, t_string_token **instructions_arr, char ***env)
+{
+	int pid;
+	int i;
+	int status;
+
+	i = 0;
+	status = 0;
+	while (i != -1)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+
+		//	_free_all_other(instructions_arr);
+			signal(SIGINT, SIG_IGN);
+			signal(SIGQUIT, SIG_IGN);
+			execution(data, instructions_arr[i], env);
+			exit(g_ret_val);
+		}
+		if (waitpid(pid, &status, WUNTRACED) == -1)
+			g_ret_val = 1;
+		else if (WIFEXITED(status))
+			g_ret_val = WEXITSTATUS(status);
+		i = _get_next_index(++i, instructions_arr);
+	}
+	return (SUCCESS);
+}
+
+t_return_status	switchman(t_data *data, t_string_token *token_lst, char ***env_pt)
+{
+	t_string_token	**instructions_arr;
+	int 			i;
+
+	i = 0;
+	instructions_arr = malloc(sizeof(t_string_token *) * (count_instructions_node(token_lst) + 1));
+	if (instructions_arr == NULL)
+		return (FAILURE);
+	fill(instructions_arr, token_lst);
+	while (instructions_arr[i])
+	{
+		i++;
+	}
+	launch_instructions_arr(data, instructions_arr, env_pt);
+	return (SUCCESS);
+}
+
+//static size_t _count_block(t_string_token *pin)
+//{
+//	size_t	count;
+//
+//	count = 1;
+//	while (pin->token != EOL)
+//	{
+//		if (pin->token == AND || pin->token == OR)
+//			count++;
+//		if (pin->token == O_PRTSS)
+//		{
+//			while (pin->token != C_PRTSS)
+//				pin = pin->next;
+//		}
+//		pin = pin->next;
+//	}
+//	return (count);
+//}
+
+#define TST_SWITCHMAN
 #ifdef TST_SWITCHMAN
 int main(int ac, char **av, char **env)
 {
 	(void)ac; (void)av;
 	t_string_token *str_tok;
+	t_data	data;
 
+	data.prompt = NULL;
+	env = ft_str_array_dup(env);
 	char *line;
 	while (1) {
 		line = readline(">");
@@ -114,8 +182,7 @@ int main(int ac, char **av, char **env)
 		add_history(line);
 		get_lexed_str_token_lst_from_line(line, &str_tok, env);
 		del_space_token(str_tok);
-		switchman(str_tok);
-		string_token_destructor(str_tok);
+		switchman(&data, str_tok, &env);
 	}
 }
 #endif

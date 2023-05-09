@@ -41,6 +41,7 @@ void	handle_signal_heredoc(int signal)
 	if (signal == SIGINT)
 	{
 		(void)signal;
+		ft_dprintf(2, "\n");
 		g_ret_val = 130;
 		exit (g_ret_val);
 	}
