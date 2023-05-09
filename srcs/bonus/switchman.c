@@ -1,13 +1,19 @@
-//
-// Created by bpoumeau on 4/5/23.
-//
-#include "../../libft/libft.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   switchman.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/09 22:35:42 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/05/09 22:35:49 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_return_status	split_t_string_token_on(t_string_token **string_token_pt);
+#include "libft.h"
+#include "minishell_parsing.h"
 
-
-void go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok)
+void	go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok)
 {
 	if (tmp == NULL)
 		return ;
@@ -22,11 +28,8 @@ void go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok)
 	}
 	*str_tok = tmp;
 }
-void	display_t_emt_string(t_string_token *token);
 
-int profondeur = 0;
-
-void go_to_next_logical_door(t_string_token *src, t_string_token **dst)
+void	go_to_next_logical_door(t_string_token *src, t_string_token **dst)
 {
 	t_string_token	*and_pt;
 	t_string_token	*or_pt;
@@ -54,7 +57,8 @@ size_t	count_instructions_node(t_string_token *str_tok_lst)
 	return (count);
 }
 
-t_return_status fill(t_string_token **instructions_arr, t_string_token *str_tok_lst)
+t_return_status	fill(t_string_token **instructions_arr, \
+					t_string_token *str_tok_lst)
 {
 	size_t			i;
 	t_string_token	*next;
@@ -78,9 +82,9 @@ t_return_status fill(t_string_token **instructions_arr, t_string_token *str_tok_
 	return (SUCCESS);
 }
 
-int _get_next_index(int last, t_string_token **instructions_arr)
+int	_get_next_index(int last, t_string_token **instructions_arr)
 {
-	t_emt to_search;
+	t_emt	to_search;
 
 	to_search = AND;
 	if (last == -1)
@@ -94,7 +98,8 @@ int _get_next_index(int last, t_string_token **instructions_arr)
 	return (-1);
 }
 
-t_return_status	launch_instructions_arr(t_data *data, t_string_token **instructions_arr, char ***env)
+t_return_status	launch_instructions_arr(t_data *data, \
+						t_string_token **instructions_arr, char ***env)
 {
 	t_string_token	*actual;
 
@@ -109,55 +114,14 @@ t_return_status	launch_instructions_arr(t_data *data, t_string_token **instructi
 	return (SUCCESS);
 }
 
-t_return_status	switchman(t_data *data, t_string_token *token_lst, char ***env_pt)
+t_return_status	switchman(t_data *data, \
+					t_string_token *token_lst, char ***env_pt)
 {
-
-	data->instructions_arr = malloc(sizeof(t_string_token *) * (count_instructions_node(token_lst) + 1));
+	data->instructions_arr = malloc(sizeof(t_string_token *) \
+				* (count_instructions_node(token_lst) + 1));
 	if (data->instructions_arr == NULL)
 		return (FAILURE);
 	fill(data->instructions_arr, token_lst);
 	launch_instructions_arr(data, data->instructions_arr, env_pt);
 	return (SUCCESS);
 }
-
-//static size_t _count_block(t_string_token *pin)
-//{
-//	size_t	count;
-//
-//	count = 1;
-//	while (pin->token != EOL)
-//	{
-//		if (pin->token == AND || pin->token == OR)
-//			count++;
-//		if (pin->token == O_PRTSS)
-//		{
-//			while (pin->token != C_PRTSS)
-//				pin = pin->next;
-//		}
-//		pin = pin->next;
-//	}
-//	return (count);
-//}
-
-//#define TST_SWITCHMAN
-#ifdef TST_SWITCHMAN
-int main(int ac, char **av, char **env)
-{
-	(void)ac; (void)av;
-	t_string_token *str_tok;
-	t_data	data;
-
-	data.prompt = NULL;
-	env = ft_str_array_dup(env);
-	char *line;
-	while (1) {
-		line = readline(">");
-		if (!line)
-			return (0);
-		add_history(line);
-		get_lexed_str_token_lst_from_line(line, &str_tok, env);
-		del_space_token(str_tok);
-		switchman(&data, str_tok, &env);
-	}
-}
-#endif
