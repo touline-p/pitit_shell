@@ -15,8 +15,10 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static t_return_status	_set_outfile(t_data *data, char **file, int block_id, char **env);
-static t_return_status	_set_appends(t_data *data, char **file, int block_id, char **env);
+static t_return_status	_set_outfile(t_data *data, char **file, \
+									int block_id, char **env);
+static t_return_status	_set_appends(t_data *data, char **file, \
+									int block_id, char **env);
 
 /*----------------------------------------------------------------------------*/
 
@@ -38,7 +40,8 @@ void	manage_ambiguous(t_cmd *cmd, char *file)
 	ft_dprintf(2, "minishell: %s: ambiguous redirect\n", file);
 }
 
-t_return_status	outfiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
+t_return_status	outfiles_management(t_data *data, \
+									t_string_token *lst_of_tok, char **env)
 {
 	int					i;
 	t_string_token		*temp;
@@ -60,22 +63,22 @@ t_return_status	outfiles_management(t_data *data, t_string_token *lst_of_tok, ch
 				return (FAILURE);
 		}
 		if (temp->token == PIPE)
-		{
 			i++;
-		}
 		temp = temp->next;
 	}
 	return (SUCCESS);
 }
 
-static t_return_status	_set_outfile(t_data *data, char **file, int block_id, char **env)
+static t_return_status	_set_outfile(t_data *data, char **file, \
+									int block_id, char **env)
 {
-	char **arr;
+	char	**arr;
 	bool	signal;
 
 	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
-	if (data->cmds_block[block_id].infile < 0 || data->cmds_block[block_id].fd_hd[0] < 0
+	if (data->cmds_block[block_id].infile < 0
+		|| data->cmds_block[block_id].fd_hd[0] < 0
 		|| data->cmds_block[block_id].is_ambiguous == true)
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
@@ -95,19 +98,20 @@ static t_return_status	_set_outfile(t_data *data, char **file, int block_id, cha
 	return (SUCCESS);
 }
 
-static t_return_status	_set_appends(t_data *data, char **file, int block_id, char **env)
+static t_return_status	_set_appends(t_data *data, char **file, \
+									int block_id, char **env)
 {	
-	char **arr;
+	char	**arr;
 	bool	signal;
 
 	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
-	if (data->cmds_block[block_id].infile < 0 || data->cmds_block[block_id].fd_hd[0] < 0
+	if (data->cmds_block[block_id].infile < 0
+		|| data->cmds_block[block_id].fd_hd[0] < 0
 		|| data->cmds_block[block_id].is_ambiguous == true)
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
-	
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
