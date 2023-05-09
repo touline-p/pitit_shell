@@ -21,14 +21,12 @@ static t_return_status	check_exit_args(char **av, char ***env_pt);
 
 t_return_status	exit_builtin(char **av, char ***env_pt)
 {
-
 	ft_dprintf(2, RED"exit\n"END);
 	if (av[1])
 	{
 		if (check_exit_args(av, env_pt) != SUCCESS)
 			return (FAILURE);
 	}
-
 	ft_free_split(*env_pt);
 	g_ret_val = 0;
 	ft_free_split(av);
@@ -40,7 +38,8 @@ static t_return_status	check_exit_args(char **av, char ***env_pt)
 {
 	if (ft_isnbr(av[1]) == false)
 	{
-		ft_dprintf(2, RED"minishell: exit: %s: numeric argument required\n"END, av[1]);
+		ft_dprintf(2, \
+		RED"minishell: exit: %s: numeric argument required\n"END, av[1]);
 		g_ret_val = 2;
 		ft_free_split(av);
 		ft_free_split(*env_pt);
