@@ -133,8 +133,8 @@ static void	_manage_the_pipe(t_data *data, int block_id)
 		cmd->outfile = cmd->fd_hd[1];
 	else
 		close(cmd->fd_hd[1]);
-	if (cmd->infile == STDIN_FILENO)
-		cmd->infile = cmd->fd_hd[0];
+	if ((cmd + 1)->infile == STDIN_FILENO)
+		(cmd + 1)->infile = cmd->fd_hd[0];
 	else
 		close(data->cmds_block[block_id].fd_hd[0]);
 }
