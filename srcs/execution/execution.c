@@ -49,7 +49,7 @@ t_return_status	fix_string(t_data *data)
 	{
 		if (data->cmds_block[i].commands[0] == NULL)
 		{
-			free(data->cmds_block);
+			free(data->cmds_block[i].commands);
 			data->cmds_block[i].commands = malloc(sizeof(char *) * 2);
 			if (data->cmds_block[i].commands == NULL)
 				return (FAILED_MALLOC);

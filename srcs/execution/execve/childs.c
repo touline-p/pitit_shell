@@ -16,7 +16,7 @@
 
 static t_return_status	_do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id);
 static void 			_manage_the_pipe(t_data *data, int block_id);
-static void				_child_launch_act(t_cmd *command_block, int nb_of_pipe, char ***env, int block_id);
+static void				_child_launch_act(t_data *data, t_cmd *command_block, int nb_of_pipe, char ***env, int block_id);
 static char				*add_path_cmd(t_cmd *cmd, char **env);
 static void				_close_this(int fd);
 
@@ -61,7 +61,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 			free(data->prompt);
 			//free_all_others(data->cmds_block, block_id, data->nb_of_pipe);
 
-			_child_launch_act(&(data->cmds_block[block_id]), data->nb_of_pipe, env, block_id);
+			_child_launch_act(data,&(data->cmds_block[block_id]), data->nb_of_pipe, env, block_id);
 		}
 		else if (data->cmds_block[block_id].process_id < 0)
 		{
@@ -77,7 +77,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 	return (SUCCESS);
 }
 
-static void	_child_launch_act(t_cmd *command_block, int nb_of_pipe, char ***env, int block_id)
+static void	_child_launch_act(t_data *data, t_cmd *command_block, int nb_of_pipe, char ***env, int block_id)
 {
 	char *command;
 	
@@ -100,9 +100,10 @@ static void	_child_launch_act(t_cmd *command_block, int nb_of_pipe, char ***env,
 		execve(command, command_block->commands, *env);
 		perror(command_block->commands[0]);
 	}
+	ft_free_split(*env);
 	ft_free_split(command_block->commands);
-	g_ret_val = 127;
-	exit(g_ret_val);
+	free(data->cmds_block);
+	exit(127);
 }
 
 static t_return_status	_do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id)
