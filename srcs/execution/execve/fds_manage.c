@@ -15,11 +15,11 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static	t_return_status _dup_n_close(int to_dup, int to_replace);
+static t_return_status	_dup_n_close(int to_dup, int to_replace);
 
 /*----------------------------------------------------------------------------*/
 
-t_return_status 	duplicate_fds(t_cmd block, t_data *data, char ***env_pt)
+t_return_status	duplicate_fds(t_cmd block, t_data *data, char ***env_pt)
 {
 	if (block.is_heredoc == true)
 		heredoc_child_management(&block, data, *env_pt);
@@ -33,7 +33,7 @@ t_return_status 	duplicate_fds(t_cmd block, t_data *data, char ***env_pt)
 	return (SUCCESS);
 }
 
-static	t_return_status _dup_n_close(int to_dup, int to_replace)
+static t_return_status	_dup_n_close(int to_dup, int to_replace)
 {
 	if (to_dup == to_replace)
 		return (SUCCESS);
@@ -48,7 +48,7 @@ static	t_return_status _dup_n_close(int to_dup, int to_replace)
 
 t_return_status	_write_all(char *str, int fd)
 {
-	int flag;
+	int	flag;
 
 	if (!str)
 		return (close(fd), FAILURE);
@@ -64,10 +64,29 @@ t_return_status	_write_all(char *str, int fd)
 	return (SUCCESS);
 }
 
-t_return_status heredoc_child_management(t_cmd *cmd, t_data *data, char **env_pt)
+static void	_heredoc_forking(int *fd, t_cmd *cmd, t_data *data, char **env_pt)
 {
-	int fd[2];
-	int pid;
+	ft_free_split(env_pt);
+	ft_free_split(cmd->commands);
+	close(cmd->infile);
+	close(cmd->outfile);
+	close(fd[0]);
+	if (_write_all(cmd->heredoc_data, fd[1]) != SUCCESS)
+	{
+		free(cmd->heredoc_data);
+		exit(FAILURE);
+	}
+	close(fd[1]);
+	free(cmd->heredoc_data);
+	free(data->cmds_block);
+	exit(SUCCESS);
+}
+
+t_return_status	heredoc_child_management(t_cmd *cmd, t_data *data, \
+										char **env_pt)
+{
+	int	fd[2];
+	int	pid;
 
 	if (pipe(fd) == -1)
 		return (FAILURE);
@@ -76,78 +95,10 @@ t_return_status heredoc_child_management(t_cmd *cmd, t_data *data, char **env_pt
 		return (FAILURE);
 	if (pid == 0)
 	{
-
-		ft_free_split(env_pt);
-		ft_free_split(cmd->commands);
-		close(cmd->infile);
-		close(cmd->outfile);
-		close(fd[0]);
-		if (_write_all(cmd->heredoc_data, fd[1]) != SUCCESS)
-		{
-			free(cmd->heredoc_data);
-			exit(FAILURE);
-		}
-		close(fd[1]);
-		free(cmd->heredoc_data);
-		free(data->cmds_block);
-		exit(SUCCESS);
+		_heredoc_forking(fd, cmd, data, env_pt);
 	}
 	free(cmd->heredoc_data);
 	close(fd[1]);
 	cmd->infile = fd[0];
 	return (SUCCESS);
 }
-
-// #define TST_DUP_FD
-#ifdef TST_DUP_FD
-static char	*add_path_cmd(int block_id, t_data *data, char **env)
-{
-	int		i;
-	char	**paths;
-
-	if (access(data->cmds_block[block_id].commands[0], X_OK) == 0)
-		return (data->cmds_block[block_id].commands[0]);
-	paths = get_paths(env);
-	if (!paths)
-		return (NULL);
-	i = 0;
-	while (paths[i])
-	{
-		paths[i] = strjoin_path_cmd(paths[i], data->cmds_block[block_id].commands[0]);
-		if (!paths[i])
-		{
-			ft_free((void **)paths, get_path_size(paths));
-			return (NULL);
-		}
-		if (access(paths[i], X_OK) == 0)
-		{
-			printf(BLUE"command without paths? %s\n"END, data->cmds_block[block_id].commands[0]);
-			data->cmds_block[block_id].commands[0] = ft_strdup(paths[i]);
-			printf(BLUE"command with paths? %s\n"END, data->cmds_block[block_id].commands[0]);
-			ft_free((void **)paths, get_path_size(paths));
-			return (data->cmds_block[block_id].commands[0]);
-		}
-		i++;
-	}
-	return (NULL);
-}
-
-int	main(int ac, char **av, char **env)
-{
-	int	block_id = 0;
-	t_cmd	cmd = {
-		.infile = open(av[1], O_RDONLY),
-		.outfile = open(av[3], O_WRONLY | O_CREAT | O_TRUNC, 0644),
-		.commands = ft_split(av[2], ' ')
-	};
-	t_data	data = {
-		.cmds_block = &cmd,
-		.nb_of_pipe = 0
-	};
-	
-	duplicate_fds(&data, block_id);
-	if (ac)
-		execve(add_path_cmd(0, &data, env),cmd.commands, env);
-	return (0);
-}
-#endif
