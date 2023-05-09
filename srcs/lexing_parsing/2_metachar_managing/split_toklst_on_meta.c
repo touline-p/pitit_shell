@@ -33,8 +33,8 @@ t_token	*split_toklst_on_meta(t_token *tok)
 static	void	_get_signal_from_char(char sign_char, t_emt *emt_pt)
 {
 	const t_emt	emt_arr[] = {PIPE, AMPERSAND, CHEVRON_IN, CHEVRON_OT, \
-						O_PRTSS, C_PRTSS, E_SPACE,
-							E_SPACE, E_SPACE, E_SPACE, E_SPACE};
+						O_PRTSS, C_PRTSS, E_SPACE, E_SPACE, E_SPACE, \
+						E_SPACE, E_SPACE};
 	const char	*metachar_set = METACHAR_SET;
 	char		*signal;
 

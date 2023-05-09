@@ -14,15 +14,17 @@
 #include "../../incs/parsing_incs/minishell_parsing.h"
 #include "minishell_parsing.h"
 
-static t_return_status	_get_str_token_on_and_reset_pin(t_string_token **str_tok_pt, t_token **pin_pt);
-static void		*_token_lst_to_str_token_ep(t_token *trash, t_string_token *mem);
-static char 	*_reset_pin_ret_string(t_token **pin_pt);
+static t_return_status	_get_str_token_on_and_reset_pin( \
+		t_string_token **str_tok_pt, t_token **pin_pt);
+static void				*_token_lst_to_str_token_ep( \
+		t_token *trash, t_string_token *mem);
+static char				*_reset_pin_ret_string(t_token **pin_pt);
 
-t_string_token *token_lst_to_str_token(t_token *tok)
+t_string_token	*token_lst_to_str_token(t_token *tok)
 {
 	t_string_token	*str_token_list;
 	t_string_token	*mem;
-	t_token 		*pin;
+	t_token			*pin;
 
 	mem = NULL;
 	if (string_token_creator_on(&str_token_list) != SUCCESS)
@@ -32,7 +34,8 @@ t_string_token *token_lst_to_str_token(t_token *tok)
 	pin = tok->next;
 	while (pin->token != EOL)
 	{
-		if (_get_str_token_on_and_reset_pin(&str_token_list->next, &pin) != SUCCESS)
+		if (_get_str_token_on_and_reset_pin(&str_token_list->next, \
+		&pin) != SUCCESS)
 			return (_token_lst_to_str_token_ep(tok, mem));
 		str_token_list = str_token_list->next;
 	}
@@ -43,9 +46,10 @@ t_string_token *token_lst_to_str_token(t_token *tok)
 	return (mem);
 }
 
-static t_return_status	_get_str_token_on_and_reset_pin(t_string_token **str_tok_pt, t_token **pin_pt)
+static t_return_status	_get_str_token_on_and_reset_pin( \
+					t_string_token **str_tok_pt, t_token **pin_pt)
 {
-	t_emt tmp;
+	t_emt	tmp;
 
 	if (string_token_creator_on(str_tok_pt) != SUCCESS)
 		return (FAILURE);
@@ -63,7 +67,8 @@ static t_return_status	_get_str_token_on_and_reset_pin(t_string_token **str_tok_
 	return (SUCCESS);
 }
 
-static void		*_token_lst_to_str_token_ep(t_token *trash, t_string_token *trashy_string_token)
+static void	*_token_lst_to_str_token_ep( \
+					t_token *trash, t_string_token *trashy_string_token)
 {
 	token_lst_clear(trash);
 	string_token_destructor(trashy_string_token);
@@ -73,7 +78,7 @@ static void		*_token_lst_to_str_token_ep(t_token *trash, t_string_token *trashy_
 static char	*_reset_pin_ret_string(t_token **pin_pt)
 {
 	char	*new;
-	int 	len;
+	int		len;
 
 	len = len_to_next_type(*pin_pt);
 	new = malloc(len + 1);
