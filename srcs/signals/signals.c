@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/08 12:39:32 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/09 15:57:59 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	handle_signal_heredoc(int signal)
 	if (signal == SIGINT)
 	{
 		(void)signal;
+		ft_dprintf(2, "\n");
 		g_ret_val = 130;
 		exit (g_ret_val);
 	}

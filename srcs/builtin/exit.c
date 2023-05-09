@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:15:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/03 11:04:15 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/09 10:46:03 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_return_status	exit_builtin(char **av, char ***env_pt)
 		if (check_exit_args(av) != SUCCESS)
 			return (FAILURE);
 	}
-
 	g_ret_val = 0;
 	ft_free_split(av);
 	exit(g_ret_val);

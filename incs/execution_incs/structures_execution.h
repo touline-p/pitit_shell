@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/19 16:14:08 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/09 19:02:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_data			t_data;
 typedef struct s_cmd			t_cmd;
 typedef struct s_data			t_data;
 typedef struct s_cmd			t_cmd;
+typedef struct s_wild_data		t_w_data;
 
 /*---- structures ------------------------------------------------------------*/
 
@@ -51,6 +52,14 @@ struct s_cmd
 	int			outfile;
 	int 		fd_hd[2];
 	pid_t		process_id;
+};
+
+struct s_wild_data
+{
+	int		nb_of_stars;
+	char	first;
+	char	last;
+	char	**match;
 };
 
 #endif

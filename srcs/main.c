@@ -12,7 +12,7 @@ int g_ret_val;
 
 /*----------------------------------------------------------------------------*/
 
- #define MAIN
+//  #define MAIN
 #ifdef MAIN
 
 /*---- prototypes ------------------------------------------------------------*/
@@ -49,10 +49,8 @@ int	main(int ac, char **av, char **env)
 	t_string_token	*str_tok_lst;
 
 	data.prompt = NULL;
-
 	line = NULL;
 	str_tok_lst = NULL;
-	//display_files();
 	if (check_arguments(ac, av) != SUCCESS)
 		return (1);
 	if (welcome_to_minihell(&env) != SUCCESS)
@@ -60,10 +58,8 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-
 		get_prompt_on(&(data.prompt), env);
 		line = readline(data.prompt);
-
 		if (errno)
 		{
 			perror("readline");
@@ -75,16 +71,14 @@ int	main(int ac, char **av, char **env)
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
 		del_space_token(str_tok_lst);
-		display_str_token(str_tok_lst);
+		// display_str_token(str_tok_lst);
 		if (syntax_is_valid(str_tok_lst) != SUCCESS)
 		{
 			string_token_destructor(str_tok_lst);
 			continue;
 		}
 		del_space_token(str_tok_lst);
-
-		g_ret_val = 0;
-
+		// g_ret_val = 0; // pourquoi?? 
 		execution(&data, str_tok_lst, &env);
 		if (data.cmds_block)
 			free(data.cmds_block);
@@ -113,7 +107,7 @@ static t_return_status get_allocated_box_on(char **box_pt, char **env)
 	char	*box;
 	char	*pwd;
 	size_t	box_width;
-	size_t		i;
+	size_t	i;
 
 	pwd = get_env_content_from_key("PWD", env);
 	if (pwd == NULL)
@@ -123,7 +117,6 @@ static t_return_status get_allocated_box_on(char **box_pt, char **env)
 	if (box == NULL)
 		return (perror("prompt"), FAILED_MALLOC);
 	*box_pt = box;
-
 	box = ft_strcpy_rn(box, GREEN"\001\u2554");
 	i = 0;
 	while (i < box_width)
