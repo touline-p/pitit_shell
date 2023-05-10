@@ -20,6 +20,6 @@
 # define IFS " \t\n"
 # define PROMPT_MESSAGE " - Y a quoi : "
 
-typedef t_return_status (*t_builtin_ft)(char **av, char ***env_pt);
+typedef t_return_status	(*t_builtin_ft)(char **av, char ***env_pt);
 
 #endif 

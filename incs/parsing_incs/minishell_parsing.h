@@ -16,18 +16,17 @@
 /*---- libraries -------------------------------------------------------------*/
 
 # include <stdio.h>
+# include "defines_parsing.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
 # include "../../libft/libft.h"
+# include "enums_parsing.h"
+# include "prototypes_parsing.h"
+# include "structures_parsing.h"
 
 /*---- includes --------------------------------------------------------------*/
 
 extern int	g_ret_val;
-
-# include "defines_parsing.h"
-# include "enums_parsing.h"
-# include "prototypes_parsing.h"
-# include "structures_parsing.h"
 
 #endif

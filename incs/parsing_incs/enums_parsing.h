@@ -15,15 +15,16 @@
 
 /*---- typedef enums ---------------------------------------------------------*/
 
-typedef enum	e_token_minishell	t_emt;
-typedef enum	e_enum_op			t_e_op;
+typedef enum e_token_minishell	t_emt;
+typedef enum e_enum_op			t_e_op;
 
 /*----------------------------------------------------------------------------*/
 
-#undef SPACE
 # ifndef EMT
 #  define EMT
-enum 	e_token_minishell
+#  undef SPACE
+
+enum	e_token_minishell
 {
 	START = 0,
 	PIPE = 1,
@@ -45,6 +46,7 @@ enum 	e_token_minishell
 	DOLLAR = 17,
 	NONE = 18
 };
+
 # endif
 
 enum e_enum_op

@@ -31,7 +31,7 @@
 
 # include "libft.h"
 
-#include "../srcs/debug_folder/debug.h"
+# include "../srcs/debug_folder/debug.h"
 
 /*---- includes --------------------------------------------------------------*/
 
