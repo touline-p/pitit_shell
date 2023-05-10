@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/08 12:58:52 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/09 10:26:07 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,15 +148,21 @@ static void	_close_this(int fd)
 static char	*add_path_cmd(t_cmd *cmd, char **env)
 {
 	char	**paths;
+	char 	*ret_val;
+	char	*str;
 
 	if (is_path(cmd->commands[0]))
 		return (cmd->commands[0]);
 	paths = get_paths(env);
+	str = NULL;
 	if (!paths)
 		return (NULL);
 	if (ft_strcmp("", cmd->commands[0]) == 0)
 	{
-		ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
+		//ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
+		str = ft_strjoin(cmd->commands[0], " : command not found\n");
+		write(2, str, ft_strlen(str));
+		free(str);
 		return (ft_free_split(paths), NULL);
 	}
 	return (_get_cmd_from_path(cmd, paths));
@@ -182,6 +188,9 @@ static char	*_get_cmd_from_path(t_cmd *cmd, char **paths)
 		i++;
 	}
 	ft_free((void **)paths, ft_str_array_len(paths));
-	ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
+	// ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
+	str = ft_strjoin(cmd->commands[0], " : command not found\n");
+	write(2, str, ft_strlen(str));
+	free(str);
 	return (NULL);
 }

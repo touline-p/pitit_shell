@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcards.c                                        :+:      :+:    :+:   */
+/*   multi_stars.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 15:27:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/10 15:47:42 by twang            ###   ########.fr       */
+/*   Created: 2023/05/10 11:41:16 by twang             #+#    #+#             */
+/*   Updated: 2023/05/10 11:47:35 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,14 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
+
 /*----------------------------------------------------------------------------*/
 
-t_return_status	fetch_wildcards_args(char *line)
+t_return_status	multi_stars_case(t_w_data *w_data, char *line, char *name)
 {
-	t_w_data	w_data;
-	
-	ft_bzero((void *)&w_data, sizeof(t_w_data));
-	if (parse_args(&w_data, line) != SUCCESS)
-	{
-		ft_dprintf(2, RED"%s\n"END, line);
-		return (FAILURE);
-	}
-	return (SUCCESS);
+	(void)w_data;
+	(void)line;
+	(void)name;
+	puts("Voila c'est pas fait !");
+	return (FAILURE);
 }
-
-// #define TST_WILD
-#ifdef TST_WILD
-
-int	main(int ac, char **av)
-{
-	(void)ac; (void)av;
-	char *line = "*";
-
-	fetch_wildcards_args(line);
-	return (0);
-}
-
-#endif
