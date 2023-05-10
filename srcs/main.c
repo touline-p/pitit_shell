@@ -113,7 +113,12 @@ static t_return_status get_allocated_box_on(char **box_pt, char **env)
 	if (box == NULL)
 		return (perror("prompt"), FAILED_MALLOC);
 	*box_pt = box;
-	box = ft_strcpy_rn(box, GREEN"\001\u2554");
+	if (g_ret_val == 0)
+		box = ft_strcpy_rn(box, GREEN"\001\u2554");
+	else if (g_ret_val == 130 || g_ret_val == 131)
+		box = ft_strcpy_rn(box, BLUE"\001\u2554");
+	else
+		box = ft_strcpy_rn(box, RED"\001\u2554");
 	i = 0;
 	while (i < box_width)
 	{
