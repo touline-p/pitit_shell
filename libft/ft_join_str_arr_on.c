@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_join_str_arr_on.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/10 02:04:26 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/05/10 02:04:27 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
 t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
 {
 	char	**arr_pin;
-	char 	*str_pin;
+	char	*str_pin;
 	size_t	size_str;
 
 	arr_pin = str_arr;
@@ -12,7 +23,6 @@ t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
 	while (*arr_pin)
 		size_str += ft_strlen(*(arr_pin++));
 	*line_pt = malloc(size_str);
-
 	if (*line_pt == NULL)
 		return (FAILED_MALLOC);
 	str_pin = *line_pt;
@@ -21,13 +31,3 @@ t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
 		str_pin = ft_strcpy_rn(str_pin, *(arr_pin++));
 	return (SUCCESS);
 }
-
-/*
-int main()
-{
-	char **oh = ft_split("", ' ');
-	char *line;
-	ft_join_str_arr_on(oh, &line);
-	printf("-%s-\n", line);
-}
- */

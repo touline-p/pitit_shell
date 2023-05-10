@@ -32,7 +32,7 @@ char	*ft_strdup(const char *src)
 
 t_return_status	ft_strdup_on(const char *src, char **str_pt)
 {
-	char *new;
+	char	*new;
 
 	new = ft_strdup(src);
 	if (new == NULL)

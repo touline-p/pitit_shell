@@ -29,7 +29,7 @@ t_string_token	*string_token_creator(void)
 
 t_return_status	string_token_creator_on(t_string_token **tok_pt)
 {
-	t_string_token *new;
+	t_string_token	*new;
 
 	new = string_token_creator();
 	if (new == NULL)
@@ -40,7 +40,7 @@ t_return_status	string_token_creator_on(t_string_token **tok_pt)
 
 void	string_token_destructor(t_string_token *trash)
 {
-	t_string_token *tmp;
+	t_string_token	*tmp;
 
 	if (trash == NULL)
 		return ;
@@ -50,9 +50,21 @@ void	string_token_destructor(t_string_token *trash)
 	string_token_destructor(tmp);
 }
 
+void	free_all_str(t_data *data)
+{
+	int	i;
+
+	i = data->index;
+	while (data->instructions_arr[i])
+	{
+		string_token_destructor(data->instructions_arr[i]);
+		i++;
+	}
+}
+
 void	cpy_token_lst_to_str(t_token *tok, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	str[0] = tok->sign_char;
@@ -78,10 +90,9 @@ void	del_next_string_token(t_string_token *tok)
 	tok->next = tmp;
 }
 
-
 void	del_space_token(t_string_token *tok)
 {
-	t_string_token *pin;
+	t_string_token	*pin;
 
 	pin = tok;
 	while (pin->next)
@@ -93,9 +104,10 @@ void	del_space_token(t_string_token *tok)
 	}
 }
 
-t_return_status string_token_new_on(void *content, t_emt emt, t_string_token **str_token_pt)
+t_return_status	string_token_new_on(void *content, t_emt emt, \
+									t_string_token **str_token_pt)
 {
-	t_string_token *new;
+	t_string_token	*new;
 
 	new = malloc(sizeof(t_string_token));
 	if (!new)
@@ -107,31 +119,35 @@ t_return_status string_token_new_on(void *content, t_emt emt, t_string_token **s
 	return (SUCCESS);
 }
 
-t_return_status str_arr_to_str_token_lst(char **split, t_string_token **str_token_pt)
+t_return_status	str_arr_to_str_token_lst(char **split, \
+										t_string_token **str_token_pt)
 {
 	t_string_token	*new_lst;
-	char 			**split_tmp;
+	char			**split_tmp;
 
 	split_tmp = split;
 	new_lst = NULL;
-	if (*split && string_token_new_on(*(split++), STRING, &new_lst) != SUCCESS)
+	if (*split && string_token_new_on(*(split++), STRING, \
+		&new_lst) != SUCCESS)
 		return (FAILED_MALLOC);
 	free(*str_token_pt);
 	*str_token_pt = new_lst;
 	while (*split)
 	{
-		if (string_token_new_on(*(split++), STRING, &(new_lst->next)) != SUCCESS)
-		new_lst = new_lst->next;
+		if (string_token_new_on(*(split++), STRING, \
+			&(new_lst->next)) != SUCCESS)
+			new_lst = new_lst->next;
 	}
 	free(split_tmp);
 	return (SUCCESS);
 }
 
-void del_empty_tokens(t_string_token *token_lst)
+void	del_empty_tokens(t_string_token *token_lst)
 {
 	while (token_lst->next->token != EOL)
 	{
-		if (token_lst->next->content == NULL || *(char *)(token_lst->next->content) == 0)
+		if (token_lst->next->content == NULL
+			|| *(char *)(token_lst->next->content) == 0)
 			del_next_string_token(token_lst);
 		else
 			token_lst = token_lst->next;

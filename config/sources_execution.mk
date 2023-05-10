@@ -24,6 +24,7 @@ SOURCES	=																	\
 			srcs/execution/utils/cmds_utils.c								\
 			srcs/execution/utils/files_utils.c								\
 			srcs/execution/utils/path_utils.c								\
+			srcs/execution/utils/lstc_utils.c								\
 			srcs/execution/utils/struct_utils.c								\
 			srcs/execution/execution.c										\
 			srcs/signals/signals.c											\

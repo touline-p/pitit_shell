@@ -17,12 +17,12 @@
 
 /*---- typedef structures ----------------------------------------------------*/
 
-typedef struct s_token t_token;
-typedef struct s_block t_block;
+typedef struct s_token	t_token;
+typedef struct s_block	t_block;
 
 /*---- structures ------------------------------------------------------------*/
 
-typedef enum  e_secured
+typedef enum e_secured
 {
 	SECURED,
 	UNSECURED
@@ -31,7 +31,7 @@ typedef enum  e_secured
 struct	s_token
 {
 	t_emt			token;
-	char 			sign_char;
+	char			sign_char;
 	void			*content;
 	t_esec			esec;
 	struct s_token	*next;

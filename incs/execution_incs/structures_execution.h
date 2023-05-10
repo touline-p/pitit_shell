@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_EXECUTION_autre_H
-# define STRUCTURES_EXECUTION_autre_H
+#ifndef STRUCTURES_EXECUTION_H
+# define STRUCTURES_EXECUTION_H
 
 # include "enums_execution.h"
 
@@ -22,7 +22,10 @@ typedef struct s_data			t_data;
 typedef struct s_cmd			t_cmd;
 typedef struct s_data			t_data;
 typedef struct s_cmd			t_cmd;
+
 typedef struct s_wild_data		t_w_data;
+typedef struct s_list_of_char	t_lstc;
+
 
 /*---- structures ------------------------------------------------------------*/
 
@@ -30,27 +33,30 @@ struct s_string_token
 {
 	t_token_minishell	token;
 	char				*content;
-	char 				**str_arr;
+	char				**str_arr;
 	t_string_token		*next;
 };
 
 struct s_data
 {
-	t_cmd	*cmds_block;
-	char 	*prompt;
-	int 	fd[2];
-	int 	nb_of_pipe;
+	t_cmd			*cmds_block;
+	t_string_token	**instructions_arr;
+	int				index;
+	char			*prompt;
+	int				fd[2];
+	int				nb_of_pipe;
 };
 
 struct s_cmd
 {
 	t_builtin	id_command;
 	char		**commands;
+	char		*heredoc_data;
 	bool		is_ambiguous;
 	bool		is_heredoc;
 	int			infile;
 	int			outfile;
-	int 		fd_hd[2];
+	int			fd_hd[2];
 	pid_t		process_id;
 };
 
@@ -60,6 +66,12 @@ struct s_wild_data
 	char	first;
 	char	last;
 	char	**match;
+};
+
+struct	s_list_of_char
+{
+	t_lstc	*next;
+	char	c;
 };
 
 #endif

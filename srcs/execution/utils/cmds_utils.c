@@ -16,7 +16,7 @@ t_builtin	is_builtin(char *string)
 {
 	t_builtin	ret_val;
 	const char	*name_arr[] = {NULL, "env","echo", "export", \
-							 "pwd","exit", "unset", "cd"};
+							"pwd","exit", "unset", "cd"};
 
 	ret_val = ENV;
 	if (!string)
@@ -30,12 +30,13 @@ t_builtin	is_builtin(char *string)
 	return (CMD);
 }
 
-t_return_status 	builtin_switch(t_builtin builtin, char **av, char ***env_pt)
+t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt)
 {
 	const t_builtin_ft	ft_arr[] = {NULL, &env_builtin, &echo_builtin, \
-									&export_builtin, &pwd_builtin, &exit_builtin, &unset_builtin, \
+									&export_builtin, &pwd_builtin, \
+									&exit_builtin, &unset_builtin, \
 									&cd_builtin};
-									
+
 	if (builtin == CMD)
 		return (FAILURE);
 	return ((*ft_arr[builtin])(av, env_pt));
@@ -50,12 +51,3 @@ bool	is_cmd(char *line)
 {
 	return (ft_strchr(line, '/') == NULL);
 }
-
-#ifdef TST_IS_CMD
-
-int main()
-{
-	printf("cmd : %d\npaths : %d\n", is_cmd("minishell"), is_cmd("./minishell"));
-}
-
-#endif

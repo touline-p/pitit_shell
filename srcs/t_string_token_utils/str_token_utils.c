@@ -16,7 +16,8 @@
 
 int	next_control_operator_is_a_pipe(t_string_token *tok)
 {
-	while (tok->token != EOL && tok->token != AMPERSAND && tok->token != AND && tok->token != OR)
+	while (tok->token != EOL && tok->token != AMPERSAND \
+		&& tok->token != AND && tok->token != OR)
 	{
 		if (tok->token == PIPE)
 			return (1);

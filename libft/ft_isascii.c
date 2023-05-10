@@ -19,7 +19,7 @@ int	ft_isascii(int c)
 	return (0);
 }
 
-bool ft_str_is_ascii(char *str)
+bool	ft_str_is_ascii(char *str)
 {
 	while (*str)
 	{
