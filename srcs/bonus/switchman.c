@@ -20,11 +20,6 @@ size_t	go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok)
 	l = 0;
 	if (tmp == NULL)
 		return (INT_MAX);
-	if (tmp->token == token)
-	{
-		l++;
-		tmp = tmp->next;
-	}
 	while (tmp->token != token && tmp->token != EOL)
 	{
 		if (tmp->token == O_PRTSS)
