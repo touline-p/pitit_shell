@@ -148,7 +148,6 @@ static void	_close_this(int fd)
 static char	*add_path_cmd(t_cmd *cmd, char **env)
 {
 	char	**paths;
-	char 	*ret_val;
 	char	*str;
 
 	if (is_path(cmd->commands[0]))
@@ -172,6 +171,7 @@ static char	*_get_cmd_from_path(t_cmd *cmd, char **paths)
 {
 	int		i;
 	char	*ret_val;
+	char 	*str;
 
 	i = 0;
 	while (paths[i])
@@ -190,6 +190,8 @@ static char	*_get_cmd_from_path(t_cmd *cmd, char **paths)
 	ft_free((void **)paths, ft_str_array_len(paths));
 	// ft_dprintf(2, "%s : command not found\n", cmd->commands[0]);
 	str = ft_strjoin(cmd->commands[0], " : command not found\n");
+	if (str == NULL)
+		return (NULL);
 	write(2, str, ft_strlen(str));
 	free(str);
 	return (NULL);

@@ -35,12 +35,16 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 		if (temp->token == CHEVRON_IN)
 		{
 			temp = temp->next;
+			if (temp->token != STRING)
+				return (redirection_syntax_error("\'<\'\n"));
 			if (_set_infile(data, &(temp->content), i, env) == FAILURE)
 				return (FAILURE);
 		}
 		if (temp->token == HERE_DOC)
 		{
 			temp = temp->next;
+			if (temp->token != STRING)
+				return (redirection_syntax_error("\'<<\'\n"));
 			if (_set_heredoc(data, temp->content, i, env) != SUCCESS)
 				return (FAILURE);
 		}
