@@ -140,6 +140,13 @@ t_return_status	replace_dquotes_str_by_env_value(char **line_pt, char **env);
 t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 						t_string_token **str_tok_pt, char **env);
 
-void update_tokens(t_string_token *str_tok_lst);
+void			update_tokens(t_string_token *str_tok_lst);
+
+
+/***	bonus	***/
+
+void			go_to_next_logical_door(t_string_token *src, t_string_token **dst);
+
+void			check_par_err(t_string_token *str_tok_lst);
 # endif
 #endif //MINI_PARSING_MINI_PARSING_H

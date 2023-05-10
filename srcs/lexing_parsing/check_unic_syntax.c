@@ -31,21 +31,26 @@ bool	update_to_hr_data(t_string_token **tmp)
 	return (true);
 }
 
-bool	do_nothing_ut(t_string_token **tmp)
+bool	dn_ut(t_string_token **tmp)
 {
-	display_str_token(*tmp);
 	*tmp = (*tmp)->next;
 	return (true);
 }
 
 void update_tokens(t_string_token *str_tok_lst)
 {
-	const	t_act_update	ft_arr[] = {&do_nothing_ut, &do_nothing_ut, &do_nothing_ut, &update_to_filename, &update_to_filename,  &do_nothing_ut, &do_nothing_ut, &update_to_hr_data, &update_to_filename, &do_nothing_ut, &do_nothing_ut};
+	const	t_act_update	ft_arr[] = {&dn_ut, &dn_ut, &dn_ut, \
+	&update_to_filename, &update_to_filename,  &dn_ut, &dn_ut, \
+	&update_to_hr_data, &update_to_filename, &dn_ut, &dn_ut,  \
+	dn_ut, &dn_ut, &dn_ut, &dn_ut, &dn_ut, &dn_ut,  \
+	dn_ut, &dn_ut, &dn_ut, &dn_ut};
 	t_string_token	*tmp;
 
 	tmp = str_tok_lst;
 	while (tmp->token != EOL)
-		if (!ft_arr[str_tok_lst->token](&str_tok_lst))
-			break ;
-	display_str_token(str_tok_lst);
+	{
+		if (!ft_arr[tmp->token](&tmp))
+			return ;
+	}
+	return ;
 }

@@ -28,7 +28,7 @@ size_t	go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok)
 	while (tmp->token != token && tmp->token != EOL)
 	{
 		if (tmp->token == O_PRTSS)
-			l += go_to_next_(C_PRTSS, tmp, &tmp);
+			l += go_to_next_(C_PRTSS, tmp->next, &tmp);
 		else
 		{
 			tmp = tmp->next;

@@ -22,6 +22,7 @@ t_return_status heredoc_management(t_data *data, t_string_token *string_token_ls
 
 	tmp = string_token_lst;
 	update_tokens(string_token_lst);
+	check_par_err(string_token_lst);
 	/*
 	while (tmp != NULL)
 	{
