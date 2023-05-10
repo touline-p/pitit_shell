@@ -80,6 +80,7 @@ t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt);
 /*-- files_utils --*/
 void			check_opened_infiles(t_data *data, int block_id);
 void			check_opened_outfiles(t_data *data, int block_id);
+t_return_status	redirection_syntax_error(char *str);
 
 /*-- path_utils --*/
 int				get_path_size(char **paths);

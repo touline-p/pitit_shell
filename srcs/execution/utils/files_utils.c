@@ -52,3 +52,15 @@ bool	file_is_empty(char *file)
 	free(dup);
 	return (false);
 }
+
+t_return_status redirection_syntax_error(char *str)
+{
+	char *tmp;
+
+	tmp = ft_strjoin("syntax error near unexpected token :", str);
+	if (!tmp)
+		return (FAILURE);
+	write(2, tmp, ft_strlen(tmp));
+	free(tmp);
+	return (FAILURE);
+}

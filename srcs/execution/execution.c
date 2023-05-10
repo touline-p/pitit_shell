@@ -70,7 +70,8 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 {
 	init_data(data);
 	alloc_cmd_block(data, lst_of_tok);
-	infiles_management(data, lst_of_tok, *env_pt);
+	if (infiles_management(data, lst_of_tok, *env_pt) != SUCCESS)
+		return ;
 	outfiles_management(data, lst_of_tok, *env_pt);
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);

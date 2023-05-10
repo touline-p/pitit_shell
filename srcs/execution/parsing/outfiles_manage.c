@@ -40,6 +40,11 @@ void	manage_ambiguous(t_cmd *cmd, char *file)
 	ft_dprintf(2, "minishell: %s: ambiguous redirect\n", file);
 }
 
+bool	is_err_next_to_pipe(t_emt token)
+{
+	if (token )
+}
+
 t_return_status	outfiles_management(t_data *data, \
 									t_string_token *lst_of_tok, char **env)
 {
@@ -53,17 +58,25 @@ t_return_status	outfiles_management(t_data *data, \
 		if (temp->token == CHEVRON_OT)
 		{
 			temp = temp->next;
+			if (temp->token != STRING)
+				return (redirection_syntax_error("\'>\'\n"));
 			if (_set_outfile(data, &(temp->content), i, env) == FAILURE)
 				return (FAILURE);
 		}
 		if (temp->token == APPENDS)
 		{
 			temp = temp->next;
+			if (temp->token != STRING)
+				return (redirection_syntax_error("\'>>\'\n"));
 			if (_set_appends(data, &(temp->content), i, env) == FAILURE)
 				return (FAILURE);
 		}
 		if (temp->token == PIPE)
+		{
+			if (is_err_next_to_pipe(temp->next->token))
+				return (redirection_syntax_error("\'|\'"));
 			i++;
+		}
 		temp = temp->next;
 	}
 	return (SUCCESS);

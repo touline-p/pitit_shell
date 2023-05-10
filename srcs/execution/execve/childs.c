@@ -171,6 +171,7 @@ static char	*_get_cmd_from_path(t_cmd *cmd, char **paths)
 	int		i;
 	char	*str;
 	char	*ret_val;
+	char 	*str;
 
 	i = 0;
 	str = NULL;
@@ -190,6 +191,8 @@ static char	*_get_cmd_from_path(t_cmd *cmd, char **paths)
 	}
 	ft_free((void **)paths, ft_str_array_len(paths));
 	str = ft_strjoin(cmd->commands[0], " : command not found\n");
+	if (str == NULL)
+		return (NULL);
 	write(2, str, ft_strlen(str));
 	free(str);
 	return (NULL);
