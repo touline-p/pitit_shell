@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:41:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/10 11:48:52 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/10 13:29:54 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,18 @@ static t_return_status	_star_end(char *line, char *name)
 
 static t_return_status	_star_middle(char *line, char *name)
 {
-	(void)line;
 	(void)name;
-	puts("SPLIT");
+	char	**splited_line;
+
+	splited_line = NULL;
+	splited_line = ft_split(line, '*');
+	// printf(GREEN"%s\n"END, splited_line[0]);
+	// printf(RED"%s\n"END, splited_line[1]);
+	if (ft_strncmp(name, splited_line[0], ft_strlen(splited_line[0])) == 0 && ft_strncmp(name + ft_strlen(name) - ft_strlen(splited_line[1]), splited_line[1], ft_strlen(splited_line[1])) == 0)
+	{
+		printf("%s\n", name);
+		return (SUCCESS);
+	}
+	free(splited_line);
 	return (FAILURE);
 }

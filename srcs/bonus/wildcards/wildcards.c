@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:27:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/10 11:53:06 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/10 15:47:42 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ t_return_status	fetch_wildcards_args(char *line)
 	return (SUCCESS);
 }
 
-#define TST_WILD
+// #define TST_WILD
 #ifdef TST_WILD
 
 int	main(int ac, char **av)
 {
 	(void)ac; (void)av;
-	char *line = "l*l*";
+	char *line = "*";
 
 	fetch_wildcards_args(line);
 	return (0);
