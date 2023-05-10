@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:27:15 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 12:42:08 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/10 17:40:55 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ t_return_status redirection_syntax_error(char *str)
 		return (FAILURE);
 	write(2, tmp, ft_strlen(tmp));
 	free(tmp);
+	g_ret_val = 2;
 	return (FAILURE);
 }

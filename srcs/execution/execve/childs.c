@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/10 16:33:22 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/10 17:32:26 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,6 @@ static char	*_get_cmd_from_path(t_cmd *cmd, char **paths)
 	int		i;
 	char	*str;
 	char	*ret_val;
-	char 	*str;
 
 	i = 0;
 	str = NULL;
