@@ -18,6 +18,7 @@ SOURCES	=																	\
 			srcs/execution/execve/childs.c									\
 			srcs/execution/execve/fds_manage.c								\
 			srcs/execution/parsing/clean_utils.c							\
+			srcs/execution/parsing/heredoc_manage.c							\
 			srcs/execution/parsing/infiles_manage.c							\
 			srcs/execution/parsing/outfiles_manage.c						\
 			srcs/execution/parsing/strings_manage.c							\

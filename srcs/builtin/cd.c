@@ -35,7 +35,6 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 		return (FAILURE);
 	}
 	ft_free_split(av);
-	printf("%s, %p\n", pwd, *env_pt);
 	if (_update_pwd_var(pwd, *env_pt) != SUCCESS)
 		return (FAILURE);
 	return (SUCCESS);

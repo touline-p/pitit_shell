@@ -17,11 +17,15 @@
 
 static t_return_status	_set_infile(t_data *data, char **file, int block_id, char **env);
 static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, char **env);
-static void				_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env, t_data *data);
-static t_return_status	_expand_hd(char **here_doc, char **env);
-static void				_trim_limiter(char *s);
 
 /*----------------------------------------------------------------------------*/
+//// to do check le here doc pour qu'il fonctionne (c'est mieux) recuperer le hr data et set les variables
+bool	is_err_next_to_pipe(t_emt token)
+{
+	if (token > CHEVRON_OT && token != STRING)
+		return (false);
+	return (true);
+}
 
 t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
 {
@@ -49,7 +53,11 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 				return (FAILURE);
 		}
 		if (temp->token == PIPE)
+		{
+			if (is_err_next_to_pipe(temp->next->token))
+				return (redirection_syntax_error("\'|\'\n"));
 			i++;
+		}
 		temp = temp->next;
 	}
 	return (SUCCESS);
@@ -96,106 +104,7 @@ static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, c
 	if (data->cmds_block[block_id].is_heredoc)
 		free(data->cmds_block[block_id].heredoc_data);
 	data->cmds_block[block_id].is_heredoc = true;
-	if (ft_strchr(limiter, -'\'') || ft_strchr(limiter, -'\"'))
-	{
-		do_expand = true;
-		_trim_limiter(limiter);
-	}
-	if (pipe(fd_hd) == -1)
-		return (FAILED_PIPE);
-	signal(SIGINT, SIG_IGN);
-	data->cmds_block[block_id].process_id = fork();
-	if (data->cmds_block[block_id].process_id == -1)
-		perror("fork");
-	if (data->cmds_block[block_id].process_id == 0)
-	{
-		free(data->prompt);
-		free(data->cmds_block);
-		signal(SIGINT, &handle_signal_heredoc);
-		signal(SIGQUIT, &handle_signal_heredoc);
-		_get_heredoc(limiter, do_expand, fd_hd, env, data);
-	}
-	else
-	{
-		close(fd_hd[1]);
-		printf("i do herdoc for %s\n", limiter);
-		if (read_fd_in_str(fd_hd[0], &(data->cmds_block[block_id].heredoc_data)) != SUCCESS)
-			return (FAILED_MALLOC);
-		if (waitpid(data->cmds_block[block_id].process_id, &status, WUNTRACED) == -1)
-			g_ret_val = WEXITSTATUS(status);
-		else if (WIFEXITED(status))
-			g_ret_val = WEXITSTATUS(status);
-	}
-	if (g_ret_val == 130)
-	{
-		data->cmds_block[block_id].infile = -1;
-		return (FAILURE);
-	}
 	return (SUCCESS);
 }
 
-static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env, t_data *data)
-{
-	char	*line;
-	char	*here_doc;
-	int		nb_of_line;
-	
-	line = NULL;
-	here_doc = NULL;
-	here_doc = ft_strdup("");
-	if (!here_doc)
-		perror("here doc _get_heredoc");
-	nb_of_line = 0;
-	while (HEREDOC_MUST_GO_ON)
-	{
-		nb_of_line++;
-		ft_dprintf(2, GREEN"> "END);
-		line = get_next_line(0);
-		if (!line)
-		{
-			ft_dprintf(2, RED"minishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n"END, nb_of_line, limiter);
-			break ;
-		}
-		*ft_strchr(line, '\n') = 0;
-		if (!ft_strncmp(limiter, line, ft_strlen(limiter) + 1))
-			break;
-		*ft_strchr(line, '\0') = '\n';
-		here_doc = strjoin_path_cmd(here_doc, line);
-		free(line);
-	}
-	get_next_line(-1);
-	free(line);
-	if (do_expand == false)
-		_expand_hd(&here_doc, env);
-	ft_free_split(env);
-	if (here_doc)
-		write(fd_hd[1], here_doc, ft_strlen(here_doc));
-	close(fd_hd[0]);
-	close(fd_hd[1]);
-	free(here_doc);
-	string_token_destructor(data->instructions_arr[data->index]);
-	ft_free_all_str_lst(data, data->index);
-	exit(g_ret_val);
-}
 
-static t_return_status _expand_hd(char **here_doc, char **env)
-{
-	char	**arr;
-
-	if (cut_line_on(*here_doc, &arr) != SUCCESS
-		|| join_arr_on(arr, here_doc, env) != SUCCESS)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-static void	_trim_limiter(char *s)
-{
-	while (*s)
-	{
-		while (*s && (*s != -'\'' && *s != -'\"'))
-			s++;
-		if (*s == '\0')
-			break ;
-		ft_memmove(s, s + 1, ft_strlen(s));
-	}
-}

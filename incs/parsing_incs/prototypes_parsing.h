@@ -112,6 +112,7 @@ char			*get_env_content_from_key(char *key, char **env);
 t_return_status	add_str_to_env(char *line, char ***env_pt);
 t_return_status	del_str_from_env(char *line, char ***env_pt);
 void			display_str_par(t_string_token *tok);
+size_t			go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok);
 
 char			*get_first_line_in_env(char **env);
 char			*get_next_line_in_env(char *last, char **env);
@@ -139,5 +140,6 @@ t_return_status	replace_dquotes_str_by_env_value(char **line_pt, char **env);
 t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 						t_string_token **str_tok_pt, char **env);
 
+void update_tokens(t_string_token *str_tok_lst);
 # endif
 #endif //MINI_PARSING_MINI_PARSING_H

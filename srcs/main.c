@@ -77,7 +77,8 @@ int	main(int ac, char **av, char **env)
 //			continue;
 //		}
 		del_space_token(str_tok_lst);
-		switchman(&data, str_tok_lst, &env);
+		heredoc_management(&data, str_tok_lst, env);
+		//switchman(&data, str_tok_lst, &env);
 	}
 	return (0);
 }

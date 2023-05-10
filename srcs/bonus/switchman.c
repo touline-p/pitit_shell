@@ -110,6 +110,15 @@ int	_get_next_index(int last, t_string_token **instructions_arr)
 	return (-1);
 }
 
+//void	clean_last_string_tokens_lst(t_string_token **instructions_arr, int index)
+//{
+//	while (instructions_arr[index])
+//	{
+//		string_token_destructor(instructions_arr[index]);
+//		index++;
+//	}
+//}
+
 t_return_status	launch_instructions_arr(t_data *data, \
 						t_string_token **instructions_arr, char ***env)
 {
@@ -121,7 +130,10 @@ t_return_status	launch_instructions_arr(t_data *data, \
 		actual = instructions_arr[data->index];
 		execution(data, actual, env);
 		data->index = _get_next_index(++data->index, instructions_arr);
+		if (g_ret_val == 2)
+			return (SUCCESS);
 	}
+//	clean_last_string_tokens_lst(instructions_arr, data->index);
 	free(instructions_arr);
 	return (SUCCESS);
 }
