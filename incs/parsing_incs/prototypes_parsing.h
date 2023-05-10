@@ -146,7 +146,7 @@ void			update_tokens(t_string_token *str_tok_lst);
 /***	bonus	***/
 
 void			go_to_next_logical_door(t_string_token *src, t_string_token **dst);
-
+char 			*format_string_token(t_string_token *token);
 void			check_par_err(t_string_token *str_tok_lst);
 # endif
 #endif //MINI_PARSING_MINI_PARSING_H

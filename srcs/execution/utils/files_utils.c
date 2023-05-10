@@ -57,7 +57,13 @@ t_return_status redirection_syntax_error(char *str)
 {
 	char *tmp;
 
-	tmp = ft_strjoin("syntax error near unexpected token :", str);
+	if (str == NULL)
+	{
+		perror("formating");
+		return (FAILURE);
+	}
+	tmp = ft_strjoin("syntax error near unexpected token : \'", str);
+	free(str);
 	if (!tmp)
 		return (FAILURE);
 	write(2, tmp, ft_strlen(tmp));

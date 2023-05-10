@@ -23,18 +23,20 @@ t_return_status heredoc_management(t_data *data, t_string_token *string_token_ls
 	tmp = string_token_lst;
 	update_tokens(string_token_lst);
 	check_par_err(string_token_lst);
-	/*
 	while (tmp != NULL)
 	{
-		if (tmp->token == HERE_DOC)
+		if (tmp->token == HR_DATA)
 		{
-			tmp = tmp->next;
 			if (_get_here_doc_in_hr_data(data, tmp, env) != SUCCESS)
 				return (FAILED_MALLOC);
 		}
+		if (tmp->token == SYN_ERR)
+		{
+			redirection_syntax_error(format_string_token(tmp->next));
+			return (FAILURE);
+		}
 		tmp = tmp->next;
 	}
-	 */
 	return (SUCCESS);
 }
 
@@ -46,8 +48,9 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *to
 	int 	pid;
 	int 	status;
 
-	token->token = HR_DATA;
+	do_expand = false;
 	limiter = token->content;
+	token->content = NULL;
 	if (ft_strchr(limiter, -'\'') || ft_strchr(limiter, -'\"'))
 	{
 		do_expand = true;
@@ -62,20 +65,17 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *to
 	if (pid == 0)
 	{
 		free(data->prompt);
-		free(data->cmds_block);
 		signal(SIGINT, &handle_signal_heredoc);
 		signal(SIGQUIT, &handle_signal_heredoc);
 		_get_heredoc(limiter, do_expand, fd_hd, env, data);
 	}
 	else
 	{
+		free(limiter);
 		close(fd_hd[1]);
-		printf("i do herdoc for %s\n", limiter);
 		if (read_fd_in_str(fd_hd[0], &(token->content)) != SUCCESS)
 			return (FAILED_MALLOC);
 		if (waitpid(pid,  &status, WUNTRACED) == -1)
-			g_ret_val = WEXITSTATUS(status);
-		else if (WIFEXITED(status))
 			g_ret_val = WEXITSTATUS(status);
 	}
 	if (g_ret_val == 130)
@@ -122,8 +122,6 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env, t
 	close(fd_hd[0]);
 	close(fd_hd[1]);
 	free(here_doc);
-	string_token_destructor(data->instructions_arr[data->index]);
-	ft_free_all_str_lst(data, data->index);
 	exit(g_ret_val);
 }
 

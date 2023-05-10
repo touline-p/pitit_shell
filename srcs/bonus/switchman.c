@@ -41,8 +41,8 @@ void	go_to_next_logical_door(t_string_token *src, t_string_token **dst)
 	size_t			and_l;
 	size_t			or_l;
 
-	and_l = go_to_next_(AND, src, &and_pt);
-	or_l = go_to_next_(OR, src, &or_pt);
+	and_l = go_to_next_(AND, src->next, &and_pt);
+	or_l = go_to_next_(OR, src->next, &or_pt);
 	if (and_l < or_l)
 		*dst = and_pt;
 	else
@@ -59,7 +59,7 @@ size_t	count_instructions_node(t_string_token *str_tok_lst)
 	while (tmp->token != EOL)
 	{
 		count++;
-		go_to_next_logical_door(tmp, &tmp);
+		go_to_next_logical_door(tmp->next, &tmp);
 	}
 	return (count);
 }
@@ -141,6 +141,12 @@ t_return_status	switchman(t_data *data, \
 	if (data->instructions_arr == NULL)
 		return (FAILURE);
 	fill(data->instructions_arr, token_lst);
+	printf("decoupage de chaque bloc\n");
+	int i  = 0;
+	while (data->instructions_arr[i])
+	{
+		display_str_token(data->instructions_arr[i++]);
+	}
 	launch_instructions_arr(data, data->instructions_arr, env_pt);
 	return (SUCCESS);
 }

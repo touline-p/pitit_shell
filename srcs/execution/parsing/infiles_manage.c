@@ -16,7 +16,7 @@
 /*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status	_set_infile(t_data *data, char **file, int block_id, char **env);
-static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, char **env);
+static t_return_status	_set_heredoc(t_data *data, char *hr_doc, int block_id);
 
 /*----------------------------------------------------------------------------*/
 //// to do check le here doc pour qu'il fonctionne (c'est mieux) recuperer le hr data et set les variables
@@ -39,25 +39,18 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 		if (temp->token == CHEVRON_IN)
 		{
 			temp = temp->next;
-			if (temp->token != STRING)
-				return (redirection_syntax_error("\'<\'\n"));
 			if (_set_infile(data, &(temp->content), i, env) == FAILURE)
 				return (FAILURE);
 		}
 		if (temp->token == HERE_DOC)
 		{
 			temp = temp->next;
-			if (temp->token != STRING)
-				return (redirection_syntax_error("\'<<\'\n"));
-			if (_set_heredoc(data, temp->content, i, env) != SUCCESS)
+			if (_set_heredoc(data, temp->content, i) != SUCCESS)
 				return (FAILURE);
+			temp->content = NULL;
 		}
 		if (temp->token == PIPE)
-		{
-			if (is_err_next_to_pipe(temp->next->token))
-				return (redirection_syntax_error("\'|\'\n"));
 			i++;
-		}
 		temp = temp->next;
 	}
 	return (SUCCESS);
@@ -92,18 +85,13 @@ static t_return_status	_set_infile(t_data *data, char **file, int block_id, char
 	return (SUCCESS);
 }
 
-static t_return_status	_set_heredoc(t_data *data, char *limiter, int block_id, char **env)
+static t_return_status	_set_heredoc(t_data *data, char *hr_data, int block_id)
 {
-	int 	fd_hd[2];
-	int		status;
-	bool	do_expand;
-
-	status = 0;
-	do_expand = false;
 	check_opened_infiles(data, block_id);
 	if (data->cmds_block[block_id].is_heredoc)
 		free(data->cmds_block[block_id].heredoc_data);
 	data->cmds_block[block_id].is_heredoc = true;
+	data->cmds_block[block_id].heredoc_data = hr_data;
 	return (SUCCESS);
 }
 
