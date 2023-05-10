@@ -13,7 +13,6 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
@@ -64,38 +63,39 @@ typedef struct s_list
 }	t_list;
 
 //void		put_return_status(t_return_status signal);
-t_return_status ft_join_str_arr_on(char **str_arr, char **line_pt);
-char		*ft_strdup(const char *src);
+t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt);
+char			*ft_strdup(const char *src);
 t_return_status	ft_strdup_on(const char *src, char **str_pt);
-char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strjoin_free_sec_sf(char *s1, char *s2);
-char		*ft_strtrim(char const *s1, char const *set);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-t_return_status	ft_substr_on(char const *s, unsigned int start, size_t len, char **line_pt);
-int			ft_atoi(const char *nptr);
-int			ft_atoi_has_overflown(char *str);
-char		*ft_itoa(int n);
-int			*ft_intarr_set(int *tab, int value, size_t size);
-void		*ft_memdup(void *src, size_t ln);
-void		ft_swap(int *a, int *b);
-int			ft_is_overflowing(char *str);
-void		*ft_free_split(char **dst);
-void		ft_free_int_arr(int **int_arr);
-void		ft_print_split(char **split);
-char		*ft_strjoin_three(char *a, char *b, char *c);
-void		*per_n_ret(char *msg);
-int			is_from(char c, char *base);
-int			str_is_made_of(char *str, char *charset);
-t_uchar		*ft_ustrdup(unsigned char *str);
-int			ft_min(int a, int b);
-int			ft_max(int a, int b);
-char		*ft_get_env(char *key, char **env);
-size_t 		ft_str_array_len(char **str_arr);
-char 		**ft_str_array_dup(char **str_arr);
-char 		**ft_strarray_join(char **first, char **second);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin_free_sec_sf(char *s1, char *s2);
+char			*ft_strtrim(char const *s1, char const *set);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+t_return_status	ft_substr_on(char const *s, unsigned int start, \
+							size_t len, char **line_pt);
+int				ft_atoi(const char *nptr);
+int				ft_atoi_has_overflown(char *str);
+char			*ft_itoa(int n);
+int				*ft_intarr_set(int *tab, int value, size_t size);
+void			*ft_memdup(void *src, size_t ln);
+void			ft_swap(int *a, int *b);
+int				ft_is_overflowing(char *str);
+void			*ft_free_split(char **dst);
+void			ft_free_int_arr(int **int_arr);
+void			ft_print_split(char **split);
+char			*ft_strjoin_three(char *a, char *b, char *c);
+void			*per_n_ret(char *msg);
+int				is_from(char c, char *base);
+int				str_is_made_of(char *str, char *charset);
+t_uchar			*ft_ustrdup(unsigned char *str);
+int				ft_min(int a, int b);
+int				ft_max(int a, int b);
+char			*ft_get_env(char *key, char **env);
+size_t			ft_str_array_len(char **str_arr);
+char			**ft_str_array_dup(char **str_arr);
+char			**ft_strarray_join(char **first, char **second);
 
 //t_return_status		ft_atoi_on(const char *str, int *int_pt);
-int	ft_dprintf(int fd, const char *str, ...);
+int				ft_dprintf(int fd, const char *str, ...);
 
 void			ft_swap(int *a, int *b);
 int				ft_isalnum(int c);
@@ -155,7 +155,7 @@ int				ft_max(int a, int b);
 char			*ft_get_env(char *key, char **env);
 t_uchar			*ft_ustrdup(unsigned char *str);
 
-t_return_status			ft_atoi_on(const char *str, int *int_pt);
+t_return_status	ft_atoi_on(const char *str, int *int_pt);
 
 /** Pipes utils **/
 
@@ -174,12 +174,12 @@ char			*ft_strcpy(char *dst, char *src);
 /** LST **/
 
 void			ft_lstclean(t_list *head, void (*del)(void *));
-t_return_status			ft_lstnew_on(void *content, t_list **list_ptr);
-t_return_status			ft_lstnew_onsf(void *content, t_list **list_ptr);
+t_return_status	ft_lstnew_on(void *content, t_list **list_ptr);
+t_return_status	ft_lstnew_onsf(void *content, t_list **list_ptr);
 
 /**	LSTSTR **/
 
-t_return_status			ft_lststr_to_str(t_list *lst, char **str);
+t_return_status	ft_lststr_to_str(t_list *lst, char **str);
 size_t			ft_lststrlen(t_list *lst);
 
 /** GNL **/
@@ -188,13 +188,13 @@ size_t			ft_lststrlen(t_list *lst);
 #  define BUFFER_SIZE 1024
 # endif
 
-t_return_status			ft_gnl_on(int fd_hd, char **line_pt);
+t_return_status	ft_gnl_on(int fd_hd, char **line_pt);
 
 /**---- utils ---- **/
 
-int		open_file(const char *av);
-void	*ft_free(void **s, size_t len);
-char	*strjoin_path_cmd(char *s1, char *s2);
+int				open_file(const char *av);
+void			*ft_free(void **s, size_t len);
+char			*strjoin_path_cmd(char *s1, char *s2);
 
 /**---- printf ---- dprintf ---- **/
 
@@ -206,11 +206,12 @@ size_t			ft_putnbr_base(unsigned long nbr, char *base, int fd);
 size_t			ft_putnbr_unsigned_fd(unsigned int n, int fd);
 size_t			ft_putnbr_fd(int n, int fd);
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strndup(char *s1, int size);
-char	*get_strchr(char *s, int c);
-char	*get_calloc(size_t count, size_t size);
-char	*get_strjoin(char *s1, char *s2);
-char	*get_next_line(int fd);
+char			*ft_strnstr(const char *haystack, \
+							const char *needle, size_t len);
+char			*ft_strndup(char *s1, int size);
+char			*get_strchr(char *s, int c);
+char			*get_calloc(size_t count, size_t size);
+char			*get_strjoin(char *s1, char *s2);
+char			*get_next_line(int fd);
 
 #endif

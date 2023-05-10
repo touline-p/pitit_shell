@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_str_arr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/10 01:59:33 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/05/10 01:59:34 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static char **_ft_str_array_dup_ep(char **str_arr, size_t i);
+static char	**_ft_str_array_dup_ep(char **str_arr, size_t i);
 
 size_t	ft_str_array_len(char **str_arr)
 {
@@ -36,7 +48,7 @@ char	**ft_str_array_dup(char **str_arr)
 	return (new);
 }
 
-static char **_ft_str_array_dup_ep(char **str_arr, size_t i)
+static char	**_ft_str_array_dup_ep(char **str_arr, size_t i)
 {
 	while (i--)
 		free(str_arr[i]);
@@ -44,10 +56,10 @@ static char **_ft_str_array_dup_ep(char **str_arr, size_t i)
 	return (NULL);
 }
 
-char **ft_strarray_join(char **first, char **second)
+char	**ft_strarray_join(char **first, char **second)
 {
-	char **new;
-	char **pin;
+	char	**new;
+	char	**pin;
 
 	new = malloc(sizeof(char *) * (ft_str_array_len(first) \
 			+ ft_str_array_len(second) + 1));

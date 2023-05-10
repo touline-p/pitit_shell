@@ -31,7 +31,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*ft_strjoin_free_sec_sf(char *s1, char *s2)
 {
-	char *dst;
+	char	*dst;
 
 	if (s2 == NULL)
 		return (NULL);
@@ -39,4 +39,3 @@ char	*ft_strjoin_free_sec_sf(char *s1, char *s2)
 	free(s2);
 	return (dst);
 }
-
