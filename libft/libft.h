@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/04 16:37:36 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/10 20:29:09 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int				ft_tolower(int c);
 int				ft_toupper(int c);
 void			*ft_calloc(size_t n, size_t size);
 char			**ft_split(char const *s, char c);
+char			**ft_split_charset(char *str, char *charset);
 char			*ft_strdup(const char *src);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
