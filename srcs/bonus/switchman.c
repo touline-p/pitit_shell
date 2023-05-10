@@ -13,30 +13,42 @@
 #include "libft.h"
 #include "minishell_parsing.h"
 
-void	go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok)
+size_t	go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok)
 {
+	size_t	l;
+
+	l = 0;
 	if (tmp == NULL)
-		return ;
-	if (tmp->next)
+		return (INT_MAX);
+	if (tmp->token == token)
+	{
+		l++;
 		tmp = tmp->next;
+	}
 	while (tmp->token != token && tmp->token != EOL)
 	{
 		if (tmp->token == O_PRTSS)
-			go_to_next_(C_PRTSS, tmp, &tmp);
+			l += go_to_next_(C_PRTSS, tmp, &tmp);
 		else
+		{
 			tmp = tmp->next;
+			l++;
+		}
 	}
 	*str_tok = tmp;
+	return (l);
 }
 
 void	go_to_next_logical_door(t_string_token *src, t_string_token **dst)
 {
 	t_string_token	*and_pt;
 	t_string_token	*or_pt;
+	size_t			and_l;
+	size_t			or_l;
 
-	go_to_next_(AND, src, &and_pt);
-	go_to_next_(OR, src, &or_pt);
-	if (and_pt < or_pt)
+	and_l = go_to_next_(AND, src, &and_pt);
+	or_l = go_to_next_(OR, src, &or_pt);
+	if (and_l < or_l)
 		*dst = and_pt;
 	else
 		*dst = or_pt;
