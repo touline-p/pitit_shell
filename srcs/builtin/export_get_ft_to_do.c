@@ -80,6 +80,7 @@ t_return_status	do_nothing_t_export_ft(char *line, char ***env_pt)
 t_return_status	not_in_context_error(char *line, char ***env_pt)
 {
 	(void)env_pt;
+	g_ret_val = 1;
 	if (dprintf(2, "export : '%s': not a valid identifier\n", line) == -1)
 		return (free(line), FAILED_WRITE);
 	return (free(line), SUCCESS);

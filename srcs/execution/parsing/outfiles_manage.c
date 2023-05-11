@@ -54,14 +54,16 @@ t_return_status	outfiles_management(t_data *data, \
 		{
 			temp = temp->next;
 			if (_set_outfile(data, &(temp->content), i, env) == FAILURE)
-				return (FAILURE);
+				go_to_next_(PIPE, temp, &temp);
 		}
 		if (temp->token == APPENDS)
 		{
 			temp = temp->next;
 			if (_set_appends(data, &(temp->content), i, env) == FAILURE)
-				return (FAILURE);
+				go_to_next_(PIPE, temp, &temp);
 		}
+		if (temp->token == O_PRTSS)
+			go_to_next_(C_PRTSS, temp, &temp);
 		if (temp->token == PIPE)
 			i++;
 		temp = temp->next;

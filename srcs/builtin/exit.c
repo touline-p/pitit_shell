@@ -36,14 +36,15 @@ t_return_status	exit_builtin(char **av, char ***env_pt)
 
 static t_return_status	check_exit_args(char **av, char ***env_pt)
 {
-	if (ft_isnbr(av[1]) == false)
+	int nb;
+
+	if (ft_atoi_on(av[1], &nb) == FAILURE || ft_isnbr(av[1]) == false )
 	{
 		ft_dprintf(2, \
 		RED"minishell: exit: %s: numeric argument required\n"END, av[1]);
-		g_ret_val = 2;
 		ft_free_split(av);
 		ft_free_split(*env_pt);
-		exit(g_ret_val);
+		exit(2);
 	}
 	if (ft_str_array_len(av) > 2)
 	{

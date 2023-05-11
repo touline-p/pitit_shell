@@ -67,11 +67,12 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-		get_prompt_on(&(data.prompt), env);
+		//get_prompt_on(&(data.prompt), env);
+		data.prompt = ft_strdup("sans doute");
 		line = readline(data.prompt);
 		if (errno)
 		{
-			perror("readline");
+			//perror("readline");
 			errno = SUCCESS;
 		}
 		if (line == NULL || ft_strcmp("", line) == 0)
