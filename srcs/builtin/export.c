@@ -30,7 +30,7 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 			return (free(*args), ft_free_split(tmp), FAILED_MALLOC);
 		tmp++;
 	}
-	return (free(*args), free(args), SUCCESS);
+	return (free(*args), free(args), g_ret_val);
 }
 
 void	get_rid_of_plus(char *line)

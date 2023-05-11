@@ -63,6 +63,8 @@ char	*get_env_content_from_key(char *key, char **env)
 
 bool	key_is_not_alnum(char *line)
 {
+	if (*line == '=' || ft_isdigit(*line))
+		return (true);
 	while (*line != '=' && *line)
 	{
 		if (*line == '+' && *(line + 1) == '=')

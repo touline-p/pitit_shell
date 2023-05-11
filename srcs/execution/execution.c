@@ -87,8 +87,10 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD)
 		switchman_once(data, env_pt);
 	else
+	{
 		childs_execve(data, env_pt);
-	wait_for_process_ids(data);
+		wait_for_process_ids(data);
+	}
 	free(data->cmds_block);
 }
 
@@ -156,12 +158,9 @@ static void	wait_for_process_ids(t_data *data)
 	signals = false;
 	while (block_id < data->nb_of_pipe + 1)
 	{
-		if (data->cmds_block[block_id].id_command == CMD)
-		{
-			if (wait_for_command(data->cmds_block[block_id].process_id, \
+		if (wait_for_command(data->cmds_block[block_id].process_id, \
 								&status, &signals) == false)
-				break;
-		}
+			break;
 		block_id++;
 	}
 }

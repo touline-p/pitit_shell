@@ -28,8 +28,7 @@ static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 		exit(1);
 	}
 	builtin_switch(cmd.id_command, cmd.commands, env_pt);
-	g_ret_val = 0;
-	exit(g_ret_val);
+	exit(SUCCESS);
 }
 
 t_return_status	switchman_once(t_data *data, char ***env_pt)
@@ -47,8 +46,9 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 	if (pid == 0)
 		_execute_son(data, cmd, env_pt);
 	ft_free_split(cmd.commands);
-	if (waitpid(pid, &status, WUNTRACED) == -1)
+	if (waitpid(pid, &status, WUNTRACED) == -1) {
 		g_ret_val = 1;
+	}
 	else if (WIFEXITED(status))
 		g_ret_val = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))

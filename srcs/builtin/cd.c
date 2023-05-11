@@ -22,8 +22,11 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 	pwd = NULL;
 	(void)env_pt;
 	if (ft_str_array_len(av) != 2)
-		return (dprintf(2, "cd: bad arguments number\n"), \
-						ft_free_split(av), SUCCESS);
+	{
+		g_ret_val = 1;
+		return (dprintf(2, "cd: too many arguments\n"), \
+                        ft_free_split(av), 1);
+	}
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 	{
@@ -33,6 +36,7 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 	if (chdir(av[1]) == -1)
 	{
 		perror(av[1]);
+		g_ret_val = 1;
 		free(pwd);
 		ft_free_split(av);
 		return (FAILURE);
