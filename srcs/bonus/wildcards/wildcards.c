@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:27:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/10 15:47:42 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/11 17:09:27 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,46 @@
 
 /*----------------------------------------------------------------------------*/
 
-t_return_status	fetch_wildcards_args(char *line)
-{
-	t_w_data	w_data;
-	
-	ft_bzero((void *)&w_data, sizeof(t_w_data));
-	if (parse_args(&w_data, line) != SUCCESS)
+static char	**fetch_wildcards_args(char *line)
+{	
+	if (parse_args(line) != SUCCESS)
 	{
 		ft_dprintf(2, RED"%s\n"END, line);
-		return (FAILURE);
+		return (NULL);
 	}
-	return (SUCCESS);
+	/*if (fetch_args(line) != SUCCESS)
+	{
+		return (FAILURE);
+	}*/
+	return (NULL);
 }
+/*
+t_return_status	wildcards(t_data *data)
+{
+	int i;
 
+	i = 0;
+	while(data->cmds_block->commands[i])
+	{
+		printf(data->cmds_block->commands[i]);
+		printf(data->cmds_block->commands[i][0]);
+		fetch_wildcards_args(data->cmds_block[i].commands[i]);
+		i++;
+	}
+}
+*/
 // #define TST_WILD
 #ifdef TST_WILD
 
 int	main(int ac, char **av)
 {
 	(void)ac; (void)av;
-	char *line = "*";
+	char *line = "i*c*s";
+	char **wildcards;
 
-	fetch_wildcards_args(line);
+	wildcards = fetch_wildcards_args(line);
+	// puts("result : ");
+	ft_print_split(wildcards);
 	return (0);
 }
 

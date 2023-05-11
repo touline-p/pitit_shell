@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:41:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/10 11:49:15 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/11 16:55:11 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,51 +15,55 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static t_return_status	_check_line(t_w_data *w_data, char *line);
-static int				_get_alloc_size(t_w_data *w_data, char *line);
-static	t_return_status	_find_matching_files(t_w_data *w_data, char *line, \
-											char *name);
+static t_return_status	_check_line(char *line);
+static int				_get_alloc_size(char *line);
+static	t_return_status	_find_matching_files(char *line, char *name);
+
 /*----------------------------------------------------------------------------*/
 
-t_return_status	parse_args(t_w_data *w_data, char *line)
+t_return_status	parse_args(char *line)
 {
+	char **match;
 	int	size;
 
+	
+	match = NULL;
 	size = 0;
-	if (_check_line(w_data, line) != SUCCESS)
+	if (_check_line(line) != SUCCESS)
 		return (FAILURE);
-	size = _get_alloc_size(w_data, line);
+	size = _get_alloc_size(line);
 	if (size <= 0)
 		return (FAILURE);
-	w_data->match = ft_calloc(size + 1, sizeof(char *));
-	if (!w_data->match)
+	match = ft_calloc(size + 1, sizeof(char *));
+	if (match)
 		return (FAILURE);
+	// match = fetch_matching_files(line);
 	return (SUCCESS);
 }
 
-static t_return_status	_check_line(t_w_data *w_data, char *line)
+static t_return_status	_check_line(char *line)
 {
-	w_data->first = line[0];
+	int	nb_of_stars;
+
+	nb_of_stars = 0;
 	while (*line)
 	{
 		if (*line == '*')
-			w_data->nb_of_stars++;
+			nb_of_stars++;
 		if (*line == '/')
 		{
 			ft_dprintf(2, RED"minishell: /: bonus wildcards can be used only \
 			in the current directory\n"END);
 			return (FAILURE);
 		}
-		if (*(line + 1) == '\0')
-			w_data->last = *line;
 		line++;
 	}
-	if (w_data->nb_of_stars <= 0)
+	if (nb_of_stars <= 0)
 		return (FAILURE);
 	return (SUCCESS);
 }
 
-static int	_get_alloc_size(t_w_data *w_data, char *line)
+static int	_get_alloc_size(char *line)
 {
 	struct dirent	*data;
 	DIR				*directory;
@@ -77,26 +81,37 @@ static int	_get_alloc_size(t_w_data *w_data, char *line)
 		data = readdir(directory);
 		if (data == NULL)
 			break ;
-		if (_find_matching_files(w_data, line, data->d_name) == SUCCESS)
+		if (_find_matching_files(line, data->d_name) == SUCCESS)
+		{
+			printf(BLUE"%s\n"END, data->d_name);
 			size++;
+		}
 	}
 	closedir(directory);
-	ft_dprintf(2, GREEN"size alloc :%d\n"END, size);
 	return (size);
 }
 
-static	t_return_status	_find_matching_files(t_w_data *w_data, char *line, \
-											char *name)
+static	t_return_status	_find_matching_files(char *line, char *name)
 {
-	if (w_data->nb_of_stars == 1)
+	if (name[0] == '.' && line[0] != '.')
+		return (FAILURE);
+	if (name[0] != '.' && line[0] == '.')
+		return (FAILURE);
+	while (*line)
 	{
-		if (one_star_case(w_data, line, name) != FAILURE)
-			return (SUCCESS);
+		while (*line == '*' && *(line + 1) == '*')
+			line++;
+		if (*line == '*')
+		{
+			line++;
+ 			name = ft_strstr_w(name, line);
+		}
+		if (!name || (*line && *line != '*' && *name != *line))
+		{
+			return (FAILURE);
+		}
+		line++;
+		name++;
 	}
-	else
-	{
-		if (multi_stars_case(w_data, line, name) != FAILURE)
-			return (SUCCESS);
-	}
-	return (FAILURE);
+	return (SUCCESS);
 }
