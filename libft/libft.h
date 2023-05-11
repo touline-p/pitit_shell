@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/11 13:01:21 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/11 19:52:29 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,6 @@ char			*get_strchr(char *s, int c);
 char			*get_calloc(size_t count, size_t size);
 char			*get_strjoin(char *s1, char *s2);
 char			*get_next_line(int fd);
-char			*ft_strstr_w(char *haystack, char *needle);
+char			*ft_strstr_w(char *name, char *line);
 
 #endif

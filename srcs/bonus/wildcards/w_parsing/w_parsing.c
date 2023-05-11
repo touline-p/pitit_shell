@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:41:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/11 16:55:11 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/11 20:46:21 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ static	t_return_status	_find_matching_files(char *line, char *name);
 
 t_return_status	parse_args(char *line)
 {
-	char **match;
+	// char **match;
 	int	size;
 
 	
-	match = NULL;
+	// match = NULL;
 	size = 0;
 	if (_check_line(line) != SUCCESS)
 		return (FAILURE);
 	size = _get_alloc_size(line);
 	if (size <= 0)
 		return (FAILURE);
-	match = ft_calloc(size + 1, sizeof(char *));
-	if (match)
-		return (FAILURE);
+	// match = ft_calloc(size + 1, sizeof(char *));
+	// if (match)
+		// return (FAILURE);
 	// match = fetch_matching_files(line);
 	return (SUCCESS);
 }
@@ -68,14 +68,17 @@ static int	_get_alloc_size(char *line)
 	struct dirent	*data;
 	DIR				*directory;
 	int				size;
+	char			**pattern;
 
 	size = 0;
+	pattern = NULL;
 	directory = opendir(".");
 	if (!directory)
 	{
 		perror ("minishell: opendir: cannot open current directory");
 		return (-1);
 	}
+	pattern = ft_split_w(line);
 	while (1)
 	{
 		data = readdir(directory);
@@ -83,20 +86,18 @@ static int	_get_alloc_size(char *line)
 			break ;
 		if (_find_matching_files(line, data->d_name) == SUCCESS)
 		{
-			printf(BLUE"%s\n"END, data->d_name);
+			printf(GREEN"%s\n"END, data->d_name);
 			size++;
 		}
 	}
 	closedir(directory);
+	printf("%d\n", size);
 	return (size);
 }
 
 static	t_return_status	_find_matching_files(char *line, char *name)
 {
-	if (name[0] == '.' && line[0] != '.')
-		return (FAILURE);
-	if (name[0] != '.' && line[0] == '.')
-		return (FAILURE);
+
 	while (*line)
 	{
 		while (*line == '*' && *(line + 1) == '*')
@@ -108,6 +109,7 @@ static	t_return_status	_find_matching_files(char *line, char *name)
 		}
 		if (!name || (*line && *line != '*' && *name != *line))
 		{
+			printf("%s\n", line);
 			return (FAILURE);
 		}
 		line++;
@@ -115,3 +117,16 @@ static	t_return_status	_find_matching_files(char *line, char *name)
 	}
 	return (SUCCESS);
 }
+
+# define TEST_SA_MERE
+# ifdef TEST_SA_MERE
+
+int main(void)
+{
+	char *line = "li*";
+
+	if (parse_args(line) != SUCCESS)
+		puts("voili");
+}
+
+#endif
