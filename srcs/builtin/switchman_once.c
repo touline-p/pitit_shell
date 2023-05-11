@@ -28,34 +28,23 @@ static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 		exit(1);
 	}
 	builtin_switch(cmd.id_command, cmd.commands, env_pt);
-	g_ret_val = 0;
-	exit(g_ret_val);
+	exit(SUCCESS);
 }
 
 t_return_status	switchman_once(t_data *data, char ***env_pt)
 {
-	int		pid;
-	int		status;
-	t_cmd	cmd;
+	int pid;
+	int status;
+	t_cmd cmd;
 
 	status = 0;
 	cmd = *(data->cmds_block);
 	if (cmd.id_command > PWD
 		|| (cmd.id_command == EXPORT && cmd.commands[1] != NULL))
 		return (builtin_switch(cmd.id_command, cmd.commands, env_pt));
-	pid = fork();
-	if (pid == 0)
+	data->cmds_block->process_id = fork();
+	if (data->cmds_block->process_id == 0)
 		_execute_son(data, cmd, env_pt);
 	ft_free_split(cmd.commands);
-	if (waitpid(pid, &status, WUNTRACED) == -1)
-		g_ret_val = 1;
-	else if (WIFEXITED(status))
-		g_ret_val = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-	{
-		g_ret_val = WTERMSIG(status);
-		if (g_ret_val != 131)
-			g_ret_val += 128;
-	}
 	return (SUCCESS);
 }
