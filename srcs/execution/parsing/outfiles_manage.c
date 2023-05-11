@@ -53,17 +53,13 @@ t_return_status	outfiles_management(t_data *data, \
 		if (temp->token == CHEVRON_OT)
 		{
 			temp = temp->next;
-			if (_set_outfile(data, &(temp->content), i, env) == FAILURE)
-				go_to_next_(PIPE, temp, &temp);
+			_set_outfile(data, &(temp->content), i, env);
 		}
 		if (temp->token == APPENDS)
 		{
 			temp = temp->next;
-			if (_set_appends(data, &(temp->content), i, env) == FAILURE)
-				go_to_next_(PIPE, temp, &temp);
+			_set_appends(data, &(temp->content), i, env);
 		}
-		if (temp->token == O_PRTSS)
-			go_to_next_(C_PRTSS, temp, &temp);
 		if (temp->token == PIPE)
 			i++;
 		temp = temp->next;
@@ -80,6 +76,7 @@ static t_return_status	_set_outfile(t_data *data, char **file, \
 	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
 	if (data->cmds_block[block_id].infile < 0
+		|| data->cmds_block[block_id].outfile < 0
 		|| data->cmds_block[block_id].fd_hd[0] < 0
 		|| data->cmds_block[block_id].is_ambiguous == true)
 		return (SUCCESS);
