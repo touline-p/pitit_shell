@@ -80,6 +80,7 @@ static t_return_status	_set_infile(t_data *data, char **file, int block_id, char
 	}
 	if (data->cmds_block[block_id].infile == -1)
 	{
+		g_ret_val = 1;
 		perror(*file);
 		return (FAILURE);
 	}

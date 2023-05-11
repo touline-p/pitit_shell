@@ -94,6 +94,7 @@ static t_return_status	_set_outfile(t_data *data, char **file, \
 	O_TRUNC, 0644);
 	if (data->cmds_block[block_id].outfile == -1)
 	{
+		g_ret_val = 1;
 		perror(*file);
 		return (FAILURE);
 	}
@@ -123,6 +124,7 @@ static t_return_status	_set_appends(t_data *data, char **file, \
 	O_APPEND, 0644);
 	if (data->cmds_block[block_id].outfile == -1)
 	{
+		g_ret_val = 1;
 		perror(*file);
 		return (FAILURE);
 	}
