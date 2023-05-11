@@ -19,7 +19,7 @@ static t_return_status	_set_infile(t_data *data, char **file, int block_id, char
 static t_return_status	_set_heredoc(t_data *data, char *hr_doc, int block_id);
 
 /*----------------------------------------------------------------------------*/
-//// to do check le here doc pour qu'il fonctionne (c'est mieux) recuperer le hr data et set les variables
+
 bool	is_err_next_to_pipe(t_emt token)
 {
 	if (token > CHEVRON_OT && token != STRING)
