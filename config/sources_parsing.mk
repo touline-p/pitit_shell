@@ -24,6 +24,7 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/lexing_parsing/5_suppress_quotes/suppress_quotes.c			\
 			srcs/lexing_parsing/3_expand_in_parsing/expand_variable.c		\
 			srcs/lexing_parsing/parsing_articulation.c						\
+			srcs/lexing_parsing/check_unic_syntax.c							\
 			srcs/lexing_parsing/1_preservation/double_quoting.c 			\
 			srcs/lexing_parsing/1_preservation/escaping_chars.c 			\
 			srcs/lexing_parsing/1_preservation/preserv.c 					\
@@ -35,6 +36,7 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/lexing_parsing/parsing_token_utils/token_lst_utils_2.c		\
 			srcs/lexing_parsing/parsing_token_utils/testing_utils.c			\
 			srcs/lexing_parsing/syntax_is_valid.c							\
+			srcs/lexing_parsing/check_par_err.c								\
 			srcs/t_string_token_utils/t_string_token_utils.c				\
 			srcs/t_string_token_utils/str_token_debug.c						\
 			srcs/t_string_token_utils/token_to_str_token.c					\

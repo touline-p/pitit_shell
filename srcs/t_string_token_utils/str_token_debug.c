@@ -35,7 +35,7 @@ void	display_t_emt_string(t_string_token *token)
 	const char	*msgarr[] = {"start", "_pipe_", "ifnot", "fd_in", \
 	"fd_ot", "__or__", "_and_", "hrdoc", "appnd", "lfpar", \
 	"rtpar", "smcln", "space", "_tab_", "_ltr_", "end_l", \
-	"_str_", "dolrs"};
+	"_str_", "dolrs", "file_", "hr_dt", "syner"};
 	char		*msg;
 
 	if (token == NULL)

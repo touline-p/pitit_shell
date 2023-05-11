@@ -49,6 +49,8 @@ void			replace_space_by_minus(unsigned int nb, char *content);
 t_return_status	childs_execve(t_data *data, char ***env);
 
 /*-- fds_manage --*/
+t_return_status	heredoc_management(t_data *data, t_string_token *str_tok_lst, char **env);
+t_return_status check_unic_syntax(t_string_token *actual, bool *string, t_pr_stat *in_parentheses);
 void			close_fds(t_data *data, int block_id);
 void			close_all_fds(t_data *data, int block_id);
 t_return_status	duplicate_fds(t_cmd block, t_data *data, char ***env_pt);

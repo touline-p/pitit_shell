@@ -66,6 +66,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 						data->nb_of_pipe, block_id) != SUCCESS)
 			return (FAILURE);
 		_manage_the_pipe(data, block_id);
+		print_cmd_block(ft_itoa(block_id), data->cmds_block[block_id]);
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		data->cmds_block[block_id].process_id = fork();

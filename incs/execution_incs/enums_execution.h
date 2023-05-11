@@ -20,34 +20,6 @@ typedef enum e_builtin			t_builtin;
 
 /*----------------------------------------------------------------------------*/
 
-# ifndef EMT
-#  define EMT
-
-enum	e_token_minishell
-{
-	START,
-	PIPE,
-	AMPERSAND,
-	CHEVRON_IN,
-	CHEVRON_OT,
-	OR,
-	AND,
-	HERE_DOC,
-	APPENDS,
-	O_PRTSS,
-	C_PRTSS,
-	SEMICOLON,
-	E_SPACE,
-	TABULATION,
-	LETTER,
-	EOL,
-	STRING,
-	DOLLAR,
-	NONE
-};
-
-# endif
-
 enum e_builtin
 {
 	CMD,

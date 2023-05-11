@@ -17,6 +17,7 @@
 
 typedef enum e_token_minishell	t_emt;
 typedef enum e_enum_op			t_e_op;
+typedef enum e_par_stat			t_pr_stat;
 
 /*----------------------------------------------------------------------------*/
 
@@ -44,7 +45,10 @@ enum	e_token_minishell
 	EOL = 15,
 	STRING = 16,
 	DOLLAR = 17,
-	NONE = 18
+	FILE_NAME = 18,
+	HR_DATA = 19,
+	SYN_ERR = 20,
+	NONE = 21
 };
 
 # endif
@@ -55,6 +59,13 @@ enum e_enum_op
 	OR_OP = 2,
 	UNRESOLVED = 3,
 	RESOLVED = 4
+};
+
+enum e_par_stat
+{
+	NO_PAR,
+	IN_PAR,
+	OT_PAR
 };
 
 #endif

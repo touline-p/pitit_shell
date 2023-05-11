@@ -32,7 +32,7 @@ static void	handle_signal_main(int signal)
 	g_ret_val = 130;
 	ft_dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
 	rl_on_new_line();
-	// rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
 

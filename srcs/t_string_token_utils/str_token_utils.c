@@ -25,3 +25,15 @@ int	next_control_operator_is_a_pipe(t_string_token *tok)
 	}
 	return (0);
 }
+
+char *format_string_token(t_string_token *token)
+{
+	const char	*msgarr[] = {"start", "\'|", "ifnot", "\'<", \
+	"\'>", "\'||", "\'&&", "\'<<", "\'>>", "lfpar", \
+	"\')", "\';", "\' ", "\'\t", "_ltr_", "\'newline", \
+	"_str_\n", "dolrs\n", "file_\n", "hr_dt\n", "\'syner"};
+
+	if (token->token == STRING)
+		return (ft_strjoin(token->content, "'\n"));
+	return (ft_strjoin(msgarr[token->token], "'\n"));
+}
