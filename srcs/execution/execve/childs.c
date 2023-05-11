@@ -82,18 +82,26 @@ t_return_status	childs_execve(t_data *data, char ***env)
 
 static t_return_status _is_executable(char *command)
 {
-	if (access(command, F_OK) != 0)
+	struct stat	st;
+
+	if (stat(command, &st) == 0)
 	{
-		ft_dprintf(2,"minishell: %s: Permission denied\n", command);
-		g_ret_val = 126;
-		return (FAILURE);
+		if (!(st.st_mode & S_IXUSR))
+		{
+			ft_dprintf(2,"minishell: %s: Permission denied\n", command);
+			g_ret_val = 126;
+			return (FAILURE);
+		}
+		if (S_ISDIR(st.st_mode))
+		{
+			ft_dprintf(2,"minishell: %s: Is a directory\n", command);
+			g_ret_val = 126;
+			return (FAILURE);
+		}
+		return (SUCCESS);
 	}
-	else if (access(command, R_OK) == 0)
-	{
-		ft_dprintf(2,"minishell: %s: Is a directory\n", command);
-		g_ret_val = 126;
-		return (FAILURE);
-	}
+	g_ret_val = 126;
+	ft_dprintf(2,"minishell: %s: Permission denied\n", command);
 	return (SUCCESS);
 }
 
@@ -177,6 +185,7 @@ static char	*add_path_cmd(t_cmd *cmd, char **env)
 	if (ft_strcmp("", cmd->commands[0]) == 0)
 	{
 		str = ft_strjoin(cmd->commands[0], " : command not found\n");
+		g_ret_val = 127;
 		write(2, str, ft_strlen(str));
 		free(str);
 		return (ft_free_split(paths), NULL);
@@ -206,6 +215,7 @@ static char	*_get_cmd_from_path(t_cmd *cmd, char **paths)
 		}
 		i++;
 	}
+	g_ret_val = 127;
 	ft_free((void **)paths, ft_str_array_len(paths));
 	str = ft_strjoin(cmd->commands[0], " : command not found\n");
 	if (str == NULL)
