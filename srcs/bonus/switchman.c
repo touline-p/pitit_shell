@@ -136,17 +136,21 @@ t_return_status	launch_instructions_arr(t_data *data, \
 t_return_status	switchman(t_data *data, \
 					t_string_token *token_lst, char ***env_pt)
 {
+	if (data->instructions_arr != NULL)
+		free(data->instructions_arr);
 	data->instructions_arr = malloc(sizeof(t_string_token *) \
 				* (count_instructions_node(token_lst) + 1));
 	if (data->instructions_arr == NULL)
 		return (FAILURE);
 	fill(data->instructions_arr, token_lst);
+	/*
 	printf("decoupage de chaque bloc\n");
 	int i  = 0;
 	while (data->instructions_arr[i])
 	{
 		display_str_token(data->instructions_arr[i++]);
 	}
+	 */
 	launch_instructions_arr(data, data->instructions_arr, env_pt);
 	return (SUCCESS);
 }

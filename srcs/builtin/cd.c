@@ -26,7 +26,10 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 						ft_free_split(av), SUCCESS);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		return (FAILURE);
+	{
+		ft_dprintf(2, "cd: error retrieving current directory:");
+		perror("getcwd");
+	}
 	if (chdir(av[1]) == -1)
 	{
 		perror(av[1]);
@@ -46,16 +49,19 @@ static t_return_status	_update_pwd_var(char *pwd, char **env)
 	char	*new_pwd;
 	char	*tmp;
 
-	old_pwd = ft_strjoin("OLDPWD=", pwd);
-	free(pwd);
-	if (old_pwd == NULL)
-		return (FAILED_MALLOC);
+	if (pwd)
+	{
+		old_pwd = ft_strjoin("OLDPWD=", pwd);
+		free(pwd);
+		if (old_pwd == NULL)
+			return (FAILED_MALLOC);
+		replace_content_in_env(old_pwd, env);
+	}
 	tmp = getcwd(NULL, 0);
 	if (tmp == NULL)
 		return (free(old_pwd), FAILED_MALLOC);
 	new_pwd = ft_strjoin("PWD=", tmp);
 	free(tmp);
-	replace_content_in_env(old_pwd, env);
 	replace_content_in_env(new_pwd, env);
 	return (SUCCESS);
 }

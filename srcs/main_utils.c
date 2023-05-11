@@ -29,9 +29,12 @@ t_return_status	check_arguments(int ac, char **av)
 void	clean_the_prompt(char *prompt, char *line, char **env)
 {
 	free(line);
-	free(prompt);
-	ft_free_split(env);
-	clear_history();
-	ft_dprintf(2, RED"exit\n"END);
-	exit(0);
+	if (line == NULL)
+	{
+		free(prompt);
+		ft_free_split(env);
+		clear_history();
+		ft_dprintf(2, RED"exit\n"END);
+		exit(0);
+	}
 }

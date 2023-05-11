@@ -57,6 +57,7 @@ int	main(int ac, char **av, char **env)
 	t_string_token	*str_tok_lst;
 
 	data.prompt = NULL;
+	data.instructions_arr = NULL;
 	line = NULL;
 	str_tok_lst = NULL;
 	if (check_arguments(ac, av) != SUCCESS)
@@ -73,8 +74,11 @@ int	main(int ac, char **av, char **env)
 			perror("readline");
 			errno = SUCCESS;
 		}
-		if (line == NULL)
+		if (line == NULL || ft_strcmp("", line) == 0)
+		{
 			clean_the_prompt(data.prompt, line, env);
+			continue ;
+		}
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
@@ -87,7 +91,6 @@ int	main(int ac, char **av, char **env)
 		del_space_token(str_tok_lst);
 		if (heredoc_management(&data, str_tok_lst, env))
 			continue ;
-		puts("here");
 		switchman(&data, str_tok_lst, &env);
 	}
 	return (0);
@@ -98,15 +101,15 @@ static t_return_status welcome_to_minihell(char ***env_pt)
 	g_ret_val = 0;
 	if (env_init_on(env_pt) != SUCCESS)
 		return (FAILED_MALLOC);
-	ft_dprintf(2, PURPLE"\n------------------------------------------------------------------------------\t\n"END);
-	ft_dprintf(2, PURPLE" __    __   __   __   __   __   ______   __  __   ______   __       __        \n");
-	ft_dprintf(2, "/\\ \"-./  \\ /\\ \\ /\\ \"-.\\ \\ /\\ \\ /\\  ___\\ /\\ \\_\\ \\ /\\  ___\\ /\\ \\     /\\ \\       \n");
-	ft_dprintf(2, "\\ \\ \\-./\\ \\\\ \\ \\\\ \\ \\-.  \\\\ \\ \\\\ \\___  \\\\ \\  __ \\\\ \\  __\\ \\ \\ \\____\\ \\ \\____  \n");
-	ft_dprintf(2, " \\ \\_\\ \\ \\_\\\\ \\_\\\\ \\_\\\\\"\\_\\\\ \\_\\\\/\\_____\\\\ \\_\\ \\_\\\\ \\_____\\\\ \\_____\\\\ \\_____\\ \n");
-	ft_dprintf(2, "  \\/_/  \\/_/ \\/_/ \\/_/ \\/_/ \\/_/ \\/_____/ \\/_/\\/_/ \\/_____/ \\/_____/ \\/_____/ \n");
-	ft_dprintf(2, PURPLE" \n------------------------------------------------------------------------------\t\n"END);
-	ft_dprintf(2, ITALIC PURPLE"\t\t\t\t\t\t by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
-	ft_dprintf(2, "& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
+//	ft_dprintf(2, PURPLE"\n------------------------------------------------------------------------------\t\n"END);
+//	ft_dprintf(2, PURPLE" __    __   __   __   __   __   ______   __  __   ______   __       __        \n");
+//	ft_dprintf(2, "/\\ \"-./  \\ /\\ \\ /\\ \"-.\\ \\ /\\ \\ /\\  ___\\ /\\ \\_\\ \\ /\\  ___\\ /\\ \\     /\\ \\       \n");
+//	ft_dprintf(2, "\\ \\ \\-./\\ \\\\ \\ \\\\ \\ \\-.  \\\\ \\ \\\\ \\___  \\\\ \\  __ \\\\ \\  __\\ \\ \\ \\____\\ \\ \\____  \n");
+//	ft_dprintf(2, " \\ \\_\\ \\ \\_\\\\ \\_\\\\ \\_\\\\\"\\_\\\\ \\_\\\\/\\_____\\\\ \\_\\ \\_\\\\ \\_____\\\\ \\_____\\\\ \\_____\\ \n");
+//	ft_dprintf(2, "  \\/_/  \\/_/ \\/_/ \\/_/ \\/_/ \\/_/ \\/_____/ \\/_/\\/_/ \\/_____/ \\/_____/ \\/_____/ \n");
+//	ft_dprintf(2, PURPLE" \n------------------------------------------------------------------------------\t\n"END);
+//	ft_dprintf(2, ITALIC PURPLE"\t\t\t\t\t\t by ⭐ \e]8;;https://profile.intra.42.fr/users/bpoumeau\a\e[34mbpoumeau\e[34m\e]8;;\a ");
+//	ft_dprintf(2, "& \e]8;;https://profile.intra.42.fr/users/twang\a\e[34mtwang\e[34m\e]8;;\a ⭐\n\n"END);
 	return (SUCCESS);
 }
 static t_return_status get_allocated_box_on(char **box_pt, char **env)

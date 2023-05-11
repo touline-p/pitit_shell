@@ -5,7 +5,7 @@
 #include "minishell_execution.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
-static void				_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env, t_data *data);
+static void				_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env);
 static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *token, char **env);
 static void				_trim_limiter(char *s);
 static t_return_status	_expand_hd(char **here_doc, char **env);
@@ -70,7 +70,7 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *to
 		free(data->prompt);
 		signal(SIGINT, &handle_signal_heredoc);
 		signal(SIGQUIT, &handle_signal_heredoc);
-		_get_heredoc(limiter, do_expand, fd_hd, env, data);
+		_get_heredoc(limiter, do_expand, fd_hd, env);
 	}
 	else
 	{
@@ -78,6 +78,7 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *to
 		close(fd_hd[1]);
 		if (read_fd_in_str(fd_hd[0], &(token->content)) != SUCCESS)
 			return (FAILED_MALLOC);
+		close(fd_hd[0]);
 		if (waitpid(pid,  &status, WUNTRACED) == -1)
 			g_ret_val = WEXITSTATUS(status);
 	}
@@ -86,7 +87,48 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *to
 	return (SUCCESS);
 }
 
-static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env, t_data *data)
+static bool	_read_hd_ep(char *line)
+{
+
+}
+
+t_return_status	read_here_doc_in_str(char *limiter, char **documentation)
+{
+	int		nb_of_line;
+	char	*line;
+
+	nb_of_line = 0;
+	line = NULL;
+	errno = 0;
+	while (HEREDOC_MUST_GO_ON)
+	{
+		nb_of_line++;
+		ft_dprintf(2, GREEN"> "END);
+		line = get_next_line(0);
+		if (_read_hd_ep(line))
+			break ;
+		if (errno)
+		{
+			perror("here doc get next line");
+			errno = 0;
+			return (FAILURE);
+		}
+		if (!line)
+		{
+			ft_dprintf(2, RED"minishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n"END, nb_of_line, limiter);
+			break ;
+		}
+		*ft_strchr(line, '\n') = 0;
+		if (!ft_strncmp(limiter, line, ft_strlen(limiter) + 1))
+			break;
+		*ft_strchr(line, '\0') = '\n';
+		*documentation = strjoin_path_cmd(*documentation, line);
+		free(line);
+	}
+	return (SUCCESS);
+}
+
+static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 {
 	char	*line;
 	char	*here_doc;
@@ -97,24 +139,7 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env, t
 	here_doc = ft_strdup("");
 	if (!here_doc)
 		perror("here doc _get_heredoc");
-	nb_of_line = 0;
-	while (HEREDOC_MUST_GO_ON)
-	{
-		nb_of_line++;
-		ft_dprintf(2, GREEN"> "END);
-		line = get_next_line(0);
-		if (!line)
-		{
-			ft_dprintf(2, RED"minishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n"END, nb_of_line, limiter);
-			break ;
-		}
-		*ft_strchr(line, '\n') = 0;
-		if (!ft_strncmp(limiter, line, ft_strlen(limiter) + 1))
-			break;
-		*ft_strchr(line, '\0') = '\n';
-		here_doc = strjoin_path_cmd(here_doc, line);
-		free(line);
-	}
+	read_here_doc_in_str(limiter, &here_doc);
 	get_next_line(-1);
 	free(line);
 	free(limiter);
