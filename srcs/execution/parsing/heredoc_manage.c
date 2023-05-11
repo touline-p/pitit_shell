@@ -87,9 +87,20 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *to
 	return (SUCCESS);
 }
 
-static bool	_read_hd_ep(char *line)
+static bool	_read_hd_ep(char *line, int nb_of_line, char *limiter)
 {
-
+	if (errno)
+	{
+		perror("here doc gnl");
+		perror("here doc get next line");
+		return (true);
+	}
+	if (!line)
+	{
+		ft_dprintf(2, RED"minishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n"END, nb_of_line, limiter);
+		return (true);
+	}
+	return (false);
 }
 
 t_return_status	read_here_doc_in_str(char *limiter, char **documentation)
@@ -105,19 +116,8 @@ t_return_status	read_here_doc_in_str(char *limiter, char **documentation)
 		nb_of_line++;
 		ft_dprintf(2, GREEN"> "END);
 		line = get_next_line(0);
-		if (_read_hd_ep(line))
+		if (_read_hd_ep(line, nb_of_line, limiter))
 			break ;
-		if (errno)
-		{
-			perror("here doc get next line");
-			errno = 0;
-			return (FAILURE);
-		}
-		if (!line)
-		{
-			ft_dprintf(2, RED"minishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n"END, nb_of_line, limiter);
-			break ;
-		}
 		*ft_strchr(line, '\n') = 0;
 		if (!ft_strncmp(limiter, line, ft_strlen(limiter) + 1))
 			break;
@@ -125,6 +125,8 @@ t_return_status	read_here_doc_in_str(char *limiter, char **documentation)
 		*documentation = strjoin_path_cmd(*documentation, line);
 		free(line);
 	}
+	if (errno)
+		return (FAILURE);
 	return (SUCCESS);
 }
 
@@ -132,7 +134,6 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 {
 	char	*line;
 	char	*here_doc;
-	int		nb_of_line;
 
 	line = NULL;
 	here_doc = NULL;
