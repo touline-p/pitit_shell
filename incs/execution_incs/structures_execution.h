@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/09 19:02:15 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/11 14:55:49 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,6 @@ struct s_cmd
 	int			outfile;
 	int			fd_hd[2];
 	pid_t		process_id;
-};
-
-struct s_wild_data
-{
-	int		nb_of_stars;
-	char	first;
-	char	last;
-	char	**match;
 };
 
 struct	s_list_of_char

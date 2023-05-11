@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/10 17:32:26 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/11 17:59:16 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ t_return_status	childs_execve(t_data *data, char ***env)
 						data->nb_of_pipe, block_id) != SUCCESS)
 			return (FAILURE);
 		_manage_the_pipe(data, block_id);
-		//print_cmd_block(ft_itoa(block_id), data->cmds_block[block_id]);
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		data->cmds_block[block_id].process_id = fork();
@@ -77,6 +76,23 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		_close_this(data->cmds_block[block_id].infile);
 		_close_this(data->cmds_block[block_id].outfile);
 		block_id++;
+	}
+	return (SUCCESS);
+}
+
+static t_return_status _is_executable(char *command)
+{
+	if (access(command, F_OK) != 0)
+	{
+		ft_dprintf(2,"minishell: %s: Permission denied\n", command);
+		g_ret_val = 126;
+		return (FAILURE);
+	}
+	else if (access(command, R_OK) == 0)
+	{
+		ft_dprintf(2,"minishell: %s: Is a directory\n", command);
+		g_ret_val = 126;
+		return (FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -100,15 +116,16 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 		exit(builtin_switch(command_block->id_command, command_block->commands, \
 			env));
 	command = add_path_cmd(command_block, *env);
-	if (command != NULL)
+	if (command != NULL && _is_executable(command) == SUCCESS)
 	{
 		execve(command, command_block->commands, *env);
 		perror(command_block->commands[0]);
+		g_ret_val = 127;
 	}
 	ft_free_split(*env);
 	ft_free_split(command_block->commands);
 	free(data->cmds_block);
-	exit(127);
+	exit(g_ret_val);
 }
 
 static t_return_status	_do_the_pipe(t_cmd *cmd_block, \
