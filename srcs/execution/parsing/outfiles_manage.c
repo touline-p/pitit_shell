@@ -53,16 +53,12 @@ t_return_status	outfiles_management(t_data *data, \
 		if (temp->token == CHEVRON_OT)
 		{
 			temp = temp->next;
-			if (temp->token != STRING)
-				return (redirection_syntax_error("\'>\'\n"));
 			if (_set_outfile(data, &(temp->content), i, env) == FAILURE)
 				return (FAILURE);
 		}
 		if (temp->token == APPENDS)
 		{
 			temp = temp->next;
-			if (temp->token != STRING)
-				return (redirection_syntax_error("\'>>\'\n"));
 			if (_set_appends(data, &(temp->content), i, env) == FAILURE)
 				return (FAILURE);
 		}
