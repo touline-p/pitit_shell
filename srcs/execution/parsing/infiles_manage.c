@@ -40,7 +40,7 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 		{
 			temp = temp->next;
 			if (_set_infile(data, &(temp->content), i, env) == FAILURE)
-				go_to_next_(PIPE, temp, &temp);
+				;
 		}
 		if (temp->token == HERE_DOC)
 		{
@@ -51,8 +51,6 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 		if (temp->token == PIPE)
 			i++;
 		temp = temp->next;
-		if (temp->token == O_PRTSS)
-			go_to_next_(C_PRTSS, temp, &temp);
 	}
 	return (SUCCESS);
 }
