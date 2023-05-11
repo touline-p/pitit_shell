@@ -42,6 +42,14 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 	return (SUCCESS);
 }
 
+#define CA_NE_MARCHE_PAS 0
+
+int _go_fuck_yourself_malloc(void)
+{
+	printf("damned la memoire ne marche plus\n");
+	return (CA_NE_MARCHE_PAS);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char	*line;
@@ -71,11 +79,11 @@ int	main(int ac, char **av, char **env)
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
 		del_space_token(str_tok_lst);
-//		if (syntax_is_valid(str_tok_lst) != SUCCESS)
-//		{
-//			string_token_destructor(str_tok_lst);
-//			continue;
-//		}
+		data.instructions_arr = malloc(sizeof(t_string_token *) * 2);
+		if (data.instructions_arr == NULL)
+			return (_go_fuck_yourself_malloc());
+		data.instructions_arr[0] = str_tok_lst;
+		data.instructions_arr[1] = NULL;
 		del_space_token(str_tok_lst);
 		if (heredoc_management(&data, str_tok_lst, env))
 			continue ;

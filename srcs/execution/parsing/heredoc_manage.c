@@ -20,6 +20,7 @@ t_return_status heredoc_management(t_data *data, t_string_token *string_token_ls
 {
 	t_string_token	*tmp;
 
+
 	tmp = string_token_lst;
 	update_tokens(string_token_lst);
 	check_par_err(string_token_lst);
@@ -64,6 +65,8 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *to
 		perror("fork");
 	if (pid == 0)
 	{
+		string_token_destructor(data->instructions_arr[0]);
+		free(data->instructions_arr);
 		free(data->prompt);
 		signal(SIGINT, &handle_signal_heredoc);
 		signal(SIGQUIT, &handle_signal_heredoc);
@@ -114,6 +117,7 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env, t
 	}
 	get_next_line(-1);
 	free(line);
+	free(limiter);
 	if (do_expand == false)
 		_expand_hd(&here_doc, env);
 	ft_free_split(env);
