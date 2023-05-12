@@ -178,18 +178,20 @@ static char	*add_path_cmd(t_cmd *cmd, char **env)
 
 	if (is_path(cmd->commands[0]))
 		return (cmd->commands[0]);
-	paths = get_paths(env);
-	str = NULL;
-	if (!paths)
-		return (NULL);
 	if (ft_strcmp("", cmd->commands[0]) == 0)
 	{
+		if (cmd->id_command != EMPTY)
+			return (NULL);
 		str = ft_strjoin(cmd->commands[0], " : command not found\n");
 		g_ret_val = 127;
 		write(2, str, ft_strlen(str));
 		free(str);
-		return (ft_free_split(paths), NULL);
+		return (NULL);
 	}
+	paths = get_paths(env);
+	str = NULL;
+	if (!paths)
+		return (NULL);
 	return (_get_cmd_from_path(cmd, paths));
 }
 

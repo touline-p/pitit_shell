@@ -29,7 +29,8 @@ enum e_builtin
 	PWD,
 	EXIT,
 	UNSET,
-	CD
+	CD,
+	EMPTY
 };
 
 #endif

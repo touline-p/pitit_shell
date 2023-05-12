@@ -35,12 +35,13 @@ static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, ch
 	temp = lst_of_tok;
 	while (temp->token != EOL)
 	{
+		if (temp->next->token == PIPE || temp->next->token == EOL)
+			data->cmds_block[block_id].id_command = EMPTY;
 		data->cmds_block[block_id].commands = join_token_lst(&temp, env);
 		expand_wildcards(&(data->cmds_block[block_id].commands));
 		block_id++;
 	}
 	data->cmds_block[block_id].commands = NULL;
-	
 	if (!data->cmds_block[block_id].commands)
 		return (FAILED_MALLOC);
 	return (SUCCESS);
