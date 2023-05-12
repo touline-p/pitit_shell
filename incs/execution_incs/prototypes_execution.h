@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/12 14:09:07 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/12 17:17:49 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,19 @@
 
 /*-- wildcards ---------------------------------------------------------------*/
 
+/*-- wildcards_utils --*/
+t_return_status	check_line(char *line);
+int				get_alloc_size(char *line);
+t_return_status	fill_dst_arr(char *line, char **arr_to_fill);
+
+/*-- wildcards --*/
 t_return_status	expand_wildcards(char ***original_pt);
-t_return_status	fetch_on(char *line, char ***dst_arr);
-
-t_return_status	wildcards(t_data *data);
-
-/*-- w_parsing --*/
-t_return_status	parse_args(char *line);
 
 /*----------------------------------------------------------------------------*/
 /*---- Execution -------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 
-void			execution(t_data *data, t_string_token *lst_of_tok, \
-						char ***env_pt);
+void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt);
 
 /*-- execve ------------------------------------------------------------------*/
 
