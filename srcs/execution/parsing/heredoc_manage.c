@@ -20,7 +20,6 @@ t_return_status heredoc_management(t_data *data, t_string_token *string_token_ls
 {
 	t_string_token	*tmp;
 
-
 	tmp = string_token_lst;
 	update_tokens(string_token_lst);
 	check_par_err(string_token_lst);
@@ -29,7 +28,7 @@ t_return_status heredoc_management(t_data *data, t_string_token *string_token_ls
 		if (tmp->token == HR_DATA)
 		{
 			if (_get_here_doc_in_hr_data(data, tmp, env) != SUCCESS)
-				return (FAILED_MALLOC);
+				return (FAILURE);
 		}
 		if (tmp->token == SYN_ERR)
 		{
@@ -58,7 +57,7 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *to
 		_trim_limiter(limiter);
 	}
 	if (pipe(fd_hd) == -1)
-		return (FAILED_PIPE);
+		return (perror("pipe"), FAILED_PIPE);
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
@@ -110,6 +109,8 @@ t_return_status	read_here_doc_in_str(char *limiter, char **documentation)
 
 	nb_of_line = 0;
 	line = NULL;
+	if (*documentation == NULL)
+		return (FAILURE);
 	errno = 0;
 	while (HEREDOC_MUST_GO_ON)
 	{
@@ -123,6 +124,8 @@ t_return_status	read_here_doc_in_str(char *limiter, char **documentation)
 			break;
 		*ft_strchr(line, '\0') = '\n';
 		*documentation = strjoin_path_cmd(*documentation, line);
+		if (!documentation)
+			return (FAILURE);
 		free(line);
 	}
 	if (errno)
@@ -136,7 +139,6 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	char	*here_doc;
 
 	line = NULL;
-	here_doc = NULL;
 	here_doc = ft_strdup("");
 	if (!here_doc)
 		perror("here doc _get_heredoc");
@@ -144,8 +146,14 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	get_next_line(-1);
 	free(line);
 	free(limiter);
+	if (here_doc == NULL)
+	{
+		ft_free_split(env);
+		return ;
+	}
 	if (do_expand == false)
-		_expand_hd(&here_doc, env);
+		if (_expand_hd(&here_doc, env) != SUCCESS)
+			here_doc = NULL;
 	ft_free_split(env);
 	if (here_doc)
 		write(fd_hd[1], here_doc, ft_strlen(here_doc));

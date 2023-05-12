@@ -32,24 +32,9 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 	split_toklst_on_meta(simple_tok_lst);
 	regroup_meta(simple_tok_lst);
 	str_token_lst = token_lst_to_str_token(simple_tok_lst);
-	if (simple_tok_lst == NULL)
+	if (str_token_lst == NULL)
 		return (FAILED_MALLOC);
+	del_space_token(str_token_lst);
 	*str_tok_pt = str_token_lst;
 	return (SUCCESS);
-}
-
-t_string_token	*parsing_constructor(char *str, char **env)
-{
-	t_token			*tok;
-	t_string_token	*str_tok;
-
-	tok = token_lst_constructor(str);
-	preserve_token_lst(tok);
-	expand_dollars(tok, env);
-	split_toklst_on_meta(tok);
-	regroup_meta(tok);
-	str_tok = token_lst_to_str_token(tok);
-	del_space_token(str_tok);
-	display_str_token(str_tok);
-	return (str_tok);
 }

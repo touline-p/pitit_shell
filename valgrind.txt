@@ -1,50 +1,29 @@
-==265914== Memcheck, a memory error detector
-==265914== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==265914== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==265914== Command: ./minishell
-==265914== Parent PID: 265880
-==265914== 
-==265914== 
-==265914== FILE DESCRIPTORS: 4 open (3 std) at exit.
-==265914== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
-==265914==    <inherited from parent>
-==265914== 
-==265914== 
-==265914== HEAP SUMMARY:
-==265914==     in use at exit: 211,272 bytes in 279 blocks
-==265914==   total heap usage: 686 allocs, 407 frees, 251,979 bytes allocated
-==265914== 
-==265914== 16 bytes in 1 blocks are still reachable in loss record 7 of 71
-==265914==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==265914==    by 0x409741: main (main.c:87)
-==265914== 
-==265914== 200 bytes in 5 blocks are indirectly lost in loss record 25 of 71
-==265914==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==265914==    by 0x40734A: token_constructor (token_lst_utils.c:20)
-==265914==    by 0x405BD5: token_lst_constructor (token_lst_constructor.c:36)
-==265914==    by 0x40687C: get_lexed_str_token_lst_from_line (parsing_articulation.c:26)
-==265914==    by 0x409720: main (main.c:84)
-==265914== 
-==265914== 1,680 bytes in 42 blocks are indirectly lost in loss record 43 of 71
-==265914==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==265914==    by 0x40734A: token_constructor (token_lst_utils.c:20)
-==265914==    by 0x405B7C: token_lst_constructor (token_lst_constructor.c:30)
-==265914==    by 0x40687C: get_lexed_str_token_lst_from_line (parsing_articulation.c:26)
-==265914==    by 0x409720: main (main.c:84)
-==265914== 
-==265914== 2,080 (200 direct, 1,880 indirect) bytes in 5 blocks are definitely lost in loss record 45 of 71
-==265914==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==265914==    by 0x40734A: token_constructor (token_lst_utils.c:20)
-==265914==    by 0x405B37: token_lst_constructor (token_lst_constructor.c:24)
-==265914==    by 0x40687C: get_lexed_str_token_lst_from_line (parsing_articulation.c:26)
-==265914==    by 0x409720: main (main.c:84)
-==265914== 
-==265914== LEAK SUMMARY:
-==265914==    definitely lost: 200 bytes in 5 blocks
-==265914==    indirectly lost: 1,880 bytes in 47 blocks
-==265914==      possibly lost: 0 bytes in 0 blocks
-==265914==    still reachable: 16 bytes in 1 blocks
-==265914==         suppressed: 209,176 bytes in 226 blocks
-==265914== 
-==265914== For lists of detected and suppressed errors, rerun with: -s
-==265914== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==271497== Memcheck, a memory error detector
+==271497== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==271497== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==271497== Command: ./minishell
+==271497== Parent PID: 271473
+==271497== 
+==271497== 
+==271497== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==271497== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
+==271497==    <inherited from parent>
+==271497== 
+==271497== 
+==271497== HEAP SUMMARY:
+==271497==     in use at exit: 208,935 bytes in 224 blocks
+==271497==   total heap usage: 542 allocs, 318 frees, 238,231 bytes allocated
+==271497== 
+==271497== 16 bytes in 1 blocks are still reachable in loss record 7 of 65
+==271497==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==271497==    by 0x4094E1: main (main.c:93)
+==271497== 
+==271497== LEAK SUMMARY:
+==271497==    definitely lost: 0 bytes in 0 blocks
+==271497==    indirectly lost: 0 bytes in 0 blocks
+==271497==      possibly lost: 0 bytes in 0 blocks
+==271497==    still reachable: 16 bytes in 1 blocks
+==271497==         suppressed: 208,919 bytes in 223 blocks
+==271497== 
+==271497== For lists of detected and suppressed errors, rerun with: -s
+==271497== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

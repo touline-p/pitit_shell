@@ -44,9 +44,15 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 
 #define CA_NE_MARCHE_PAS 0
 
-int _go_fuck_yourself_malloc(void)
+int _go_fuck_yourself_malloc(t_data *data, char **env, t_string_token *trash)
 {
-	printf("damned la memoire ne marche plus\n");
+	if (data->instructions_arr)
+		free(data->instructions_arr);
+	string_token_destructor(trash);
+	free(data->prompt);
+	ft_free_split(env);
+
+	printf("damned l'ordinateur ne marche plus.\n");
 	return (CA_NE_MARCHE_PAS);
 }
 
@@ -83,15 +89,14 @@ int	main(int ac, char **av, char **env)
 		add_history(line);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
-		del_space_token(str_tok_lst);
+		display_str_token(str_tok_lst);
 		data.instructions_arr = malloc(sizeof(t_string_token *) * 2);
 		if (data.instructions_arr == NULL)
-			return (_go_fuck_yourself_malloc());
+			return (_go_fuck_yourself_malloc(&data, env, str_tok_lst));
 		data.instructions_arr[0] = str_tok_lst;
 		data.instructions_arr[1] = NULL;
-		del_space_token(str_tok_lst);
-		if (heredoc_management(&data, str_tok_lst, env))
-			continue ;
+		if (heredoc_management(&data, str_tok_lst, env) != SUCCESS)
+			return (_go_fuck_yourself_malloc(&data, env,str_tok_lst));
 		string_token_destructor(str_tok_lst);
 		//switchman(&data, str_tok_lst, &env);
 	}
