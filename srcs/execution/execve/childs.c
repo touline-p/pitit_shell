@@ -122,6 +122,8 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 		ft_free_split(command_block->commands);
 		exit(1);
 	}
+	if (command_block->id_command == SUBSHELL)
+		switchman(data, (t_string_token *)command_block->commands, env);
 	if (command_block->id_command != CMD)
 		exit(builtin_switch(command_block->id_command, command_block->commands, \
 			env));

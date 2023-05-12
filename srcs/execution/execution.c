@@ -84,7 +84,7 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	string_token_destructor(lst_of_tok);
 	if (g_ret_val == 130 && check_cmd(data->cmds_block))
 		return ;
-	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD)
+	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD && data->cmds_block->id_command != SUBSHELL)
 		switchman_once(data, env_pt);
 	else
 	{

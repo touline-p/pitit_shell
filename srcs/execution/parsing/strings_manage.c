@@ -25,7 +25,6 @@ void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env)
 	set_id_cmds(data);
 }
 
-
 static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, char **env)
 {
 	t_string_token	*temp;
@@ -37,8 +36,13 @@ static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, ch
 	{
 		if (temp->next->token == PIPE || temp->next->token == EOL)
 			data->cmds_block[block_id].id_command = EMPTY;
-		data->cmds_block[block_id].commands = join_token_lst(&temp, env);
-		expand_wildcards(&(data->cmds_block[block_id].commands));
+		if (temp->next->token == O_PRTSS)
+			data->cmds_block[block_id].commands = subshell_preparation(&temp);
+		else
+		{
+			data->cmds_block[block_id].commands = join_token_lst(&temp, env);
+			expand_wildcards(&(data->cmds_block[block_id].commands));
+		}
 		block_id++;
 	}
 	data->cmds_block[block_id].commands = NULL;
@@ -54,8 +58,9 @@ static void	set_id_cmds(t_data *data)
 	block_id = 0;
 	while (data->cmds_block[block_id].commands)
 	{
-		data->cmds_block[block_id].id_command =
-			is_builtin(data->cmds_block[block_id].commands[0]);
+		if (data->cmds_block[block_id].id_command != SUBSHELL)
+			data->cmds_block[block_id].id_command =
+					is_builtin(data->cmds_block[block_id].commands[0]);
 		block_id++;
 	}
 }
