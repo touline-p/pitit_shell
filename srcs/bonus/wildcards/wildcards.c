@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../../incs/execution_incs/minishell_execution.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
 #include "minishell_execution.h"
 #include "minishell_parsing.h"
 
