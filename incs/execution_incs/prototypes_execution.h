@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/11 16:51:46 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/12 14:09:07 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 
 /*-- wildcards ---------------------------------------------------------------*/
 
+t_return_status	expand_wildcards(char ***original_pt);
+t_return_status	fetch_on(char *line, char ***dst_arr);
 
-
-/*-- w_parsing ------------------------------------------------------------------*/
-
+t_return_status	wildcards(t_data *data);
 
 /*-- w_parsing --*/
 t_return_status	parse_args(char *line);

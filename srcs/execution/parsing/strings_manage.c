@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/04/24 14:56:13 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/12 14:46:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,13 @@ static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, ch
 	block_id = 0;
 	temp = lst_of_tok;
 	while (temp->token != EOL)
-		data->cmds_block[block_id++].commands = join_token_lst(&temp, env);
+	{
+		data->cmds_block[block_id].commands = join_token_lst(&temp, env);
+		expand_wildcards(&(data->cmds_block[block_id].commands));
+		block_id++;
+	}
 	data->cmds_block[block_id].commands = NULL;
+	
 	if (!data->cmds_block[block_id].commands)
 		return (FAILED_MALLOC);
 	return (SUCCESS);
