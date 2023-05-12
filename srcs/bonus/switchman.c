@@ -69,6 +69,7 @@ t_return_status	fill(t_string_token **instructions_arr, \
 {
 	size_t			i;
 	t_string_token	*next;
+	t_string_token 	*tmp;
 
 	i = 0;
 	while (str_tok_lst->token != EOL)
@@ -79,9 +80,12 @@ t_return_status	fill(t_string_token **instructions_arr, \
 			str_tok_lst = str_tok_lst->next;
 		if (str_tok_lst->next->token != EOL)
 		{
-			str_tok_lst->next = string_token_creator();
-			str_tok_lst->next->token = EOL;
-			str_tok_lst->next->next = NULL;
+			tmp = string_token_creator();
+			if (tmp == NULL)
+				return (perror("filling"), FAILED_MALLOC);
+			str_tok_lst->next = tmp;
+			tmp->token = EOL;
+			tmp->next = NULL;
 		}
 		str_tok_lst = next;
 	}
@@ -105,14 +109,6 @@ int	_get_next_index(int last, t_string_token **instructions_arr)
 	return (-1);
 }
 
-//void	clean_last_string_tokens_lst(t_string_token **instructions_arr, int index)
-//{
-//	while (instructions_arr[index])
-//	{
-//		string_token_destructor(instructions_arr[index]);
-//		index++;
-//	}
-//}
 
 t_return_status	launch_instructions_arr(t_data *data, \
 						t_string_token **instructions_arr, char ***env)
@@ -128,9 +124,21 @@ t_return_status	launch_instructions_arr(t_data *data, \
 		if (g_ret_val == 2)
 			return (SUCCESS);
 	}
-//	clean_last_string_tokens_lst(instructions_arr, data->index);
 	free(instructions_arr);
 	return (SUCCESS);
+}
+
+static t_return_status	_fill_ep(t_string_token **trash_arr)
+{
+	int	i;
+
+	i = 0;
+	while (trash_arr[i])
+	{
+		string_token_destructor(trash_arr[i]);
+		i++;
+	}
+	return (FAILED_MALLOC);
 }
 
 t_return_status	switchman(t_data *data, \
@@ -138,19 +146,12 @@ t_return_status	switchman(t_data *data, \
 {
 	if (data->instructions_arr != NULL)
 		free(data->instructions_arr);
-	data->instructions_arr = malloc(sizeof(t_string_token *) \
-				* (count_instructions_node(token_lst) + 1));
+	data->instructions_arr = ft_calloc(count_instructions_node(token_lst) + 1, \
+			sizeof(t_string_token *));
 	if (data->instructions_arr == NULL)
-		return (FAILURE);
-	fill(data->instructions_arr, token_lst);
-	/*
-	printf("decoupage de chaque bloc\n");
-	int i  = 0;
-	while (data->instructions_arr[i])
-	{
-		display_str_token(data->instructions_arr[i++]);
-	}
-	 */
+		return (string_token_destructor(token_lst), FAILURE);
+	if (fill(data->instructions_arr, token_lst) != SUCCESS)
+		return (_fill_ep(data->instructions_arr));
 	launch_instructions_arr(data, data->instructions_arr, env_pt);
 	return (SUCCESS);
 }

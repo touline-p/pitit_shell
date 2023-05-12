@@ -42,18 +42,18 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 	return (SUCCESS);
 }
 
-#define CA_NE_MARCHE_PAS 0
+#define SEEMS_NOT_TO_BE_WORKING 0
 
 int _go_fuck_yourself_malloc(t_data *data, char **env, t_string_token *trash)
 {
 	if (data->instructions_arr)
 		free(data->instructions_arr);
-	string_token_destructor(trash);
+	if (trash)
+		string_token_destructor(trash);
 	free(data->prompt);
 	ft_free_split(env);
-
-	printf("damned l'ordinateur ne marche plus.\n");
-	return (CA_NE_MARCHE_PAS);
+	ft_dprintf(2, "damned l'ordinateur ne marche plus.\n");
+	return (SEEMS_NOT_TO_BE_WORKING);
 }
 
 int	main(int ac, char **av, char **env)
@@ -97,8 +97,8 @@ int	main(int ac, char **av, char **env)
 		data.instructions_arr[1] = NULL;
 		if (heredoc_management(&data, str_tok_lst, env) != SUCCESS)
 			return (_go_fuck_yourself_malloc(&data, env,str_tok_lst));
-		string_token_destructor(str_tok_lst);
-		//switchman(&data, str_tok_lst, &env);
+		if (switchman(&data, str_tok_lst, &env) != SUCCESS)
+			return (_go_fuck_yourself_malloc(&data, env, NULL));
 	}
 	return (0);
 }
