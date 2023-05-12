@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   w_parsing.c                                        :+:      :+:    :+:   */
+/*   wildcards_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 10:41:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/12 14:51:36 by twang            ###   ########.fr       */
+/*   Created: 2023/05/12 17:03:32 by twang             #+#    #+#             */
+/*   Updated: 2023/05/12 17:20:58 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,66 +15,11 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static t_return_status	_check_line(char *line);
-static int				_get_alloc_size(char *line);
-static	t_return_status	fill_dst_arr(char *line, char **arr_to_fill);
 static	t_return_status	_find_matching_files(char *line, char *name);
 
 /*----------------------------------------------------------------------------*/
 
-t_return_status	fetch_on(char *line, char ***dst_arr)
-{
-	int	size;
-
-	size = 0;
-	if (_check_line(line) != SUCCESS)
-		return (FAILURE);
-	size = _get_alloc_size(line);
-	if (size <= 0)
-		return (FAILURE);
-	*dst_arr = ft_calloc(size + 1, sizeof(char *));
-	if (*dst_arr == NULL)
-		 return (FAILURE);
-	if (fill_dst_arr(line, *dst_arr) != SUCCESS)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-static	t_return_status	fill_dst_arr(char *line, char **arr_to_fill)
-{
-	struct dirent	*data;
-	DIR				*directory;
-	int				i;
-	
-	i = 0;
-	directory = opendir(".");
-	if (!directory)
-	{
-		perror ("minishell: opendir: cannot open current directory");
-		return (-1);
-	}
-	while (1)
-	{
-		data = readdir(directory);
-		if (data == NULL)
-			break ;
-		if (_find_matching_files(line, data->d_name) == SUCCESS)
-		{
-			arr_to_fill[i] = ft_strdup(data->d_name);
-			if (arr_to_fill[i] == NULL)
-				return (FAILURE);
-			i++;
-		}
-	}
-	if (i == 0)
-		arr_to_fill[i] = ft_strdup(line);
-	free(line);
-	closedir(directory);
-	return (SUCCESS);
-}
-
-
-static t_return_status	_check_line(char *line)
+t_return_status	check_line(char *line)
 {
 	int	nb_of_stars;
 
@@ -85,8 +30,8 @@ static t_return_status	_check_line(char *line)
 			nb_of_stars++;
 		if (*line == '/' && nb_of_stars > 0)
 		{
-			ft_dprintf(2, RED"minishell: /: bonus wildcards can be used only \
-			in the current directory\n"END);
+			ft_dprintf(2, RED"minishell: /: wildcards can be used only");
+			ft_dprintf(2," in the current directory\n"END);
 			return (SUCCESS);
 		}
 		line++;
@@ -94,7 +39,7 @@ static t_return_status	_check_line(char *line)
 	return (SUCCESS);
 }
 
-static int	_get_alloc_size(char *line)
+int	get_alloc_size(char *line)
 {
 	struct dirent	*data;
 	DIR				*directory;
@@ -147,5 +92,38 @@ static	t_return_status	_find_matching_files(char *line, char *name)
 		line++;
 		name++;
 	}
+	return (SUCCESS);
+}
+
+t_return_status	fill_dst_arr(char *line, char **arr_to_fill)
+{
+	struct dirent	*data;
+	DIR				*directory;
+	int				i;
+	
+	i = 0;
+	directory = opendir(".");
+	if (!directory)
+	{
+		perror ("minishell: opendir: cannot open current directory");
+		return (-1);
+	}
+	while (1)
+	{
+		data = readdir(directory);
+		if (data == NULL)
+			break ;
+		if (_find_matching_files(line, data->d_name) == SUCCESS)
+		{
+			arr_to_fill[i] = ft_strdup(data->d_name);
+			if (arr_to_fill[i] == NULL)
+				return (FAILURE);
+			i++;
+		}
+	}
+	if (i == 0)
+		arr_to_fill[i] = ft_strdup(line);
+	free(line);
+	closedir(directory);
 	return (SUCCESS);
 }
