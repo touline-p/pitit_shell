@@ -23,7 +23,10 @@ size_t	go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok)
 	while (tmp->token != token && tmp->token != EOL)
 	{
 		if (tmp->token == O_PRTSS)
-			l += go_to_next_(C_PRTSS, tmp->next, &tmp);
+		{
+			l += go_to_next_(C_PRTSS, tmp->next, &tmp) + 1;
+			tmp = tmp->next;
+		}
 		else
 		{
 			tmp = tmp->next;
@@ -132,6 +135,7 @@ t_return_status	launch_instructions_arr(t_data *data, \
 	free(instructions_arr);
 	return (SUCCESS);
 }
+int profondeur = 0;
 
 t_return_status	switchman(t_data *data, \
 					t_string_token *token_lst, char ***env_pt)

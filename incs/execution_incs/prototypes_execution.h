@@ -114,6 +114,7 @@ void			ft_free_all_str_lst(t_data *data, int index);
 t_return_status	read_fd_in_str(int fd, char **dst);
 t_return_status	heredoc_child_management(t_cmd *cmd, \
 						t_data *data, char **env_pt);
+char	**subshell_preparation(t_string_token **start);
 
 /*----------------------------------------------------------------------------*/
 /*---- Main ------------------------------------------------------------------*/

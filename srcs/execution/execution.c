@@ -47,7 +47,7 @@ t_return_status	fix_string(t_data *data)
 	i = 0;
 	while (i < data->nb_of_pipe + 1)
 	{
-		if (data->cmds_block[i].commands[0] == NULL)
+		if (data->cmds_block[i].id_command != SUBSHELL && data->cmds_block[i].commands[0] == NULL)
 		{
 			free(data->cmds_block[i].commands);
 			data->cmds_block[i].commands = malloc(sizeof(char *) * 2);
@@ -84,7 +84,7 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	string_token_destructor(lst_of_tok);
 	if (g_ret_val == 130 && check_cmd(data->cmds_block))
 		return ;
-	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD)
+	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD && data->cmds_block->id_command != SUBSHELL)
 		switchman_once(data, env_pt);
 	else
 	{

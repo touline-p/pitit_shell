@@ -121,6 +121,11 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 		}
 		if (temp->token == PIPE)
 			i++;
+		if (temp->token == O_PRTSS)
+		{
+			data->cmds_block[i].id_command = SUBSHELL;
+			go_to_next_(C_PRTSS, temp->next, &temp);
+		}
 		temp = temp->next;
 	}
 	return (SUCCESS);

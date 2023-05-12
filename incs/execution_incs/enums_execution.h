@@ -30,7 +30,8 @@ enum e_builtin
 	EXIT,
 	UNSET,
 	CD,
-	EMPTY
+	EMPTY,
+	SUBSHELL
 };
 
 #endif
