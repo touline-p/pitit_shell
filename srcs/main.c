@@ -67,8 +67,8 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-		//get_prompt_on(&(data.prompt), env);
-		data.prompt = ft_strdup("sans doute");
+		get_prompt_on(&(data.prompt), env);
+		//data.prompt = ft_strdup("sans doute");
 		line = readline(data.prompt);
 		if (errno)
 		{
@@ -92,7 +92,8 @@ int	main(int ac, char **av, char **env)
 		del_space_token(str_tok_lst);
 		if (heredoc_management(&data, str_tok_lst, env))
 			continue ;
-		switchman(&data, str_tok_lst, &env);
+		string_token_destructor(str_tok_lst);
+		//switchman(&data, str_tok_lst, &env);
 	}
 	return (0);
 }

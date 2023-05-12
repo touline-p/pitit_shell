@@ -22,6 +22,8 @@ t_token	*token_lst_constructor(char *str)
 	t_token	*pin;
 
 	token = token_constructor(START, STRT_CHR);
+	if (token == NULL)
+		return (NULL);
 	pin = token;
 	while (*str != EOSTR)
 	{
@@ -32,6 +34,8 @@ t_token	*token_lst_constructor(char *str)
 		str++;
 	}
 	pin->next = token_constructor(EOL, EOSTR);
+	if (pin->next == NULL)
+		return (_token_lst_constructor_ep(token, NULL));
 	return (token);
 }
 
