@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preserv.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 03:57:05 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/10 02:08:26 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:36:50 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #define DONO_INDX 2
 
+static void		wildcards_discard(t_token *token);
 static size_t	_code_from(char code);
 t_return_status	do_nothing(t_token *voided, \
 							t_token *also_voided, t_token **this_one_too);
@@ -25,7 +26,9 @@ t_return_status	preserve_token_lst(t_token *token)
 	const t_preserv_act	act[] = {squoting_process, \
 			dquoting_process, \
 			do_nothing};
-
+	t_token				*tmp;
+	
+	tmp = token;
 	pin = token->next;
 	while (token->token != EOL)
 	{
@@ -34,7 +37,18 @@ t_return_status	preserve_token_lst(t_token *token)
 		if (token)
 			pin = token->next;
 	}
+	wildcards_discard(tmp);
 	return (SUCCESS);
+}
+
+static void	wildcards_discard(t_token *token)
+{
+	while (token->token != EOL)
+	{
+		if (token->esec != SECURED && token->sign_char == '*')
+			token->sign_char = - '*';
+		token = token->next;
+	}
 }
 
 static size_t	_code_from(char code)
