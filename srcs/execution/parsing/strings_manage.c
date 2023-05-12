@@ -25,6 +25,7 @@ void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env)
 	set_id_cmds(data);
 }
 
+
 static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, char **env)
 {
 	t_string_token	*temp;

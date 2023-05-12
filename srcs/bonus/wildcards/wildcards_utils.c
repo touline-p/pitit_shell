@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../../incs/execution_incs/minishell_execution.h"
+#include "../../../incs/parsing_incs/minishell_parsing.h"
 #include "minishell_execution.h"
 #include "minishell_parsing.h"
 
@@ -95,6 +97,16 @@ static	t_return_status	_find_matching_files(char *line, char *name)
 	return (SUCCESS);
 }
 
+static void	_replace_wild_card(char *line)
+{
+	while (*line)
+	{
+		if (*line == - '*')
+			*line = '*';
+		line++;
+	}
+}
+
 t_return_status	fill_dst_arr(char *line, char **arr_to_fill)
 {
 	struct dirent	*data;
@@ -122,7 +134,10 @@ t_return_status	fill_dst_arr(char *line, char **arr_to_fill)
 		}
 	}
 	if (i == 0)
+	{
+		_replace_wild_card(line);
 		arr_to_fill[i] = ft_strdup(line);
+	}
 	free(line);
 	closedir(directory);
 	return (SUCCESS);
