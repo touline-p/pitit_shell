@@ -107,6 +107,7 @@ static t_return_status	_set_appends(t_data *data, char **file, \
 	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
 	if (data->cmds_block[block_id].infile < 0
+		|| data->cmds_block[block_id].outfile < 0
 		|| data->cmds_block[block_id].fd_hd[0] < 0
 		|| data->cmds_block[block_id].is_ambiguous == true)
 		return (SUCCESS);

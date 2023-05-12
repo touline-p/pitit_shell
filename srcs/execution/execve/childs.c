@@ -62,6 +62,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 	block_id = 0;
 	while (block_id < data->nb_of_pipe + 1)
 	{
+		//print_cmd_block(ft_itoa(block_id), data->cmds_block[block_id]);
 		if (_do_the_pipe(&(data->cmds_block[block_id]), \
 						data->nb_of_pipe, block_id) != SUCCESS)
 			return (FAILURE);
@@ -115,6 +116,7 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 	command = NULL;
 	if (block_id <= nb_of_pipe)
 		_close_this(command_block->fd_hd[0]);
+	//print_cmd_block(ft_itoa(block_id), data->cmds_block[block_id]);
 	if (duplicate_fds(*command_block, data, env) != SUCCESS)
 	{
 		ft_free_split(command_block->commands);
@@ -139,8 +141,6 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 static t_return_status	_do_the_pipe(t_cmd *cmd_block, \
 						int nb_of_pipe, int block_id)
 {
-	if (cmd_block->infile < 0 || cmd_block->fd_hd[0] < 0)
-		return (FAILURE);
 	if (block_id == nb_of_pipe)
 		return (SUCCESS);
 	if (pipe(cmd_block->fd_hd) != 0)

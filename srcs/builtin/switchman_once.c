@@ -25,6 +25,7 @@ static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 	if (duplicate_fds(cmd, data, env_pt) != SUCCESS)
 	{
 		ft_free_split(cmd.commands);
+		g_ret_val = 1;
 		exit(1);
 	}
 	builtin_switch(cmd.id_command, cmd.commands, env_pt);
@@ -42,6 +43,7 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 	if (cmd.id_command > PWD
 		|| (cmd.id_command == EXPORT && cmd.commands[1] != NULL))
 		return (builtin_switch(cmd.id_command, cmd.commands, env_pt));
+
 	pid = fork();
 	if (pid == 0)
 		_execute_son(data, cmd, env_pt);

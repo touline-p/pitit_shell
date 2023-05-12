@@ -21,6 +21,7 @@ static t_return_status	_dup_n_close(int to_dup, int to_replace);
 
 t_return_status	duplicate_fds(t_cmd block, t_data *data, char ***env_pt)
 {
+	//puts("this seems legit");
 	if (block.is_heredoc == true)
 		heredoc_child_management(&block, data, *env_pt);
 	if (block.infile == -1 || block.outfile == -1)

@@ -54,12 +54,15 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 	return (SUCCESS);
 }
 
+#define TAMERE FAILURE
 
 static t_return_status	_set_infile(t_data *data, char **file, int block_id, char **env)
 {
 	char	**arr;
 	bool	signal;
 
+	if (data->cmds_block[block_id].infile == -1)
+		return (TAMERE);
 	check_opened_infiles(data, block_id);
 	signal = file_is_empty(*file);
 	cut_line_on(*file, &arr);
