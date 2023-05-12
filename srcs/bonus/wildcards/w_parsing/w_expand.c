@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 12:20:58 by twang             #+#    #+#             */
-/*   Updated: 2023/05/12 14:37:27 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/12 14:53:19 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,23 +96,3 @@ static int	size_origin(char ***new)
 	i++;
 	return (i);
 }
-
-//# define TEST_SA_MERE
-# ifdef TEST_SA_MERE
-
-int main(int ac, char **av, char **env)
-{
-	int i = 0;
-
-	char	**bonjour = ft_str_array_dup(av);
-	expand_wildcards(&bonjour);
-	while (bonjour[i])
-	{
-		printf("%s\n", bonjour[i]);
-		i++;
-	}
-	ft_free_split(bonjour);
-	return 1;
-}
-
-#endif

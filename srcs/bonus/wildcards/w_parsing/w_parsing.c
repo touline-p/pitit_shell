@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:41:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/12 14:49:52 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/12 14:51:36 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ static	t_return_status	_find_matching_files(char *line, char *name);
 
 t_return_status	fetch_on(char *line, char ***dst_arr)
 {
-	// char **match;
 	int	size;
 
-	// match = NULL;
 	size = 0;
 	if (_check_line(line) != SUCCESS)
 		return (FAILURE);
