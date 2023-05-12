@@ -35,8 +35,7 @@ t_return_status	squoting_process(t_token *last_token, \
 
 static t_return_status	_squoting_process_ep(void)
 {
-	write(2, \
-	"syntax error near newline.\nLine can't end with : \'\n", \
-	65);
+	ft_dprintf(2, \
+	"syntax error near newline.\nLine can't end with : \'\n");
 	return (FAILURE);
 }

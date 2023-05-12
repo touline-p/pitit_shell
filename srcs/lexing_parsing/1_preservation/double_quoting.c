@@ -29,10 +29,10 @@ t_return_status	dquoting_process(t_token *last_token, \
 		last_token = last_token->next;
 		pin = last_token->next;
 	}
-	if (pin->token == EOL)
-		return (_dquoting_process_ep());
 	pin->sign_char = - '\"';
 	*end_of_quot_pt = pin;
+	if (pin->token == EOL)
+		return (_dquoting_process_ep());
 	return (SUCCESS);
 }
 
@@ -41,6 +41,6 @@ static t_return_status	_dquoting_process_ep(void)
 	char	*str;
 
 	str = "syntax error near newline.\nLine can't end with open : \"\n";
-	write(2, str, 65);
+	ft_dprintf(2, "%s", str);
 	return (FAILURE);
 }
