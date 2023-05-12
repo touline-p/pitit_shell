@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:41:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/11 20:46:21 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/12 10:13:42 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,14 @@ static int	_get_alloc_size(char *line)
 	struct dirent	*data;
 	DIR				*directory;
 	int				size;
-	char			**pattern;
 
 	size = 0;
-	pattern = NULL;
 	directory = opendir(".");
 	if (!directory)
 	{
 		perror ("minishell: opendir: cannot open current directory");
 		return (-1);
 	}
-	pattern = ft_split_w(line);
 	while (1)
 	{
 		data = readdir(directory);
@@ -107,9 +104,10 @@ static	t_return_status	_find_matching_files(char *line, char *name)
 			line++;
  			name = ft_strstr_w(name, line);
 		}
+		if (*line)
+			return (SUCCESS);
 		if (!name || (*line && *line != '*' && *name != *line))
 		{
-			printf("%s\n", line);
 			return (FAILURE);
 		}
 		line++;
