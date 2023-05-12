@@ -72,7 +72,10 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		data->cmds_block[block_id].process_id = fork();
 		_fork_process(data, data->cmds_block[block_id].process_id, \
 						block_id, env);
-		ft_free_split(data->cmds_block[block_id].commands);
+		if (data->cmds_block[block_id].id_command == SUBSHELL)
+			string_token_destructor((t_string_token *)data->cmds_block[block_id].commands);
+		else
+			ft_free_split(data->cmds_block[block_id].commands);
 		free(data->cmds_block[block_id].heredoc_data);
 		_close_this(data->cmds_block[block_id].infile);
 		_close_this(data->cmds_block[block_id].outfile);
@@ -111,7 +114,9 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 {
 	char	*command;
 	t_cmd	*command_block;
+	t_data	new_data;
 
+	bzero(&new_data, sizeof(t_data));
 	command_block = &(data->cmds_block[block_id]);
 	command = NULL;
 	if (block_id <= nb_of_pipe)
@@ -123,7 +128,10 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 		exit(1);
 	}
 	if (command_block->id_command == SUBSHELL)
-		switchman(data, (t_string_token *)command_block->commands, env);
+	{
+		switchman(&new_data, (t_string_token *) command_block->commands, env);
+		exit(g_ret_val);
+	}
 	if (command_block->id_command != CMD)
 		exit(builtin_switch(command_block->id_command, command_block->commands, \
 			env));
