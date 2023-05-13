@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/11 17:59:16 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/13 23:19:54 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 	t_cmd	*command_block;
 	t_data	new_data;
 
-	bzero(&new_data, sizeof(t_data));
+	// bzero(&new_data, sizeof(t_data));
 	command_block = &(data->cmds_block[block_id]);
 	command = NULL;
 	if (block_id <= nb_of_pipe)
