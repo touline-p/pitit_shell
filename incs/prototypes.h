@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:07:11 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/14 00:47:09 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:52:16 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,20 +250,23 @@ t_return_status	heredoc_child_management(t_cmd *cmd, \
 	- expand
 	- delete
 - Parsing
-	- articulation
 	- expand
 	- cut_lines
 	- join_expand
 	- env_manage
+	- fetch_arguments
+	- manage_arguments
+	- wildcards
 - Syntax
+	- articulation
 	- check_mistakes
 	- check_unic_cases
 	- syntax_is_valid
 - Init_Env
 	- initialise_env
 - Execution
-	- fetch_arguments
-	- manage_arguments
+	- subshell_prep
+	- switchman
 	- utils
 	- manage_pipes
 	- manage_fds
@@ -271,10 +274,6 @@ t_return_status	heredoc_child_management(t_cmd *cmd, \
 	- cleaning
 - Bultins
 	- good as it is
-- Bonus
-	- wildcards
-	- parenthesis
-	- && ||
 
 */
 #endif
