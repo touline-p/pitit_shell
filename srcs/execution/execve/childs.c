@@ -115,6 +115,7 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 	char	*command;
 	t_cmd	*command_block;
 	t_data	new_data;
+	t_string_token *casted_t_str_token;
 
 	bzero(&new_data, sizeof(t_data));
 	command_block = &(data->cmds_block[block_id]);
@@ -129,7 +130,10 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 	}
 	if (command_block->id_command == SUBSHELL)
 	{
-		switchman(&new_data, (t_string_token *) command_block->commands, env);
+		casted_t_str_token = (t_string_token *)command_block->commands;
+		free(data->cmds_block);
+		switchman(&new_data, casted_t_str_token, env);
+		ft_free_split(*env);
 		exit(g_ret_val);
 	}
 	if (command_block->id_command != CMD)
