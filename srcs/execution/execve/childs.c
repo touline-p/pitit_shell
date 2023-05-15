@@ -114,6 +114,7 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 	char	*command;
 	t_cmd	*command_block;
 	t_data	new_data;
+	t_string_token *casted_t_str_token;
 
 	bzero(&new_data, sizeof(t_data));
 	command_block = &(data->cmds_block[block_id]);
@@ -127,11 +128,14 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 	}
 	if (command_block->id_command == SUBSHELL)
 	{
-		switchman(&new_data, (t_string_token *) command_block->commands, env);
+		casted_t_str_token = (t_string_token *)command_block->commands;
+		free(data->cmds_block);
+		switchman(&new_data, casted_t_str_token, env);
+		ft_free_split(*env);
 		exit(g_ret_val);
 	}
-	if (command_block->id_command != CMD)
-		exit(builtin_switch(command_block->id_command, command_block->commands, \
+	if (command_block->id_command != CMD && command_block->id_command != EMPTY)
+		exit(builtin_switch(*command_block, command_block->commands, \
 			env));
 	command = add_path_cmd(command_block, *env);
 	if (command != NULL && _is_executable(command) == SUCCESS)
@@ -184,18 +188,21 @@ static char	*add_path_cmd(t_cmd *cmd, char **env)
 	char	**paths;
 	char	*str;
 
-	if (is_path(cmd->commands[0]))
-		return (cmd->commands[0]);
-	if (ft_strcmp("", cmd->commands[0]) == 0)
+	if (cmd->id_command == EMPTY || cmd->commands == NULL)
 	{
-		if (cmd->id_command != EMPTY)
-			return (NULL);
-		str = ft_strjoin(cmd->commands[0], " : command not found\n");
-		g_ret_val = 127;
-		write(2, str, ft_strlen(str));
-		free(str);
+		if (cmd->commands)
+		{
+			str = ft_strjoin(cmd->commands[0], " : command not found\n");
+			g_ret_val = 127;
+			write(2, str, ft_strlen(str));
+			free(str);
+		}
+		else
+			g_ret_val = 0;
 		return (NULL);
 	}
+	if (is_path(cmd->commands[0]))
+		return (cmd->commands[0]);
 	paths = get_paths(env);
 	str = NULL;
 	if (!paths)

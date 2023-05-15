@@ -26,13 +26,13 @@
 # define HEXA_LOW "0123456789abcdef"
 # define HEXA_UP "0123456789ABCDEF"
 
-# define END "\001\033[0m\002"
-# define GREY "\001\033[1;30m\002"
-# define RED "\001\033[1;31m\002"
-# define GREEN "\001\033[1;32m\002"
+# define END	"\001\033[0m\002"
+# define GREY	"\001\033[1;30m\002"
+# define RED	"\001\033[1;31m\002"
+# define GREEN	"\001\033[1;32m\002"
 # define YELLOW "\001\033[1;33m\002"
-# define BLUE "\001\033[1;34m\002"
-# define PURPLE "\001\033[1;35m\002"
+# define BLUE	"\001\033[1;34m\002"
+# define PURPLE	"\001\033[1;35m\002"
 
 # define END "\001\033[0m\002"
 # define BOLD "\001\033[1m\002"
@@ -67,6 +67,7 @@ t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt);
 char			*ft_strdup(const char *src);
 t_return_status	ft_strdup_on(const char *src, char **str_pt);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin_free_first_sf(char *s1, char *s2);
 char			*ft_strjoin_free_sec_sf(char *s1, char *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_substr(char const *s, unsigned int start, size_t len);

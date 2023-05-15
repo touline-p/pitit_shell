@@ -19,7 +19,7 @@ void    print_debug_int(int value, char *file, int line)
 void    print_builtin(t_builtin built)
 {
     const char	*name_arr[] = {NULL, "env","echo", "export", \
-							"exit", "unset", "cd", "pwd"};
+							"exit", "unset", "cd", "pwd", "empty", "subshell"};
     dprintf(2, "\nbuiltin is %s\n", name_arr[built]);
 }
 

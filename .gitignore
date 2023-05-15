@@ -64,3 +64,5 @@ tester
 minishell
 
 .nfs*
+.test*
+biblia

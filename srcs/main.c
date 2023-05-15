@@ -39,6 +39,7 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 	*prompt_pt = ft_strjoin(box, line);
 	free(box);
 	free(line);
+	get_prompt(*prompt_pt,1);
 	return (SUCCESS);
 }
 
@@ -129,7 +130,9 @@ static t_return_status get_allocated_box_on(char **box_pt, char **env)
 	*box_pt = box;
 	if (g_ret_val == 0)
 		box = ft_strcpy_rn(box, GREEN"\001\u2554");
-	else if (g_ret_val == 130 || g_ret_val == 131)
+	else if (g_ret_val == 130)
+		box = ft_strcpy_rn(box, YELLOW"\001\u2554");
+	else if (g_ret_val == 131)
 		box = ft_strcpy_rn(box, BLUE"\001\u2554");
 	else
 		box = ft_strcpy_rn(box, RED"\001\u2554");
