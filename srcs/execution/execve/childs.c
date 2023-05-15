@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/11 17:59:16 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/15 14:15:43 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_return_status	childs_execve(t_data *data, char ***env)
 	block_id = 0;
 	while (block_id < data->nb_of_pipe + 1)
 	{
-		//print_cmd_block(ft_itoa(block_id), data->cmds_block[block_id]);
 		if (_do_the_pipe(&(data->cmds_block[block_id]), \
 						data->nb_of_pipe, block_id) != SUCCESS)
 			return (FAILURE);
@@ -122,7 +121,6 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 	command = NULL;
 	if (block_id <= nb_of_pipe)
 		_close_this(command_block->fd_hd[0]);
-	//print_cmd_block(ft_itoa(block_id), data->cmds_block[block_id]);
 	if (duplicate_fds(*command_block, data, env) != SUCCESS)
 	{
 		ft_free_split(command_block->commands);

@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/05 15:13:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/14 19:10:08 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	false_space_to_space(char *str)
 
 void	manage_ambiguous(t_cmd *cmd, char *file)
 {
-	cmd->outfile = -1;
 	cmd->is_ambiguous = true;
 	false_space_to_space(file);
 	ft_dprintf(2, "minishell: %s: ambiguous redirect\n", file);

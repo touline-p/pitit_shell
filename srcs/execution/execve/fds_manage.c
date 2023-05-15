@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:26:01 by twang             #+#    #+#             */
-/*   Updated: 2023/05/04 17:46:10 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/15 13:55:29 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static t_return_status	_dup_n_close(int to_dup, int to_replace);
 
 t_return_status	duplicate_fds(t_cmd block, t_data *data, char ***env_pt)
 {
-	//puts("this seems legit");
 	if (block.is_heredoc == true)
 		heredoc_child_management(&block, data, *env_pt);
 	if (block.infile == -1 || block.outfile == -1)

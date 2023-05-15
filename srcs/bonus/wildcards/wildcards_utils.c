@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 17:03:32 by twang             #+#    #+#             */
-/*   Updated: 2023/05/12 17:20:58 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/14 19:22:35 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static	t_return_status	_find_matching_files(char *line, char *name);
+// static	t_return_status	_find_matching_files(char *line, char *name);
 
 /*----------------------------------------------------------------------------*/
 
@@ -59,7 +59,7 @@ int	get_alloc_size(char *line)
 		data = readdir(directory);
 		if (data == NULL)
 			break ;
-		if (_find_matching_files(line, data->d_name) == SUCCESS)
+		if (find_matching_files(line, data->d_name) == SUCCESS)
 			size++;
 	}
 	closedir(directory);
@@ -68,7 +68,7 @@ int	get_alloc_size(char *line)
 	return (size);
 }
 
-static	t_return_status	_find_matching_files(char *line, char *name)
+t_return_status	find_matching_files(char *line, char *name)
 {
 	if (name[0] == '.' && line[0] != '.')
 		return (FAILURE);
@@ -97,7 +97,7 @@ static	t_return_status	_find_matching_files(char *line, char *name)
 	return (SUCCESS);
 }
 
-static void	_replace_wild_card(char *line)
+void	replace_wild_card(char *line)
 {
 	while (*line)
 	{
@@ -125,7 +125,7 @@ t_return_status	fill_dst_arr(char *line, char **arr_to_fill)
 		data = readdir(directory);
 		if (data == NULL)
 			break ;
-		if (_find_matching_files(line, data->d_name) == SUCCESS)
+		if (find_matching_files(line, data->d_name) == SUCCESS)
 		{
 			arr_to_fill[i] = ft_strdup(data->d_name);
 			if (arr_to_fill[i] == NULL)
@@ -135,7 +135,7 @@ t_return_status	fill_dst_arr(char *line, char **arr_to_fill)
 	}
 	if (i == 0)
 	{
-		_replace_wild_card(line);
+		replace_wild_card(line);
 		arr_to_fill[i] = ft_strdup(line);
 	}
 	free(line);
