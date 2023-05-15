@@ -30,8 +30,10 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 	if (preserve_token_lst(simple_tok_lst) != SUCCESS)
 		return (FAILURE);
 	split_toklst_on_meta(simple_tok_lst);
+	display_t_emt(simple_tok_lst);
 	regroup_meta(simple_tok_lst);
 	str_token_lst = token_lst_to_str_token(simple_tok_lst);
+	display_str_token(str_token_lst);
 	if (simple_tok_lst == NULL)
 		return (FAILED_MALLOC);
 	*str_tok_pt = str_token_lst;

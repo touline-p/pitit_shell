@@ -20,6 +20,7 @@ t_return_status	echo_builtin(char **av, char ***env_pt)
 	char	**tmp;
 	bool	option;
 
+	puts("yoyoyo");
 	ft_free_split(*env_pt);
 	option = false;
 	tmp = av + 1;

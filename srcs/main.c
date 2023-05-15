@@ -90,7 +90,6 @@ int	main(int ac, char **av, char **env)
 		data.instructions_arr[0] = str_tok_lst;
 		data.instructions_arr[1] = NULL;
 		del_space_token(str_tok_lst);
-
 		if (heredoc_management(&data, str_tok_lst, env))
 			continue ;
 		switchman(&data, str_tok_lst, &env);

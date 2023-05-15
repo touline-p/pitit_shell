@@ -28,8 +28,16 @@ static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 		g_ret_val = 1;
 		exit(1);
 	}
-	builtin_switch(cmd.id_command, cmd.commands, env_pt);
+	builtin_switch(cmd, cmd.commands, env_pt);
 	exit(SUCCESS);
+}
+
+void	close_switchman_once(t_cmd cmd)
+{
+	if (cmd.infile > 2)
+		close(cmd.infile);
+	if (cmd.outfile > 2)
+		close(cmd.outfile);
 }
 
 t_return_status	switchman_once(t_data *data, char ***env_pt)
@@ -42,12 +50,12 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 	cmd = *(data->cmds_block);
 	if (cmd.id_command > PWD
 		|| (cmd.id_command == EXPORT && cmd.commands[1] != NULL))
-		return (builtin_switch(cmd.id_command, cmd.commands, env_pt));
-
+		return (builtin_switch(cmd, cmd.commands, env_pt));
 	pid = fork();
 	if (pid == 0)
 		_execute_son(data, cmd, env_pt);
 	ft_free_split(cmd.commands);
+	close_switchman_once(cmd);
 	if (waitpid(pid, &status, WUNTRACED) == -1) {
 		g_ret_val = 1;
 	}

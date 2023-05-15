@@ -73,7 +73,7 @@ void			strings_management(t_data *data, t_string_token *lst_of_tok, \
 
 /*-- cmds_utils --*/
 t_builtin		is_builtin(char *string);
-t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt);
+t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt);
 
 /*-- files_utils --*/
 void			check_opened_infiles(t_data *data, int block_id);

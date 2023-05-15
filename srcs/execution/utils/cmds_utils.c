@@ -30,16 +30,20 @@ t_builtin	is_builtin(char *string)
 	return (CMD);
 }
 
-t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt)
+t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt)
 {
 	const t_builtin_ft	ft_arr[] = {NULL, &env_builtin, &echo_builtin, \
 									&export_builtin, &pwd_builtin, \
 									&exit_builtin, &unset_builtin, \
 									&cd_builtin};
+	t_return_status	ret_val;
 
-	if (builtin == CMD)
-		return (FAILURE);
-	return ((*ft_arr[builtin])(av, env_pt));
+	ret_val = (*ft_arr[command.id_command])(av, env_pt);
+	if (command.infile > 2)
+		close(command.infile);
+	if (command.outfile > 2)
+		close(command.outfile);
+	return (ret_val);
 }
 
 bool	is_path(char *line)

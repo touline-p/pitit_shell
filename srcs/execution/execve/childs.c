@@ -137,7 +137,7 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 		exit(g_ret_val);
 	}
 	if (command_block->id_command != CMD)
-		exit(builtin_switch(command_block->id_command, command_block->commands, \
+		exit(builtin_switch(*command_block, command_block->commands, \
 			env));
 	command = add_path_cmd(command_block, *env);
 	if (command != NULL && _is_executable(command) == SUCCESS)
