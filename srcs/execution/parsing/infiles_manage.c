@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/14 19:13:31 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/15 09:44:49 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static t_return_status	_set_outfile(t_data *data, char **file, \
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
+	if (wildcard_files(data, file, block_id) != SUCCESS)
+		return (SUCCESS);
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
@@ -73,6 +75,8 @@ static t_return_status	_set_appends(t_data *data, char **file, \
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
+	if (wildcard_files(data, file, block_id) != SUCCESS)
+		return (SUCCESS);
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
