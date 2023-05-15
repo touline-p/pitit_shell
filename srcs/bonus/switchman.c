@@ -140,6 +140,7 @@ int profondeur = 0;
 t_return_status	switchman(t_data *data, \
 					t_string_token *token_lst, char ***env_pt)
 {
+	display_str_token(token_lst);
 	if (data->instructions_arr != NULL)
 		free(data->instructions_arr);
 	data->instructions_arr = malloc(sizeof(t_string_token *) \

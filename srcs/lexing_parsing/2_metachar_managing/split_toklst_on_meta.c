@@ -68,3 +68,14 @@ static void	_regroup_ft(t_token *tok)
 	del_token(tok->next);
 	tok->next = tmp;
 }
+
+char *get_prompt(char *str, int flag)
+{
+	static char	*prompt;
+
+	if (flag == 0)
+		return (prompt);
+	if (flag == 1)
+		prompt = str;
+	return (str);
+}

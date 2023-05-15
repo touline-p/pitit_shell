@@ -39,6 +39,7 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 	*prompt_pt = ft_strjoin(box, line);
 	free(box);
 	free(line);
+	get_prompt(*prompt_pt,1);
 	return (SUCCESS);
 }
 
@@ -89,6 +90,7 @@ int	main(int ac, char **av, char **env)
 		data.instructions_arr[0] = str_tok_lst;
 		data.instructions_arr[1] = NULL;
 		del_space_token(str_tok_lst);
+
 		if (heredoc_management(&data, str_tok_lst, env))
 			continue ;
 		switchman(&data, str_tok_lst, &env);

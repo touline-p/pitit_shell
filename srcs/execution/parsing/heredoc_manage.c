@@ -16,6 +16,34 @@ void reset_booleans(bool *a, t_pr_stat *b)
 	*b = NO_PAR;
 }
 
+static t_return_status 	check_closing_par(t_string_token *string_token_lst)
+{
+	int open_par;
+
+	open_par = 0;
+	while (string_token_lst->next != NULL)
+	{
+		if (string_token_lst->token == O_PRTSS)
+			open_par++;
+		else if (string_token_lst->token == C_PRTSS)
+		{
+			open_par--;
+			if (open_par < 0)
+			{
+				string_token_lst->token = SYN_ERR;
+				return (FAILURE);
+			}
+		}
+		string_token_lst = string_token_lst->next;
+	}
+	if (open_par > 0)
+	{
+		string_token_lst->token = SYN_ERR;
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
 t_return_status heredoc_management(t_data *data, t_string_token *string_token_lst, char **env)
 {
 	t_string_token	*tmp;
@@ -23,7 +51,9 @@ t_return_status heredoc_management(t_data *data, t_string_token *string_token_ls
 
 	tmp = string_token_lst;
 	update_tokens(string_token_lst);
-	check_par_err(string_token_lst);
+	display_str_token(string_token_lst);
+	if (check_closing_par(string_token_lst) == FAILURE)
+		check_par_err(string_token_lst);
 	while (tmp != NULL)
 	{
 		if (tmp->token == HR_DATA)
@@ -114,15 +144,16 @@ t_return_status	read_here_doc_in_str(char *limiter, char **documentation)
 	while (HEREDOC_MUST_GO_ON)
 	{
 		nb_of_line++;
-		ft_dprintf(2, GREEN"> "END);
-		line = get_next_line(0);
+		line = readline(GREEN"> "END);
 		if (_read_hd_ep(line, nb_of_line, limiter))
 			break ;
-		*ft_strchr(line, '\n') = 0;
 		if (!ft_strncmp(limiter, line, ft_strlen(limiter) + 1))
 			break;
-		*ft_strchr(line, '\0') = '\n';
+		if (*documentation == NULL)
+			break ;
 		*documentation = strjoin_path_cmd(*documentation, line);
+		*documentation = ft_strjoin_free_first_sf(*documentation, "\n");
+		if (*documentation == NULL)
 		free(line);
 	}
 	if (errno)

@@ -39,3 +39,14 @@ char	*ft_strjoin_free_sec_sf(char *s1, char *s2)
 	free(s2);
 	return (dst);
 }
+
+char	*ft_strjoin_free_first_sf(char *s1, char *s2)
+{
+	char	*dst;
+
+	if (s1 == NULL)
+		return (NULL);
+	dst = ft_strjoin(s1, s2);
+	free(s1);
+	return (dst);
+}
