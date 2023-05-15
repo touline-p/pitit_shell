@@ -30,6 +30,8 @@ static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 		exit(1);
 	}
 	builtin_switch(cmd, cmd.commands, env_pt);
+	ft_free_split(*env_pt);
+	ft_free_split(cmd.commands);
 	exit(SUCCESS);
 }
 

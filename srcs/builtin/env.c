@@ -17,6 +17,7 @@ t_return_status	env_builtin(char **av, char ***env_pt)
 {
 	char	**pin;
 
+	(void)av;
 	pin = *env_pt;
 	while (*pin)
 	{

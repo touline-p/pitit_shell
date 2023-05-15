@@ -20,6 +20,7 @@ t_return_status	echo_builtin(char **av, char ***env_pt)
 	char	**tmp;
 	bool	option;
 
+	(void)env_pt;
 	option = false;
 	tmp = av + 1;
 	while (_is_option_n(*tmp))

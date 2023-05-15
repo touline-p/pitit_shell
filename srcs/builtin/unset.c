@@ -40,7 +40,6 @@ t_return_status	unset_builtin(char **args, char ***env_pt)
 		tmp++;
 	}
 	g_ret_val = 0;
-	ft_free_split(args);
 	return (SUCCESS);
 }
 

@@ -17,6 +17,7 @@ t_return_status	pwd_builtin(char **args, char ***env_pt)
 {
 	char	*pwd;
 
+	(void)args;
 	(void)env_pt;
 	/*(void)args;
 	if (ft_str_array_len(args) > 1)
