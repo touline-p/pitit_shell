@@ -112,40 +112,43 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 								char ***env, int block_id)
 {
 	char	*command;
-	t_cmd	*command_block;
+	t_cmd	command_block;
 	t_data	new_data;
 	t_string_token *casted_t_str_token;
 
 	bzero(&new_data, sizeof(t_data));
-	command_block = &(data->cmds_block[block_id]);
+	command_block = data->cmds_block[block_id];
+	free(data->cmds_block);
 	command = NULL;
 	if (block_id <= nb_of_pipe)
-		_close_this(command_block->fd_hd[0]);
-	if (duplicate_fds(*command_block, data, env) != SUCCESS)
+		_close_this(command_block.fd_hd[0]);
+	if (duplicate_fds(command_block, data, env) != SUCCESS)
 	{
-		ft_free_split(command_block->commands);
+		ft_free_split(command_block.commands);
 		exit(1);
 	}
-	if (command_block->id_command == SUBSHELL)
+	if (command_block.id_command == SUBSHELL)
 	{
-		casted_t_str_token = (t_string_token *)command_block->commands;
+		casted_t_str_token = (t_string_token *)command_block.commands;
 		free(data->cmds_block);
 		switchman(&new_data, casted_t_str_token, env);
 		ft_free_split(*env);
 		exit(g_ret_val);
 	}
-	if (command_block->id_command != CMD && command_block->id_command != EMPTY)
-		exit(builtin_switch(*command_block, command_block->commands, \
-			env));
-	command = add_path_cmd(command_block, *env);
+	if (command_block.id_command != CMD && command_block.id_command != EMPTY)
+	{
+		exit(builtin_switch(command_block, command_block.commands, \
+            env));
+	}
+	command = add_path_cmd(&command_block, *env);
 	if (command != NULL && _is_executable(command) == SUCCESS)
 	{
-		execve(command, command_block->commands, *env);
-		perror(command_block->commands[0]);
+		execve(command, command_block.commands, *env);
+		perror(command_block.commands[0]);
 		g_ret_val = 127;
 	}
 	ft_free_split(*env);
-	ft_free_split(command_block->commands);
+	ft_free_split(command_block.commands);
 	free(data->cmds_block);
 	exit(g_ret_val);
 }
