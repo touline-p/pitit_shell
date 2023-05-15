@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:03:57 by twang             #+#    #+#             */
-/*   Updated: 2023/05/08 14:58:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/14 18:01:41 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	clean_the_prompt(char *prompt, char *line, char **env)
 		free(prompt);
 		ft_free_split(env);
 		clear_history();
-		//ft_dprintf(1, "exit");
+		ft_dprintf(1, RED"exit\n"END);
 		exit(0);
 	}
 }

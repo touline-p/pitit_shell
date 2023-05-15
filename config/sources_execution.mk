@@ -6,11 +6,12 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:31:59 by twang             #+#    #+#              #
-#    Updated: 2023/05/12 17:14:52 by twang            ###   ########.fr        #
+#    Updated: 2023/05/14 18:18:16 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES	=																	\
+			srcs/bonus/wildcards/files_wildcards.c							\
 			srcs/bonus/wildcards/wildcards_utils.c							\
 			srcs/bonus/wildcards/wildcards.c								\
 			srcs/execution/execve/childs.c									\

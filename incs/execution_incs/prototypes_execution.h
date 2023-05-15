@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/12 17:17:49 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/14 19:11:39 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 /*-- wildcards_utils --*/
 t_return_status	check_line(char *line);
 int				get_alloc_size(char *line);
+t_return_status	find_matching_files(char *line, char *name);
+void			replace_wild_card(char *line);
+t_return_status wildcard_files(t_data *data, char **file, int block_id);
 t_return_status	fill_dst_arr(char *line, char **arr_to_fill);
 
 /*-- wildcards --*/
