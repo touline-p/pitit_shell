@@ -40,32 +40,6 @@ void	init_data(t_data *data)
 	data->nb_of_pipe = 0;
 }
 
-t_return_status	fix_string(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_of_pipe + 1)
-	{
-		if (data->cmds_block[i].id_command != SUBSHELL && data->cmds_block[i].commands[0] == NULL)
-		{
-			free(data->cmds_block[i].commands);
-			data->cmds_block[i].commands = malloc(sizeof(char *) * 2);
-			if (data->cmds_block[i].commands == NULL)
-				return (FAILED_MALLOC);
-			data->cmds_block[i].commands[0] = ft_strdup("");
-			if (data->cmds_block[i].commands[0] == NULL)
-			{
-				data->cmds_block[i].commands = NULL;
-				return (free(data->cmds_block[i].commands), FAILED_MALLOC);
-			}
-			data->cmds_block[i].commands[1] = NULL;
-		}
-		i++;
-	}
-	return (SUCCESS);
-}
-
 void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 {
 	init_data(data);
@@ -80,11 +54,10 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 		return ;
 	}
 	strings_management(data, lst_of_tok, *env_pt);
-	fix_string(data);
 	string_token_destructor(lst_of_tok);
 	if (g_ret_val == 130 && check_cmd(data->cmds_block))
 		return ;
-	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD && data->cmds_block->id_command != SUBSHELL)
+	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD && data->cmds_block->id_command != SUBSHELL && data->cmds_block->id_command != EMPTY)
 		switchman_once(data, env_pt);
 	else
 	{

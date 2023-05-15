@@ -16,8 +16,7 @@ t_builtin	is_builtin(char *string)
 {
 	t_builtin	ret_val;
 	const char	*name_arr[] = {NULL, "env","echo", "export", \
-							"pwd","exit", "unset", "cd"};
-
+							"pwd","exit", "unset", "cd", ""};
 	ret_val = ENV;
 	if (!string)
 		return (CMD);
