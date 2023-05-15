@@ -39,6 +39,7 @@ t_return_status	unset_builtin(char **args, char ***env_pt)
 				args, FAILED_MALLOC));
 		tmp++;
 	}
+	g_ret_val = 0;
 	ft_free_split(args);
 	return (SUCCESS);
 }
@@ -49,5 +50,6 @@ static	t_return_status	_unset_builtin_ep(char *msg, char **trash, \
 	if (trash != NULL)
 		ft_free_split(trash);
 	dprintf(2, "%s", msg);
+	g_ret_val = 1;
 	return (ret_val);
 }
