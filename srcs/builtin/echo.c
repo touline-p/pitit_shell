@@ -20,7 +20,6 @@ t_return_status	echo_builtin(char **av, char ***env_pt)
 	char	**tmp;
 	bool	option;
 
-	ft_free_split(*env_pt);
 	option = false;
 	tmp = av + 1;
 	while (_is_option_n(*tmp))
@@ -40,7 +39,6 @@ t_return_status	echo_builtin(char **av, char ***env_pt)
 	}
 	if (option == false)
 		printf("\n");
-	ft_free_split(av);
 	g_ret_val = 0;
 	return (SUCCESS);
 }

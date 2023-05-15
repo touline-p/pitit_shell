@@ -22,7 +22,6 @@ t_return_status	pwd_builtin(char **args, char ***env_pt)
 	if (ft_str_array_len(args) > 1)
 		return (dprintf(2, "pwd: too many arguments\n"), \
 						ft_free_split(args), FAILURE);*/
-	ft_free_split(args);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 		return (ft_dprintf(2, "Bro j'ai pas trouve dsl, tu es perdu 🤷🏻‍♂️ 🤷🏼‍♀️\n"), \
@@ -30,6 +29,5 @@ t_return_status	pwd_builtin(char **args, char ***env_pt)
 	printf("%s\n", pwd);
 	free(pwd);
 	g_ret_val = 0;
-	ft_free_split(*env_pt);
 	return (SUCCESS);
 }

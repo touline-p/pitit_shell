@@ -25,6 +25,7 @@ static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 	if (duplicate_fds(cmd, data, env_pt) != SUCCESS)
 	{
 		ft_free_split(cmd.commands);
+		ft_free_split(*env_pt);
 		g_ret_val = 1;
 		exit(1);
 	}

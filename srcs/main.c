@@ -75,6 +75,11 @@ int	main(int ac, char **av, char **env)
 			perror("readline");
 			errno = SUCCESS;
 		}
+		if (strncmp(line, "\\\\", 2) == 0)
+		{
+			free(line);
+			continue ;
+		}
 		if (line == NULL || ft_strcmp("", line) == 0)
 		{
 			clean_the_prompt(data.prompt, line, env);

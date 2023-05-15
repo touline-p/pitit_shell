@@ -54,9 +54,9 @@ void    print_cmd_block(char *msg, t_cmd cmd)
 	print_fd("fd[0]",cmd.fd_hd[0]);
 	print_fd("fd[1]",cmd.fd_hd[1]);
 	if (cmd.is_ambiguous == true)
-		printf("it s ambiguous\n");
+		ft_dprintf(2, "it s ambiguous\n");
 	else
-		printf("it s goood\n");
+		ft_dprintf(2, "it s goood\n");
     print_pid(cmd.process_id);
 }
 

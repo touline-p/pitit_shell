@@ -41,7 +41,6 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 		ft_free_split(av);
 		return (FAILURE);
 	}
-	ft_free_split(av);
 	g_ret_val = 0;
 	if (_update_pwd_var(pwd, *env_pt) != SUCCESS)
 		return (FAILURE);
