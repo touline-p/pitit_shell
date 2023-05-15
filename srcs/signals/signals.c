@@ -31,7 +31,7 @@ void	init_signals(void)
 char 	*get_color( void )
 {
 	if (g_ret_val == 130)
-		return (BLUE);
+		return (YELLOW);
 	else
 		return (0);
 }
