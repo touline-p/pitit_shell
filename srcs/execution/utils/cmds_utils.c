@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 17:34:06 by twang             #+#    #+#             */
-/*   Updated: 2023/05/04 13:54:02 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:42:03 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 t_builtin	is_builtin(char *string)
 {
 	t_builtin	ret_val;
-	const char	*name_arr[] = {NULL, "env","echo", "export", \
-							"pwd","exit", "unset", "cd", ""};
+	const char	*name_arr[] = {NULL, "env", "echo", "export", \
+							"pwd", "exit", "unset", "cd", ""};
+
 	ret_val = ENV;
 	if (!string)
 		return (CMD);
@@ -35,7 +36,8 @@ t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt)
 									&export_builtin, &pwd_builtin, \
 									&exit_builtin, &unset_builtin, \
 									&cd_builtin};
-	t_return_status	ret_val;
+	t_return_status		ret_val;
+
 	ret_val = (*ft_arr[command.id_command])(av, env_pt);
 	if (command.infile > 2)
 		close(command.infile);

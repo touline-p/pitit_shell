@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:38:17 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 17:58:17 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 18:56:20 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "minishell_execution.h"
 #include "structures_execution.h"
 #include <readline/readline.h>
-
 #include "../incs/execution_incs/minishell_execution.h"
 #include "../incs/parsing_incs/minishell_parsing.h"
+
 /*---- global definition -----------------------------------------------------*/
 
 int	g_ret_val;

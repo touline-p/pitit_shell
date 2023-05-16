@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:41:57 by twang             #+#    #+#             */
-/*   Updated: 2023/05/12 14:46:06 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:32:58 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, char **env);
+static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, \
+										char **env);
 static void				set_id_cmds(t_data *data);
 
 /*----------------------------------------------------------------------------*/
@@ -25,7 +26,8 @@ void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env)
 	set_id_cmds(data);
 }
 
-static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, char **env)
+static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, \
+										char **env)
 {
 	t_string_token	*temp;
 	int				block_id;
@@ -38,7 +40,8 @@ static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, ch
 			data->cmds_block[block_id].commands = subshell_preparation(&temp);
 		else
 		{
-			if (join_token_lst_on(&(data->cmds_block[block_id]), &temp, env) != SUCCESS)
+			if (join_token_lst_on(&(data->cmds_block[block_id]), &temp, env) \
+					!= SUCCESS)
 				return (FAILED_MALLOC);
 		}
 		block_id++;
@@ -56,9 +59,10 @@ static void	set_id_cmds(t_data *data)
 	block_id = 0;
 	while (data->cmds_block[block_id].commands)
 	{
-		if (data->cmds_block[block_id].id_command != SUBSHELL && data->cmds_block[block_id].id_command != EMPTY)
+		if (data->cmds_block[block_id].id_command != SUBSHELL && \
+				data->cmds_block[block_id].id_command != EMPTY)
 			data->cmds_block[block_id].id_command =
-					is_builtin(data->cmds_block[block_id].commands[0]);
+				is_builtin(data->cmds_block[block_id].commands[0]);
 		block_id++;
 	}
 }

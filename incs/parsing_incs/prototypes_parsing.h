@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/04/26 13:26:35 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:45:40 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,11 @@ t_return_status	squoting_process(t_token *voided, \
 								t_token *token, t_token **end_of_quot_pt);
 
 /*** split on meta ***/
-
 t_token			*split_toklst_on_meta(t_token *tok);
 t_token			*regroup_meta(t_token *tok);
 t_token			*split_on_meta(t_token *tok);
 
 /*** expand on dollars ***/
-
 t_return_status	expand_dollars(t_token *token_lst, char **env);
 void			suppress_quotes(t_token *tok);
 t_token			*get_next_emt(t_token *tok);
@@ -98,11 +96,9 @@ void			del_empty_tokens(t_string_token *token_lst);
 void			free_all_str(t_data *data);
 
 /*** checking syntax ***/
-
 t_return_status	syntax_is_valid(t_string_token *lst_to_check);
 
 /*** env_utils ***/
-
 typedef t_return_status	(*t_export_ft)(char *arg, char ***env_pt);
 
 t_return_status	env_init_on(char ***env_pt);
@@ -112,7 +108,8 @@ char			*get_env_content_from_key(char *key, char **env);
 t_return_status	add_str_to_env(char *line, char ***env_pt);
 t_return_status	del_str_from_env(char *line, char ***env_pt);
 void			display_str_par(t_string_token *tok);
-size_t			go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok);
+size_t			go_to_next_(t_emt token, t_string_token *tmp, \
+								t_string_token **str_tok);
 
 char			*get_first_line_in_env(char **env);
 char			*get_next_line_in_env(char *last, char **env);
@@ -142,11 +139,11 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 
 void			update_tokens(t_string_token *str_tok_lst);
 
-
 /***	bonus	***/
-
-void			go_to_next_logical_door(t_string_token *src, t_string_token **dst);
-char 			*format_string_token(t_string_token *token);
+void			go_to_next_logical_door(t_string_token *src, \
+											t_string_token **dst);
+char			*format_string_token(t_string_token *token);
 void			check_par_err(t_string_token *str_tok_lst);
+
 # endif
 #endif //MINI_PARSING_MINI_PARSING_H

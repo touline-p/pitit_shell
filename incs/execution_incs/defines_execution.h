@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:27:48 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/16 17:34:04 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 18:25:52 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@
 # define START_MSG_14 "\t\t\t\t\t\t by ⭐ bpoumeau & twang ⭐\n\n"
 
 typedef t_return_status	(*t_builtin_ft)(char **av, char ***env_pt);
+typedef bool			(*t_increment_ft)(char line_pt, void *arg);
 
 #endif 
