@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_quoting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 04:52:43 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/09 14:34:07 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:59:32 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ static t_return_status	_dquoting_process_ep(void)
 	char	*str;
 
 	str = "syntax error near newline.\nLine can't end with open : \"\n";
-	write(2, str, 65);
+	write(2, str, 57);
 	return (FAILURE);
 }
