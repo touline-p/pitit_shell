@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:21:43 by twang             #+#    #+#             */
-/*   Updated: 2023/05/14 19:24:12 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 15:47:59 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (NULL);
 }
-
+//Make*le
 char	*ft_strstr_w(char *name, char *line)
 {
 	size_t	i;
@@ -51,7 +51,7 @@ char	*ft_strstr_w(char *name, char *line)
 		j = 0;
 		while (name[i + j] == line[j])
 		{
-			if (line[j + 1] == '*' || (line[j] == '\0' && name[i + j] == '\0'))
+			if ((line[j] == '\0' && name[i + j] == '\0') || line[j + 1] == '*')
 			{
 				return ((char *) &name[i]);
 			}

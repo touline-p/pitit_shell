@@ -6,7 +6,7 @@ NAME	=	libft.a
 
 CC	=	cc
 
-CFLAGS	=	-Werror -Wall -Wextra 
+CFLAGS	=	-Werror -Wall -Wextra
 
 AR	= 	ar
 
