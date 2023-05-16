@@ -16,6 +16,11 @@ void	check_opened_infiles(t_data *data, int block_id)
 {
 	if (data->cmds_block[block_id].infile > 2)
 		close(data->cmds_block[block_id].infile);
+	if (data->cmds_block[block_id].is_heredoc == true)
+	{
+		free(data->cmds_block[block_id].heredoc_data);
+		data->cmds_block[block_id].is_heredoc = false;
+	}
 }
 
 void	check_opened_outfiles(t_data *data, int block_id)
@@ -70,4 +75,14 @@ t_return_status	redirection_syntax_error(char *str)
 	free(tmp);
 	g_ret_val = 2;
 	return (FAILURE);
+}
+
+bool redir_failed(t_cmd *cmd)
+{
+	if (cmd->infile < 0
+		|| cmd->outfile < 0
+		|| cmd->fd_hd[0] < 0
+		|| cmd->is_ambiguous == true)
+		return (true);
+	return (false);
 }

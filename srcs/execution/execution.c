@@ -45,7 +45,7 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 {
 	init_data(data);
 	alloc_cmd_block(data, lst_of_tok);
-	infiles_management(data, lst_of_tok, *env_pt);
+	files_management(data, lst_of_tok, *env_pt);
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
 	if (check_if_token(lst_of_tok) != SUCCESS)

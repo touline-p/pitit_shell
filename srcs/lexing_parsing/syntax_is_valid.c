@@ -16,7 +16,6 @@
 
 static t_return_status	_syntax_is_valid_ep(t_emt token);
 bool					is_a_meta(t_emt token);
-bool					is_a_redir(t_emt token);
 
 t_return_status	syntax_is_valid(t_string_token *lst_to_check)
 {

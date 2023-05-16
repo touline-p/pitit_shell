@@ -138,6 +138,7 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 						t_string_token **str_tok_pt, char **env);
 
 void			update_tokens(t_string_token *str_tok_lst);
+bool			is_a_redir(t_emt token);
 
 /***	bonus	***/
 void			go_to_next_logical_door(t_string_token *src, \

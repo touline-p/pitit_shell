@@ -13,14 +13,6 @@
 #include "minishell_execution.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
-/*---- prototypes ------------------------------------------------------------*/
-
-static t_return_status	_set_infile(t_data *data, char **file, int block_id, \
-										char **env);
-static t_return_status	_set_heredoc(t_data *data, char *hr_doc, int block_id);
-
-/*----------------------------------------------------------------------------*/
-
 bool	is_err_next_to_pipe(t_emt token)
 {
 	if (token > CHEVRON_OT && token != STRING)
@@ -28,7 +20,7 @@ bool	is_err_next_to_pipe(t_emt token)
 	return (true);
 }
 
-static t_return_status	_set_outfile(t_data *data, char **file, \
+t_return_status	set_outfile(t_data *data, char **file, \
 									int block_id, char **env)
 {
 	char	**arr;
@@ -36,10 +28,7 @@ static t_return_status	_set_outfile(t_data *data, char **file, \
 
 	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
-	if (data->cmds_block[block_id].infile < 0
-		|| data->cmds_block[block_id].outfile < 0
-		|| data->cmds_block[block_id].fd_hd[0] < 0
-		|| data->cmds_block[block_id].is_ambiguous == true)
+	if (redir_failed(&(data->cmds_block[block_id])))
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
@@ -61,7 +50,7 @@ static t_return_status	_set_outfile(t_data *data, char **file, \
 	return (SUCCESS);
 }
 
-static t_return_status	_set_appends(t_data *data, char **file, \
+t_return_status	set_appends(t_data *data, char **file, \
 									int block_id, char **env)
 {
 	char	**arr;
@@ -69,10 +58,7 @@ static t_return_status	_set_appends(t_data *data, char **file, \
 
 	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
-	if (data->cmds_block[block_id].infile < 0
-		|| data->cmds_block[block_id].outfile < 0
-		|| data->cmds_block[block_id].fd_hd[0] < 0
-		|| data->cmds_block[block_id].is_ambiguous == true)
+	if (redir_failed(&(data->cmds_block[block_id])))
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
@@ -94,51 +80,7 @@ static t_return_status	_set_appends(t_data *data, char **file, \
 	return (SUCCESS);
 }
 
-t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, \
-									char **env)
-{
-	int				i;
-	t_string_token	*temp;
-
-	i = 0;
-	temp = lst_of_tok;
-	while (temp != NULL)
-	{
-		if (temp->token == CHEVRON_IN)
-		{
-			temp = temp->next;
-			_set_infile(data, &(temp->content), i, env);
-		}
-		else if (temp->token == HERE_DOC)
-		{
-			temp = temp->next;
-			_set_heredoc(data, temp->content, i);
-			temp->content = NULL;
-		}
-		else if (temp->token == CHEVRON_OT)
-		{
-			temp = temp->next;
-			_set_outfile(data, &(temp->content), i, env);
-		}
-		else if (temp->token == APPENDS)
-		{
-			temp = temp->next;
-			_set_appends(data, &(temp->content), i, env);
-		}
-		else if (temp->token == PIPE)
-			i++;
-		if (temp->token == O_PRTSS)
-		{
-			data->cmds_block[i].id_command = SUBSHELL;
-			go_to_next_(C_PRTSS, temp->next, &temp);
-		}
-		else
-			temp = temp->next;
-	}
-	return (SUCCESS);
-}
-
-static t_return_status	_set_infile(t_data *data, char **file, int block_id, \
+t_return_status	set_infile(t_data *data, char **file, int block_id, \
 										char **env)
 {
 	char	**arr;
@@ -146,10 +88,7 @@ static t_return_status	_set_infile(t_data *data, char **file, int block_id, \
 
 	check_opened_infiles(data, block_id);
 	signal = file_is_empty(*file);
-	if (data->cmds_block[block_id].infile < 0
-		|| data->cmds_block[block_id].outfile < 0
-		|| data->cmds_block[block_id].fd_hd[0] < 0
-		|| data->cmds_block[block_id].is_ambiguous == true)
+	if (redir_failed(&(data->cmds_block[block_id])))
 		return (SUCCESS);
 	cut_line_on(*file, &arr);
 	join_arr_on(arr, file, env);
@@ -161,31 +100,66 @@ static t_return_status	_set_infile(t_data *data, char **file, int block_id, \
 		return (FAILURE);
 	}
 	data->cmds_block[block_id].infile = open(*file, O_RDONLY, 0644);
-	if (data->cmds_block[block_id].is_heredoc == true)
-	{
-		free(data->cmds_block[block_id].heredoc_data);
-		data->cmds_block[block_id].is_heredoc = false;
-	}
 	if (data->cmds_block[block_id].infile == -1)
 	{
 		g_ret_val = 1;
 		perror(*file);
-		return (FAILURE);
 	}
 	return (SUCCESS);
 }
 
-static t_return_status	_set_heredoc(t_data *data, char *hr_data, int block_id)
+t_return_status	set_heredoc(t_data *data, char **hr_data, int block_id, \
+										char **env)
 {
+	(void)env;
 	check_opened_infiles(data, block_id);
-	if (data->cmds_block[block_id].infile < 0
-		|| data->cmds_block[block_id].outfile < 0
-		|| data->cmds_block[block_id].fd_hd[0] < 0
-		|| data->cmds_block[block_id].is_ambiguous == true)
+	if (redir_failed(&(data->cmds_block[block_id])) == true)
 		return (SUCCESS);
 	if (data->cmds_block[block_id].is_heredoc)
 		free(data->cmds_block[block_id].heredoc_data);
 	data->cmds_block[block_id].is_heredoc = true;
-	data->cmds_block[block_id].heredoc_data = hr_data;
+	data->cmds_block[block_id].heredoc_data = *hr_data;
+	*hr_data = NULL;
+	return (SUCCESS);
+}
+
+static void	_keep_going(int *i, t_string_token **temp, t_data *data)
+{
+	if ((*temp)->token == PIPE)
+		i++;
+	if ((*temp)->token == O_PRTSS)
+	{
+		data->cmds_block[*i].id_command = SUBSHELL;
+		go_to_next_(C_PRTSS, (*temp)->next, temp);
+	}
+	else
+		*temp = (*temp)->next;
+}
+
+t_return_status	files_management(t_data *data, t_string_token *lst_of_tok, \
+									char **env)
+{
+	int								i;
+	size_t							index_ft;
+	t_string_token					*temp;
+	const t_files_manage_ft			arr_ft[] = {&set_infile, \
+					&set_heredoc, &set_appends, &set_outfile};
+	const enum e_token_minishell	arr_en[] = {CHEVRON_IN, \
+					HERE_DOC, APPENDS, CHEVRON_OT};
+
+	i = 0;
+	temp = lst_of_tok;
+	while (temp != NULL)
+	{
+		index_ft = 0;
+		while (index_ft < 4 && arr_en[index_ft] != temp->token)
+			index_ft++;
+		if (index_ft < 4)
+		{
+			temp = temp->next;
+			arr_ft[index_ft](data, &(temp->content), i, env);
+		}
+		_keep_going(&i, &temp, data);
+	}
 	return (SUCCESS);
 }

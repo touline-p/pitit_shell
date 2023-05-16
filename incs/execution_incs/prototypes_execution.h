@@ -64,7 +64,7 @@ void			clean_files_token(t_string_token *lst_of_tok);
 void			clean_token(t_string_token *lst_of_tok);
 
 /*-- infiles_manage --*/
-t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, \
+t_return_status	files_management(t_data *data, t_string_token *lst_of_tok, \
 						char **env);
 
 /*-- outfiles_manage --*/
@@ -85,6 +85,7 @@ t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt);
 void			check_opened_infiles(t_data *data, int block_id);
 void			check_opened_outfiles(t_data *data, int block_id);
 t_return_status	redirection_syntax_error(char *str);
+bool			redir_failed(t_cmd *cmd);
 
 /*-- path_utils --*/
 int				get_path_size(char **paths);

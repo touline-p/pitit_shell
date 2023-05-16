@@ -61,8 +61,8 @@ static void	set_id_cmds(t_data *data)
 	{
 		if (data->cmds_block[block_id].id_command != SUBSHELL && \
 				data->cmds_block[block_id].id_command != EMPTY)
-			data->cmds_block[block_id].id_command =
-				is_builtin(data->cmds_block[block_id].commands[0]);
+			data->cmds_block[block_id].id_command \
+				= is_builtin(data->cmds_block[block_id].commands[0]);
 		block_id++;
 	}
 }

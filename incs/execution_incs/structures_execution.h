@@ -25,6 +25,8 @@ typedef struct s_cmd			t_cmd;
 
 typedef struct s_wild_data		t_w_data;
 typedef struct s_list_of_char	t_lstc;
+typedef t_return_status	(*t_files_manage_ft)(t_data *data, \
+										char **line, int i, char **env);
 
 /*---- structures ------------------------------------------------------------*/
 

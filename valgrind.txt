@@ -268,7 +268,7 @@
 ==1728815==    by 0x114FD3: ft_join_str_arr_on (in /nfs/homes/twang/Documents/cursus_42/circle_4/minishell/minishell)
 ==1728815==    by 0x10EBAC: join_arr_on (join_expands.c:15)
 ==1728815==    by 0x10BB2F: _set_infile (infiles_manage.c:151)
-==1728815==    by 0x10B8EE: infiles_management (infiles_manage.c:108)
+==1728815==    by 0x10B8EE: files_management (infiles_manage.c:108)
 ==1728815==    by 0x10CCBC: execution (execution.c:47)
 ==1728815==    by 0x10E778: launch_instructions_arr (switchman.c:129)
 ==1728815==    by 0x10E87C: switchman (switchman.c:156)

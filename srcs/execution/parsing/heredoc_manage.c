@@ -84,6 +84,50 @@ t_return_status	heredoc_management(t_data *data, \
 	return (SUCCESS);
 }
 
+static t_return_status	_set_up_get_here_doc(t_string_token *token, \
+					char **limiter, \
+					bool *do_expand, \
+					int *fd_hd)
+{
+	*do_expand = false;
+	*limiter = token->content;
+	token->content = NULL;
+	if (ft_strchr(*limiter, - '\'') || ft_strchr(*limiter, - '\"'))
+	{
+		*do_expand = true;
+		_trim_limiter(*limiter);
+	}
+	if (pipe(fd_hd) == -1)
+		return (FAILED_PIPE);
+	signal(SIGINT, SIG_IGN);
+	return (SUCCESS);
+}
+
+void	get_heredoc_setup(t_data *data)
+{
+	string_token_destructor(data->instructions_arr[0]);
+	free(data->instructions_arr);
+	free(data->prompt);
+	signal(SIGINT, &handle_signal_heredoc);
+	signal(SIGQUIT, &handle_signal_heredoc);
+}
+
+t_return_status	father_process_here_doc_reading(char *limiter, \
+				int *fd_hd, char **dst, int pid)
+{
+	int	status;
+
+	free(limiter);
+	close(fd_hd[1]);
+	if (read_fd_in_str(fd_hd[0], dst) != SUCCESS)
+		return (FAILED_MALLOC);
+	close(fd_hd[0]);
+	if (waitpid(pid, &status, WUNTRACED) == -1)
+		g_ret_val = WEXITSTATUS(status);
+	return (SUCCESS);
+}
+
+//// proteger TO DO
 static t_return_status	_get_here_doc_in_hr_data(t_data *data, \
 											t_string_token *token, char **env)
 {
@@ -91,40 +135,22 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, \
 	int		fd_hd[2];
 	bool	do_expand;
 	int		pid;
-	int		status;
 
-	do_expand = false;
-	limiter = token->content;
-	token->content = NULL;
-	if (ft_strchr(limiter, - '\'') || ft_strchr(limiter, - '\"'))
-	{
-		do_expand = true;
-		_trim_limiter(limiter);
-	}
-	if (pipe(fd_hd) == -1)
+	if (_set_up_get_here_doc(token, &limiter, &do_expand, fd_hd))
 		return (FAILED_PIPE);
-	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
 		perror("fork");
 	if (pid == 0)
 	{
-		string_token_destructor(data->instructions_arr[0]);
-		free(data->instructions_arr);
-		free(data->prompt);
-		signal(SIGINT, &handle_signal_heredoc);
-		signal(SIGQUIT, &handle_signal_heredoc);
+		get_heredoc_setup(data);
 		_get_heredoc(limiter, do_expand, fd_hd, env);
 	}
 	else
 	{
-		free(limiter);
-		close(fd_hd[1]);
-		if (read_fd_in_str(fd_hd[0], &(token->content)) != SUCCESS)
-			return (FAILED_MALLOC);
-		close(fd_hd[0]);
-		if (waitpid(pid, &status, WUNTRACED) == -1)
-			g_ret_val = WEXITSTATUS(status);
+		if (father_process_here_doc_reading(limiter, fd_hd, \
+			&(token->content), pid) != SUCCESS)
+			return (FAILURE);
 	}
 	if (g_ret_val == 130)
 		return (FAILURE);
@@ -188,7 +214,6 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	if (!here_doc)
 		perror("here doc _get_heredoc");
 	read_here_doc_in_str(limiter, &here_doc);
-	get_next_line(-1);
 	free(line);
 	free(limiter);
 	if (do_expand == false)
