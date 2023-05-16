@@ -97,7 +97,6 @@ int	main(int ac, char **av, char **env)
 		del_space_token(str_tok_lst);
 		if (heredoc_management(&data, str_tok_lst, env))
 			continue ;
-		puts("main 100");
 		switchman(&data, str_tok_lst, &env);
 	}
 	return (0);

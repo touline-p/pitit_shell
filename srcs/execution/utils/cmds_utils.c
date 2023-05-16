@@ -37,7 +37,6 @@ t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt)
 									&cd_builtin};
 	t_return_status	ret_val;
 
-	print_cmd_block("buitin switch", command);
 	ret_val = (*ft_arr[command.id_command])(av, env_pt);
 	if (command.infile > 2)
 		close(command.infile);
