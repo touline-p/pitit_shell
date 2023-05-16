@@ -37,7 +37,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (NULL);
 }
-//Make*le
+
 char	*ft_strstr_w(char *name, char *line)
 {
 	size_t	i;
