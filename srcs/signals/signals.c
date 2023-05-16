@@ -73,7 +73,7 @@ static void	handle_signal_main(int signal)
 	prompt = get_prompt(NULL, 0);
 	prompt = update_prompt(prompt);
 	printf("%s", prompt);
-	//rl_on_new_line();
+//	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }

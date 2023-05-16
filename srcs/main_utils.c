@@ -34,7 +34,7 @@ void	clean_the_prompt(char *prompt, char *line, char **env)
 		free(prompt);
 		ft_free_split(env);
 		clear_history();
-		ft_dprintf(1, RED"exit\n"END);
+		//ft_dprintf(1, RED"exit\n"END);
 		exit(0);
 	}
 }

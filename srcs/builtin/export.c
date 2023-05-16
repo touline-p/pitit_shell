@@ -30,7 +30,6 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 			return (FAILED_MALLOC);
 		tmp++;
 	}
-	g_ret_val = 0;
 	return (g_ret_val);
 }
 
