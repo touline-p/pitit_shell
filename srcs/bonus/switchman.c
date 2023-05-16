@@ -138,6 +138,7 @@ t_return_status	launch_instructions_arr(t_data *data, \
 t_return_status	switchman(t_data *data, \
 					t_string_token *token_lst, char ***env_pt)
 {
+	display_str_token(token_lst);
 	if (data->instructions_arr != NULL)
 		free(data->instructions_arr);
 	data->instructions_arr = malloc(sizeof(t_string_token *) \
@@ -146,7 +147,7 @@ t_return_status	switchman(t_data *data, \
 		return (FAILURE);
 	fill(data->instructions_arr, token_lst);
 	/*
-	printf("decoupage de chaque bloc\n");
+	f("decoupage de chaque bloc\n");
 	int i  = 0;
 	while (data->instructions_arr[i])
 	{

@@ -70,14 +70,14 @@ int	main(int ac, char **av, char **env)
 		init_signals();
 		get_prompt_on(&(data.prompt), env);
 		line = readline(data.prompt);
-		if (errno)
-		{
-			perror("readline");
-			errno = SUCCESS;
-		}
 		if (line == NULL || ft_strcmp("", line) == 0)
 		{
 			clean_the_prompt(data.prompt, line, env);
+			continue ;
+		}
+		if (ft_str_is_ascii(line) == false)
+		{
+			errno = SUCCESS;
 			continue ;
 		}
 		if (strncmp(line, "\\\\", 2) == 0)
@@ -86,8 +86,10 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		}
 		add_history(line);
+		printf("%p\n", str_tok_lst);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
+		printf("%p\n", str_tok_lst);
 		del_space_token(str_tok_lst);
 		data.instructions_arr = malloc(sizeof(t_string_token *) * 2);
 		if (data.instructions_arr == NULL)

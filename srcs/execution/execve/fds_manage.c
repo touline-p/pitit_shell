@@ -78,7 +78,6 @@ static void	_heredoc_forking(int *fd, t_cmd *cmd, t_data *data, char **env_pt)
 	}
 	close(fd[1]);
 	free(cmd->heredoc_data);
-	free(data->cmds_block);
 	exit(SUCCESS);
 }
 

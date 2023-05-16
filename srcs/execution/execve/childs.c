@@ -68,6 +68,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		_manage_the_pipe(data, block_id);
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
+		print_cmd_block(ft_itoa(block_id), data->cmds_block[block_id]);
 		data->cmds_block[block_id].process_id = fork();
 		_fork_process(data, data->cmds_block[block_id].process_id, \
 						block_id, env);
@@ -139,6 +140,13 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 	{
 		builtin_switch(command_block, command_block.commands, \
             env);
+		if (command_block.id_command == EXPORT)
+		{
+			free(command_block.commands[0]);
+			free(command_block.commands);
+		}
+		else
+			ft_free_split(command_block.commands);
 		ft_free_split(*env);
 		exit(0);
 	}

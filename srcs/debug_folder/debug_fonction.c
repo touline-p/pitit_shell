@@ -47,7 +47,10 @@ void    print_cmd_block(char *msg, t_cmd cmd)
 			usleep(5000);
 	dprintf(2, "\n\nname : %s\n", msg);
     print_builtin(cmd.id_command);
-    ft_eprint_split(cmd.commands);
+	if (cmd.id_command != SUBSHELL)
+		ft_eprint_split(cmd.commands);
+	else
+		display_str_token((t_string_token *)cmd.commands);
     print_is_heredoc(cmd.is_heredoc);
     print_fd("infile",cmd.infile);
     print_fd("outfile",cmd.outfile);

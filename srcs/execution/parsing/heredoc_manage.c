@@ -153,8 +153,9 @@ t_return_status	read_here_doc_in_str(char *limiter, char **documentation)
 		*documentation = strjoin_path_cmd(*documentation, line);
 		*documentation = ft_strjoin_free_first_sf(*documentation, "\n");
 		if (*documentation == NULL)
-		free(line);
+			free(line);
 	}
+	printf(*documentation);
 	if (errno)
 		return (FAILURE);
 	return (SUCCESS);
@@ -177,6 +178,7 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	if (do_expand == false)
 		_expand_hd(&here_doc, env);
 	ft_free_split(env);
+	printf(">-%s-<\n", here_doc);
 	if (here_doc)
 		write(fd_hd[1], here_doc, ft_strlen(here_doc));
 	close(fd_hd[0]);

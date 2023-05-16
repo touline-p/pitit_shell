@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
+#include "minishell_parsing.h"
 
 void	clean_files_token(t_string_token *lst_of_tok)
 {
@@ -19,6 +20,8 @@ void	clean_files_token(t_string_token *lst_of_tok)
 	temp = lst_of_tok;
 	while (temp != NULL)
 	{
+		if (temp->token == O_PRTSS)
+			go_to_next_(C_PRTSS, temp->next, &temp);
 		if (temp->token == CHEVRON_IN || temp->token == CHEVRON_OT || \
 			temp->token == APPENDS || temp->token == HERE_DOC)
 		{
@@ -35,6 +38,8 @@ void	clean_token(t_string_token *lst_of_tok)
 	temp = lst_of_tok;
 	while (temp->next != NULL)
 	{
+		if (temp->token == O_PRTSS)
+			go_to_next_(C_PRTSS, temp->next, &temp);
 		if (temp->next->token == CHEVRON_IN || temp->next->token == CHEVRON_OT \
 		|| temp->next->token == APPENDS || temp->next->token == HERE_DOC)
 			del_next_string_token(temp);
