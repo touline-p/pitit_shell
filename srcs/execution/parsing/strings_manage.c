@@ -34,14 +34,12 @@ static t_return_status	get_raw_cmds(t_data *data, t_string_token *lst_of_tok, ch
 	temp = lst_of_tok;
 	while (temp->token != EOL)
 	{
-		if (temp->next->token == PIPE || temp->next->token == EOL)
-			data->cmds_block[block_id].id_command = EMPTY;
 		if (temp->next->token == O_PRTSS)
 			data->cmds_block[block_id].commands = subshell_preparation(&temp);
 		else
 		{
-			data->cmds_block[block_id].commands = join_token_lst(&temp, env);
-			expand_wildcards(&(data->cmds_block[block_id].commands));
+			if (join_token_lst_on(&(data->cmds_block[block_id]), &temp, env) != SUCCESS)
+				return (FAILED_MALLOC);
 		}
 		block_id++;
 	}
@@ -58,7 +56,7 @@ static void	set_id_cmds(t_data *data)
 	block_id = 0;
 	while (data->cmds_block[block_id].commands)
 	{
-		if (data->cmds_block[block_id].id_command != SUBSHELL)
+		if (data->cmds_block[block_id].id_command != SUBSHELL && data->cmds_block[block_id].id_command != EMPTY)
 			data->cmds_block[block_id].id_command =
 					is_builtin(data->cmds_block[block_id].commands[0]);
 		block_id++;

@@ -26,5 +26,6 @@ t_return_status	env_builtin(char **av, char ***env_pt)
 		pin++;
 	}
 	ft_free_split(*env_pt);
+	g_ret_val = 0;
 	return (SUCCESS);
 }

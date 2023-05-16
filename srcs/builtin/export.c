@@ -30,6 +30,7 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 			return (free(*args), ft_free_split(tmp), FAILED_MALLOC);
 		tmp++;
 	}
+	g_ret_val = 0;
 	return (free(*args), free(args), g_ret_val);
 }
 

@@ -76,7 +76,7 @@ void			strings_management(t_data *data, t_string_token *lst_of_tok, \
 
 /*-- cmds_utils --*/
 t_builtin		is_builtin(char *string);
-t_return_status	builtin_switch(t_builtin builtin, char **av, char ***env_pt);
+t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt);
 
 /*-- files_utils --*/
 void			check_opened_infiles(t_data *data, int block_id);
@@ -109,6 +109,7 @@ void			del_next_string_token(t_string_token *tok);
 void			display_str_token(t_string_token *tok);
 void			display_t_emt_string(t_string_token *token);
 char			**join_token_lst(t_string_token **arg, char **env);
+t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env);
 void			manage_ambiguous(t_cmd *cmd, char *file);
 t_return_status	expand_for_args(t_string_token *token_lst, char **env);
 t_return_status	switchman(t_data *data, \
@@ -126,6 +127,7 @@ char	**subshell_preparation(t_string_token **start);
 /*-- main_utils --*/
 t_return_status	check_arguments(int ac, char **av);
 void			clean_the_prompt(char *prompt, char *line, char **env);
+char 			*get_prompt(char *str, int flag);
 
 /*-- debug --*/
 void			print_pid(int pid);

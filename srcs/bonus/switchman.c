@@ -44,8 +44,8 @@ void	go_to_next_logical_door(t_string_token *src, t_string_token **dst)
 	size_t			and_l;
 	size_t			or_l;
 
-	and_l = go_to_next_(AND, src->next, &and_pt);
-	or_l = go_to_next_(OR, src->next, &or_pt);
+	and_l = go_to_next_(AND, src, &and_pt);
+	or_l = go_to_next_(OR, src, &or_pt);
 	if (and_l < or_l)
 		*dst = and_pt;
 	else
@@ -59,7 +59,7 @@ size_t	count_instructions_node(t_string_token *str_tok_lst)
 
 	count = 0;
 	tmp = str_tok_lst;
-	while (tmp->token != EOL)
+	while (tmp->next != NULL)
 	{
 		count++;
 		go_to_next_logical_door(tmp->next, &tmp);
@@ -77,7 +77,7 @@ t_return_status	fill(t_string_token **instructions_arr, \
 	while (str_tok_lst->token != EOL)
 	{
 		instructions_arr[i++] = str_tok_lst;
-		go_to_next_logical_door(str_tok_lst, &next);
+		go_to_next_logical_door(str_tok_lst->next, &next);
 		while (str_tok_lst->next != next)
 			str_tok_lst = str_tok_lst->next;
 		if (str_tok_lst->next->token != EOL)
@@ -131,11 +131,9 @@ t_return_status	launch_instructions_arr(t_data *data, \
 		if (g_ret_val == 2)
 			return (SUCCESS);
 	}
-//	clean_last_string_tokens_lst(instructions_arr, data->index);
 	free(instructions_arr);
 	return (SUCCESS);
 }
-int profondeur = 0;
 
 t_return_status	switchman(t_data *data, \
 					t_string_token *token_lst, char ***env_pt)

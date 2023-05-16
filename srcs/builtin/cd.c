@@ -24,7 +24,7 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 	if (ft_str_array_len(av) != 2)
 	{
 		g_ret_val = 1;
-		return (dprintf(2, "cd: too many arguments\n"), \
+		return (dprintf(2, "cd: bad arguments number\n"), \
                         ft_free_split(av), 1);
 	}
 	pwd = getcwd(NULL, 0);
@@ -42,6 +42,7 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 		return (FAILURE);
 	}
 	ft_free_split(av);
+	g_ret_val = 0;
 	if (_update_pwd_var(pwd, *env_pt) != SUCCESS)
 		return (FAILURE);
 	return (SUCCESS);
