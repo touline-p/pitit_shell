@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_join_str_arr_on.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 02:04:26 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/10 02:04:27 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:54:00 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
 	arr_pin = str_arr;
 	while (*arr_pin)
 		str_pin = ft_strcpy_rn(str_pin, *(arr_pin++));
+	
 	return (SUCCESS);
 }

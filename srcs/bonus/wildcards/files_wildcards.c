@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:05:17 by twang             #+#    #+#             */
-/*   Updated: 2023/05/14 19:21:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 15:52:35 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static t_return_status	_get_wildcard_file(char **line_pt)
 			break ;
 		if (find_matching_files(*line_pt, files->d_name) == SUCCESS)
 		{
-			// free(line_pt); -> double free
+			free(*line_pt);
 			*line_pt = ft_strdup(files->d_name);
 			if (*line_pt == NULL)
 				return (FAILURE);
