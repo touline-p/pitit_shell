@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_return_status				_count_atoi(const char *str, int *nb_pt);
+t_return_status		_count_atoi(const char *str, int *nb_pt);
 static const char	*ft_skipspace(const char *ptr);
 
 t_return_status	ft_atoi_on(const char *str, int *nb_pt)
@@ -41,9 +41,8 @@ t_return_status	_count_atoi(const char *str, int *nb_pt)
 		counter = 0;
 		while ("0123456789"[counter] != *str && counter < 10)
 			counter++;
-		if (counter == 10 || (res * 10 + counter) * *nb_pt / 10 != res * *nb_pt) {
+		if (counter == 10 || (res * 10 + counter) * *nb_pt / 10 != res * *nb_pt)
 			return (FAILURE);
-		}
 		res = res * 10 + counter;
 		str++;
 	}
