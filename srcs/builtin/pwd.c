@@ -19,14 +19,11 @@ t_return_status	pwd_builtin(char **args, char ***env_pt)
 
 	(void)args;
 	(void)env_pt;
-	/*(void)args;
-	if (ft_str_array_len(args) > 1)
-		return (dprintf(2, "pwd: too many arguments\n"), \
-						ft_free_split(args), FAILURE);*/
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		return (ft_dprintf(2, "Bro j'ai pas trouve dsl, tu es perdu 🤷🏻‍♂️ 🤷🏼‍♀️\n"), \
-						FAILURE);
+		return (ft_dprintf(2, \
+		"Bro j'ai pas trouve dsl, tu es perdu 🤷🏻‍♂️ 🤷🏼‍♀️\n"), \
+			FAILURE);
 	printf("%s\n", pwd);
 	free(pwd);
 	g_ret_val = 0;

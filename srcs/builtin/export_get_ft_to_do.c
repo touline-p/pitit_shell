@@ -31,7 +31,10 @@ t_export_ft	get_ft_to_do(char *line, char **env)
 	if (key_is_not_alnum(line))
 		return (&not_in_context_error);
 	if (has_a_key_from_env(line, env) == false)
+	{
+		g_ret_val = 0;
 		return (&add_str_to_env);
+	}
 	if (eq == NULL)
 		return (&do_nothing_t_export_ft);
 	if (plus == eq - 1)
@@ -65,6 +68,7 @@ t_return_status	concat_content_to_line_in_env(char *line, char ***env_pt)
 	env_line = get_line_addr_from_key(line, *env_pt);
 	tmp = *env_line;
 	*env_line = ft_strjoin(*env_line, content);
+	g_ret_val = 0;
 	free(tmp);
 	free(line);
 	return (SUCCESS);
@@ -74,6 +78,7 @@ t_return_status	do_nothing_t_export_ft(char *line, char ***env_pt)
 {
 	(void)line;
 	(void)env_pt;
+	g_ret_val = 0;
 	return (SUCCESS);
 }
 

@@ -103,9 +103,9 @@ static t_return_status _is_executable(char *command)
 		}
 		return (SUCCESS);
 	}
-	g_ret_val = 126;
-	ft_dprintf(2,"minishell: %s: Permission denied\n", command);
-	return (SUCCESS);
+	g_ret_val = 127;
+	ft_dprintf(2,"minishell: %s: No such file or directory\n", command);
+	return (FAILURE);
 }
 
 static void	_child_launch_act(t_data *data, int nb_of_pipe, \

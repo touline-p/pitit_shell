@@ -54,19 +54,10 @@ int	main(int ac, char **av, char **env)
 		init_signals();
 		get_prompt_on(&(data.prompt), env);
 		line = readline(data.prompt);
+		errno = 0;
 		if (line == NULL || ft_strcmp("", line) == 0)
 		{
 			clean_the_prompt(data.prompt, line, env);
-			continue ;
-		}
-		if (ft_str_is_ascii(line) == false)
-		{
-			errno = SUCCESS;
-			continue ;
-		}
-		if (strncmp(line, "\\\\", 2) == 0)
-		{
-			free(line);
 			continue ;
 		}
 		add_history(line);

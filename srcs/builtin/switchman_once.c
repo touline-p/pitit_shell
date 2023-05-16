@@ -22,7 +22,8 @@ static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 	free(data->cmds_block);
 	free(data->prompt);
 	ft_free_all_str_lst(data, data->index);
-	if (duplicate_fds(cmd, data, env_pt) != SUCCESS) {
+	if (duplicate_fds(cmd, data, env_pt) != SUCCESS)
+	{
 		ft_free_split(cmd.commands);
 		ft_free_split(*env_pt);
 		g_ret_val = 1;
@@ -64,9 +65,8 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 		_execute_son(data, cmd, env_pt);
 	ft_free_split(cmd.commands);
 	close_switchman_once(cmd);
-	if (waitpid(pid, &status, WUNTRACED) == -1) {
+	if (waitpid(pid, &status, WUNTRACED) == -1)
 		g_ret_val = 1;
-	}
 	else if (WIFEXITED(status))
 		g_ret_val = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))

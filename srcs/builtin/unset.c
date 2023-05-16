@@ -21,9 +21,6 @@ t_return_status	unset_builtin(char **args, char ***env_pt)
 	char	**tmp;
 	char	*line_to_del;
 
-	if (ft_str_array_len(args) == 1)
-		return (_unset_builtin_ep("", \
-				args, SUCCESS));
 	tmp = args + 1;
 	while (*tmp)
 	{
@@ -49,6 +46,5 @@ static	t_return_status	_unset_builtin_ep(char *msg, char **trash, \
 	if (trash != NULL)
 		ft_free_split(trash);
 	dprintf(2, "%s", msg);
-	g_ret_val = 1;
 	return (ret_val);
 }

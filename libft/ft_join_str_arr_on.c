@@ -29,6 +29,5 @@ t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt)
 	arr_pin = str_arr;
 	while (*arr_pin)
 		str_pin = ft_strcpy_rn(str_pin, *(arr_pin++));
-	
 	return (SUCCESS);
 }

@@ -30,7 +30,6 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 			return (FAILED_MALLOC);
 		tmp++;
 	}
-	g_ret_val = 0;
 	return (g_ret_val);
 }
 
@@ -65,7 +64,6 @@ static t_return_status	_export_display(char **env)
 			_display_unic_export(line);
 		line = get_next_line_in_env(line, env);
 	}
-	ft_free_split(env);
 	return (SUCCESS);
 }
 
