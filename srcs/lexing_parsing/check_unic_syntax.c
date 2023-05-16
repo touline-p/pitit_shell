@@ -1,13 +1,21 @@
-//
-// Created by bpoumeau on 5/10/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_unic_syntax.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 17:56:02 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/05/16 17:56:05 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../incs/execution_incs/minishell_execution.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
-typedef bool (*t_act_update)(t_string_token ** token);
+typedef bool	(*t_act_update)(t_string_token ** token);
 
-bool update_to_filename(t_string_token **tmp)
+bool	update_to_filename(t_string_token **tmp)
 {
 	if ((*tmp)->next->token != STRING)
 	{
@@ -37,14 +45,14 @@ bool	dn_ut(t_string_token **tmp)
 	return (true);
 }
 
-void update_tokens(t_string_token *str_tok_lst)
+void	update_tokens(t_string_token *str_tok_lst)
 {
-	const	t_act_update	ft_arr[] = {&dn_ut, &dn_ut, &dn_ut, \
-	&update_to_filename, &update_to_filename,  &dn_ut, &dn_ut, \
-	&update_to_hr_data, &update_to_filename, &dn_ut, &dn_ut,  \
-	dn_ut, &dn_ut, &dn_ut, &dn_ut, &dn_ut, &dn_ut,  \
+	const t_act_update	ft_arr[] = {&dn_ut, &dn_ut, &dn_ut, \
+	&update_to_filename, &update_to_filename, &dn_ut, &dn_ut, \
+	&update_to_hr_data, &update_to_filename, &dn_ut, &dn_ut, \
+	dn_ut, &dn_ut, &dn_ut, &dn_ut, &dn_ut, &dn_ut, \
 	dn_ut, &dn_ut, &dn_ut, &dn_ut};
-	t_string_token	*tmp;
+	t_string_token		*tmp;
 
 	tmp = str_tok_lst;
 	while (tmp->token != EOL)

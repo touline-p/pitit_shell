@@ -28,7 +28,7 @@ void	init_signals(void)
 	signal(SIGINT, &handle_signal_main);
 }
 
-char 	*get_color( void )
+char	*get_color( void )
 {
 	if (g_ret_val == 130)
 		return (YELLOW);
@@ -41,7 +41,7 @@ char 	*get_color( void )
 void	change_color(char *prompt)
 {
 	char	*tmp;
-	char 	*color;
+	char	*color;
 
 	color = get_color();
 	tmp = ft_strnstr(prompt, GREEN, ft_strlen(prompt));
@@ -65,15 +65,14 @@ char	*update_prompt(char *prompt)
 
 static void	handle_signal_main(int signal)
 {
-	(void)signal;
 	char	*prompt;
 
+	(void)signal;
 	g_ret_val = 130;
 	ft_dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
 	prompt = get_prompt(NULL, 0);
 	prompt = update_prompt(prompt);
 	printf("%s", prompt);
-//	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
