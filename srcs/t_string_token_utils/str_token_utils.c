@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_token_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:43:42 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/03/11 16:53:24 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:03:11 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	next_control_operator_is_a_pipe(t_string_token *tok)
 	return (0);
 }
 
-char *format_string_token(t_string_token *token)
+char	*format_string_token(t_string_token *token)
 {
 	const char	*msgarr[] = {"start", "\'|", "ifnot", "\'<", \
 	"\'>", "\'||", "\'&&", "\'<<", "\'>>", "lfpar", \

@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 11:44:13 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:16:54 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 	return (SUCCESS);
 }
 
-static t_return_status _is_executable(char *command)
+static t_return_status	_is_executable(char *command)
 {
 	struct stat	st;
 
@@ -91,30 +91,30 @@ static t_return_status _is_executable(char *command)
 	{
 		if (!(st.st_mode & S_IXUSR))
 		{
-			ft_dprintf(2,"minishell: %s: Permission denied\n", command);
+			ft_dprintf(2, "minishell: %s: Permission denied\n", command);
 			g_ret_val = 126;
 			return (FAILURE);
 		}
 		if (S_ISDIR(st.st_mode))
 		{
-			ft_dprintf(2,"minishell: %s: Is a directory\n", command);
+			ft_dprintf(2, "minishell: %s: Is a directory\n", command);
 			g_ret_val = 126;
 			return (FAILURE);
 		}
 		return (SUCCESS);
 	}
 	g_ret_val = 127;
-	ft_dprintf(2,"minishell: %s: No such file or directory\n", command);
+	ft_dprintf(2, "minishell: %s: No such file or directory\n", command);
 	return (FAILURE);
 }
 
 static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 								char ***env, int block_id)
 {
-	char	*command;
-	t_cmd	command_block;
-	t_data	new_data;
-	t_string_token *casted_t_str_token;
+	char			*command;
+	t_cmd			command_block;
+	t_data			new_data;
+	t_string_token	*casted_t_str_token;
 
 	bzero(&new_data, sizeof(t_data));
 	command_block = data->cmds_block[block_id];
@@ -138,7 +138,7 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 	if (command_block.id_command != CMD && command_block.id_command != EMPTY)
 	{
 		builtin_switch(command_block, command_block.commands, \
-            env);
+						env);
 		if (command_block.id_command == EXPORT)
 		{
 			free(command_block.commands[0]);

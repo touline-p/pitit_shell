@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/10 17:39:58 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:35:48 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	init_data(data);
 	alloc_cmd_block(data, lst_of_tok);
 	infiles_management(data, lst_of_tok, *env_pt);
-	outfiles_management(data, lst_of_tok, *env_pt);
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
 	if (check_if_token(lst_of_tok) != SUCCESS)
@@ -56,10 +55,11 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	}
 	strings_management(data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
-	//avant
 	if (g_ret_val == 130 && check_cmd(data->cmds_block))
 		return ;
-	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD && data->cmds_block->id_command != SUBSHELL && data->cmds_block->id_command != EMPTY)
+	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD && \
+		data->cmds_block->id_command != SUBSHELL && \
+		data->cmds_block->id_command != EMPTY)
 		switchman_once(data, env_pt);
 	else
 	{
@@ -137,7 +137,7 @@ static void	wait_for_process_ids(t_data *data)
 	{
 		if (wait_for_command(data->cmds_block[block_id].process_id, \
 								&status, &signals) == false)
-			break;
+			break ;
 		block_id++;
 	}
 }

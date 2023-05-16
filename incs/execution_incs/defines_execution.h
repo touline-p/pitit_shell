@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:27:48 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/04 16:35:05 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 18:25:52 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,23 @@
 # define EOSTR 0
 # define IFS " \t\n"
 # define PROMPT_MESSAGE " - Y a quoi : "
+# define START_MSG_00 "\n--------------------------------------------------"
+# define START_MSG_01 "----------------------------\t\n"
+# define START_MSG_02 " __    __   __   __   __   __   ______   __  __   __"
+# define START_MSG_03 "____   __       __        \n"
+# define START_MSG_04 "/\\ \"-./  \\ /\\ \\ /\\ \"-.\\ \\ /\\ \\ /\\  ___\\"
+# define START_MSG_05 " /\\ \\_\\ \\ /\\  ___\\ /\\ \\     /\\ \\       \n"
+# define START_MSG_06 "\\ \\ \\-./\\ \\\\ \\ \\\\ \\ \\-.  \\\\ \\ \\\\ \\_"
+# define START_MSG_07 "__  \\\\ \\  __ \\\\ \\  __\\ \\ \\ \\____\\ \\ \\__"
+# define START_MSG_08 "__  \n"
+# define START_MSG_09 " \\ \\_\\ \\ \\_\\\\ \\_\\\\ \\_\\\\\"\\_\\\\ \\_\\"
+# define START_MSG_10 "\\/\\_____\\\\ \\_\\ \\_\\\\ \\_____\\\\ \\_____\\\\ "
+# define START_MSG_11 "\\_____\\ \n"
+# define START_MSG_12 "  \\/_/  \\/_/ \\/_/ \\/_/ \\/_/ \\/_/ \\/_____/ \\/_"
+# define START_MSG_13 "/\\/_/ \\/_____/ \\/_____/ \\/_____/ \n"
+# define START_MSG_14 "\t\t\t\t\t\t by ⭐ bpoumeau & twang ⭐\n\n"
 
 typedef t_return_status	(*t_builtin_ft)(char **av, char ***env_pt);
+typedef bool			(*t_increment_ft)(char line_pt, void *arg);
 
 #endif 

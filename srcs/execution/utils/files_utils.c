@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:27:15 by twang             #+#    #+#             */
-/*   Updated: 2023/05/10 17:40:55 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:40:17 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ bool	file_is_empty(char *file)
 	return (false);
 }
 
-t_return_status redirection_syntax_error(char *str)
+t_return_status	redirection_syntax_error(char *str)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (str == NULL)
 	{

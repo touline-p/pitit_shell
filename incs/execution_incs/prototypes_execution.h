@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/14 19:11:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:47:02 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_return_status	check_line(char *line);
 int				get_alloc_size(char *line);
 t_return_status	find_matching_files(char *line, char *name);
 void			replace_wild_card(char *line);
-t_return_status wildcard_files(t_data *data, char **file, int block_id);
+t_return_status	wildcard_files(t_data *data, char **file, int block_id);
 t_return_status	fill_dst_arr(char *line, char **arr_to_fill);
 
 /*-- wildcards --*/
@@ -38,7 +38,8 @@ t_return_status	expand_wildcards(char ***original_pt);
 /*---- Execution -------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 
-void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt);
+void			execution(t_data *data, t_string_token *lst_of_tok, \
+							char ***env_pt);
 
 /*-- execve ------------------------------------------------------------------*/
 
@@ -48,8 +49,10 @@ void			replace_space_by_minus(unsigned int nb, char *content);
 t_return_status	childs_execve(t_data *data, char ***env);
 
 /*-- fds_manage --*/
-t_return_status	heredoc_management(t_data *data, t_string_token *str_tok_lst, char **env);
-t_return_status check_unic_syntax(t_string_token *actual, bool *string, t_pr_stat *in_parentheses);
+t_return_status	heredoc_management(t_data *data, t_string_token *str_tok_lst, \
+									char **env);
+t_return_status	check_unic_syntax(t_string_token *actual, bool *string, \
+									t_pr_stat *in_parentheses);
 void			close_fds(t_data *data, int block_id);
 void			close_all_fds(t_data *data, int block_id);
 t_return_status	duplicate_fds(t_cmd block, t_data *data, char ***env_pt);
@@ -118,7 +121,7 @@ void			ft_free_all_str_lst(t_data *data, int index);
 t_return_status	read_fd_in_str(int fd, char **dst);
 t_return_status	heredoc_child_management(t_cmd *cmd, \
 						t_data *data, char **env_pt);
-char	**subshell_preparation(t_string_token **start);
+char			**subshell_preparation(t_string_token **start);
 
 /*----------------------------------------------------------------------------*/
 /*---- Main ------------------------------------------------------------------*/
@@ -127,7 +130,10 @@ char	**subshell_preparation(t_string_token **start);
 /*-- main_utils --*/
 t_return_status	check_arguments(int ac, char **av);
 void			clean_the_prompt(char *prompt, char *line, char **env);
-char 			*get_prompt(char *str, int flag);
+
+/*-- prompt --*/
+t_return_status	get_prompt_on(char **prompt_pt, char **env);
+char			*get_prompt(char *str, int flag);
 
 /*-- debug --*/
 void			print_pid(int pid);

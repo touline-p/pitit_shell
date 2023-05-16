@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 15:02:36 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:30:27 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static t_return_status	_set_infile(t_data *data, char **file, int block_id, char **env);
+static t_return_status	_set_infile(t_data *data, char **file, int block_id, \
+										char **env);
 static t_return_status	_set_heredoc(t_data *data, char *hr_doc, int block_id);
 
 /*----------------------------------------------------------------------------*/
@@ -93,7 +94,8 @@ static t_return_status	_set_appends(t_data *data, char **file, \
 	return (SUCCESS);
 }
 
-t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, char **env)
+t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, \
+									char **env)
 {
 	int				i;
 	t_string_token	*temp;
@@ -136,7 +138,8 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 	return (SUCCESS);
 }
 
-static t_return_status	_set_infile(t_data *data, char **file, int block_id, char **env)
+static t_return_status	_set_infile(t_data *data, char **file, int block_id, \
+										char **env)
 {
 	char	**arr;
 	bool	signal;
@@ -186,5 +189,3 @@ static t_return_status	_set_heredoc(t_data *data, char *hr_data, int block_id)
 	data->cmds_block[block_id].heredoc_data = hr_data;
 	return (SUCCESS);
 }
-
-

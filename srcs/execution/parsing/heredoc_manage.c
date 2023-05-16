@@ -1,24 +1,38 @@
-//
-// Created by bpoumeau on 5/10/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_manage.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 19:18:27 by twang             #+#    #+#             */
+/*   Updated: 2023/05/16 19:27:09 by twang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell_execution.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
-static void				_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env);
-static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *token, char **env);
+/*---- prototypes ------------------------------------------------------------*/
+
+static void				_get_heredoc(char *limiter, int do_expand, int *fd_hd, \
+											char **env);
+static t_return_status	_get_here_doc_in_hr_data(t_data *data, \
+											t_string_token *token, char **env);
 static void				_trim_limiter(char *s);
 static t_return_status	_expand_hd(char **here_doc, char **env);
 
-void reset_booleans(bool *a, t_pr_stat *b)
+/*----------------------------------------------------------------------------*/
+
+void	reset_booleans(bool *a, t_pr_stat *b)
 {
 	*a = false;
 	*b = NO_PAR;
 }
 
-static t_return_status 	check_closing_par(t_string_token *string_token_lst)
+static t_return_status	check_closing_par(t_string_token *string_token_lst)
 {
-	int open_par;
+	int	open_par;
 
 	open_par = 0;
 	while (string_token_lst->next != NULL)
@@ -44,10 +58,10 @@ static t_return_status 	check_closing_par(t_string_token *string_token_lst)
 	return (SUCCESS);
 }
 
-t_return_status heredoc_management(t_data *data, t_string_token *string_token_lst, char **env)
+t_return_status	heredoc_management(t_data *data, \
+								t_string_token *string_token_lst, char **env)
 {
 	t_string_token	*tmp;
-
 
 	tmp = string_token_lst;
 	update_tokens(string_token_lst);
@@ -70,18 +84,19 @@ t_return_status heredoc_management(t_data *data, t_string_token *string_token_ls
 	return (SUCCESS);
 }
 
-static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *token, char **env)
+static t_return_status	_get_here_doc_in_hr_data(t_data *data, \
+											t_string_token *token, char **env)
 {
 	char	*limiter;
-	int 	fd_hd[2];
+	int		fd_hd[2];
 	bool	do_expand;
-	int 	pid;
-	int 	status;
+	int		pid;
+	int		status;
 
 	do_expand = false;
 	limiter = token->content;
 	token->content = NULL;
-	if (ft_strchr(limiter, -'\'') || ft_strchr(limiter, -'\"'))
+	if (ft_strchr(limiter, - '\'') || ft_strchr(limiter, - '\"'))
 	{
 		do_expand = true;
 		_trim_limiter(limiter);
@@ -108,7 +123,7 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, t_string_token *to
 		if (read_fd_in_str(fd_hd[0], &(token->content)) != SUCCESS)
 			return (FAILED_MALLOC);
 		close(fd_hd[0]);
-		if (waitpid(pid,  &status, WUNTRACED) == -1)
+		if (waitpid(pid, &status, WUNTRACED) == -1)
 			g_ret_val = WEXITSTATUS(status);
 	}
 	if (g_ret_val == 130)
@@ -126,7 +141,9 @@ static bool	_read_hd_ep(char *line, int nb_of_line, char *limiter)
 	}
 	if (!line)
 	{
-		ft_dprintf(2, RED"minishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n"END, nb_of_line, limiter);
+		ft_dprintf(2, RED"minishell: warning: ");
+		ft_dprintf(2, "here-document at line %d", nb_of_line);
+		ft_dprintf(2, " delimited by end-of-file (wanted `%s')\n"END, limiter);
 		return (true);
 	}
 	return (false);
@@ -147,7 +164,7 @@ t_return_status	read_here_doc_in_str(char *limiter, char **documentation)
 		if (_read_hd_ep(line, nb_of_line, limiter))
 			break ;
 		if (!ft_strncmp(limiter, line, ft_strlen(limiter) + 1))
-			break;
+			break ;
 		if (*documentation == NULL)
 			break ;
 		*documentation = strjoin_path_cmd(*documentation, line);
@@ -185,7 +202,7 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	exit(g_ret_val);
 }
 
-static t_return_status _expand_hd(char **here_doc, char **env)
+static t_return_status	_expand_hd(char **here_doc, char **env)
 {
 	char	**arr;
 
@@ -199,7 +216,7 @@ static void	_trim_limiter(char *s)
 {
 	while (*s)
 	{
-		while (*s && (*s != -'\'' && *s != -'\"'))
+		while (*s && (*s != - '\'' && *s != - '\"'))
 			s++;
 		if (*s == '\0')
 			break ;

@@ -1,11 +1,25 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cut_line.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 18:24:33 by twang             #+#    #+#             */
+/*   Updated: 2023/05/16 18:27:06 by twang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../incs/execution_incs/minishell_execution.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"
 
+/*---- prototypes ------------------------------------------------------------*/
+
 static size_t			count_indep_words(char *line);
 static t_return_status	check_allocations(char **line_arr, size_t arr_len);
 static t_return_status	alloc_each_cells(char *line, char **line_arr);
+
+/*----------------------------------------------------------------------------*/
 
 t_return_status	cut_line_on(char *line, char ***res_pt)
 {
@@ -19,8 +33,6 @@ t_return_status	cut_line_on(char *line, char ***res_pt)
 	*res_pt = line_arr;
 	return (free(line), SUCCESS);
 }
-
-typedef bool (*t_increment_ft)(char line_pt, void *arg);
 
 bool	is_eq_to(char obj, void *to_compare)
 {
@@ -155,38 +167,3 @@ static	t_return_status	alloc_each_cells(char *line, char **line_arr)
 	line_arr[arr_indx] = NULL;
 	return (check_allocations(line_arr, arr_indx));
 }
-
-#ifdef TST_CUT_LINE
-
-#include <stdio.h>
-
-void change(char *line)
-{
-	while (*line)
-	{
-		if (is_from(*line, "'\""))
-			*line = -(*line);
-		line++;
-	}
-}
-
-int main(int ac, char **av, char **env)
-{
-	(void)ac; (void)av; (void)env;
-
-	char	*line = ft_strdup("expand\"qui\" \'marche\'$USER ");
-	char 	**line_arr;
-	change(line);
-	cut_line_on(line, &line_arr);
-	char **tmp = line_arr;
-	int i = 0;
-	while (*tmp)
-	{
-		i++;
-		printf("%d: ->%s<-, \n", i, *tmp);
-		tmp++;
-	}
-	ft_free_split(line_arr);
-}
-
-#endif

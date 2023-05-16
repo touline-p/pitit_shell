@@ -1,11 +1,24 @@
-//
-// Created by bpoumeau on 4/3/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   join_expands.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 18:39:11 by twang             #+#    #+#             */
+/*   Updated: 2023/05/16 18:49:40 by twang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../libft/libft.h"
 #include "../../../incs/parsing_incs/minishell_parsing.h"
 
-static t_return_status 	_expand_lines(char **str_arr, char **env);
-static void 			_remove_quotes(char **str_arr);
+/*---- prototypes ------------------------------------------------------------*/
+
+static t_return_status	_expand_lines(char **str_arr, char **env);
+static void				_remove_quotes(char **str_arr);
+
+/*----------------------------------------------------------------------------*/
 
 t_return_status	join_arr_on(char **str_arr, char **line_pt, char **env)
 {
@@ -17,7 +30,7 @@ t_return_status	join_arr_on(char **str_arr, char **line_pt, char **env)
 	return (ft_free_split(str_arr), SUCCESS);
 }
 
-static t_return_status 	_expand_lines(char **str_arr, char **env)
+static t_return_status	_expand_lines(char **str_arr, char **env)
 {
 	while (*str_arr)
 	{
@@ -32,7 +45,7 @@ static t_return_status 	_expand_lines(char **str_arr, char **env)
 	return (SUCCESS);
 }
 
-void cpy_next_char(unsigned int index, char *str)
+void	cpy_next_char(unsigned int index, char *str)
 {
 	(void)index;
 	*str = *(str + 1);
@@ -42,7 +55,7 @@ void cpy_next_char(unsigned int index, char *str)
 
 static void	_remove_quotes(char **str_arr)
 {
-	const char	quotes_arr[] = {- '\'', - '"', 0};
+	const char	quotes_arr[] = {(- '\''), - '"', 0};
 
 	while (*str_arr)
 	{
@@ -51,34 +64,3 @@ static void	_remove_quotes(char **str_arr)
 		str_arr++;
 	}
 }
-
-//#define TST_JOIN_EXP
-
-#ifdef TST_JOIN_EXP
-
-#include <stdio.h>
-
-void change(char *line)
-{
-	while (*line)
-	{
-		if (is_from(*line, "'\""))
-			*line = -(*line);
-		line++;
-	}
-}
-
-int main(int ac, char **av, char **env)
-{
-	(void)ac; (void)av; (void)env;
-
-	t_string_token 	*tok_lst;
-	char	*line = ft_strdup("expand\"qui\"\"\" \'marche\'$USER ");
-	get_lexed_str_token_lst_from_line(line, &tok_lst, env);
-	cut_all_lines(tok_lst);
-	join_all_lines(tok_lst, env);
-	display_str_token(tok_lst);
-	string_token_destructor(tok_lst);
-}
-
-#endif
