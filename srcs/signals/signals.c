@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/15 12:26:03 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/15 14:48:44 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	handle_signal_main(int signal)
 	(void)signal;
 	g_ret_val = 130;
 	ft_dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
-	//refaire le prompt;
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

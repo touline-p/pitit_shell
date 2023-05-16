@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/05/05 18:51:29 by bpoumeau         ###   ########.fr        #
+#    Updated: 2023/05/15 16:22:38 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ OBJECTS	=	$(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 all:
 	$(MAKE) header
 	$(MAKE) -C ./libft 
-	$(MAKE) $(NAME)
+	$(MAKE) $(NAME) -j
 
 $(NAME): $(OBJECTS) $(LIBFT)
 	$(CC) $^ $(CFLAGS) $(LIBFT) -o $@ -lreadline
@@ -91,7 +91,7 @@ debug:
 
 leaks:
 	clear
-	$(MAKE) VALGRIND=yes
+	$(MAKE) -j VALGRIND=yes
 	$(LEAKS) ./minishell
 
 leak_all:    all
@@ -128,7 +128,7 @@ header:
 re:
 	clear
 	$(MAKE) fclean
-	$(MAKE) all
+	$(MAKE) -j all
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
