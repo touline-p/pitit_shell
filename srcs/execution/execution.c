@@ -54,10 +54,9 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 		string_token_destructor(lst_of_tok);
 		return ;
 	}
-	puts("exec 57");
-	display_str_token(lst_of_tok);
 	strings_management(data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
+	//avant
 	if (g_ret_val == 130 && check_cmd(data->cmds_block))
 		return ;
 	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD && data->cmds_block->id_command != SUBSHELL && data->cmds_block->id_command != EMPTY)

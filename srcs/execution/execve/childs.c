@@ -68,7 +68,6 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		_manage_the_pipe(data, block_id);
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
-		print_cmd_block(ft_itoa(block_id), data->cmds_block[block_id]);
 		data->cmds_block[block_id].process_id = fork();
 		_fork_process(data, data->cmds_block[block_id].process_id, \
 						block_id, env);

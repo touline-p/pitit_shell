@@ -86,10 +86,8 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		}
 		add_history(line);
-		printf("%p\n", str_tok_lst);
 		if (get_lexed_str_token_lst_from_line(line, &str_tok_lst, env) != SUCCESS)
 			continue ;
-		printf("%p\n", str_tok_lst);
 		del_space_token(str_tok_lst);
 		data.instructions_arr = malloc(sizeof(t_string_token *) * 2);
 		if (data.instructions_arr == NULL)
@@ -99,6 +97,7 @@ int	main(int ac, char **av, char **env)
 		del_space_token(str_tok_lst);
 		if (heredoc_management(&data, str_tok_lst, env))
 			continue ;
+		puts("main 100");
 		switchman(&data, str_tok_lst, &env);
 	}
 	return (0);
