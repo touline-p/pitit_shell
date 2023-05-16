@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_quoting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <bpoumeau@student.42lyon.f>       +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 04:03:32 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/02/28 21:07:58 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:23:57 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ t_return_status	squoting_process(t_token *last_token, \
 
 static t_return_status	_squoting_process_ep(void)
 {
-	write(2, \
-	"syntax error near newline.\nLine can't end with : \'\n", \
-	65);
+	char	*str;
+
+	str = "syntax error near newline.\nLine can't end with open : \'\n";
+	write(2, str, 57);
+	g_ret_val = 2;
 	return (FAILURE);
 }

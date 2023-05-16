@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:08 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/02 17:21:03 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 13:48:03 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_return_status	echo_builtin(char **av, char ***env_pt)
 	char	**tmp;
 	bool	option;
 
-	puts("yoyoyo");
 	ft_free_split(*env_pt);
 	option = false;
 	tmp = av + 1;

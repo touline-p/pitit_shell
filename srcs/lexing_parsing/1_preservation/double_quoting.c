@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 04:52:43 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/16 10:59:32 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 14:23:39 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ static t_return_status	_dquoting_process_ep(void)
 
 	str = "syntax error near newline.\nLine can't end with open : \"\n";
 	write(2, str, 57);
+	g_ret_val = 2;
 	return (FAILURE);
 }

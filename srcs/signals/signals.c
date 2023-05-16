@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 11:46:35 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 14:21:29 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char 	*get_color( void )
 {
 	if (g_ret_val == 130)
 		return (YELLOW);
+	else if (g_ret_val == 131)
+		return (BLUE);
 	else
 		return (0);
 }
