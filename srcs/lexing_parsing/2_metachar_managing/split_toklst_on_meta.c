@@ -69,7 +69,7 @@ static void	_regroup_ft(t_token *tok)
 	tok->next = tmp;
 }
 
-char *get_prompt(char *str, int flag)
+char	*get_prompt(char *str, int flag)
 {
 	static char	*prompt;
 

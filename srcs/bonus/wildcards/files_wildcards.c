@@ -20,10 +20,10 @@ static t_return_status	_get_wildcard_file(char **line_pt);
 
 /*----------------------------------------------------------------------------*/
 
-t_return_status wildcard_files(t_data *data, char **file, int block_id)
+t_return_status	wildcard_files(t_data *data, char **file, int block_id)
 {
 	int	match;
-	
+
 	match = 0;
 	if (check_line(*file) != SUCCESS)
 		return (SUCCESS);
@@ -36,7 +36,6 @@ t_return_status wildcard_files(t_data *data, char **file, int block_id)
 	if (match > 1)
 	{
 		replace_wild_card(*file);
-		
 		data->cmds_block[block_id].is_ambiguous = true;
 		ft_dprintf(2, "minishell: %s: ambiguous redirect\n", *file);
 		return (FAILURE);
@@ -76,7 +75,7 @@ static t_return_status	_get_wildcard_file(char **line_pt)
 {
 	struct dirent	*files;
 	DIR				*directory;
-	
+
 	directory = opendir(".");
 	if (!directory)
 	{
@@ -96,7 +95,6 @@ static t_return_status	_get_wildcard_file(char **line_pt)
 				return (FAILURE);
 		}
 	}
-	// free(line);
 	closedir(directory);
 	return (SUCCESS);
 }

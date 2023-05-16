@@ -1,6 +1,14 @@
-//
-// Created by bpoumeau on 5/12/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   subshell_preparation.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 17:50:49 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/05/16 17:50:51 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../incs/execution_incs/minishell_execution.h"
 #include "../../incs/parsing_incs/minishell_parsing.h"

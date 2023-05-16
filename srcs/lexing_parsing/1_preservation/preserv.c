@@ -27,7 +27,7 @@ t_return_status	preserve_token_lst(t_token *token)
 			dquoting_process, \
 			do_nothing};
 	t_token				*tmp;
-	
+
 	tmp = token;
 	pin = token->next;
 	while (token->token != EOL)

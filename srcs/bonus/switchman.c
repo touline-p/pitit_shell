@@ -108,15 +108,6 @@ int	_get_next_index(int last, t_string_token **instructions_arr)
 	return (-1);
 }
 
-//void	clean_last_string_tokens_lst(t_string_token **instructions_arr, int index)
-//{
-//	while (instructions_arr[index])
-//	{
-//		string_token_destructor(instructions_arr[index]);
-//		index++;
-//	}
-//}
-
 t_return_status	launch_instructions_arr(t_data *data, \
 						t_string_token **instructions_arr, char ***env)
 {
@@ -145,14 +136,6 @@ t_return_status	switchman(t_data *data, \
 	if (data->instructions_arr == NULL)
 		return (FAILURE);
 	fill(data->instructions_arr, token_lst);
-	/*
-	f("decoupage de chaque bloc\n");
-	int i  = 0;
-	while (data->instructions_arr[i])
-	{
-		display_str_token(data->instructions_arr[i++]);
-	}
-	 */
 	launch_instructions_arr(data, data->instructions_arr, env_pt);
 	return (SUCCESS);
 }
