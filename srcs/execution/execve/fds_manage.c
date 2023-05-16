@@ -50,14 +50,15 @@ t_return_status	_write_all(char *str, int fd)
 {
 	int	flag;
 
+	flag = 1;
 	if (!str)
 		return (close(fd), FAILURE);
-	flag = write(fd, str, 1);
 	while (flag == 1 && *str)
 	{
-		str++;
 		flag = write(fd, str, 1);
+		str++;
 	}
+	printf("end\n");
 	close(fd);
 	if (flag == -1)
 		return (FAILURE);
@@ -94,6 +95,7 @@ t_return_status	heredoc_child_management(t_cmd *cmd, t_data *data, \
 		return (FAILURE);
 	if (pid == 0)
 	{
+		ft_dprintf(2, "-%s-\n", cmd->heredoc_data);
 		_heredoc_forking(fd, cmd, data, env_pt);
 	}
 	free(cmd->heredoc_data);

@@ -45,20 +45,16 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 {
 	init_data(data);
 	alloc_cmd_block(data, lst_of_tok);
-	puts("exec 53");
 	infiles_management(data, lst_of_tok, *env_pt);
-	puts("exec 53");
 	outfiles_management(data, lst_of_tok, *env_pt);
-	puts("exec 53");
 	clean_files_token(lst_of_tok);
-	puts("exec 53");
 	clean_token(lst_of_tok);
-	puts("exec 53");
 	if (check_if_token(lst_of_tok) != SUCCESS)
 	{
 		string_token_destructor(lst_of_tok);
 		return ;
 	}
+	puts("exec 57");
 	display_str_token(lst_of_tok);
 	strings_management(data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
