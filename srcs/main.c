@@ -68,8 +68,7 @@ int	main(int ac, char **av, char **env)
 	while (MINI_SHELL_MUST_GO_ON)
 	{
 		init_signals();
-		//get_prompt_on(&(data.prompt), env);
-		data.prompt = ft_strdup("this");
+		get_prompt_on(&(data.prompt), env);
 		line = readline(data.prompt);
 		errno = 0;
 		if (line == NULL || ft_strcmp("", line) == 0)

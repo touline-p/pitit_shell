@@ -66,7 +66,6 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 		childs_execve(data, env_pt);
 		wait_for_process_ids(data);
 	}
-	printf("execution 69");
 	free(data->cmds_block);
 }
 
