@@ -50,13 +50,13 @@ t_return_status	_write_all(char *str, int fd)
 {
 	int	flag;
 
+	flag = 1;
 	if (!str)
 		return (close(fd), FAILURE);
-	flag = write(fd, str, 1);
 	while (flag == 1 && *str)
 	{
-		str++;
 		flag = write(fd, str, 1);
+		str++;
 	}
 	close(fd);
 	if (flag == -1)
@@ -78,7 +78,6 @@ static void	_heredoc_forking(int *fd, t_cmd *cmd, t_data *data, char **env_pt)
 	}
 	close(fd[1]);
 	free(cmd->heredoc_data);
-	free(data->cmds_block);
 	exit(SUCCESS);
 }
 
@@ -94,9 +93,7 @@ t_return_status	heredoc_child_management(t_cmd *cmd, t_data *data, \
 	if (pid == -1)
 		return (FAILURE);
 	if (pid == 0)
-	{
 		_heredoc_forking(fd, cmd, data, env_pt);
-	}
 	free(cmd->heredoc_data);
 	close(fd[1]);
 	cmd->infile = fd[0];

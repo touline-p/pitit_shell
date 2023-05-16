@@ -22,16 +22,16 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 	char		**tmp;
 
 	if (ft_str_array_len(args) == 1)
-		return (ft_free_split(args), _export_display(*env_pt), SUCCESS);
+		return (_export_display(*env_pt), SUCCESS);
 	tmp = args + 1;
 	while (*tmp != NULL)
 	{
 		if ((*get_ft_to_do(*tmp, *env_pt))(*tmp, env_pt) != SUCCESS)
-			return (free(*args), ft_free_split(tmp), FAILED_MALLOC);
+			return (FAILED_MALLOC);
 		tmp++;
 	}
 	g_ret_val = 0;
-	return (free(*args), free(args), g_ret_val);
+	return (g_ret_val);
 }
 
 void	get_rid_of_plus(char *line)

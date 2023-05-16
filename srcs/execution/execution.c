@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
+#include "minishell_parsing.h"
 
 /*---- prototypes ------------------------------------------------------------*/
 
@@ -55,6 +56,7 @@ void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
 	}
 	strings_management(data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
+	//avant
 	if (g_ret_val == 130 && check_cmd(data->cmds_block))
 		return ;
 	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD && data->cmds_block->id_command != SUBSHELL && data->cmds_block->id_command != EMPTY)
@@ -76,6 +78,8 @@ static t_return_status	alloc_cmd_block(t_data *data, \
 	temp = lst_of_tok;
 	while (temp != NULL)
 	{
+		if (temp->token == O_PRTSS)
+			go_to_next_(C_PRTSS, temp->next, &temp);
 		if (temp->token == PIPE)
 			data->nb_of_pipe++;
 		temp = temp->next;

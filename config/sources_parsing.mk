@@ -18,7 +18,7 @@ SOURCES +=	srcs/parsing/expands/cut_line.c 								\
 			srcs/parsing/expands/cut_line.c 								\
 			srcs/parsing/expands/expands.c 									\
 			srcs/bonus/switchman.c											\
-			srcs/bonus/subshell_preparation.c											\
+			srcs/bonus/subshell_preparation.c								\
 			srcs/parsing/expands/cut_all_lines.c 							\
 			srcs/parsing/expands/replace_dquotes_str_by_env_value.c			\
 			srcs/parsing/expands/join_expands.c 							\

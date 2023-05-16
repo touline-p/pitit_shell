@@ -146,7 +146,7 @@ t_return_status	switchman(t_data *data, \
 		return (FAILURE);
 	fill(data->instructions_arr, token_lst);
 	/*
-	printf("decoupage de chaque bloc\n");
+	f("decoupage de chaque bloc\n");
 	int i  = 0;
 	while (data->instructions_arr[i])
 	{

@@ -22,13 +22,21 @@ static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 	free(data->cmds_block);
 	free(data->prompt);
 	ft_free_all_str_lst(data, data->index);
-	if (duplicate_fds(cmd, data, env_pt) != SUCCESS)
-	{
+	if (duplicate_fds(cmd, data, env_pt) != SUCCESS) {
 		ft_free_split(cmd.commands);
+		ft_free_split(*env_pt);
 		g_ret_val = 1;
 		exit(1);
 	}
 	builtin_switch(cmd, cmd.commands, env_pt);
+	ft_free_split(*env_pt);
+	if (cmd.id_command != EXPORT)
+		ft_free_split(cmd.commands);
+	else
+	{
+		free(*(cmd.commands));
+		free(cmd.commands);
+	}
 	exit(SUCCESS);
 }
 

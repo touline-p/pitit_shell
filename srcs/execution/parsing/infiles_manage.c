@@ -107,30 +107,31 @@ t_return_status	infiles_management(t_data *data, t_string_token *lst_of_tok, cha
 			temp = temp->next;
 			_set_infile(data, &(temp->content), i, env);
 		}
-		if (temp->token == HERE_DOC)
+		else if (temp->token == HERE_DOC)
 		{
 			temp = temp->next;
 			_set_heredoc(data, temp->content, i);
 			temp->content = NULL;
 		}
-		if (temp->token == CHEVRON_OT)
+		else if (temp->token == CHEVRON_OT)
 		{
 			temp = temp->next;
 			_set_outfile(data, &(temp->content), i, env);
 		}
-		if (temp->token == APPENDS)
+		else if (temp->token == APPENDS)
 		{
 			temp = temp->next;
 			_set_appends(data, &(temp->content), i, env);
 		}
-		if (temp->token == PIPE)
+		else if (temp->token == PIPE)
 			i++;
 		if (temp->token == O_PRTSS)
 		{
 			data->cmds_block[i].id_command = SUBSHELL;
 			go_to_next_(C_PRTSS, temp->next, &temp);
 		}
-		temp = temp->next;
+		else
+			temp = temp->next;
 	}
 	return (SUCCESS);
 }
