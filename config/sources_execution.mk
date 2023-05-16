@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:31:59 by twang             #+#    #+#              #
-#    Updated: 2023/05/14 18:18:16 by twang            ###   ########.fr        #
+#    Updated: 2023/05/16 17:54:41 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,4 +28,5 @@ SOURCES	=																	\
 			srcs/execution/utils/struct_utils.c								\
 			srcs/execution/execution.c										\
 			srcs/signals/signals.c											\
+			srcs/prompt.c													\
 			srcs/debug_folder/debug_fonction.c

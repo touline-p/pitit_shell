@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/14 19:11:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 17:55:55 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,9 @@ char	**subshell_preparation(t_string_token **start);
 /*-- main_utils --*/
 t_return_status	check_arguments(int ac, char **av);
 void			clean_the_prompt(char *prompt, char *line, char **env);
+
+/*-- prompt --*/
+t_return_status	get_prompt_on(char **prompt_pt, char **env);
 char 			*get_prompt(char *str, int flag);
 
 /*-- debug --*/

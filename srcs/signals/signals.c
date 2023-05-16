@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 14:21:29 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 17:45:38 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static void	handle_signal_main(int signal)
 	prompt = get_prompt(NULL, 0);
 	prompt = update_prompt(prompt);
 	printf("%s", prompt);
-	//rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }

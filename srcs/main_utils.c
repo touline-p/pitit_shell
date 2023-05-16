@@ -6,20 +6,21 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:03:57 by twang             #+#    #+#             */
-/*   Updated: 2023/05/14 18:01:41 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/16 17:37:09 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_execution.h"
 #include "minishell_parsing.h"
 
-
 t_return_status	check_arguments(int ac, char **av)
 {
 	if (ac != 1)
 	{
-		ft_dprintf(2, "minishell: %s: the arguments are not processed.\n", av[1]);
-		ft_dprintf(2, YELLOW"usage: please run the program without any arguments.\n"END);
+		ft_dprintf(2, "minishell: %s: ", av[1]);
+		ft_dprintf(2, "the arguments are not processed.\n");
+		ft_dprintf(2, YELLOW"usage: ");
+		ft_dprintf(2, "please run the program without any arguments.\n"END);
 		return (FAILURE);
 	}
 	else
