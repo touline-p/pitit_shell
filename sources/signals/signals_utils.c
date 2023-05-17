@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:35:32 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 15:40:06 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:02:53 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*---- prototypes ------------------------------------------------------------*/
 
 static void			_change_color(char *prompt);
-static const char	*_get_color(void);
 static const char	*_get_color_from_prompt(char *prompt);
 
 /*----------------------------------------------------------------------------*/
@@ -31,25 +30,7 @@ char	*update_prompt(char *prompt)
 	return (end);
 }
 
-static void	_change_color(char *prompt)
-{
-	char		*tmp;
-	const char	*color_to;
-	const char	*color_from;
-
-	color_to = _get_color();
-	color_from = _get_color_from_prompt(prompt);
-	if (color_from == NULL)
-		return ;
-	tmp = ft_strnstr(prompt, color_from, ft_strlen(prompt));
-	while (tmp)
-	{
-		ft_memcpy(tmp, color_to, ft_strlen(color_to));
-		tmp = ft_strnstr(prompt, color_from, ft_strlen(prompt));
-	}
-}
-
-static const char	*_get_color(void)
+const char	*get_color(void)
 {
 	const char	*color_arr[] = {GREEN, RED, YELLOW, BLUE, RED};
 	const int	ret_val_arr[] = {0, 1, 130, 131};
@@ -59,6 +40,24 @@ static const char	*_get_color(void)
 	while (ret_val_arr[index] != g_ret_val && index < 4)
 		index++;
 	return (color_arr[index]);
+}
+
+static void	_change_color(char *prompt)
+{
+	char		*tmp;
+	const char	*color_to;
+	const char	*color_from;
+
+	color_to = get_color();
+	color_from = _get_color_from_prompt(prompt);
+	if (color_from == NULL)
+		return ;
+	tmp = ft_strnstr(prompt, color_from, ft_strlen(prompt));
+	while (tmp)
+	{
+		ft_memcpy(tmp, color_to, ft_strlen(color_to));
+		tmp = ft_strnstr(prompt, color_from, ft_strlen(prompt));
+	}
 }
 
 static const char	*_get_color_from_prompt(char *prompt)
