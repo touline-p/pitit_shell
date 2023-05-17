@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:47:45 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 17:53:41 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:00:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 	get_prompt(*prompt_pt, 1);
 	return (SUCCESS);
 }
+
+const char	*get_color(void);
+
+static char *_get_box(void)
+{
+	const char	*color_arr[] = {GREEN"\001\u2554", RED"\001\u2554", \
+							YELLOW"\001\u2554", BLUE"\001\u2554", }
+	const int	ret_val_arr[] = {0, 1, 130, 131};
+	size_t		index;
+
+	index = 0;
+	while (ret_val_arr[index] != g_ret_val && index < 5)
+		index++;
+	return ((char *)color_arr[index]);
+}
+
 
 static t_return_status	_get_alloc_box_on(char **box_pt, char **env)
 {

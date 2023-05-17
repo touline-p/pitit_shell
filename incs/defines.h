@@ -6,12 +6,12 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:02:27 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 10:32:29 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 14:45:20 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
-# define DEFINE_H
+# define DEFINES_H
 
 # define MINI_SHELL_MUST_GO_ON 1
 # define HEREDOC_MUST_GO_ON 1

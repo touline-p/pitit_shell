@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:25:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 14:07:34 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 14:56:30 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 /*----------------------------------------------------------------------------*/
 
+t_return_status	preserve_token_lst(t_token *token);
 t_return_status	cut_line_on(char *line, char ***res_pt);
 t_return_status	performe_expand_on_line(char **line_pt, char **env);
 t_return_status	replace_dollar_str_by_env_value(char **pin_pt, char **env);

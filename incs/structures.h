@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:07:42 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 13:59:32 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 14:54:15 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define STRUCTURES_H
 
 # include "enums.h"
+
+/*---- typedef structures ----------------------------------------------------*/
+
+typedef struct s_token			t_token;
+typedef struct s_block			t_block;
+typedef struct s_string_token	t_string_token;
+typedef struct s_data			t_data;
+typedef struct s_cmd			t_cmd;
+typedef struct s_list_of_char	t_lstc;
 
 /*---- typedef function pointers ---------------------------------------------*/
 
@@ -24,15 +33,6 @@ typedef t_return_status	(*t_files_manage_ft)(t_data *data, \
 										char **line, int i, char **env);
 typedef t_return_status	(*t_builtin_ft)(char **av, char ***env_pt);
 typedef bool			(*t_increment_ft)(char line_pt, void *arg);
-
-/*---- typedef structures ----------------------------------------------------*/
-
-typedef struct s_token			t_token;
-typedef struct s_block			t_block;
-typedef struct s_string_token	t_string_token;
-typedef struct s_data			t_data;
-typedef struct s_cmd			t_cmd;
-typedef struct s_list_of_char	t_lstc;
 
 /*---- structures ------------------------------------------------------------*/
 
@@ -56,7 +56,7 @@ struct	s_block
 
 struct s_string_token
 {
-	t_token_minishell	token;
+	t_emt				token;
 	char				*content;
 	char				**str_arr;
 	t_string_token		*next;
