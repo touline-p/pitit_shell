@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:25:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 11:29:25 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 14:01:31 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_return_status	insert_str_in_tkn_lst(t_token *token_lst, \
 								char *str, t_esec essec);
 int				len_to_next_type(t_token *pin);
 t_token			*token_constructor_esec(t_emt emt, char msg, t_esec esec);
+
+t_return_status	is_control_operator(t_emt token);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:54:02 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 11:28:06 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 14:01:08 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <signal.h>
 # include <errno.h>
 # include <dirent.h>
-// # include <termios.h>
+# include <termios.h>
 
 # include "libft.h"
 
@@ -42,8 +42,6 @@
 
 /*---- global ----------------------------------------------------------------*/
 
-// extern int	g_ret_val;
-
-////on define la g_ret_val ici? 
+extern int	g_ret_val;
 
 #endif
