@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_parsing.h"
+#include "../../incs/minishell.h"
 #include "../../incs/execution_incs/structures_execution.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
 
 static t_return_status	_syntax_is_valid_ep(t_emt token);
 bool					is_a_meta(t_emt token);

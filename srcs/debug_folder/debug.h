@@ -23,7 +23,7 @@ void    print_debug_int(int value, char *file, int line);
 # define ITALIC "\001\033[3m\002"
 # define UNDERLINE "\001\033[4m\002"
 # define DEL_LINE "\001\033[2K\r\002"
-# include "minishell_execution.h"
+# include "../../incs/minishell.h"
 
 
 

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/execution_incs/minishell_execution.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
-#include "minishell_parsing.h"
+#include "../../incs/minishell.h"
+#include "../../incs/minishell.h"
+#include "../../incs/minishell.h"
 
 static t_token	*_token_lst_constructor_ep(t_token *trash, t_token *ret_val);
 

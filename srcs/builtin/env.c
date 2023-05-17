@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
 
 t_return_status	env_builtin(char **av, char ***env_pt)
 {

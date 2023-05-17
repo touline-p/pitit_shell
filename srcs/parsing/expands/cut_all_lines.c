@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/execution_incs/minishell_execution.h"
-#include "../../../incs/parsing_incs/minishell_parsing.h"
+#include "../../../incs/minishell.h"
+#include "../../../incs/minishell.h"
 
 t_return_status	cut_all_lines(t_string_token *string_token_lst)
 {

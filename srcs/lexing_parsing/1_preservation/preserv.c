@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_parsing.h"
-#include "../../../incs/parsing_incs/minishell_parsing.h"
+#include "../../../incs/minishell.h"
+#include "../../../incs/minishell.h"
 
 #define DONO_INDX 2
 

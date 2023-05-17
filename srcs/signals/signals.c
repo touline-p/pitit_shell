@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_execution.h"
+#include "../../incs/minishell.h"
 
-#include "../../incs/execution_incs/minishell_execution.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
+#include "../../incs/minishell.h"
 /*---- prototypes ------------------------------------------------------------*/
 
 static void	handle_signal_main(int signal);

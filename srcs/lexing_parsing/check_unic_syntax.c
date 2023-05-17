@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/execution_incs/minishell_execution.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
+#include "../../incs/minishell.h"
 
 typedef bool	(*t_act_update)(t_string_token ** token);
 

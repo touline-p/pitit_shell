@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_execution.h"
+#include "../../../incs/minishell.h"
 
 void	free_commands(t_data *data)
 {

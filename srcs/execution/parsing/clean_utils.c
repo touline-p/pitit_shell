@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_execution.h"
-#include "minishell_parsing.h"
+#include "../../../incs/minishell.h"
+#include "../../../incs/minishell.h"
 
 void	clean_files_token(t_string_token *lst_of_tok)
 {

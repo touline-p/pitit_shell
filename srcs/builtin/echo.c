@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
 
 static	bool	_is_option_n(char *arg);
 

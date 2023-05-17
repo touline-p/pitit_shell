@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
 
 static char				*_get_cwd_var(void);
 static t_return_status	_reconstruct_env(char ***env_pt);

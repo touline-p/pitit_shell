@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
 
 static t_return_status	_export_display(char **env);
 static void				_display_unic_export(char *env_line);

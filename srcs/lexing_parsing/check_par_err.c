@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/execution_incs/minishell_execution.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
+#include "../../incs/minishell.h"
 
 static bool	_check_for_par(t_string_token *str_tok_lst)
 {

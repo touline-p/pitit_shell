@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_parsing.h"
-#include "minishell_execution.h"
+#include "../incs/minishell.h"
+#include "../incs/minishell.h"
 #include "structures_execution.h"
 #include <readline/readline.h>
-#include "../incs/execution_incs/minishell_execution.h"
-#include "../incs/parsing_incs/minishell_parsing.h"
+#include "../incs/minishell.h"
+#include "../incs/minishell.h"
 
 /*---- global definition -----------------------------------------------------*/
 

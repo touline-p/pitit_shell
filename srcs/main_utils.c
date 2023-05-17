@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_execution.h"
-#include "minishell_parsing.h"
+#include "../incs/minishell.h"
+#include "../incs/minishell.h"
 
 t_return_status	check_arguments(char **av)
 {

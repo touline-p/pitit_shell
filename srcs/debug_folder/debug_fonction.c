@@ -1,6 +1,6 @@
 #include "debug.h"
 #include "stdio.h"
-#include "minishell_execution.h"
+#include "../../incs/minishell.h"
 void    print_debug(char *file, int line)
 {
     dprintf(2, PURPLE"%s:%d "END"this is debug message\n", file, line);
