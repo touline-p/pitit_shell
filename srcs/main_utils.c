@@ -27,7 +27,7 @@ t_return_status	check_arguments(char **av)
 		return (SUCCESS);
 }
 
-void	clean_the_prompt(char *prompt, char *line, char **env)
+t_return_status 	clean_the_prompt(char *prompt, char *line, char **env)
 {
 	free(line);
 	if (line == NULL)
@@ -38,4 +38,5 @@ void	clean_the_prompt(char *prompt, char *line, char **env)
 		ft_dprintf(1, RED"exit\n"END);
 		exit(0);
 	}
+	return (SUCCESS);
 }
