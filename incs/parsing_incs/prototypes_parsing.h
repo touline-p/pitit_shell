@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/16 19:45:40 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 10:34:58 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_return_status	is_control_operator(t_emt token);
 
 /*** preserving ***/
 
-typedef t_return_status	(*t_preserv_act)(t_token *first, \
+//// typedef t_return_status	(*t_preserv_act)(t_token *first, \
 								t_token *second, t_token **ref);
 
 t_return_status	preserve_token_lst(t_token *token);
@@ -99,7 +99,7 @@ void			free_all_str(t_data *data);
 t_return_status	syntax_is_valid(t_string_token *lst_to_check);
 
 /*** env_utils ***/
-typedef t_return_status	(*t_export_ft)(char *arg, char ***env_pt);
+////typedef t_return_status	(*t_export_ft)(char *arg, char ***env_pt);
 
 t_return_status	env_init_on(char ***env_pt);
 char			*get_line_from_key(char *key, char **env);

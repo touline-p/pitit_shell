@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 17:03:32 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 15:44:53 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 09:54:53 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ t_return_status	find_matching_files(char *line, char *name)
 		{
 			line++;
 			name = ft_strstr_w(name, line);
-			printf("%c %s name\n",*line, name);
 		}
 		if (*line == 0)
 			return (SUCCESS);

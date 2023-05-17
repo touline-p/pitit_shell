@@ -6,42 +6,42 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:11:55 by twang             #+#    #+#             */
-/*   Updated: 2023/05/08 14:59:28 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 11:00:58 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_EXECUTION_H
-# define MINISHELL_EXECUTION_H
+// #ifndef MINISHELL_EXECUTION_H
+// # define MINISHELL_EXECUTION_H
 
-/*---- libraries -------------------------------------------------------------*/
+// /*---- libraries -------------------------------------------------------------*/
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <signal.h>
-# include <errno.h>
+// # include <stdio.h>
+// # include <stdlib.h>
+// # include <stdbool.h>
+// # include <readline/readline.h>
+// # include <sys/types.h>
+// # include <sys/wait.h>
+// # include <sys/stat.h>
+// # include <fcntl.h>
+// # include <signal.h>
+// # include <errno.h>
 
-// # include <termios.h>
-# include <dirent.h>
+// // # include <termios.h>
+// # include <dirent.h>
 
-# include "libft.h"
+// # include "libft.h"
 
-# include "../srcs/debug_folder/debug.h"
+// # include "../srcs/debug_folder/debug.h"
 
-/*---- includes --------------------------------------------------------------*/
+// /*---- includes --------------------------------------------------------------*/
 
-# include "defines_execution.h"
-# include "enums_parsing.h"
-# include "prototypes_execution.h"
-# include "structures_execution.h"
+// # include "defines_execution.h"
+// # include "enums_parsing.h"
+// # include "prototypes_execution.h"
+// # include "structures_execution.h"
 
-/*---- global ----------------------------------------------------------------*/
+// /*---- global ----------------------------------------------------------------*/
 
-extern int	g_ret_val;
+// extern int	g_ret_val;
 
-#endif
+// #endif
