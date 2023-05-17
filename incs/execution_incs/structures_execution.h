@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:17:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/16 19:47:14 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:11:48 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct s_data
 {
 	t_cmd			*cmds_block;
 	t_string_token	**instructions_arr;
+	struct termios	term;
 	int				index;
 	char			*prompt;
 	int				fd[2];

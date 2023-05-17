@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:38:17 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 18:56:20 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:35:04 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ static int				_go_fuck_yourself_malloc(void);
 
 # define IT_DOES_NOT_WORK 0
 
+void	reset_term_settings(t_data *data)
+{
+	if (tcsetattr(1, TCSANOW, &data->term) == -1)
+	{
+		perror("tcsetattr");
+		errno = SUCCESS;
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char			*line;
@@ -51,7 +60,7 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
-		init_signals();
+		init_signals(&data);
 		get_prompt_on(&(data.prompt), env);
 		line = readline(data.prompt);
 		errno = 0;
@@ -72,7 +81,11 @@ int	main(int ac, char **av, char **env)
 		data.instructions_arr[1] = NULL;
 		del_space_token(str_tok_lst);
 		if (heredoc_management(&data, str_tok_lst, env))
+		{
+			reset_term_settings(&data);
 			continue ;
+		}
+		reset_term_settings(&data);
 		switchman(&data, str_tok_lst, &env);
 	}
 	return (0);

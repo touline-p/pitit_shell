@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:11:55 by twang             #+#    #+#             */
-/*   Updated: 2023/05/08 14:59:28 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:01:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <signal.h>
 # include <errno.h>
 
-// # include <termios.h>
+# include <termios.h>
 # include <dirent.h>
 
 # include "libft.h"
