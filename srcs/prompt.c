@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:47:45 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 15:00:15 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:01:46 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ const char	*get_color(void);
 static char *_get_box(void)
 {
 	const char	*color_arr[] = {GREEN"\001\u2554", RED"\001\u2554", \
-							YELLOW"\001\u2554", BLUE"\001\u2554", }
+							YELLOW"\001\u2554", BLUE"\001\u2554", };
 	const int	ret_val_arr[] = {0, 1, 130, 131};
 	size_t		index;
 
