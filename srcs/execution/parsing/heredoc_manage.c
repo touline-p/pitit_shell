@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 19:18:27 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 19:27:09 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:34:12 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,15 @@ static t_return_status	_set_up_get_here_doc(t_string_token *token, \
 
 void	get_heredoc_setup(t_data *data)
 {
+	struct termios	copy;
+	
+	copy = data->term;
+	copy.c_lflag &= ~(ECHO);
+	if (tcsetattr(1, TCSANOW, &copy) == -1)
+	{
+		perror("tcsetattr");
+		errno = SUCCESS;
+	}
 	string_token_destructor(data->instructions_arr[0]);
 	free(data->instructions_arr);
 	free(data->prompt);
