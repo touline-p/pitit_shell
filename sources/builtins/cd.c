@@ -6,14 +6,17 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:57:56 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/04 11:32:08 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:51:35 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
+
+/*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status	_update_pwd_var(char *pwd, char **env);
+
+/*----------------------------------------------------------------------------*/
 
 t_return_status	cd_builtin(char **av, char ***env_pt)
 {

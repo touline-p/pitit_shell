@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_par_err.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:57:41 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/16 17:57:44 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:01:52 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
 
 static bool	_check_for_par(t_string_token *str_tok_lst)
 {

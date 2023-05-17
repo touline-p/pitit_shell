@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_in_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:01:58 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 23:02:21 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:42:24 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../libft/libft.h"
-#include "../../../incs/minishell.h"
+#include "minishell.h"
 
 char	*get_line_from_key(char *key, char **env)
 {

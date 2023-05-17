@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:27 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 22:58:28 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:56:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
+
+/*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status	_export_display(char **env);
 static void				_display_unic_export(char *env_line);
 t_export_ft				get_ft_to_do(char *line, char **env);
+
+/*----------------------------------------------------------------------------*/
 
 t_return_status	export_builtin(char **args, char ***env_pt)
 {
@@ -31,21 +34,6 @@ t_return_status	export_builtin(char **args, char ***env_pt)
 		tmp++;
 	}
 	return (g_ret_val);
-}
-
-void	get_rid_of_plus(char *line)
-{
-	if (line == NULL)
-		return ;
-	while (*line != '=' && *line)
-	{
-		if (*line == '+')
-		{
-			ft_memmove(line, line + 1, ft_strlen(line));
-			return ;
-		}
-		line++;
-	}
 }
 
 t_return_status	replace_content_in_env_pt(char *line, char ***env_pt)

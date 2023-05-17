@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ordering_env_export.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:00:27 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/26 23:00:29 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:45:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../libft/libft.h"
-#include "../../../incs/minishell.h"
+#include "minishell.h"
 
 char	*get_first_line_in_env(char **env)
 {

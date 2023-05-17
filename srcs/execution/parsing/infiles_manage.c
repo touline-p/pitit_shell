@@ -6,12 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:01:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 19:30:27 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 18:07:32 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/minishell.h"
-#include "../../../incs/minishell.h"
+#include "minishell.h"
 
 bool	is_err_next_to_pipe(t_emt token)
 {

@@ -6,19 +6,17 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:00:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/04 11:27:25 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:42:13 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../libft/libft.h"
-#include "../../../incs/minishell.h"
+#include "minishell.h"
 
-bool	is_a_key_from_env(char *key, char **env)
-{
-	if (get_line_from_key(key, env) != NULL)
-		return (true);
-	return (false);
-}
+/*---- prototypes ------------------------------------------------------------*/
+
+static bool	_is_a_key_from_env(char *key, char **env);
+
+/*----------------------------------------------------------------------------*/
 
 bool	has_a_key_from_env(char *line, char **env)
 {
@@ -27,14 +25,21 @@ bool	has_a_key_from_env(char *line, char **env)
 
 	equal_sign = ft_strchr(line, '=');
 	if (equal_sign == NULL)
-		ret_val = is_a_key_from_env(line, env);
+		ret_val = _is_a_key_from_env(line, env);
 	else
 	{
 		*equal_sign = 0;
-		ret_val = is_a_key_from_env(line, env);
+		ret_val = _is_a_key_from_env(line, env);
 		*equal_sign = '=';
 	}
 	return (ret_val);
+}
+
+static bool	_is_a_key_from_env(char *key, char **env)
+{
+	if (get_line_from_key(key, env) != NULL)
+		return (true);
+	return (false);
 }
 
 t_return_status	add_str_to_env(char *line, char ***env_pt)

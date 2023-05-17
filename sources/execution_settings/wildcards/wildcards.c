@@ -6,14 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:27:19 by twang             #+#    #+#             */
-/*   Updated: 2023/05/12 17:12:32 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 17:15:04 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/minishell.h"
-#include "../../../incs/minishell.h"
-#include "../../../incs/minishell.h"
-#include "../../../incs/minishell.h"
+#include "minishell.h"
 
 /*---- prototypes ------------------------------------------------------------*/
 

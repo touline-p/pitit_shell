@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:07:42 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 14:54:15 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 19:59:55 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef t_return_status	(*t_files_manage_ft)(t_data *data, \
 										char **line, int i, char **env);
 typedef t_return_status	(*t_builtin_ft)(char **av, char ***env_pt);
 typedef bool			(*t_increment_ft)(char line_pt, void *arg);
+typedef bool			(*t_act_update)(t_string_token ** token);
 
 /*---- structures ------------------------------------------------------------*/
 

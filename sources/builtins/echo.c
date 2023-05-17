@@ -6,14 +6,17 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:08 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/16 13:48:03 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:52:25 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
+
+/*---- prototypes ------------------------------------------------------------*/
 
 static	bool	_is_option_n(char *arg);
+
+/*----------------------------------------------------------------------------*/
 
 t_return_status	echo_builtin(char **av, char ***env_pt)
 {

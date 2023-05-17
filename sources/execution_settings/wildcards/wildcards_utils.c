@@ -6,40 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 17:03:32 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 09:54:53 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 17:16:30 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/minishell.h"
-#include "../../../incs/minishell.h"
-#include "../../../incs/minishell.h"
-#include "../../../incs/minishell.h"
-
-/*---- prototypes ------------------------------------------------------------*/
-
-// static	t_return_status	_find_matching_files(char *line, char *name);
-
-/*----------------------------------------------------------------------------*/
-
-t_return_status	check_line(char *line)
-{
-	int	nb_of_stars;
-
-	nb_of_stars = 0;
-	while (*line)
-	{
-		if (*line == - '*')
-			nb_of_stars++;
-		if (*line == '/' && nb_of_stars > 0)
-		{
-			ft_dprintf(2, RED"minishell: /: wildcards can be used only");
-			ft_dprintf(2, " in the current directory\n"END);
-			return (SUCCESS);
-		}
-		line++;
-	}
-	return (SUCCESS);
-}
+#include "minishell.h"
 
 int	get_alloc_size(char *line)
 {
@@ -91,16 +62,6 @@ t_return_status	find_matching_files(char *line, char *name)
 		name++;
 	}
 	return (SUCCESS);
-}
-
-void	replace_wild_card(char *line)
-{
-	while (*line)
-	{
-		if (*line == - '*')
-			*line = '*';
-		line++;
-	}
 }
 
 static t_return_status	_fill_dst_arr_one_name(char *line, \

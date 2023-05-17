@@ -6,18 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:14:18 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/17 16:32:38 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:48:26 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool			key_is_not_alnum(char *line);
-t_return_status	replace_content_in_env_pt(char *line, char ***env_pt);
-t_return_status	do_nothing_t_export_ft(char *line, char ***env_pt);
-t_return_status	not_in_context_error(char *line, char ***env_pt);
-void			get_rid_of_plus(char *line);
-t_return_status	concat_content_to_line_in_env(char *line, char ***env_pt);
 
 t_export_ft	get_ft_to_do(char *line, char **env)
 {
@@ -41,7 +34,7 @@ t_export_ft	get_ft_to_do(char *line, char **env)
 	return (&replace_content_in_env_pt);
 }
 
-void	_get_rid_of_plus(char *line)
+void	get_rid_of_plus(char *line)
 {
 	if (line == NULL)
 		return ;

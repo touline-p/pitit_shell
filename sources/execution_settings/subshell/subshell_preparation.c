@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   subshell_preparation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:50:49 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/16 17:50:51 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:36:02 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
 
 char	**subshell_preparation(t_string_token **start)
 {

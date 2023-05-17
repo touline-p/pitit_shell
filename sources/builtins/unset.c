@@ -6,15 +6,18 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:54 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/03 18:20:47 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:59:48 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
+
+/*---- prototypes ------------------------------------------------------------*/
 
 static	t_return_status	_unset_builtin_ep(char *msg, char **trash, \
 							t_return_status ret_val);
+
+/*----------------------------------------------------------------------------*/
 
 t_return_status	unset_builtin(char **args, char ***env_pt)
 {

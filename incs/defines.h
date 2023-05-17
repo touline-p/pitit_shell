@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:02:27 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 16:21:02 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 19:38:18 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define STRT_CHR -1
 # define EOSTR 0
 # define IT_DOES_NOT_WORK 0
+#define DONO_INDX 2
 # define METACHAR_SET "|&<>() \t\v\f\r\n"
 # define IFS " \t\n"
 # define NAME_OF_EXE "Pitit shell"
