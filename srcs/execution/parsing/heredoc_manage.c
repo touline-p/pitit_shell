@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 19:18:27 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 13:34:12 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:43:56 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	get_heredoc_setup(t_data *data)
 	struct termios	copy;
 	
 	copy = data->term;
-	copy.c_lflag &= ~(ECHO);
+	copy.c_lflag &= ~(ECHOCTL);
 	if (tcsetattr(1, TCSANOW, &copy) == -1)
 	{
 		perror("tcsetattr");
