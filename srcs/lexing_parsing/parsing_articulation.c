@@ -34,6 +34,7 @@ t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 	str_token_lst = token_lst_to_str_token(simple_tok_lst);
 	if (str_token_lst == NULL)
 		return (FAILED_MALLOC);
+	del_space_token(str_token_lst);
 	*str_tok_pt = str_token_lst;
 	return (SUCCESS);
 }

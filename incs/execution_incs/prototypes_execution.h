@@ -130,7 +130,7 @@ char			**subshell_preparation(t_string_token **start);
 
 /*-- main_utils --*/
 t_return_status	check_arguments(char **av);
-void			clean_the_prompt(char *prompt, char *line, char **env);
+t_return_status	clean_the_prompt(char *prompt, char *line, char **env);
 
 /*-- prompt --*/
 t_return_status	get_prompt_on(char **prompt_pt, char **env);
