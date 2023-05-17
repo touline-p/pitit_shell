@@ -6,12 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/16 19:35:48 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 14:32:40 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_execution.h"
-#include "minishell_parsing.h"
+#include "minishell.h"
 
 /*---- prototypes ------------------------------------------------------------*/
 
