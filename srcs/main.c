@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:38:17 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 13:35:04 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:43:03 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ static int				_go_fuck_yourself_malloc(t_string_token *string_token, \
 
 # define IT_DOES_NOT_WORK 0
 
-
-void	reset_term_settings(t_data *data)
+t_return_status	reset_term_settings(t_data *data)
 {
 	if (tcsetattr(1, TCSANOW, &data->term) == -1)
 	{
 		perror("tcsetattr");
 		errno = SUCCESS;
 	}
+	return (SUCCESS);
+}
 
 t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 				char **av, char ***env_pt)
