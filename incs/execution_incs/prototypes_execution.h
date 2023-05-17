@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:38:27 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/16 19:47:02 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:37:24 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void			free_commands(t_data *data);
 /*----------------------------------------------------------------------------*/
 
 /*-- signals --*/
-void			init_signals(void);
+void			init_signals(t_data *data);
 void			handle_signal_child(int signal);
 void			handle_signal_heredoc(int signal);
 void			handle_signal_heredoc_sigquit(int signal);
