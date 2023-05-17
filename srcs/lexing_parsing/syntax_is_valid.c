@@ -6,13 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 00:19:36 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/03 15:02:14 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:31:40 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
-#include "../../incs/execution_incs/structures_execution.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
 
 static t_return_status	_syntax_is_valid_ep(t_emt token);
 bool					is_a_meta(t_emt token);

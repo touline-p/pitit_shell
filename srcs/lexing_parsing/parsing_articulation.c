@@ -6,15 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 00:20:01 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/04 17:59:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:31:51 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
-#include "../../incs/parsing_incs/prototypes_parsing.h"
-#include "../../incs/execution_incs/structures_execution.h"
-
-#include "../../libft/libft.h"
+#include "minishell.h"
 
 t_return_status	get_lexed_str_token_lst_from_line(char *line, \
 		t_string_token **str_tok_pt, char **env)

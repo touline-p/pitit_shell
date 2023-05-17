@@ -6,12 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:03:57 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 17:37:09 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:00:20 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/minishell.h"
-#include "../incs/minishell.h"
+#include "minishell.h"
 
 t_return_status	check_arguments(char **av)
 {

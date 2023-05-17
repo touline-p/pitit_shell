@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 17:47:45 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 16:10:30 by twang            ###   ########.fr       */
+/*   Created: 2023/05/17 16:06:23 by twang             #+#    #+#             */
+/*   Updated: 2023/05/17 16:09:23 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,34 +37,6 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 	free(line);
 	get_prompt(*prompt_pt, 1);
 	return (SUCCESS);
-}
-
-void copy_all_box(char *box, char *pwd, size_t box_width)
-{
-	size_t	i;
-
-	i = 0;
-	box = ft_strcpy_rn(box, (char *)get_color());
-	box = ft_strcpy_rn(box, "\001\u2554");
-	i = 0;
-	while (i < box_width)
-	{
-		box = ft_strcpy_rn(box, "\u2550");
-		i++;
-	}
-	box = ft_strcpy_rn(box, "\u2557\n");
-	box = ft_strcpy_rn(box, "\u2551  ");
-	box = ft_strcpy_rn(box, pwd);
-	box = ft_strcpy_rn(box, "  \u2551\n");
-	box = ft_strcpy_rn(box, "\u255A");
-	i = 0;
-	while (i < box_width)
-	{
-		box = ft_strcpy_rn(box, "\u2550");
-		i++;
-	}
-	box = ft_strcpy_rn(box, "\u255D\002\n"END);
-	*box = 0;
 }
 
 static t_return_status	_get_alloc_box_on(char **box_pt, char **env)

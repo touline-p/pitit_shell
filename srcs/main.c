@@ -6,16 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:38:17 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 13:43:03 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:31:25 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/minishell.h"
-#include "../incs/minishell.h"
-#include "structures_execution.h"
-#include <readline/readline.h>
-#include "../incs/minishell.h"
-#include "../incs/minishell.h"
+#include "minishell.h"
 
 /*---- global definition -----------------------------------------------------*/
 
