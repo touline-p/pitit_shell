@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:47:45 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 15:05:12 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:11:00 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 	get_prompt(*prompt_pt, 1);
 	return (SUCCESS);
 }
-
-const char	*get_color(void);
 
 static char *_get_box(void)
 {

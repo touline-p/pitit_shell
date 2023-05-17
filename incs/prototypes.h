@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:25:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 14:56:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:08:23 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "structures.h"
 
 /*----------------------------------------------------------------------------*/
+
+const char		*get_color(void);
+
 
 t_return_status	preserve_token_lst(t_token *token);
 t_return_status	cut_line_on(char *line, char ***res_pt);
