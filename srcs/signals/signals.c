@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 17:45:38 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:45:19 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ static void	handle_signal_main(int signal);
 
 /*----------------------------------------------------------------------------*/
 
-void	init_signals(void)
+void	init_signals(t_data *data)
 {
+	if (tcgetattr(1, &data->term) == -1)
+	{
+		perror("tcgetattr");
+		errno = SUCCESS;
+	}
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
@@ -82,6 +87,7 @@ void	handle_signal_heredoc(int signal)
 	if (signal == SIGINT)
 	{
 		(void)signal;
+		ft_dprintf(2, "^C");
 		ft_dprintf(2, "\n");
 		g_ret_val = 130;
 		exit (g_ret_val);
