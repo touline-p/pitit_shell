@@ -67,7 +67,7 @@ void	loop_init(t_data *data, char **line_pt, char **env)
 		clean_the_prompt(data->prompt, *line_pt, env);
 	*line_pt = readline(data->prompt);
 	errno = 0;
-	if ((*line_pt == NULL) || ft_strcmp("", *line_pt))
+	if ((*line_pt == NULL) || ft_strcmp("", *line_pt) == 0)
 		clean_the_prompt(data->prompt, *line_pt, env);
 	add_history(*line_pt);
 }
