@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines_execution.h                                :+:      :+:    :+:   */
+/*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 18:27:48 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/17 10:33:08 by twang            ###   ########.fr       */
+/*   Created: 2023/05/17 10:02:27 by twang             #+#    #+#             */
+/*   Updated: 2023/05/17 14:45:20 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#ifndef DEFINES_EXECUTION_H
-# define DEFINES_EXECUTION_H
+#ifndef DEFINES_H
+# define DEFINES_H
 
 # define MINI_SHELL_MUST_GO_ON 1
 # define HEREDOC_MUST_GO_ON 1
 # define STRT_CHR -1
 # define EOSTR 0
+# define METACHAR_SET "|&<>() \t\v\f\r\n"
 # define IFS " \t\n"
+# define NAME_OF_EXE "Pitit shell"
 # define PROMPT_MESSAGE " - Y a quoi : "
 # define START_MSG_00 "\n--------------------------------------------------"
 # define START_MSG_01 "----------------------------\t\n"
@@ -35,7 +37,4 @@
 # define START_MSG_13 "/\\/_/ \\/_____/ \\/_____/ \\/_____/ \n"
 # define START_MSG_14 "\t\t\t\t\t\t by ⭐ bpoumeau & twang ⭐\n\n"
 
-typedef t_return_status	(*t_builtin_ft)(char **av, char ***env_pt);
-typedef bool			(*t_increment_ft)(char line_pt, void *arg);
-
-#endif */
+#endif

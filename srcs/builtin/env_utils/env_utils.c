@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../../libft/libft.h"
-#include "../../../incs/parsing_incs/minishell_parsing.h"
+#include "../../../incs/minishell.h"
 
 bool	is_a_key_from_env(char *key, char **env)
 {

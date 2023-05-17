@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_parsing.h"
-#include "../../../incs/parsing_incs/minishell_parsing.h"
+#include "../../../incs/minishell.h"
+#include "../../../incs/minishell.h"
 
 static t_return_status	_squoting_process_ep(void);
 

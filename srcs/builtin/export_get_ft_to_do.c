@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
 
 bool			key_is_not_alnum(char *line);
 t_return_status	replace_content_in_env_pt(char *line, char ***env_pt);

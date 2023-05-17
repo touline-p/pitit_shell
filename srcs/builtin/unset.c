@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
 
 static	t_return_status	_unset_builtin_ep(char *msg, char **trash, \
 							t_return_status ret_val);

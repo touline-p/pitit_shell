@@ -14,8 +14,8 @@
 // Created by bpoumeau on 4/22/23.
 //
 
-#include "../../incs/execution_incs/minishell_execution.h"
-#include "../../incs/parsing_incs/minishell_parsing.h"
+#include "../../incs/minishell.h"
+#include "../../incs/minishell.h"
 
 static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 {

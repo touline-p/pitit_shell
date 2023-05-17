@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_execution.h"
+#include "../../../incs/minishell.h"
 
 void	check_opened_infiles(t_data *data, int block_id)
 {

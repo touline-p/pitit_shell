@@ -6,14 +6,12 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:47:45 by twang             #+#    #+#             */
-/*   Updated: 2023/05/16 17:53:41 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:11:00 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_execution.h"
-#include "minishell_parsing.h"
-#include "../incs/execution_incs/minishell_execution.h"
-#include "../incs/parsing_incs/minishell_parsing.h"
+#include "../incs/minishell.h"
+#include "../incs/minishell.h"
 
 /*---- prototypes ------------------------------------------------------------*/
 
@@ -41,6 +39,9 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 	get_prompt(*prompt_pt, 1);
 	return (SUCCESS);
 }
+
+
+static char *_get_box(void);
 
 const char	*get_color(void);
 

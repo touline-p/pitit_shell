@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   defines_parsing.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:27:48 by wangthea          #+#    #+#             */
-/*   Updated: 2023/03/20 19:22:24 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:33:29 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_PARSING_H
+/*#ifndef DEFINES_PARSING_H
 # define DEFINES_PARSING_H
 
 # define MINI_SHELL_MUST_GO_ON 1
@@ -18,5 +18,4 @@
 # define EOSTR 0
 # define METACHAR_SET "|&<>() \t\v\f\r\n"
 # define IFS " \t\n"
-# define NAME_OF_EXE "Pitit shell"
-#endif 
+#endif */

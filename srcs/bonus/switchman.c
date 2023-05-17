@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell_parsing.h"
+#include "../../incs/minishell.h"
 
 size_t	go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok)
 {

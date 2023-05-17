@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../../libft/libft.h"
-#include "../../../incs/parsing_incs/minishell_parsing.h"
+#include "../../../incs/minishell.h"
 
 char	*get_first_line_in_env(char **env)
 {

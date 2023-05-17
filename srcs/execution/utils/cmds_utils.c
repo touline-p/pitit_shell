@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_execution.h"
+#include "../../../incs/minishell.h"
 
 t_builtin	is_builtin(char *string)
 {
