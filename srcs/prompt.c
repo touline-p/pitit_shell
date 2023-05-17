@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:47:45 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 15:01:46 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:05:12 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ const char	*get_color(void);
 static char *_get_box(void)
 {
 	const char	*color_arr[] = {GREEN"\001\u2554", RED"\001\u2554", \
-							YELLOW"\001\u2554", BLUE"\001\u2554", };
+							YELLOW"\001\u2554", BLUE"\001\u2554", \
+							RED"\001\u2554"};
 	const int	ret_val_arr[] = {0, 1, 130, 131};
 	size_t		index;
 
@@ -73,14 +74,8 @@ static t_return_status	_get_alloc_box_on(char **box_pt, char **env)
 	if (box == NULL)
 		return (perror("prompt"), FAILED_MALLOC);
 	*box_pt = box;
-	if (g_ret_val == 0)
-		box = ft_strcpy_rn(box, GREEN"\001\u2554");
-	else if (g_ret_val == 130)
-		box = ft_strcpy_rn(box, YELLOW"\001\u2554");
-	else if (g_ret_val == 131)
-		box = ft_strcpy_rn(box, BLUE"\001\u2554");
-	else
-		box = ft_strcpy_rn(box, RED"\001\u2554");
+	box = ft_strcpy_rn(box, get_color());
+	box = ft_strcpy_rn(box, "\001\u2554");
 	i = 0;
 	while (i < box_width)
 	{

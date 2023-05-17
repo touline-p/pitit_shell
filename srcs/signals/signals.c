@@ -40,7 +40,7 @@ const char	*get_color(void)
 	size_t		index;
 
 	index = 0;
-	while (ret_val_arr[index] != g_ret_val && index < 5)
+	while (ret_val_arr[index] != g_ret_val && index < 4)
 		index++;
 	return (color_arr[index]);
 }
