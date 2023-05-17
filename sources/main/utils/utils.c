@@ -6,13 +6,13 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:13:46 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 16:18:44 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:25:24 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_return_status reset_term_settings(t_data *data)
+t_return_status	reset_term_settings(t_data *data)
 {
 	if (tcsetattr(1, TCSANOW, &data->term) == -1)
 	{
@@ -29,10 +29,9 @@ t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 	data->instructions_arr = NULL;
 	*str_token_pt = NULL;
 	if (check_arguments(av) != SUCCESS
-		|| _welcome_to_minihell(env_pt) != SUCCESS)
+		|| welcome_to_minihell(env_pt) != SUCCESS)
 		return (FAILURE);
 	return (SUCCESS);
-
 }
 
 void	loop_init(t_data *data, char **line_pt, char **env)
@@ -47,7 +46,8 @@ void	loop_init(t_data *data, char **line_pt, char **env)
 	add_history(*line_pt);
 }
 
-t_return_status set_data_instruction_arr(t_data *data, t_string_token *str_tok_lst)
+t_return_status	set_data_instruction_arr(t_data *data, \
+											t_string_token *str_tok_lst)
 {
 	data->instructions_arr = malloc(sizeof(t_string_token *) * 2);
 	if (data->instructions_arr == NULL)
@@ -55,4 +55,12 @@ t_return_status set_data_instruction_arr(t_data *data, t_string_token *str_tok_l
 	data->instructions_arr[0] = str_tok_lst;
 	data->instructions_arr[1] = NULL;
 	return (SUCCESS);
+}
+
+int	go_fuck_yourself_malloc(t_string_token *token_lst, char **env)
+{
+	ft_free_split(env);
+	string_token_destructor(token_lst);
+	printf("DAMMIT, memory is shit\n");
+	return (IT_DOES_NOT_WORK);
 }

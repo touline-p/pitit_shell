@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:38:17 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 15:31:25 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:21:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static int				_go_fuck_yourself_malloc(t_string_token *string_token, \
 												char **env);
 
 /*----------------------------------------------------------------------------*/
-
-# define IT_DOES_NOT_WORK 0
 
 t_return_status reset_term_settings(t_data *data)
 {
