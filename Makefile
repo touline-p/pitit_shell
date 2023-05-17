@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/05/15 16:22:38 by twang            ###   ########.fr        #
+#    Updated: 2023/05/17 15:52:28 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ OBJECTS	=	$(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
 all:
 	$(MAKE) header
-	$(MAKE) -C ./libft 
+	$(MAKE) -C ./libft
 	$(MAKE) $(NAME) -j
 
 $(NAME): $(OBJECTS) $(LIBFT)
