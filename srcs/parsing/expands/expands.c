@@ -36,7 +36,6 @@ t_return_status	performe_expand_on_line(char **line_pt, char **env)
 
 static bool	_check_emptyness(t_string_token *arg)
 {
-	size_t	size;
 	char	*tmp;
 
 	while (arg->token != EOL)

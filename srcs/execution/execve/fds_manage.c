@@ -66,6 +66,7 @@ t_return_status	_write_all(char *str, int fd)
 
 static void	_heredoc_forking(int *fd, t_cmd *cmd, t_data *data, char **env_pt)
 {
+	(void)data;
 	ft_free_split(env_pt);
 	ft_free_split(cmd->commands);
 	close(cmd->infile);
