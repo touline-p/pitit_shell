@@ -44,39 +44,12 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 
 const char	*get_color(void);
 
-static char *_get_box(void)
+void copy_all_box(char *box, char *pwd, size_t box_width)
 {
-	const char	*color_arr[] = {GREEN"\001\u2554", RED"\001\u2554", \
-							YELLOW"\001\u2554", BLUE"\001\u2554", \
-							RED"\001\u2554"};
-	const int	ret_val_arr[] = {0, 1, 130, 131};
-	size_t		index;
-
-	index = 0;
-	while (ret_val_arr[index] != g_ret_val && index < 5)
-		index++;
-	return ((char *)color_arr[index]);
-}
-
-
-static t_return_status	_get_alloc_box_on(char **box_pt, char **env)
-{
-	char	*box;
-	char	*pwd;
-	size_t	box_width;
 	size_t	i;
 
-	pwd = get_env_content_from_key("PWD", env);
-	if (pwd == NULL)
-		pwd = "We are kinda lost bitches.";
-	box_width = (ft_strlen(pwd) + 4);
-	box = malloc(ft_strlen(GREEN) + (box_width * 4 + 2) * \
-					ft_strlen("\001\u2550\002") + box_width \
-					+ 4 + ft_strlen("\001\u255D\002\n"END));
-	if (box == NULL)
-		return (perror("prompt"), FAILED_MALLOC);
-	*box_pt = box;
-	box = ft_strcpy_rn(box, get_color());
+	i = 0;
+	box = ft_strcpy_rn(box, (char *)get_color());
 	box = ft_strcpy_rn(box, "\001\u2554");
 	i = 0;
 	while (i < box_width)
@@ -97,6 +70,25 @@ static t_return_status	_get_alloc_box_on(char **box_pt, char **env)
 	}
 	box = ft_strcpy_rn(box, "\u255D\002\n"END);
 	*box = 0;
+}
+
+static t_return_status	_get_alloc_box_on(char **box_pt, char **env)
+{
+	char	*box;
+	char	*pwd;
+	size_t	box_width;
+
+	pwd = get_env_content_from_key("PWD", env);
+	if (pwd == NULL)
+		pwd = "We are kinda lost bitches.";
+	box_width = (ft_strlen(pwd) + 4);
+	box = malloc(ft_strlen(GREEN) + (box_width * 4 + 2) * \
+					ft_strlen("\001\u2550\002") + box_width \
+					+ 4 + ft_strlen("\001\u255D\002\n"END));
+	if (box == NULL)
+		return (perror("prompt"), FAILED_MALLOC);
+	*box_pt = box;
+	copy_all_box(box, pwd, box_width);
 	return (SUCCESS);
 }
 
