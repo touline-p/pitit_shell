@@ -29,11 +29,13 @@ int	g_ret_val;
 /*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status	_welcome_to_minihell(char ***env_pt);
-static int				_go_fuck_yourself_malloc(void);
+static int				_go_fuck_yourself_malloc(t_string_token *string_token, \
+												char **env);
 
 /*----------------------------------------------------------------------------*/
 
 # define IT_DOES_NOT_WORK 0
+
 
 void	reset_term_settings(t_data *data)
 {
@@ -42,6 +44,18 @@ void	reset_term_settings(t_data *data)
 		perror("tcsetattr");
 		errno = SUCCESS;
 	}
+
+t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
+				char **av, char ***env_pt)
+{
+	data->prompt = NULL;
+	data->instructions_arr = NULL;
+	*str_token_pt = NULL;
+	if (check_arguments(av) != SUCCESS
+		|| _welcome_to_minihell(env_pt) != SUCCESS)
+		return (FAILURE);
+	return (SUCCESS);
+
 }
 
 int	main(int ac, char **av, char **env)
@@ -50,13 +64,8 @@ int	main(int ac, char **av, char **env)
 	t_data			data;
 	t_string_token	*str_tok_lst;
 
-	data.prompt = NULL;
-	data.instructions_arr = NULL;
-	line = NULL;
-	str_tok_lst = NULL;
-	if (check_arguments(ac, av) != SUCCESS)
-		return (1);
-	if (_welcome_to_minihell(&env) != SUCCESS)
+	(void)ac;
+	if (init_main(&data, &str_tok_lst, av, &env) != SUCCESS)
 		return (1);
 	while (MINI_SHELL_MUST_GO_ON)
 	{
@@ -76,7 +85,7 @@ int	main(int ac, char **av, char **env)
 		del_space_token(str_tok_lst);
 		data.instructions_arr = malloc(sizeof(t_string_token *) * 2);
 		if (data.instructions_arr == NULL)
-			return (_go_fuck_yourself_malloc());
+			return (_go_fuck_yourself_malloc(str_tok_lst, env));
 		data.instructions_arr[0] = str_tok_lst;
 		data.instructions_arr[1] = NULL;
 		del_space_token(str_tok_lst);
@@ -107,8 +116,10 @@ static t_return_status	_welcome_to_minihell(char ***env_pt)
 	return (SUCCESS);
 }
 
-static int	_go_fuck_yourself_malloc(void)
+static int	_go_fuck_yourself_malloc(t_string_token *token_lst, char **env)
 {
+	ft_free_split(env);
+	string_token_destructor(token_lst);
 	printf("DAMMIT, memory is shit\n");
 	return (IT_DOES_NOT_WORK);
 }

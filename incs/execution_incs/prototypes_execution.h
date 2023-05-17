@@ -129,7 +129,7 @@ char			**subshell_preparation(t_string_token **start);
 /*----------------------------------------------------------------------------*/
 
 /*-- main_utils --*/
-t_return_status	check_arguments(int ac, char **av);
+t_return_status	check_arguments(char **av);
 void			clean_the_prompt(char *prompt, char *line, char **env);
 
 /*-- prompt --*/
