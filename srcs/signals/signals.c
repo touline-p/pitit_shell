@@ -45,9 +45,19 @@ const char	*get_color(void)
 	return (color_arr[index]);
 }
 
-static const char	*_get_color_from(char *prompt)
+static const char	*_get_color_from_prompt(char *prompt)
 {
+	const char	*color_arr[] = {GREEN, RED, YELLOW, BLUE, RED};
+	size_t		index;
 
+	index = 0;
+	while (index < 5)
+	{
+		if (ft_strnstr(prompt, (char *)color_arr[index], ft_strlen(prompt)) != NULL)
+			return (color_arr[index]);
+		index++;
+	}
+	return (NULL);
 }
 
 void	change_color(char *prompt)
@@ -57,7 +67,7 @@ void	change_color(char *prompt)
 	const char	*color_from;
 
 	color_to = get_color();
-	color_from = _get_color_from();
+	color_from = _get_color_from_prompt(prompt);
 	if (color_from == NULL)
 		return ;
 	tmp = ft_strnstr(prompt, color_from, ft_strlen(prompt));

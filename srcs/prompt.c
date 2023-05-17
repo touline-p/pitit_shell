@@ -42,6 +42,22 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 	return (SUCCESS);
 }
 
+const char	*get_color(void);
+
+static char *_get_box(void)
+{
+	const char	*color_arr[] = {GREEN"\001\u2554", RED"\001\u2554", \
+							YELLOW"\001\u2554", BLUE"\001\u2554", }
+	const int	ret_val_arr[] = {0, 1, 130, 131};
+	size_t		index;
+
+	index = 0;
+	while (ret_val_arr[index] != g_ret_val && index < 5)
+		index++;
+	return ((char *)color_arr[index]);
+}
+
+
 static t_return_status	_get_alloc_box_on(char **box_pt, char **env)
 {
 	char	*box;
