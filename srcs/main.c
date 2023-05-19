@@ -29,6 +29,7 @@ static int				_go_fuck_yourself_malloc(t_string_token *string_token, \
 
 /*----------------------------------------------------------------------------*/
 
+
 t_return_status reset_term_settings(t_data *data)
 {
 	if (tcsetattr(1, TCSANOW, &data->term) == -1)
@@ -39,18 +40,6 @@ t_return_status reset_term_settings(t_data *data)
 	return (SUCCESS);
 }
 
-t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
-				char **av, char ***env_pt)
-{
-	data->prompt = NULL;
-	data->instructions_arr = NULL;
-	*str_token_pt = NULL;
-	if (check_arguments(av) != SUCCESS
-		|| _welcome_to_minihell(env_pt) != SUCCESS)
-		return (FAILURE);
-	return (SUCCESS);
-
-}
 
 void	loop_init(t_data *data, char **line_pt, char **env)
 {

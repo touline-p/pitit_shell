@@ -60,6 +60,7 @@ SOURCES =																	\
 			sources/lexing/lexing_articulation.c							\
 			sources/main/prompt/prompt_utils.c								\
 			sources/main/prompt/prompt.c									\
+			sources/main/utils/check_arguments.c							\
 			sources/main/utils/display.c									\
 			sources/main/utils/utils.c										\
 			sources/main/main.c												\
