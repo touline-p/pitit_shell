@@ -32,7 +32,7 @@ t_return_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 	if (content == NULL)
 		*pin_pt = ft_strdup("");
 	else
-		*pin_pt = NULL;//ft_strdup(content);
+		*pin_pt = ft_strdup(content);
 	if (*pin_pt == NULL)
 		return (ft_free_split_content(pin_pt + 1), perror("replace_dollar_str_by_env_value"), FAILED_MALLOC);
 	ft_striteri(*pin_pt, &_replace_space_by_minus);

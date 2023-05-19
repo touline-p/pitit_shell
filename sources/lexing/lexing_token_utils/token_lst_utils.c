@@ -31,7 +31,7 @@ t_token	*token_constructor_esec(t_emt emt, char msg, t_esec esec)
 {
 	t_token	*new;
 
-	new = malloc(sizeof(t_token));
+	new = NULL;//malloc(sizeof(t_token));
 	if (!new)
 		return (perror("token_constructor_esec"), NULL);
 	new->token = emt;
