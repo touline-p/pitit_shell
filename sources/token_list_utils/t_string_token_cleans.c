@@ -49,15 +49,3 @@ void	del_space_token(t_string_token *tok)
 			pin = pin->next;
 	}
 }
-
-void	free_all_str(t_data *data)
-{
-	int	i;
-
-	i = data->index;
-	while (data->instructions_arr[i])
-	{
-		string_token_destructor(data->instructions_arr[i]);
-		i++;
-	}
-}
