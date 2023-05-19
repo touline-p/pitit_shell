@@ -30,3 +30,12 @@ void	init_data(t_data *data)
 	data->fd[1] = 0;
 	data->nb_of_pipe = 0;
 }
+
+void	ft_free_all_str_lst(t_data *data, int index)
+{
+	index++;
+	while (data->instructions_arr[index])
+		string_token_destructor(data->instructions_arr[index++]);
+	free(data->instructions_arr);
+	return ;
+}
