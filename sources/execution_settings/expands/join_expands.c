@@ -21,8 +21,9 @@ static void				_remove_quotes(char **str_arr);
 
 t_return_status	join_arr_on(char **str_arr, char **line_pt, char **env)
 {
+	*line_pt = NULL;
 	if (_expand_lines(str_arr, env) != SUCCESS)
-		return (ft_free_split(str_arr), SUCCESS);
+		return (ft_free_split(str_arr), FAILED_MALLOC);
 	_remove_quotes(str_arr);
 	if (ft_join_str_arr_on(str_arr, line_pt) != SUCCESS)
 		return (ft_free_split(str_arr), FAILED_MALLOC);

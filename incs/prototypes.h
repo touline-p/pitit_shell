@@ -151,7 +151,7 @@ bool	check_cmd(t_cmd *cmd);
 void	init_data(t_data *data);
 
 /*---- exec_articultaion.c ----*/
-void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt);
+t_return_status execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt);
 
 /*---- executions.c ----*/
 void			subshell_then_exit(t_cmd command, char ***env);

@@ -85,7 +85,8 @@ static t_return_status	_launch_instructions_arr(t_data *data, \
 	while (data->index != -1)
 	{
 		actual = instructions_arr[data->index];
-		execution(data, actual, env);
+		if (execution(data, actual, env) != SUCCESS)
+			return (FAILED_MALLOC);
 		data->index = get_next_index(++data->index, instructions_arr);
 		if (g_ret_val == 2)
 			return (SUCCESS);

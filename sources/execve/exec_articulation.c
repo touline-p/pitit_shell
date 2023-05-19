@@ -16,28 +16,27 @@
 
 static t_return_status	_alloc_cmd_block(t_data *data, \
 													t_string_token *lst_of_tok);
-static t_return_status	_check_if_token(t_string_token *lst_of_tok);
+static t_return_status	_check_if_token_lst_is_empty(t_string_token *lst_of_tok);
 static void				_wait_for_process_ids(t_data *data);
 static t_return_status	_wait_for_command(int pid, int *status, bool *signals);
 
 /*----------------------------------------------------------------------------*/
 
-void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt)
+t_return_status	execution(t_data *data, t_string_token *lst_of_tok, \
+				char ***env_pt)
 {
 	init_data(data);
-	_alloc_cmd_block(data, lst_of_tok);
-	files_management(data, lst_of_tok, *env_pt);
+	if (_alloc_cmd_block(data, lst_of_tok) != SUCCESS
+		|| files_management(data, lst_of_tok, *env_pt) != SUCCESS)
+		return (string_token_destructor(lst_of_tok), FAILED_MALLOC);
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
-	if (_check_if_token(lst_of_tok) != SUCCESS)
-	{
-		string_token_destructor(lst_of_tok);
-		return ;
-	}
+	if (_check_if_token_lst_is_empty(lst_of_tok) != SUCCESS)
+		return (string_token_destructor(lst_of_tok), SUCCESS);
 	strings_management(data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
 	if (g_ret_val == 130 && check_cmd(data->cmds_block))
-		return ;
+		return (SUCCESS);
 	if (data->nb_of_pipe == 0 && data->cmds_block->id_command != CMD && \
 		data->cmds_block->id_command != SUBSHELL && \
 		data->cmds_block->id_command != EMPTY)
@@ -74,7 +73,7 @@ static t_return_status	_alloc_cmd_block(t_data *data, \
 	return (SUCCESS);
 }
 
-static t_return_status	_check_if_token(t_string_token *lst_of_tok)
+static t_return_status	_check_if_token_lst_is_empty(t_string_token *lst_of_tok)
 {
 	t_string_token	*temp;
 
