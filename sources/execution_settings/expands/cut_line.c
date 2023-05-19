@@ -28,8 +28,9 @@ t_return_status	cut_line_on(char *line, char ***res_pt)
 
 	*res_pt = NULL;
 	line_arr = malloc(sizeof(char *) * (_count_indep_words(line) + 1));
-	if (line_arr == NULL
-		|| _alloc_each_cells(line, line_arr) != SUCCESS)
+	if (line_arr == NULL)
+		return (perror("cut_line_on"), free(line), FAILED_MALLOC);
+	if (_alloc_each_cells(line, line_arr) != SUCCESS)
 		return (free(line), free(line_arr), FAILED_MALLOC);
 	*res_pt = line_arr;
 	return (free(line), SUCCESS);
