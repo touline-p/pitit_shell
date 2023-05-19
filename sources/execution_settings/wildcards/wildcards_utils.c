@@ -19,7 +19,7 @@ int	get_alloc_size(char *line)
 	int				size;
 
 	size = 0;
-	directory = NULL; //opendir(".");
+	directory = opendir(".");
 	if (!directory)
 	{
 		perror ("minishell: opendir: cannot open current directory");
@@ -85,7 +85,7 @@ static t_return_status	_fill_dst_arr_one_name(char *line, \
 		{
 			arr_to_fill[*i] = ft_strdup(data->d_name);
 			if (arr_to_fill[*i] == NULL)
-				return (FAILURE);
+				return (perror("fill dst arr one name"),closedir(directory), FAILURE);
 			(*i)++;
 		}
 	}

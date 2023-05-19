@@ -164,6 +164,7 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 char			*ft_get_env(char *key, char **env);
 t_uchar			*ft_ustrdup(unsigned char *str);
+void			ft_arriteri(void **arr, void *(*f)(char **));
 
 t_return_status	ft_atoi_on(const char *str, int *int_pt);
 
