@@ -74,7 +74,6 @@ SOURCES =																	\
 			sources/signals/signals.c										\
 			sources/syntax/check_par_err.c									\
 			sources/syntax/check_unic_syntax.c								\
-			sources/syntax/syntax_is_valid.c								\
 			sources/token_list_utils/str_token_debug.c						\
 			sources/token_list_utils/str_token_utils.c						\
 			sources/token_list_utils/t_string_token_utils.c					\
