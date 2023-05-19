@@ -94,3 +94,4 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 		builtin_then_exit(command_block, env);
 	execve_then_exit(command_block, env);
 }
+

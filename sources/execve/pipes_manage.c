@@ -12,16 +12,6 @@
 
 #include "minishell.h"
 
-t_return_status	_do_the_pipe(t_cmd *cmd_block, \
-						int nb_of_pipe, int block_id)
-{
-	if (block_id == nb_of_pipe)
-		return (SUCCESS);
-	if (pipe(cmd_block->fd_hd) != 0)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
 void	manage_the_pipe(t_data *data, int block_id)
 {
 	t_cmd	*cmd;
@@ -37,4 +27,14 @@ void	manage_the_pipe(t_data *data, int block_id)
 		(cmd + 1)->infile = cmd->fd_hd[0];
 	else
 		close(data->cmds_block[block_id].fd_hd[0]);
+}
+
+t_return_status	do_the_pipe(t_cmd *cmd_block, \
+						int nb_of_pipe, int block_id)
+{
+	if (block_id == nb_of_pipe)
+		return (SUCCESS);
+	if (pipe(cmd_block->fd_hd) != 0)
+		return (FAILURE);
+	return (SUCCESS);
 }
