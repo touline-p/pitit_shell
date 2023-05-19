@@ -86,6 +86,8 @@ FILES	=	ft_atoi.c 				\
 			ft_putnbr_base_fd.c		\
 			ft_putnbr_unsigned_fd.c	\
 			_get_next_line.c		\
+			lstc.c					\
+			lstc_2.c				\
 
 HFILES	=	libft.h
 

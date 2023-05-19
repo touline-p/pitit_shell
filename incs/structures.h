@@ -22,7 +22,6 @@ typedef struct s_block			t_block;
 typedef struct s_string_token	t_string_token;
 typedef struct s_data			t_data;
 typedef struct s_cmd			t_cmd;
-typedef struct s_list_of_char	t_lstc;
 
 /*---- typedef function pointers ---------------------------------------------*/
 
@@ -86,12 +85,5 @@ struct s_cmd
 	int			fd_hd[2];
 	pid_t		process_id;
 };
-
-struct	s_list_of_char
-{
-	t_lstc	*next;
-	char	c;
-};
-
 
 #endif
