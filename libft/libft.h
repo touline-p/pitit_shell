@@ -152,6 +152,7 @@ void			*ft_memdup(void *src, size_t ln);
 void			ft_swap(int *a, int *b);
 int				ft_is_overflowing(char *str);
 void			*ft_free_split(char **dst);
+void			ft_free_split_content(char **str_arr);
 void			ft_free_int_arr(int **int_arr);
 void			ft_eprint_split(char **split);
 void			ft_print_split(char **split);

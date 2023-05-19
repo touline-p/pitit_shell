@@ -76,6 +76,12 @@ static t_return_status	_fill(t_string_token **instructions_arr, \
 	return (SUCCESS);
 }
 
+static t_return_status	_free_minishell_data(t_data *data)
+{
+	free(data->instructions_arr);
+	free(data->cmds_block);
+}
+
 static t_return_status	_launch_instructions_arr(t_data *data, \
 						t_string_token **instructions_arr, char ***env)
 {
@@ -86,7 +92,7 @@ static t_return_status	_launch_instructions_arr(t_data *data, \
 	{
 		actual = instructions_arr[data->index];
 		if (execution(data, actual, env) != SUCCESS)
-			return (FAILED_MALLOC);
+			return (_free_minishell_data(data), FAILED_MALLOC);
 		data->index = get_next_index(++data->index, instructions_arr);
 		if (g_ret_val == 2)
 			return (SUCCESS);

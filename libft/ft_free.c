@@ -27,3 +27,12 @@ void	*ft_free(void **s, size_t len)
 	s = NULL;
 	return (NULL);
 }
+
+void	ft_free_split_content(char **str_arr)
+{
+	while (*str_arr)
+	{
+		free(*str_arr);
+		++str_arr;
+	}
+}

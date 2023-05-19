@@ -1,286 +1,97 @@
-<<<<<<< HEAD
-==673635== Memcheck, a memory error detector
-==673635== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==673635== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==673635== Command: ./minishell
-==673635== Parent PID: 673611
-==673635== 
-==673635== 
-==673635== Process terminating with default action of signal 1 (SIGHUP)
-==673635==    at 0x4994C3A: wait4 (wait4.c:27)
-==673635==    by 0x404EC3: wait_for_command (execution.c:112)
-==673635==    by 0x404E74: wait_for_process_ids (execution.c:138)
-==673635==    by 0x404C9E: execution (execution.c:67)
-==673635==    by 0x4068B1: launch_instructions_arr (switchman.c:129)
-==673635==    by 0x4069AD: switchman (switchman.c:157)
-==673635==    by 0x40A174: main (main.c:102)
-==673649== 
-==673649== Process terminating with default action of signal 1 (SIGHUP)
-==673649==    at 0x403483: infiles_management (infiles_manage.c:103)
-==673649==    by 0x404B9D: execution (execution.c:48)
-==673649==    by 0x4068B1: launch_instructions_arr (switchman.c:129)
-==673649==    by 0x4069AD: switchman (switchman.c:157)
-==673649==    by 0x4022DE: _child_launch_act (childs.c:134)
-==673649==    by 0x402131: _fork_process (childs.c:44)
-==673649==    by 0x401ECC: childs_execve (childs.c:72)
-==673649==    by 0x404C95: execution (execution.c:66)
-==673649==    by 0x4068B1: launch_instructions_arr (switchman.c:129)
-==673649==    by 0x4069AD: switchman (switchman.c:157)
-==673649==    by 0x40A174: main (main.c:102)
-==673635== 
-==673635== FILE DESCRIPTORS: 4 open at exit.
-==673635== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
-==673635==    <inherited from parent>
-==673635== 
-==673635== Open file descriptor 2: /dev/pts/1
-==673635==    <inherited from parent>
-==673635== 
-==673635== Open file descriptor 1: /dev/pts/1
-==673635==    <inherited from parent>
-==673635== 
-==673635== Open file descriptor 0: /dev/pts/1
-==673635==    <inherited from parent>
-==673635== 
-==673635== 
-==673635== HEAP SUMMARY:
-==673635==     in use at exit: 210,427 bytes in 292 blocks
-==673635==   total heap usage: 554 allocs, 262 frees, 233,050 bytes allocated
-==673635== 
-==673649== 
-==673649== FILE DESCRIPTORS: 4 open at exit.
-==673649== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
-==673649==    <inherited from parent>
-==673649== 
-==673649== Open file descriptor 2: /dev/pts/1
-==673649==    <inherited from parent>
-==673649== 
-==673649== Open file descriptor 1: /dev/pts/1
-==673649==    <inherited from parent>
-==673649== 
-==673649== Open file descriptor 0: /dev/pts/1
-==673649==    <inherited from parent>
-==673649== 
-==673649== 
-==673649== HEAP SUMMARY:
-==673649==     in use at exit: 210,276 bytes in 301 blocks
-==673649==   total heap usage: 559 allocs, 258 frees, 233,229 bytes allocated
-==673649== 
-==673635== 8 bytes in 1 blocks are still reachable in loss record 1 of 68
-==673635==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673635==    by 0x40C715: ft_strjoin (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673635==    by 0x40C7F4: ft_strjoin_free_sec_sf (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673635==    by 0x4098DB: _increment_shlvl (env_init.c:56)
-==673635==    by 0x4096BF: env_init_on (env_init.c:30)
-==673635==    by 0x40A1AF: welcome_to_minihell (main.c:110)
-==673635==    by 0x409FD3: main (main.c:66)
-==673635== 
-==673635== 16 bytes in 1 blocks are still reachable in loss record 9 of 68
-==673635==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673635==    by 0x406961: switchman (switchman.c:144)
-==673635==    by 0x40A174: main (main.c:102)
-==673635== 
-==673635== 96 bytes in 1 blocks are still reachable in loss record 21 of 68
-==673635==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673635==    by 0x40BA42: ft_calloc (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673635==    by 0x404D47: alloc_cmd_block (execution.c:87)
-==673635==    by 0x404B89: execution (execution.c:47)
-==673635==    by 0x4068B1: launch_instructions_arr (switchman.c:129)
-==673635==    by 0x4069AD: switchman (switchman.c:157)
-==673635==    by 0x40A174: main (main.c:102)
-==673635== 
-==673635== 373 bytes in 1 blocks are still reachable in loss record 27 of 68
-==673635==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673635==    by 0x40C715: ft_strjoin (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673635==    by 0x409B08: get_prompt_on (main.c:39)
-==673635==    by 0x40A003: main (main.c:71)
-==673635== 
-==673635== 560 bytes in 1 blocks are still reachable in loss record 31 of 68
-==673635==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673635==    by 0x40DE44: ft_str_array_dup (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673635==    by 0x409679: env_init_on (env_init.c:27)
-==673635==    by 0x40A1AF: welcome_to_minihell (main.c:110)
-==673635==    by 0x409FD3: main (main.c:66)
-==673635== 
-==673649== 8 bytes in 1 blocks are still reachable in loss record 1 of 69
-==673649==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673649==    by 0x40C715: ft_strjoin (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673649==    by 0x40C7F4: ft_strjoin_free_sec_sf (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673649==    by 0x4098DB: _increment_shlvl (env_init.c:56)
-==673649==    by 0x4096BF: env_init_on (env_init.c:30)
-==673635== 3,977 bytes in 68 blocks are still reachable in loss record 45 of 68
-==673649==    by 0x40A1AF: welcome_to_minihell (main.c:110)
-==673635==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673649==    by 0x409FD3: main (main.c:66)
-==673635==    by 0x40C505: ft_strdup (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673649== 
-==673635==    by 0x40DE82: ft_str_array_dup (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673635==    by 0x409679: env_init_on (env_init.c:27)
-==673635==    by 0x40A1AF: welcome_to_minihell (main.c:110)
-==673635==    by 0x409FD3: main (main.c:66)
-==673635== 
-==673649== 14 bytes in 5 blocks are still reachable in loss record 7 of 69
-==673649==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673649==    by 0x4091E8: _reset_pin_ret_string (token_to_str_token.c:84)
-==673649==    by 0x409152: _get_str_token_on_and_reset_pin (token_to_str_token.c:57)
-==673649==    by 0x409057: token_lst_to_str_token (token_to_str_token.c:37)
-==673649==    by 0x4071E9: get_lexed_str_token_lst_from_line (parsing_articulation.c:34)
-==673649==    by 0x40A0D2: main (main.c:90)
-==673649== 
-==673635== LEAK SUMMARY:
-==673635==    definitely lost: 0 bytes in 0 blocks
-==673635==    indirectly lost: 0 bytes in 0 blocks
-==673635==      possibly lost: 0 bytes in 0 blocks
-==673635==    still reachable: 5,030 bytes in 73 blocks
-==673649== 16 bytes in 1 blocks are still reachable in loss record 10 of 69
-==673635==         suppressed: 205,397 bytes in 219 blocks
-==673649==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673635== 
-==673649==    by 0x406961: switchman (switchman.c:144)
-==673635== For lists of detected and suppressed errors, rerun with: -s
-==673649==    by 0x4022DE: _child_launch_act (childs.c:134)
-==673635== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==673649==    by 0x402131: _fork_process (childs.c:44)
-==673649==    by 0x401ECC: childs_execve (childs.c:72)
-==673649==    by 0x404C95: execution (execution.c:66)
-==673649==    by 0x4068B1: launch_instructions_arr (switchman.c:129)
-==673649==    by 0x4069AD: switchman (switchman.c:157)
-==673649==    by 0x40A174: main (main.c:102)
-==673649== 
-==673649== 144 bytes in 1 blocks are still reachable in loss record 23 of 69
-==673649==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673649==    by 0x40BA42: ft_calloc (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673649==    by 0x404D47: alloc_cmd_block (execution.c:87)
-==673649==    by 0x404B89: execution (execution.c:47)
-==673649==    by 0x4068B1: launch_instructions_arr (switchman.c:129)
-==673649==    by 0x4069AD: switchman (switchman.c:157)
-==673649==    by 0x4022DE: _child_launch_act (childs.c:134)
-==673649==    by 0x402131: _fork_process (childs.c:44)
-==673649==    by 0x401ECC: childs_execve (childs.c:72)
-==673649==    by 0x404C95: execution (execution.c:66)
-==673649==    by 0x4068B1: launch_instructions_arr (switchman.c:129)
-==673649==    by 0x4069AD: switchman (switchman.c:157)
-==673649== 
-==673649== 160 bytes in 5 blocks are still reachable in loss record 25 of 69
-==673649==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673649==    by 0x4087F1: string_token_creator (t_string_token_utils.c:21)
-==673649==    by 0x408860: string_token_creator_on (t_string_token_utils.c:34)
-==673649==    by 0x409128: _get_str_token_on_and_reset_pin (token_to_str_token.c:54)
-==673649==    by 0x409057: token_lst_to_str_token (token_to_str_token.c:37)
-==673649==    by 0x4071E9: get_lexed_str_token_lst_from_line (parsing_articulation.c:34)
-==673649==    by 0x40A0D2: main (main.c:90)
-==673649== 
-==673649== 560 bytes in 1 blocks are still reachable in loss record 32 of 69
-==673649==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673649==    by 0x40DE44: ft_str_array_dup (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673649==    by 0x409679: env_init_on (env_init.c:27)
-==673649==    by 0x40A1AF: welcome_to_minihell (main.c:110)
-==673649==    by 0x409FD3: main (main.c:66)
-==673649== 
-==673649== 3,977 bytes in 68 blocks are still reachable in loss record 46 of 69
-==673649==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==673649==    by 0x40C505: ft_strdup (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673649==    by 0x40DE82: ft_str_array_dup (in /nfs/homes/bpoumeau/Documents/pitit_shell/minishell)
-==673649==    by 0x409679: env_init_on (env_init.c:27)
-==673649==    by 0x40A1AF: welcome_to_minihell (main.c:110)
-==673649==    by 0x409FD3: main (main.c:66)
-==673649== 
-==673649== LEAK SUMMARY:
-==673649==    definitely lost: 0 bytes in 0 blocks
-==673649==    indirectly lost: 0 bytes in 0 blocks
-==673649==      possibly lost: 0 bytes in 0 blocks
-==673649==    still reachable: 4,879 bytes in 82 blocks
-==673649==         suppressed: 205,397 bytes in 219 blocks
-==673649== 
-==673649== For lists of detected and suppressed errors, rerun with: -s
-==673649== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-=======
-==1728815== Memcheck, a memory error detector
-==1728815== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1728815== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==1728815== Command: ./minishell
-==1728815== Parent PID: 1728791
-==1728815== 
-==1728815== Invalid read of size 1
-==1728815==    at 0x11426F: ft_strstr_w (in /nfs/homes/twang/Documents/cursus_42/circle_4/minishell/minishell)
-==1728815==    by 0x10992E: find_matching_files (wildcards_utils.c:86)
-==1728815==    by 0x109690: _check_nb_of_match (files_wildcards.c:66)
-==1728815==    by 0x109592: wildcard_files (files_wildcards.c:30)
-==1728815==    by 0x10BB45: _set_infile (infiles_manage.c:152)
-==1728815==    by 0x10B8EE: infiles_management (infiles_manage.c:108)
-==1728815==    by 0x10CCBC: execution (execution.c:47)
-==1728815==    by 0x10E778: launch_instructions_arr (switchman.c:129)
-==1728815==    by 0x10E87C: switchman (switchman.c:156)
-==1728815==    by 0x111B6F: main (main.c:95)
-==1728815==  Address 0x4b18b28 is 0 bytes after a block of size 8 alloc'd
-==1728815==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1728815==    by 0x114FD3: ft_join_str_arr_on (in /nfs/homes/twang/Documents/cursus_42/circle_4/minishell/minishell)
-==1728815==    by 0x10EBAC: join_arr_on (join_expands.c:15)
-==1728815==    by 0x10BB2F: _set_infile (infiles_manage.c:151)
-==1728815==    by 0x10B8EE: infiles_management (infiles_manage.c:108)
-==1728815==    by 0x10CCBC: execution (execution.c:47)
-==1728815==    by 0x10E778: launch_instructions_arr (switchman.c:129)
-==1728815==    by 0x10E87C: switchman (switchman.c:156)
-==1728815==    by 0x111B6F: main (main.c:95)
-==1728815== 
-==1728815== Invalid read of size 1
-==1728815==    at 0x11426F: ft_strstr_w (in /nfs/homes/twang/Documents/cursus_42/circle_4/minishell/minishell)
-==1728815==    by 0x10992E: find_matching_files (wildcards_utils.c:86)
-==1728815==    by 0x109717: _get_wildcard_file (files_wildcards.c:91)
-==1728815==    by 0x10961A: wildcard_files (files_wildcards.c:44)
-==1728815==    by 0x10BB45: _set_infile (infiles_manage.c:152)
-==1728815==    by 0x10B8EE: infiles_management (infiles_manage.c:108)
-==1728815==    by 0x10CCBC: execution (execution.c:47)
-==1728815==    by 0x10E778: launch_instructions_arr (switchman.c:129)
-==1728815==    by 0x10E87C: switchman (switchman.c:156)
-==1728815==    by 0x111B6F: main (main.c:95)
-==1728815==  Address 0x4b18b28 is 0 bytes after a block of size 8 alloc'd
-==1728815==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1728815==    by 0x114FD3: ft_join_str_arr_on (in /nfs/homes/twang/Documents/cursus_42/circle_4/minishell/minishell)
-==1728815==    by 0x10EBAC: join_arr_on (join_expands.c:15)
-==1728815==    by 0x10BB2F: _set_infile (infiles_manage.c:151)
-==1728815==    by 0x10B8EE: infiles_management (infiles_manage.c:108)
-==1728815==    by 0x10CCBC: execution (execution.c:47)
-==1728815==    by 0x10E778: launch_instructions_arr (switchman.c:129)
-==1728815==    by 0x10E87C: switchman (switchman.c:156)
-==1728815==    by 0x111B6F: main (main.c:95)
-==1728815== 
-==1728815== 
-==1728815== FILE DESCRIPTORS: 4 open at exit.
-==1728815== Open file descriptor 3: /nfs/homes/twang/Documents/cursus_42/circle_4/minishell/valgrind.txt
-==1728815==    <inherited from parent>
-==1728815== 
-==1728815== Open file descriptor 2: /dev/pts/1
-==1728815==    <inherited from parent>
-==1728815== 
-==1728815== Open file descriptor 1: /dev/pts/1
-==1728815==    <inherited from parent>
-==1728815== 
-==1728815== Open file descriptor 0: /dev/pts/1
-==1728815==    <inherited from parent>
-==1728815== 
-==1728815== 
-==1728815== HEAP SUMMARY:
-==1728815==     in use at exit: 206,009 bytes in 218 blocks
-==1728815==   total heap usage: 592 allocs, 374 frees, 369,147 bytes allocated
-==1728815== 
-==1728815== 8 bytes in 1 blocks are definitely lost in loss record 2 of 61
-==1728815==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1728815==    by 0x114FD3: ft_join_str_arr_on (in /nfs/homes/twang/Documents/cursus_42/circle_4/minishell/minishell)
-==1728815==    by 0x10EBAC: join_arr_on (join_expands.c:15)
-==1728815==    by 0x10BB2F: _set_infile (infiles_manage.c:151)
-==1728815==    by 0x10B8EE: files_management (infiles_manage.c:108)
-==1728815==    by 0x10CCBC: execution (execution.c:47)
-==1728815==    by 0x10E778: launch_instructions_arr (switchman.c:129)
-==1728815==    by 0x10E87C: switchman (switchman.c:156)
-==1728815==    by 0x111B6F: main (main.c:95)
-==1728815== 
-==1728815== LEAK SUMMARY:
-==1728815==    definitely lost: 8 bytes in 1 blocks
-==1728815==    indirectly lost: 0 bytes in 0 blocks
-==1728815==      possibly lost: 0 bytes in 0 blocks
-==1728815==    still reachable: 0 bytes in 0 blocks
-==1728815==         suppressed: 206,001 bytes in 217 blocks
-==1728815== 
-==1728815== For lists of detected and suppressed errors, rerun with: -s
-==1728815== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 1 from 1)
->>>>>>> aa7867d1a480c4ab900e6ce886565cc88f93c4f2
+==1056179== Memcheck, a memory error detector
+==1056179== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1056179== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1056179== Command: ./minishell
+==1056179== Parent PID: 1056155
+==1056179== 
+==1056185== 
+==1056185== FILE DESCRIPTORS: 4 open at exit.
+==1056185== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
+==1056185==    <inherited from parent>
+==1056185== 
+==1056185== Open file descriptor 2: /dev/pts/1
+==1056185==    <inherited from parent>
+==1056185== 
+==1056185== Open file descriptor 1: /dev/pts/1
+==1056185==    <inherited from parent>
+==1056185== 
+==1056185== Open file descriptor 0: /dev/pts/1
+==1056185==    <inherited from parent>
+==1056185== 
+==1056185== 
+==1056185== HEAP SUMMARY:
+==1056185==     in use at exit: 205,384 bytes in 219 blocks
+==1056185==   total heap usage: 540 allocs, 321 frees, 363,864 bytes allocated
+==1056185== 
+==1056185== LEAK SUMMARY:
+==1056185==    definitely lost: 0 bytes in 0 blocks
+==1056185==    indirectly lost: 0 bytes in 0 blocks
+==1056185==      possibly lost: 0 bytes in 0 blocks
+==1056185==    still reachable: 0 bytes in 0 blocks
+==1056185==         suppressed: 205,384 bytes in 219 blocks
+==1056185== 
+==1056185== For lists of detected and suppressed errors, rerun with: -s
+==1056185== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1056179== Conditional jump or move depends on uninitialised value(s)
+==1056179==    at 0x403F95: _launch_instructions_arr (switchman.c:94)
+==1056179==    by 0x403DE4: switchman (switchman.c:35)
+==1056179==    by 0x407FD8: main (main.c:42)
+==1056179== 
+==1056201== 
+==1056201== FILE DESCRIPTORS: 4 open at exit.
+==1056201== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
+==1056201==    <inherited from parent>
+==1056201== 
+==1056201== Open file descriptor 2: /dev/pts/1
+==1056201==    <inherited from parent>
+==1056201== 
+==1056201== Open file descriptor 1: /dev/pts/1
+==1056201==    <inherited from parent>
+==1056201== 
+==1056201== Open file descriptor 0: /dev/pts/1
+==1056201==    <inherited from parent>
+==1056201== 
+==1056201== 
+==1056201== HEAP SUMMARY:
+==1056201==     in use at exit: 205,526 bytes in 228 blocks
+==1056201==   total heap usage: 680 allocs, 452 frees, 377,713 bytes allocated
+==1056201== 
+==1056201== LEAK SUMMARY:
+==1056201==    definitely lost: 0 bytes in 0 blocks
+==1056201==    indirectly lost: 0 bytes in 0 blocks
+==1056201==      possibly lost: 0 bytes in 0 blocks
+==1056201==    still reachable: 0 bytes in 0 blocks
+==1056201==         suppressed: 205,526 bytes in 228 blocks
+==1056201== 
+==1056201== Use --track-origins=yes to see where uninitialised values come from
+==1056201== For lists of detected and suppressed errors, rerun with: -s
+==1056201== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==1056179== 
+==1056179== FILE DESCRIPTORS: 4 open at exit.
+==1056179== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
+==1056179==    <inherited from parent>
+==1056179== 
+==1056179== Open file descriptor 2: /dev/pts/1
+==1056179==    <inherited from parent>
+==1056179== 
+==1056179== Open file descriptor 1: /dev/pts/1
+==1056179==    <inherited from parent>
+==1056179== 
+==1056179== Open file descriptor 0: /dev/pts/1
+==1056179==    <inherited from parent>
+==1056179== 
+==1056179== 
+==1056179== HEAP SUMMARY:
+==1056179==     in use at exit: 205,341 bytes in 216 blocks
+==1056179==   total heap usage: 689 allocs, 473 frees, 379,859 bytes allocated
+==1056179== 
+==1056179== LEAK SUMMARY:
+==1056179==    definitely lost: 0 bytes in 0 blocks
+==1056179==    indirectly lost: 0 bytes in 0 blocks
+==1056179==      possibly lost: 0 bytes in 0 blocks
+==1056179==    still reachable: 0 bytes in 0 blocks
+==1056179==         suppressed: 205,341 bytes in 216 blocks
+==1056179== 
+==1056179== Use --track-origins=yes to see where uninitialised values come from
+==1056179== For lists of detected and suppressed errors, rerun with: -s
+==1056179== ERROR SUMMARY: 2 errors from 1 contexts (suppressed: 0 from 0)

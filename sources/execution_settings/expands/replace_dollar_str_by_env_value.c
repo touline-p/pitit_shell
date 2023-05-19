@@ -34,7 +34,7 @@ t_return_status	replace_dollar_str_by_env_value(char **pin_pt, char **env)
 	else
 		*pin_pt = NULL;//ft_strdup(content);
 	if (*pin_pt == NULL)
-		return (perror("replace_dollar_str_by_env_value"), FAILED_MALLOC);
+		return (ft_free_split_content(pin_pt + 1), perror("replace_dollar_str_by_env_value"), FAILED_MALLOC);
 	ft_striteri(*pin_pt, &_replace_space_by_minus);
 	return (SUCCESS);
 }
