@@ -30,7 +30,7 @@ char	*update_prompt(char *prompt)
 	return (end);
 }
 
-const char	*get_color(void)
+char	*get_color(void)
 {
 	const char	*color_arr[] = {GREEN, RED, YELLOW, BLUE, RED};
 	const int	ret_val_arr[] = {0, 1, 130, 131};
@@ -39,7 +39,7 @@ const char	*get_color(void)
 	index = 0;
 	while (ret_val_arr[index] != g_ret_val && index < 4)
 		index++;
-	return (color_arr[index]);
+	return ((char *)color_arr[index]);
 }
 
 static void	_change_color(char *prompt)

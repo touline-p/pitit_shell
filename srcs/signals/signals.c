@@ -31,7 +31,7 @@ void	init_signals(t_data *data)
 	signal(SIGINT, &handle_signal_main);
 }
 
-const char	*get_color(void)
+char	*get_color(void)
 {
 	const char	*color_arr[] = {GREEN, RED, YELLOW, BLUE, RED};
 	const int	ret_val_arr[] = {0, 1, 130, 131};

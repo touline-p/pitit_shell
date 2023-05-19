@@ -338,7 +338,7 @@ void	clean_token(t_string_token *lst_of_tok);
 
 /*---- signals_utils.c ----*/
 char		*update_prompt(char *prompt);
-const char	get_color(void);
+char		*get_color(void);
 
 /*---- signals.c ----*/
 void		init_signals(t_data *data);

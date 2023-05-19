@@ -17,7 +17,7 @@ void	copy_all_box(char *box, char *pwd, size_t box_width)
 	size_t	i;
 
 	i = 0;
-	box = ft_strcpy_rn(box, (char *)get_color());
+	box = ft_strcpy_rn(box, get_color());
 	box = ft_strcpy_rn(box, "\001\u2554");
 	i = 0;
 	while (i < box_width)
