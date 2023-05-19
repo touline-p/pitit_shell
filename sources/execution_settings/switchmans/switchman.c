@@ -19,6 +19,7 @@ static t_return_status	_fill(t_string_token **instructions_arr, \
 					t_string_token *str_tok_lst);
 static t_return_status	_launch_instructions_arr(t_data *data, \
 						t_string_token **instructions_arr, char ***env);
+static void				_free_minishell_data(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
@@ -76,12 +77,6 @@ static t_return_status	_fill(t_string_token **instructions_arr, \
 	return (SUCCESS);
 }
 
-static t_return_status	_free_minishell_data(t_data *data)
-{
-	free(data->instructions_arr);
-	free(data->cmds_block);
-}
-
 static t_return_status	_launch_instructions_arr(t_data *data, \
 						t_string_token **instructions_arr, char ***env)
 {
@@ -99,4 +94,9 @@ static t_return_status	_launch_instructions_arr(t_data *data, \
 	}
 	free(instructions_arr);
 	return (SUCCESS);
+}
+static void	_free_minishell_data(t_data *data)
+{
+	free(data->instructions_arr);
+	free(data->cmds_block);
 }
