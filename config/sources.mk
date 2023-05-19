@@ -34,6 +34,7 @@ SOURCES =																	\
 			sources/execution_settings/switchmans/switchman_utils.c			\
 			sources/execution_settings/switchmans/switchman.c				\
 			sources/execution_settings/wildcards/files_wildcards.c			\
+			sources/execution_settings/wildcards/wildcards_utils.c			\
 			sources/execution_settings/wildcards/utils.c					\
 			sources/execution_settings/wildcards/wildcards.c				\
 			sources/execution_settings/env_init.c							\
