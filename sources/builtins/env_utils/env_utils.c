@@ -50,7 +50,7 @@ t_return_status	add_str_to_env(char *line, char ***env_pt)
 
 	new_env = (char **)malloc(sizeof(char *) * (ft_str_array_len(*env_pt) + 2));
 	if (new_env == NULL)
-		return (FAILED_MALLOC);
+		return (perror("add str to env"), FAILED_MALLOC);
 	env = *env_pt;
 	i = 0;
 	while (env[i])
@@ -71,9 +71,9 @@ t_return_status	del_str_from_env(char *line, char ***env_pt)
 	char	**env;
 	size_t	i;
 
-	new_env = (char **)malloc(sizeof(char *) * (ft_str_array_len(*env_pt) + 1));
+	new_env = NULL; //(char **)malloc(sizeof(char *) * (ft_str_array_len(*env_pt) + 1));
 	if (new_env == NULL)
-		return (FAILED_MALLOC);
+		return (perror("del_str_from_env"), FAILED_MALLOC);
 	env = *env_pt;
 	i = 0;
 	while (*env)

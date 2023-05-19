@@ -28,15 +28,19 @@ t_return_status	env_init_on(char ***env_pt)
 	if (**env_pt == NULL)
 		return (_reconstruct_env(env_pt));
 	*env_pt = ft_str_array_dup(*env_pt);
+	if (*env_pt == NULL)
+		return (perror("env_init"), FAILED_MALLOC);
 	if (get_line_from_key("OLDPWD", *env_pt) == NULL)
-		add_str_to_env("OLDPWD", env_pt);
+		if (add_str_to_env("OLDPWD", env_pt) != SUCCESS)
+			return (ft_free_split(*env_pt), FAILED_MALLOC);
 	_increment_shlvl(env_pt);
 	if (get_line_from_key("PWD", *env_pt) == NULL)
 	{
 		line_cwd = _get_cwd_var();
 		if (line_cwd == NULL)
 			return (FAILED_MALLOC);
-		add_str_to_env(line_cwd, env_pt);
+		if (add_str_to_env(line_cwd, env_pt) != SUCCESS)
+			return (ft_free_split(*env_pt), FAILED_MALLOC);
 	}
 	return (SUCCESS);
 }

@@ -46,6 +46,23 @@ t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt)
 	return (ret_val);
 }
 
+t_return_status	builtin_switch_free(t_cmd command, char **av, char ***env_pt)
+{
+	const t_builtin_ft	ft_arr[] = {NULL, &env_builtin, &echo_builtin, \
+									&export_builtin, &pwd_builtin, \
+									&exit_builtin, &unset_builtin, \
+									&cd_builtin};
+	t_return_status		ret_val;
+
+	ret_val = (*ft_arr[command.id_command])(av, env_pt);
+	if (command.infile > 2)
+		close(command.infile);
+	if (command.outfile > 2)
+		close(command.outfile);
+	ft_free_split(av);
+	return (ret_val);
+}
+
 bool	is_path(char *line)
 {
 	return (ft_strchr(line, '/') != NULL);

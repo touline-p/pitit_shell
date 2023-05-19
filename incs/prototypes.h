@@ -272,6 +272,7 @@ void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env);
 /*---- strings_utils.c ----*/
 t_builtin		is_builtin(char *string);
 t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt);
+t_return_status	builtin_switch_free(t_cmd command, char **av, char ***env_pt);
 bool			is_path(char *line);
 bool			is_cmd(char *line);
 

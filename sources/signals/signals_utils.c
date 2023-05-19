@@ -37,7 +37,7 @@ char	*get_color(void)
 	size_t		index;
 
 	index = 0;
-	while (ret_val_arr[index] != g_ret_val && index < 4)
+	while (index < 4 && ret_val_arr[index] != g_ret_val)
 		index++;
 	return ((char *)color_arr[index]);
 }
