@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:35:32 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 16:02:53 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/19 12:17:45 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*update_prompt(char *prompt)
 	return (end);
 }
 
-const char	*get_color(void)
+char	*get_color(void)
 {
 	const char	*color_arr[] = {GREEN, RED, YELLOW, BLUE, RED};
 	const int	ret_val_arr[] = {0, 1, 130, 131};
@@ -39,7 +39,7 @@ const char	*get_color(void)
 	index = 0;
 	while (ret_val_arr[index] != g_ret_val && index < 4)
 		index++;
-	return (color_arr[index]);
+	return ((char *)color_arr[index]);
 }
 
 static void	_change_color(char *prompt)

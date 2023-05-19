@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:14:50 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 16:17:58 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:22:07 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 /*---- global definition -----------------------------------------------------*/
 
 int	g_ret_val;
-
-/*---- prototypes ------------------------------------------------------------*/
-
-static int				_go_fuck_yourself_malloc(t_string_token *string_token, \
-												char **env);
 
 /*----------------------------------------------------------------------------*/
 
@@ -39,7 +34,7 @@ int	main(int ac, char **av, char **env)
 			!= SUCCESS)
 			continue ;
 		if (set_data_instruction_arr(&data, str_tok_lst))
-			return (_go_fuck_yourself_malloc(str_tok_lst, env));
+			return (go_fuck_yourself_malloc(str_tok_lst, env));
 		if (heredoc_management(&data, str_tok_lst, env)
 			&& reset_term_settings(&data) == SUCCESS)
 			continue ;

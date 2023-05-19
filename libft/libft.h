@@ -62,6 +62,13 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_list_of_char	t_lstc;
+struct	s_list_of_char
+{
+	t_lstc	*next;
+	char	c;
+};
+
 //void		put_return_status(t_return_status signal);
 t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt);
 char			*ft_strdup(const char *src);
@@ -216,5 +223,14 @@ char			*get_calloc(size_t count, size_t size);
 char			*get_strjoin(char *s1, char *s2);
 char			*get_next_line(int fd);
 char			*ft_strstr_w(char *name, char *line);
+
+void			lstc_cpy_in_str(t_lstc	*lst, char **str);
+t_lstc			*read_lstc_from_fd(int fd);
+t_lstc			*lstc_new(char c);
+t_lstc			*lstc_clear(t_lstc *trash);
+t_lstc			*init_lstc_first_read(int fd);
+t_return_status	read_fd_in_str(int fd, char **dst);
+void			read_lst(t_lstc *lst);
+size_t			lstc_size(t_lstc *lst);
 
 #endif
