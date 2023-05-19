@@ -34,7 +34,7 @@ t_return_status	files_management(t_data *data, t_string_token *lst_of_tok, \
 		{
 			temp = temp->next;
 			if (arr_ft[index_ft](data, &(temp->content), i, env) != SUCCESS)
-				return (FAILED_MALLOC);
+				return (free(data->cmds_block), FAILED_MALLOC);
 		}
 		keep_going(&i, &temp, data);
 	}

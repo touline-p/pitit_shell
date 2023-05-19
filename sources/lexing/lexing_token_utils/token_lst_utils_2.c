@@ -26,50 +26,6 @@ void	del_token(t_token *token)
 	free(token);
 }
 
-t_token	*token_lst_constructor_word(char *string, t_esec esec)
-{
-	t_token	*pin;
-	t_token	*new;
-
-	new = NULL;
-	if (*string != '\0')
-		new = token_constructor_esec(LETTER, *(string++), esec);
-	if (!new)
-		return (NULL);
-	pin = new;
-	while (*string != '\0')
-	{
-		pin->next = token_constructor_esec(LETTER, *(string++), esec);
-		if (!pin->next)
-		{
-			token_lst_clear(new);
-			return (NULL);
-		}
-		pin = pin->next;
-	}
-	return (new);
-}
-
-t_return_status	insert_str_in_tkn_lst(t_token *token_lst, char *str, \
-										t_esec insert_esec)
-{
-	t_token	*next;
-	t_token	*new;
-
-	next = token_lst->next;
-	new = token_lst_constructor_word(str, insert_esec);
-	if (!new)
-		return (FAILED_MALLOC);
-	token_lst->next = new;
-	while (token_lst->next != NULL)
-	{
-		token_lst = token_lst->next;
-		token_lst->esec = insert_esec;
-	}
-	token_lst->next = next;
-	return (SUCCESS);
-}
-
 int	len_to_next_type(t_token *pin)
 {
 	int	i;

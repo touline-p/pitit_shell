@@ -27,21 +27,6 @@ t_token	*token_constructor(t_emt emt, char msg)
 	return (new);
 }
 
-t_token	*token_constructor_esec(t_emt emt, char msg, t_esec esec)
-{
-	t_token	*new;
-
-	new = NULL;//malloc(sizeof(t_token));
-	if (!new)
-		return (perror("token_constructor_esec"), NULL);
-	new->token = emt;
-	new->sign_char = msg;
-	new->next = NULL;
-	new->esec = esec;
-	new->next_word = NULL;
-	return (new);
-}
-
 void	token_lst_clear(t_token *trash)
 {
 	t_token	*tmp;

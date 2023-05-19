@@ -47,6 +47,7 @@ t_return_status	execution(t_data *data, t_string_token *lst_of_tok, \
 		_wait_for_process_ids(data);
 	}
 	free(data->cmds_block);
+	return (SUCCESS);
 }
 
 static t_return_status	_alloc_cmd_block(t_data *data, \

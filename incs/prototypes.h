@@ -60,6 +60,9 @@ t_return_status	env_builtin(char **av, char ***env_pt);
 /*---- exit.c ----*/
 t_return_status	exit_builtin(char **av, char ***env_pt);
 
+/*---- exit_the_programme.c ----*/
+t_return_status	exit_the_program(t_data *data, char ***env_pt, t_cmd cmd);
+
 /*---- export.c ----*/
 t_return_status	export_builtin(char **args, char ***env_pt);
 t_return_status	replace_content_in_env_pt(char *line, char ***env_pt);

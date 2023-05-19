@@ -27,6 +27,8 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 
 	status = 0;
 	cmd = *(data->cmds_block);
+	if (cmd.id_command == EXIT)
+		return (exit_the_program(data, env_pt, cmd));
 	if (cmd.id_command > PWD
 		|| (cmd.id_command == EXPORT && cmd.commands[1] != NULL))
 		return (builtin_switch(cmd, cmd.commands, env_pt));

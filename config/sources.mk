@@ -19,6 +19,7 @@ SOURCES =																	\
 			sources/builtins/echo.c											\
 			sources/builtins/env.c											\
 			sources/builtins/exit.c											\
+			sources/builtins/exit_the_programme.c							\
 			sources/builtins/export.c										\
 			sources/builtins/pwd.c											\
 			sources/builtins/unset.c										\
@@ -49,7 +50,6 @@ SOURCES =																	\
 			sources/lexing/1_preservation/preserv.c							\
 			sources/lexing/1_preservation/simple_quoting.c					\
 			sources/lexing/2_metachar_managing/split_toklst_on_meta.c		\
-			sources/lexing/3_expand_in_parsing/expand_variable.c			\
 			sources/lexing/lexing_token_utils/simple_tokens_utils.c			\
 			sources/lexing/lexing_token_utils/testing_utils.c				\
 			sources/lexing/lexing_token_utils/token_lst_utils_2.c			\
