@@ -373,8 +373,6 @@ t_return_status	string_token_new_on(void *content, t_emt emt, \
 									t_string_token **str_token_pt);
 t_return_status	str_arr_to_str_token_lst(char **split, \
 									t_string_token **str_token_pt);
-t_return_status	split_t_string_token_on_space(t_string_token **token);
-
 /*---- t_string_token_cleans.c ----*/
 void	string_token_destructor(t_string_token *trash);
 void	del_next_string_token(t_string_token *tok);

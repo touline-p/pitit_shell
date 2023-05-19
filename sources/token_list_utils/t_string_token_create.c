@@ -18,7 +18,7 @@ t_string_token	*string_token_creator(void)
 
 	new = malloc(sizeof(t_string_token));
 	if (new == NULL)
-		return (NULL);
+		return (perror("string token creator"), NULL);
 	new->next = NULL;
 	new->content = NULL;
 	new->token = NONE;

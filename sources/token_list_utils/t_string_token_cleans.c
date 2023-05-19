@@ -50,18 +50,6 @@ void	del_space_token(t_string_token *tok)
 	}
 }
 
-void	del_empty_tokens(t_string_token *token_lst)
-{
-	while (token_lst->next->token != EOL)
-	{
-		if (token_lst->next->content == NULL
-			|| *(char *)(token_lst->next->content) == 0)
-			del_next_string_token(token_lst);
-		else
-			token_lst = token_lst->next;
-	}
-}
-
 void	free_all_str(t_data *data)
 {
 	int	i;
