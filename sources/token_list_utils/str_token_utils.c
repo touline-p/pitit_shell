@@ -12,18 +12,6 @@
 
 #include "minishell.h"
 
-int	next_control_operator_is_a_pipe(t_string_token *tok)
-{
-	while (tok->token != EOL && tok->token != AMPERSAND \
-		&& tok->token != AND && tok->token != OR)
-	{
-		if (tok->token == PIPE)
-			return (1);
-		tok = tok->next;
-	}
-	return (0);
-}
-
 char	*format_string_token(t_string_token *token)
 {
 	const char	*msgarr[] = {"start", "\'|", "ifnot", "\'<", \

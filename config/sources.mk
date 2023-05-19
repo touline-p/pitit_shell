@@ -46,13 +46,10 @@ SOURCES =																	\
 			sources/execve/pipes_manage.c									\
 			sources/execve/utils.c											\
 			sources/lexing/1_preservation/double_quoting.c					\
-			sources/lexing/1_preservation/escaping_chars.c					\
 			sources/lexing/1_preservation/preserv.c							\
 			sources/lexing/1_preservation/simple_quoting.c					\
-			sources/lexing/2_metachar_managing/split_on_meta.c				\
 			sources/lexing/2_metachar_managing/split_toklst_on_meta.c		\
 			sources/lexing/3_expand_in_parsing/expand_variable.c			\
-			sources/lexing/4_suppress_quotes/suppress_quotes.c				\
 			sources/lexing/lexing_token_utils/simple_tokens_utils.c			\
 			sources/lexing/lexing_token_utils/testing_utils.c				\
 			sources/lexing/lexing_token_utils/token_lst_utils_2.c			\

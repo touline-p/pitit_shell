@@ -182,10 +182,6 @@ void			free_all_others(t_cmd *cmds, int block_id, int nb_of_pipes);
 /*---- double_quoting.c ----*/
 t_return_status	dquoting_process(t_token *last_token, \
 									t_token *token, t_token **end_of_quot_pt);
-/*---- escaping_chars.c ----*/
-t_return_status	escaping_chars(t_token *tok);
-t_return_status	escape_process(t_token *last_pt, t_token *tok, t_token **voided);
-
 /*---- preserv.c ----*/
 t_return_status	preserve_token_lst(t_token *token);
 
@@ -194,9 +190,6 @@ t_return_status	squoting_process(t_token *last_token, \
 	t_token *token, t_token **end_of_quot_pt);
 
 /*---- 2_metachar_managing ---------------------------------------------------*/
-/*---- split_on_meta.c ----*/
-t_token	*split_on_meta(t_token *tok);
-t_token	*get_next_emt(t_token *tok);
 
 /*---- split_toklst_on_meta.c ----*/
 t_token	*split_toklst_on_meta(t_token *tok);
@@ -206,10 +199,6 @@ char	*get_prompt(char *str, int flag);
 /*---- 3_expand_in_parsing ---------------------------------------------------*/
 /*---- expand_variable.c ----*/
 t_return_status	expand_dollars(t_token *token_lst, char **env);
-
-/*---- 4_suppress_quotes -----------------------------------------------------*/
-/*---- suppress_quotes.c ----*/
-void	suppress_quotes(t_token *tok);
 
 /*---- lexing_token_utils ----------------------------------------------------*/
 /*---- simple_tokens_utils.c ----*/
