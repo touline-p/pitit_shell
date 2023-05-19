@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_prepare.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:35 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 18:46:21 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/19 15:37:54 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_return_status	set_up_get_here_doc(t_string_token *token, char **limiter, \
 	if (ft_strchr(*limiter, - '\'') || ft_strchr(*limiter, - '\"'))
 	{
 		*do_expand = true;
-		_trim_limiter(*limiter);
+		trim_limiter(*limiter);
 	}
 	if (pipe(fd_hd) == -1)
 		return (FAILED_PIPE);
@@ -75,7 +75,7 @@ t_return_status	set_up_get_here_doc(t_string_token *token, char **limiter, \
 	return (SUCCESS);
 }
 
-static void	_trim_limiter(char *s)
+void	trim_limiter(char *s)
 {
 	while (*s)
 	{
@@ -85,4 +85,17 @@ static void	_trim_limiter(char *s)
 			break ;
 		ft_memmove(s, s + 1, ft_strlen(s));
 	}
+}
+
+void	keep_going(int *i, t_string_token **temp, t_data *data)
+{
+	if ((*temp)->token == PIPE)
+		i++;
+	if ((*temp)->token == O_PRTSS)
+	{
+		data->cmds_block[*i].id_command = SUBSHELL;
+		go_to_next_(C_PRTSS, (*temp)->next, temp);
+	}
+	else
+		*temp = (*temp)->next;
 }

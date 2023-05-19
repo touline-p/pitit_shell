@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_files.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:08:37 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 19:55:02 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/19 12:38:49 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_return_status	files_management(t_data *data, t_string_token *lst_of_tok, \
 			temp = temp->next;
 			arr_ft[index_ft](data, &(temp->content), i, env);
 		}
-		_keep_going(&i, &temp, data);
+		keep_going(&i, &temp, data);
 	}
 	return (SUCCESS);
 }

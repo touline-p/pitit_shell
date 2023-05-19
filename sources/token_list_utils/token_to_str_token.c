@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   token_to_str_token.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:53:13 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/04 17:59:55 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/18 19:26:04 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
-#include "../../incs/minishell.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
+
+/*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status	_get_str_token_on_and_reset_pin( \
-		t_string_token **str_tok_pt, t_token **pin_pt);
+								t_string_token **str_tok_pt, t_token **pin_pt);
 static void				*_token_lst_to_str_token_ep( \
-		t_token *trash, t_string_token *mem);
+								t_token *trash, t_string_token *mem);
 static char				*_reset_pin_ret_string(t_token **pin_pt);
+
+/*----------------------------------------------------------------------------*/
 
 t_string_token	*token_lst_to_str_token(t_token *tok)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:20 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 19:56:22 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/19 12:28:26 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, \
 	bool	do_expand;
 	int		pid;
 
-	if (_set_up_get_here_doc(token, &limiter, &do_expand, fd_hd))
+	if (set_up_get_here_doc(token, &limiter, &do_expand, fd_hd))
 		return (FAILED_PIPE);
 	pid = fork();
 	if (pid == -1)

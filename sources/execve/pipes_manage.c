@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_manage.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:31:24 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 17:52:59 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/19 12:40:52 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_return_status	_do_the_pipe(t_cmd *cmd_block, \
 	return (SUCCESS);
 }
 
-static void	_manage_the_pipe(t_data *data, int block_id)
+void	manage_the_pipe(t_data *data, int block_id)
 {
 	t_cmd	*cmd;
 

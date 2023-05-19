@@ -6,12 +6,11 @@
 /*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:06:10 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/04/06 21:02:21 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:20:35 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
 
 void	display_t_emt_string(t_string_token *token);
 

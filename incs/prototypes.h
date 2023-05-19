@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:25:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 20:03:54 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/19 15:58:02 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ char	**subshell_preparation(t_string_token **start);
 /*---- switchmans ------------------------------------------------------------*/
 /*---- switchman_once.c ----*/
 t_return_status	switchman_once(t_data *data, char ***env_pt);
+void			ft_free_all_str_lst(t_data *data, int index);
 
 /*---- switchman_utils.c ----*/
 size_t	go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok);
@@ -145,10 +146,18 @@ t_return_status	env_init_on(char ***env_pt);
 /*---- childs.c ----*/
 t_return_status	childs_execve(t_data *data, char ***env);
 
+/*---- exec_articultaion_utils.c ----*/
+bool	check_cmd(t_cmd *cmd);
+void	init_data(t_data *data);
+
+/*---- exec_articultaion.c ----*/
+void	execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt);
+
 /*---- executions.c ----*/
-void	subshell_then_exit(t_cmd command, char ***env);
-void	builtin_then_exit(t_cmd command, char ***env);
-void	execve_then_exit(t_cmd command, char ***env);
+void			subshell_then_exit(t_cmd command, char ***env);
+void			builtin_then_exit(t_cmd command, char ***env);
+void			execve_then_exit(t_cmd command, char ***env);
+t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt);
 
 /*---- fds_manage.c ----*/
 t_return_status	duplicate_fds(t_cmd block, t_data *data, char ***env_pt);
@@ -156,8 +165,8 @@ t_return_status	heredoc_child_management(t_cmd *cmd, t_data *data, \
 										char **env_pt);
 
 /*---- pipes_manage.c ----*/
-t_return_status	_do_the_pipe(t_cmd *cmd_block, \
-						int nb_of_pipe, int block_id);
+t_return_status	do_the_pipe(t_cmd *cmd_block, int nb_of_pipe, int block_id);
+void			manage_the_pipe(t_data *data, int block_id);
 						
 /*---- utils.c ----*/
 t_return_status	is_executable(char *command);
@@ -255,21 +264,43 @@ t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 void			loop_init(t_data *data, char **line_pt, char **env);
 t_return_status set_data_instruction_arr(t_data *data, t_string_token *str_tok_lst);
 int				go_fuck_yourself_malloc(t_string_token *token_lst, char **env);
+t_return_status	check_arguments(char **av);
 
 /*----------------------------------------------------------------------------*/
 /*---- Parsing ---------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 
 /*---- cmds_managements ------------------------------------------------------*/
+
+/*---- path_utils.c ----*/
+char	**get_paths(char **env);
+
 /*---- strings_manage.c ----*/
 void	strings_management(t_data *data, t_string_token *lst_of_tok, char **env);
 
+/*---- strings_utils.c ----*/
+t_builtin		is_builtin(char *string);
+t_return_status	builtin_switch(t_cmd command, char **av, char ***env_pt);
+bool			is_path(char *line);
+bool			is_cmd(char *line);
+
 /*---- files_managements -----------------------------------------------------*/
+
+/*---- files_prepare.c ----*/
+void			check_opened_infiles(t_data *data, int block_id);
+void			check_opened_outfiles(t_data *data, int block_id);
+bool			file_is_empty(char *file);
+t_return_status	redirection_syntax_error(char *str);
+bool 			redir_failed(t_cmd *cmd);
+
+
 /*---- heredoc_prepare.c ----*/
 t_return_status	check_closing_par(t_string_token *string_token_lst);
 void			get_heredoc_setup(t_data *data);
 t_return_status	set_up_get_here_doc(t_string_token *token, char **limiter, \
 										bool *do_expand, int *fd_hd);
+void			keep_going(int *i, t_string_token **temp, t_data *data);
+void			trim_limiter(char *s);
 
 /*---- set_files.c ----*/
 t_return_status	files_management(t_data *data, t_string_token *lst_of_tok, \
@@ -286,13 +317,15 @@ t_return_status	set_appends(t_data *data, char **file, int block_id, \
 /*---- set_heredoc.c ----*/
 t_return_status	heredoc_management(t_data *data, \
 								t_string_token *string_token_lst, char **env);
-								
+t_return_status	read_fd_in_str(int fd, char **dst);
+
 /*---- utils.c ----*/
-void	false_space_to_space(char *str);
-void	manage_ambiguous(t_cmd *cmd, char *file);
-void	reset_booleans(bool *a, t_pr_stat *b);
+void			false_space_to_space(char *str);
+void			manage_ambiguous(t_cmd *cmd, char *file);
+void			reset_booleans(bool *a, t_pr_stat *b);
 t_return_status	expand_hd(char **here_doc, char **env);
-bool	read_hd_ep(char *line, int nb_of_line, char *limiter);
+bool			read_hd_ep(char *line, int nb_of_line, char *limiter);
+bool			redir_failed(t_cmd *cmd);
 
 /*---- utils -----------------------------------------------------------------*/
 /*---- clean_utils.c ----*/
@@ -327,19 +360,46 @@ bool	update_to_hr_data(t_string_token **tmp);
 bool	dn_ut(t_string_token **tmp);
 
 /*---- syntax_is_valid.c ----*/
-t_return_status	syntax_is_valid(t_string_token *lst_to_check)
-bool	is_a_meta(t_emt token);
-bool	is_a_redir(t_emt token);
+t_return_status	syntax_is_valid(t_string_token *lst_to_check);
+bool			is_a_meta(t_emt token);
+bool			is_a_redir(t_emt token);
 
 /*----------------------------------------------------------------------------*/
 /*---- Token_list_utils ------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
 /*---- str_token_debug.c ----*/
+void	display_str_token(t_string_token *tok);
+void	display_t_emt_string(t_string_token *token);
+void	display_str_token_till(t_string_token *tok);
+void	display_str_par(t_string_token *tok);
+
 /*---- str_token_utils.c ----*/
+int		next_control_operator_is_a_pipe(t_string_token *tok);
+char	*format_string_token(t_string_token *token);
+
 /*---- t_string_token_utils.c ----*/
+void			cpy_token_lst_to_str(t_token *tok, char *str);
+t_return_status	string_token_new_on(void *content, t_emt emt, \
+									t_string_token **str_token_pt);
+t_return_status	str_arr_to_str_token_lst(char **split, \
+									t_string_token **str_token_pt);
+t_return_status	split_t_string_token_on_space(t_string_token **token);
+
 /*---- t_string_token_cleans.c ----*/
+void	string_token_destructor(t_string_token *trash);
+void	del_next_string_token(t_string_token *tok);
+void	del_space_token(t_string_token *tok);
+void	del_empty_tokens(t_string_token *token_lst);
+void	free_all_str(t_data *data);
+
 /*---- t_string_token_create.c ----*/
+t_string_token	*string_token_creator(void);
+t_return_status	string_token_creator_on(t_string_token **tok_pt);
+
 /*---- token_lst_constructor.c ----*/
+t_token	*token_lst_constructor(char *str);
+
 /*---- token_to_str_token.c ----*/
+t_string_token	*token_lst_to_str_token(t_token *tok);
 
 #endif

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   str_token_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:43:42 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/16 19:03:11 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/18 19:21:29 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
-#include "../../incs/minishell.h"
-#include "../../incs/minishell.h"
+#include "minishell.h"
 
 int	next_control_operator_is_a_pipe(t_string_token *tok)
 {

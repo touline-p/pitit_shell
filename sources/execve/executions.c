@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:41:45 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 17:48:18 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/19 15:59:27 by wangthea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	subshell_then_exit(t_cmd command, char ***env)
 {
 	t_data	new_data;
 
-	bzero(&new_data, sizeof(t_data));
+	ft_bzero(&new_data, sizeof(t_data));
 	switchman(&new_data, (t_string_token *)command.commands, env);
 	ft_free_split(*env);
 	exit(g_ret_val);
