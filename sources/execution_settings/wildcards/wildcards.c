@@ -15,7 +15,7 @@
 /*---- prototypes ------------------------------------------------------------*/
 
 static t_return_status	_fetch_on(char *line, char ***dst_arr);
-static t_return_status	_expand_wildcards_error(char ***new);
+static t_return_status	_expand_wildcards_error(char ***new, char **original_pt, int index);
 static char				**joined_new(char ***new);
 static int				_size_origin(char ***new);
 
@@ -30,12 +30,12 @@ t_return_status	expand_wildcards(char ***original_pt)
 	original_array = *original_pt;
 	new = ft_calloc(ft_str_array_len(original_array) + 1, sizeof(char **));
 	if (!new)
-		return (FAILED_MALLOC);
+		return (perror("expand wildcards"), FAILED_MALLOC);
 	i = 0;
 	while (original_array[i])
 	{
 		if (_fetch_on(original_array[i], &new[i]) != SUCCESS)
-			return (_expand_wildcards_error(new));
+			return (_expand_wildcards_error(new, original_array, i));
 		i++;
 	}
 	free(original_array);
@@ -61,7 +61,7 @@ static t_return_status	_fetch_on(char *line, char ***dst_arr)
 	return (SUCCESS);
 }
 
-static t_return_status	_expand_wildcards_error(char ***new)
+static t_return_status	_expand_wildcards_error(char ***new, char **original_arr, int index)
 {
 	int	i;
 
@@ -71,6 +71,8 @@ static t_return_status	_expand_wildcards_error(char ***new)
 		ft_free_split(new[i]);
 		i++;
 	}
+	ft_free_split_content(original_arr + index);
+	free(original_arr);
 	free(new);
 	return (FAILED_MALLOC);
 }

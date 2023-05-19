@@ -73,11 +73,11 @@ t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env)
 		|| join_arr_on(arr, &ret, env))
 		return (FAILED_MALLOC);
 	arr = ft_split(ret, - ' ');
+	free(ret);
 	if (expand_wildcards(&arr) != SUCCESS)
 		return (FAILED_MALLOC);
 	if (*arr == NULL)
 		return (FAILED_MALLOC);
-	free(ret);
 	cmd->commands = arr;
 	return (SUCCESS);
 }
