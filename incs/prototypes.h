@@ -313,7 +313,6 @@ t_return_status	read_fd_in_str(int fd, char **dst);
 /*---- utils.c ----*/
 void			false_space_to_space(char *str);
 void			manage_ambiguous(t_cmd *cmd, char *file);
-void			reset_booleans(bool *a, t_pr_stat *b);
 t_return_status	expand_hd(char **here_doc, char **env);
 bool			read_hd_ep(char *line, int nb_of_line, char *limiter);
 bool			redir_failed(t_cmd *cmd);

@@ -29,12 +29,6 @@ void	manage_ambiguous(t_cmd *cmd, char *file)
 	ft_dprintf(2, "minishell: %s: ambiguous redirect\n", file);
 }
 
-void	reset_booleans(bool *a, t_pr_stat *b)
-{
-	*a = false;
-	*b = NO_PAR;
-}
-
 t_return_status	expand_hd(char **here_doc, char **env)
 {
 	char	**arr;
