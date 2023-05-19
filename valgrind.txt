@@ -1,97 +1,34 @@
-==1056179== Memcheck, a memory error detector
-==1056179== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1056179== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==1056179== Command: ./minishell
-==1056179== Parent PID: 1056155
-==1056179== 
-==1056185== 
-==1056185== FILE DESCRIPTORS: 4 open at exit.
-==1056185== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
-==1056185==    <inherited from parent>
-==1056185== 
-==1056185== Open file descriptor 2: /dev/pts/1
-==1056185==    <inherited from parent>
-==1056185== 
-==1056185== Open file descriptor 1: /dev/pts/1
-==1056185==    <inherited from parent>
-==1056185== 
-==1056185== Open file descriptor 0: /dev/pts/1
-==1056185==    <inherited from parent>
-==1056185== 
-==1056185== 
-==1056185== HEAP SUMMARY:
-==1056185==     in use at exit: 205,384 bytes in 219 blocks
-==1056185==   total heap usage: 540 allocs, 321 frees, 363,864 bytes allocated
-==1056185== 
-==1056185== LEAK SUMMARY:
-==1056185==    definitely lost: 0 bytes in 0 blocks
-==1056185==    indirectly lost: 0 bytes in 0 blocks
-==1056185==      possibly lost: 0 bytes in 0 blocks
-==1056185==    still reachable: 0 bytes in 0 blocks
-==1056185==         suppressed: 205,384 bytes in 219 blocks
-==1056185== 
-==1056185== For lists of detected and suppressed errors, rerun with: -s
-==1056185== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==1056179== Conditional jump or move depends on uninitialised value(s)
-==1056179==    at 0x403F95: _launch_instructions_arr (switchman.c:94)
-==1056179==    by 0x403DE4: switchman (switchman.c:35)
-==1056179==    by 0x407FD8: main (main.c:42)
-==1056179== 
-==1056201== 
-==1056201== FILE DESCRIPTORS: 4 open at exit.
-==1056201== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
-==1056201==    <inherited from parent>
-==1056201== 
-==1056201== Open file descriptor 2: /dev/pts/1
-==1056201==    <inherited from parent>
-==1056201== 
-==1056201== Open file descriptor 1: /dev/pts/1
-==1056201==    <inherited from parent>
-==1056201== 
-==1056201== Open file descriptor 0: /dev/pts/1
-==1056201==    <inherited from parent>
-==1056201== 
-==1056201== 
-==1056201== HEAP SUMMARY:
-==1056201==     in use at exit: 205,526 bytes in 228 blocks
-==1056201==   total heap usage: 680 allocs, 452 frees, 377,713 bytes allocated
-==1056201== 
-==1056201== LEAK SUMMARY:
-==1056201==    definitely lost: 0 bytes in 0 blocks
-==1056201==    indirectly lost: 0 bytes in 0 blocks
-==1056201==      possibly lost: 0 bytes in 0 blocks
-==1056201==    still reachable: 0 bytes in 0 blocks
-==1056201==         suppressed: 205,526 bytes in 228 blocks
-==1056201== 
-==1056201== Use --track-origins=yes to see where uninitialised values come from
-==1056201== For lists of detected and suppressed errors, rerun with: -s
-==1056201== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-==1056179== 
-==1056179== FILE DESCRIPTORS: 4 open at exit.
-==1056179== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
-==1056179==    <inherited from parent>
-==1056179== 
-==1056179== Open file descriptor 2: /dev/pts/1
-==1056179==    <inherited from parent>
-==1056179== 
-==1056179== Open file descriptor 1: /dev/pts/1
-==1056179==    <inherited from parent>
-==1056179== 
-==1056179== Open file descriptor 0: /dev/pts/1
-==1056179==    <inherited from parent>
-==1056179== 
-==1056179== 
-==1056179== HEAP SUMMARY:
-==1056179==     in use at exit: 205,341 bytes in 216 blocks
-==1056179==   total heap usage: 689 allocs, 473 frees, 379,859 bytes allocated
-==1056179== 
-==1056179== LEAK SUMMARY:
-==1056179==    definitely lost: 0 bytes in 0 blocks
-==1056179==    indirectly lost: 0 bytes in 0 blocks
-==1056179==      possibly lost: 0 bytes in 0 blocks
-==1056179==    still reachable: 0 bytes in 0 blocks
-==1056179==         suppressed: 205,341 bytes in 216 blocks
-==1056179== 
-==1056179== Use --track-origins=yes to see where uninitialised values come from
-==1056179== For lists of detected and suppressed errors, rerun with: -s
-==1056179== ERROR SUMMARY: 2 errors from 1 contexts (suppressed: 0 from 0)
+==1069509== Memcheck, a memory error detector
+==1069509== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1069509== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1069509== Command: ./minishell
+==1069509== Parent PID: 1069485
+==1069509== 
+==1069509== 
+==1069509== FILE DESCRIPTORS: 4 open at exit.
+==1069509== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
+==1069509==    <inherited from parent>
+==1069509== 
+==1069509== Open file descriptor 2: /dev/pts/1
+==1069509==    <inherited from parent>
+==1069509== 
+==1069509== Open file descriptor 1: /dev/pts/1
+==1069509==    <inherited from parent>
+==1069509== 
+==1069509== Open file descriptor 0: /dev/pts/1
+==1069509==    <inherited from parent>
+==1069509== 
+==1069509== 
+==1069509== HEAP SUMMARY:
+==1069509==     in use at exit: 205,341 bytes in 216 blocks
+==1069509==   total heap usage: 514 allocs, 298 frees, 235,464 bytes allocated
+==1069509== 
+==1069509== LEAK SUMMARY:
+==1069509==    definitely lost: 0 bytes in 0 blocks
+==1069509==    indirectly lost: 0 bytes in 0 blocks
+==1069509==      possibly lost: 0 bytes in 0 blocks
+==1069509==    still reachable: 0 bytes in 0 blocks
+==1069509==         suppressed: 205,341 bytes in 216 blocks
+==1069509== 
+==1069509== For lists of detected and suppressed errors, rerun with: -s
+==1069509== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

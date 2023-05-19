@@ -31,14 +31,14 @@ t_return_status	add_str_to_env(char *line, char ***env_pt);
 t_return_status	del_str_from_env(char *line, char ***env_pt);
 
 /*---- get_in_env.c ----*/
-char	*get_line_from_key(char *key, char **env);
-char	**get_line_addr_from_key(char *key, char **env);
-char	*get_env_content_from_key(char *key, char **env);
-bool	key_is_not_alnum(char *line);
+char			*get_line_from_key(char *key, char **env);
+char			**get_line_addr_from_key(char *key, char **env);
+char			*get_env_content_from_key(char *key, char **env);
+bool			key_is_not_alnum(char *line);
 
 /*---- ordering_env_export.c ----*/
-char	*get_first_line_in_env(char **env);
-char	*get_next_line_in_env(char *last, char **env);
+char			*get_first_line_in_env(char **env);
+char			*get_next_line_in_env(char *last, char **env);
 
 /*---- utils -------------------------------------------------------------*/
 /*---- export_get_ft_to_do.c ----*/
@@ -76,7 +76,7 @@ t_return_status	unset_builtin(char **args, char ***env_pt);
 
 /*---- expands ---------------------------------------------------------------*/
 /*---- cut_line_utils.c ----*/
-void	increment_count_and_reset_pin(size_t *count_pt, char **line_pt);
+void			increment_count_and_reset_pin(size_t *count_pt, char **line_pt);
 
 /*---- cut_line.c ----*/
 t_return_status	cut_line_on(char *line, char ***res_pt);
@@ -104,7 +104,7 @@ t_return_status	replace_dquotes_str_by_env_value(char **line_pt, char **env);
 
 /*---- subshell --------------------------------------------------------------*/
 /*---- subshell_preparation.c ----*/
-char	**subshell_preparation(t_string_token **start);
+char			**subshell_preparation(t_string_token **start);
 
 /*---- switchmans ------------------------------------------------------------*/
 /*---- switchman_once.c ----*/
@@ -112,9 +112,9 @@ t_return_status	switchman_once(t_data *data, char ***env_pt);
 void			ft_free_all_str_lst(t_data *data, int index);
 
 /*---- switchman_utils.c ----*/
-size_t	go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok);
-void	go_to_next_logical_door(t_string_token *src, t_string_token **dst);
-int		get_next_index(int last, t_string_token **instructions_arr);
+size_t			go_to_next_(t_emt token, t_string_token *tmp, t_string_token **str_tok);
+void			go_to_next_logical_door(t_string_token *src, t_string_token **dst);
+int				get_next_index(int last, t_string_token **instructions_arr);
 
 /*---- switchman.c ----*/
 t_return_status	switchman(t_data *data, \
@@ -147,8 +147,8 @@ t_return_status	env_init_on(char ***env_pt);
 t_return_status	childs_execve(t_data *data, char ***env);
 
 /*---- exec_articultaion_utils.c ----*/
-bool	check_cmd(t_cmd *cmd);
-void	init_data(t_data *data);
+bool			check_cmd(t_cmd *cmd);
+void			init_data(t_data *data);
 
 /*---- exec_articultaion.c ----*/
 t_return_status execution(t_data *data, t_string_token *lst_of_tok, char ***env_pt);
@@ -192,9 +192,9 @@ t_return_status	squoting_process(t_token *last_token, \
 /*---- 2_metachar_managing ---------------------------------------------------*/
 
 /*---- split_toklst_on_meta.c ----*/
-t_token	*split_toklst_on_meta(t_token *tok);
-t_token	*regroup_meta(t_token *tok);
-char	*get_prompt(char *str, int flag);
+t_token			*split_toklst_on_meta(t_token *tok);
+t_token			*regroup_meta(t_token *tok);
+char			*get_prompt(char *str, int flag);
 
 /*---- 3_expand_in_parsing ---------------------------------------------------*/
 /*---- expand_variable.c ----*/
@@ -205,24 +205,23 @@ t_return_status	expand_dollars(t_token *token_lst, char **env);
 t_return_status	is_control_operator(t_emt token);
 
 /*---- testing_utils.c ----*/
-void	display_tokens(t_token *token_lst);
-void	display_t_emt(t_token *token);
-void	put_esec(t_token *tok);
+void			display_tokens(t_token *token_lst);
+void			display_t_emt(t_token *token);
+void			put_esec(t_token *tok);
 
 /*---- tokens_lst_utils_2.c ----*/
-void	del_next_word(t_token *token);
-void	del_token(t_token *token);
-t_token	*token_lst_constructor_word(char *string, t_esec esec);
+void			del_next_word(t_token *token);
+void			del_token(t_token *token);
+t_token			*token_lst_constructor_word(char *string, t_esec esec);
 t_return_status	insert_str_in_tkn_lst(t_token *token_lst, char *str, \
 										t_esec insert_esec);
-int	len_to_next_type(t_token *pin);
+int				len_to_next_type(t_token *pin);
 
 /*---- tokens_lst_utils.c ----*/
-t_token	*token_constructor(t_emt emt, char msg);
-t_token	*token_constructor_esec(t_emt emt, char msg, t_esec esec);
-void	token_lst_clear(t_token *trash);
-void	del_next_token(t_token *token);
-void	del_first_token(t_token **token);
+t_token			*token_constructor(t_emt emt, char msg);
+t_token			*token_constructor_esec(t_emt emt, char msg, t_esec esec);
+void			token_lst_clear(t_token *trash);
+void			del_next_token(t_token *token);
 
 
 /*---- lexing_articulation.c ----*/

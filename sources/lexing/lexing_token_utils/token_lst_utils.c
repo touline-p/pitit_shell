@@ -18,7 +18,7 @@ t_token	*token_constructor(t_emt emt, char msg)
 
 	new = malloc(sizeof(t_token));
 	if (!new)
-		return (NULL);
+		return (perror("token_constructor"), NULL);
 	new->token = emt;
 	new->sign_char = msg;
 	new->next = NULL;
@@ -33,7 +33,7 @@ t_token	*token_constructor_esec(t_emt emt, char msg, t_esec esec)
 
 	new = malloc(sizeof(t_token));
 	if (!new)
-		return (NULL);
+		return (perror("token_constructor_esec"), NULL);
 	new->token = emt;
 	new->sign_char = msg;
 	new->next = NULL;
