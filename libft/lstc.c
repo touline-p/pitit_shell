@@ -43,6 +43,8 @@ t_return_status	read_fd_in_str(int fd, char **dst)
 	*dst = malloc(lstc_size(lst) + 1);
 	if (*dst)
 		lstc_cpy_in_str(lst, dst);
+	else
+		return (lstc_clear(lst), FAILED_MALLOC);
 	lstc_clear(lst);
 	return (SUCCESS);
 }

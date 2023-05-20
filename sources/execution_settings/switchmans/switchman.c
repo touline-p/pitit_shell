@@ -28,10 +28,10 @@ t_return_status	switchman(t_data *data, \
 {
 	if (data->instructions_arr != NULL)
 		free(data->instructions_arr);
-	data->instructions_arr = malloc(sizeof(t_string_token *) \
-				* (_count_instructions_node(token_lst) + 1));
+	data->instructions_arr = ft_calloc(_count_instructions_node(token_lst) + 1,
+			sizeof(t_string_token *));
 	if (data->instructions_arr == NULL)
-		return (FAILED_MALLOC);
+		return (string_token_destructor(token_lst), perror("switchman"), FAILED_MALLOC);
 	if (_fill(data->instructions_arr, token_lst) != SUCCESS)
 		return (FAILED_MALLOC);
 	if (_launch_instructions_arr(data, data->instructions_arr, env_pt) != SUCCESS)
@@ -54,6 +54,19 @@ static size_t	_count_instructions_node(t_string_token *str_tok_lst)
 	return (count);
 }
 
+void clear_instructions_arr(t_string_token **instructions_arr)
+{
+	t_string_token	**tmp;
+
+	tmp = instructions_arr;
+	while (*tmp)
+	{
+		string_token_destructor(*tmp);
+		tmp++;
+	}
+	free(instructions_arr);
+}
+
 static t_return_status	_fill(t_string_token **instructions_arr, \
 					t_string_token *str_tok_lst)
 {
@@ -69,9 +82,10 @@ static t_return_status	_fill(t_string_token **instructions_arr, \
 			str_tok_lst = str_tok_lst->next;
 		if (str_tok_lst->next->token != EOL)
 		{
-			str_tok_lst->next = string_token_creator();
+			str_tok_lst->next = NULL; //string_token_creator();
 			if (str_tok_lst->next == NULL)
-				return (FAILED_MALLOC);
+				return (perror("_fill"), clear_instructions_arr(instructions_arr),
+						string_token_destructor(next), FAILED_MALLOC);
 			str_tok_lst->next->token = EOL;
 			str_tok_lst->next->next = NULL;
 		}
