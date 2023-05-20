@@ -62,9 +62,7 @@ static int	_check_nb_of_match(char *line)
 		if (data == NULL)
 			break ;
 		if (find_matching_files(line, data->d_name) == SUCCESS)
-		{
 			size++;
-		}
 	}
 	closedir(directory);
 	return (size);

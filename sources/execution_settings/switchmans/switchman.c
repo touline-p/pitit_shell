@@ -31,9 +31,11 @@ t_return_status	switchman(t_data *data, \
 	data->instructions_arr = malloc(sizeof(t_string_token *) \
 				* (_count_instructions_node(token_lst) + 1));
 	if (data->instructions_arr == NULL)
-		return (FAILURE);
-	_fill(data->instructions_arr, token_lst);
-	_launch_instructions_arr(data, data->instructions_arr, env_pt);
+		return (FAILED_MALLOC);
+	if (_fill(data->instructions_arr, token_lst) != SUCCESS)
+		return (FAILED_MALLOC);
+	if (_launch_instructions_arr(data, data->instructions_arr, env_pt) != SUCCESS)
+		return (FAILED_MALLOC);
 	return (SUCCESS);
 }
 
@@ -68,6 +70,8 @@ static t_return_status	_fill(t_string_token **instructions_arr, \
 		if (str_tok_lst->next->token != EOL)
 		{
 			str_tok_lst->next = string_token_creator();
+			if (str_tok_lst->next == NULL)
+				return (FAILED_MALLOC);
 			str_tok_lst->next->token = EOL;
 			str_tok_lst->next->next = NULL;
 		}

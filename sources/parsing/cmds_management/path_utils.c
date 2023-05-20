@@ -24,20 +24,23 @@ char	**get_paths(char **env)
 	int		i;
 	int		find_path;
 	char	**paths;
+	size_t	path_size;
 
 	find_path = find_path_in_environment(env);
 	if (find_path == -1)
 		return (NULL);
 	paths = ft_split(&env[find_path][5], ':');
 	if (!paths)
-		return (NULL);
+		return (perror("get_path spliting"), NULL);
+	path_size = _get_path_size(paths);
 	i = 0;
 	while (paths[i])
 	{
 		paths[i] = strjoin_path_cmd(paths[i], "/");
 		if (!paths[i])
 		{
-			ft_free((void **)paths, _get_path_size(paths));
+			ft_free_split_content(paths + i + 1);
+			ft_free_split(paths);
 			return (NULL);
 		}
 		i++;

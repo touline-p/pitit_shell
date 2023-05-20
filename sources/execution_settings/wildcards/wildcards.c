@@ -55,7 +55,7 @@ static t_return_status	_fetch_on(char *line, char ***dst_arr)
 	size = get_alloc_size(line);
 	if (size <= 0)
 		return (FAILURE);
-	*dst_arr = NULL; //ft_calloc(size + 1, sizeof(char *));
+	*dst_arr = ft_calloc(size + 1, sizeof(char *));
 	if (*dst_arr == NULL)
 		return (perror("_fetch_on"), FAILURE);
 	if (fill_dst_arr(line, *dst_arr) != SUCCESS)

@@ -19,27 +19,6 @@ static size_t	_count_ln(t_string_token *token_lst);
 
 /*----------------------------------------------------------------------------*/
 
-t_return_status	performe_expand_on_line(char **line_pt, char **env)
-{
-	char	**line_arr;
-	char	**pin;
-
-	if (cut_line_on(*line_pt, &line_arr) != SUCCESS)
-		return (0);
-	pin = line_arr;
-	while (pin && *pin)
-	{
-		if (**pin == '$' && \
-			replace_dollar_str_by_env_value(pin, env) != SUCCESS)
-			return (ft_free_split(line_arr), FAILED_MALLOC);
-		pin++;
-	}
-	if (ft_join_str_arr_on(line_arr, line_pt) != SUCCESS)
-		return (ft_free_split(line_arr), FAILED_MALLOC);
-	ft_free_split(line_arr);
-	return (SUCCESS);
-}
-
 t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env)
 {
 	char			**arr;
@@ -80,33 +59,6 @@ t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env)
 		return (FAILED_MALLOC);
 	cmd->commands = arr;
 	return (SUCCESS);
-}
-
-char	**join_token_lst(t_string_token **arg, char **env)
-{
-	char			**arr;
-	char			*tmp;
-	char			*ret;
-	t_string_token	*token_lst;
-
-	token_lst = *arg;
-	tmp = malloc(_count_ln(token_lst) + 1);
-	ret = tmp;
-	token_lst = token_lst->next;
-	while (token_lst->token != EOL && token_lst->token != PIPE)
-	{
-		tmp = ft_strcpy_rn(tmp, token_lst->content);
-		*(tmp++) = - ' ';
-		token_lst = token_lst->next;
-	}
-	*tmp = 0;
-	*arg = token_lst;
-	if (cut_line_on(ret, &arr) != SUCCESS
-		|| join_arr_on(arr, &ret, env))
-		return (NULL);
-	arr = ft_split(ret, - ' ');
-	free(ret);
-	return (arr);
 }
 
 static bool	_check_emptyness(t_string_token *arg)
