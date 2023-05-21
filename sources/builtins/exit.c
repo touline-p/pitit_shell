@@ -23,8 +23,8 @@ t_return_status	exit_builtin(char **av, char ***env_pt)
 	ft_dprintf(2, RED"exit\n"END);
 	if (av[1])
 	{
-		if (check_exit_args(av, env_pt) != SUCCESS)
-			return (FAILURE);
+		check_exit_args(av, env_pt);
+		return (FAILURE);
 	}
 	ft_free_split(*env_pt);
 	g_ret_val = 0;
