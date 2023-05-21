@@ -25,7 +25,6 @@ bool	check_cmd(t_cmd *cmd)
 
 void	init_data(t_data *data)
 {
-	//g_ret_val = 0;
 	data->cmds_block = NULL;
 	data->fd[0] = 0;
 	data->fd[1] = 0;

@@ -23,8 +23,9 @@ static void				_heredoc_forking(int *fd, t_cmd *cmd, t_data *data, \
 
 t_return_status	duplicate_fds(t_cmd block, t_data *data, char ***env_pt)
 {
-	if (block.is_heredoc == true)
-		heredoc_child_management(&block, data, *env_pt);
+	if (block.is_heredoc == true
+		&& heredoc_child_management(&block, data, *env_pt) != SUCCESS)
+		return (FAILURE);
 	if (block.infile == -1 || block.outfile == -1)
 		return (FAILURE);
 	if (block.is_ambiguous)
@@ -55,10 +56,10 @@ t_return_status	heredoc_child_management(t_cmd *cmd, t_data *data, \
 	int	pid;
 
 	if (pipe(fd) == -1)
-		return (FAILURE);
+		return (free(cmd->heredoc_data), perror("pipe"), FAILURE);
 	pid = fork();
 	if (pid == -1)
-		return (FAILURE);
+		return (free(cmd->heredoc_data), perror("heredoc"), FAILURE);
 	if (pid == 0)
 		_heredoc_forking(fd, cmd, data, env_pt);
 	free(cmd->heredoc_data);
