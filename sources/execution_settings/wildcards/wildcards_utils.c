@@ -105,7 +105,7 @@ t_return_status	fill_dst_arr(char *line, char **arr_to_fill)
 		replace_wild_card(line);
 		arr_to_fill[i] = ft_strdup(line);
 		if (arr_to_fill[i] == NULL)
-			return (FAILURE);
+			return (perror("fill_dst_arr"), FAILURE);
 	}
 	free(line);
 	return (SUCCESS);
