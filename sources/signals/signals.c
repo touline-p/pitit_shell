@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/19 15:37:21 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/21 20:01:57 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,13 @@ static void	handle_signal_readline(int sign)
 	ft_dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
 	prompt = get_prompt(NULL, 0);
 	prompt = update_prompt(prompt);
-	printf("%s", prompt);
+	if (prompt == NULL)
+	{
+		perror("update_prompt");
+		ft_dprintf(2, RED"🤷 Sorry bro: "END);
+	}
+	else
+		ft_dprintf(2, "%s", prompt);
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
