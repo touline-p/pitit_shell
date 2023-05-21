@@ -46,5 +46,6 @@ t_return_status	check_allocations(char **line_arr, size_t arr_len)
 	}
 	while (tmp--)
 		free(line_arr[tmp]);
+	perror("cut line");
 	return (FAILED_MALLOC);
 }
