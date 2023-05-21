@@ -27,6 +27,8 @@ t_return_status	wildcard_files(t_data *data, char **file, int block_id)
 	if (check_line(*file) != SUCCESS)
 		return (SUCCESS);
 	match = _check_nb_of_match(*file);
+	if (match == -1)
+		return (FAILURE);
 	if (match == 0)
 	{
 		replace_wild_card(*file);

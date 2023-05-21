@@ -34,7 +34,7 @@ t_return_status	files_management(t_data *data, t_string_token *lst_of_tok, \
 		{
 			temp = temp->next;
 			if (arr_ft[index_ft](data, &(temp->content), i, env) != SUCCESS)
-				return (free(data->cmds_block), FAILED_MALLOC);
+				return (FAILED_MALLOC);
 		}
 		keep_going(&i, &temp, data);
 	}
@@ -55,7 +55,7 @@ t_return_status	set_infile(t_data *data, char **file, int block_id, \
 		|| join_arr_on(arr, file, env) != SUCCESS)
 		return (FAILED_MALLOC);
 	if (wildcard_files(data, file, block_id) != SUCCESS)
-		return (SUCCESS);
+		return (FAILURE);
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
@@ -99,7 +99,7 @@ t_return_status	set_outfile(t_data *data, char **file, int block_id, \
 		   || join_arr_on(arr, file, env) != SUCCESS)
 		return (FAILED_MALLOC);
 	if (wildcard_files(data, file, block_id) != SUCCESS)
-		return (SUCCESS);
+		return (FAILURE);
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
@@ -130,7 +130,7 @@ t_return_status	set_appends(t_data *data, char **file, int block_id, \
 		   || join_arr_on(arr, file, env) != SUCCESS)
 		return (FAILED_MALLOC);
 	if (wildcard_files(data, file, block_id) != SUCCESS)
-		return (SUCCESS);
+		return (FAILURE);
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
