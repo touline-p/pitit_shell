@@ -41,8 +41,7 @@ t_return_status	wildcard_files(t_data *data, char **file, int block_id)
 		ft_dprintf(2, "minishell: %s: ambiguous redirect\n", *file);
 		return (FAILURE);
 	}
-	_get_wildcard_file(file);
-	return (SUCCESS);
+	return (_get_wildcard_file(file));
 }
 
 static int	_check_nb_of_match(char *line)
@@ -79,7 +78,7 @@ static t_return_status	_get_wildcard_file(char **line_pt)
 	if (!directory)
 	{
 		perror ("minishell: opendir: cannot open current directory");
-		return (-1);
+		return (FAILURE);
 	}
 	while (1)
 	{
@@ -91,7 +90,7 @@ static t_return_status	_get_wildcard_file(char **line_pt)
 			free(*line_pt);
 			*line_pt = ft_strdup(files->d_name);
 			if (*line_pt == NULL)
-				return (FAILURE);
+				return (perror("_get_wildcard_file"), FAILURE);
 		}
 	}
 	closedir(directory);
