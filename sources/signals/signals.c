@@ -31,17 +31,17 @@ void	init_signals(t_data *data)
 	signal(SIGINT, &handle_signal_main);
 }
 
-static void	handle_signal_main(int signal)
+static void	handle_signal_main(int sign)
 {
 	char	*prompt;
 
-	(void)signal;
+	(void)sign;
 	g_ret_val = 130;
 	ft_dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
 	prompt = get_prompt(NULL, 0);
 	prompt = update_prompt(prompt);
 	printf("%s", prompt);
-	// rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_redisplay();
 }
 

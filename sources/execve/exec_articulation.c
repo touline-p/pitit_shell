@@ -43,7 +43,8 @@ t_return_status	execution(t_data *data, t_string_token *lst_of_tok, \
 		switchman_once(data, env_pt);
 	else
 	{
-		childs_execve(data, env_pt);
+		if (childs_execve(data, env_pt) != SUCCESS)
+			return (FAILURE);
 		_wait_for_process_ids(data);
 	}
 	free(data->cmds_block);

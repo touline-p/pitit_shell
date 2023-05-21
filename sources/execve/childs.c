@@ -35,8 +35,9 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		data->cmds_block[block_id].process_id = fork();
-		_fork_process(data, data->cmds_block[block_id].process_id, \
-						block_id, env);
+		if (_fork_process(data, data->cmds_block[block_id].process_id, \
+						block_id, env) != SUCCESS)
+			return (FAILURE);
 		if (data->cmds_block[block_id].id_command == SUBSHELL)
 			string_token_destructor((t_string_token *)data->cmds_block[block_id].commands);
 		else

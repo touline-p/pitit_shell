@@ -93,6 +93,8 @@ static t_return_status	_father_process_here_doc_reading(char *limiter, \
 	close(fd_hd[0]);
 	if (waitpid(pid, &status, WUNTRACED) == -1)
 		g_ret_val = WEXITSTATUS(status);
+	else if (WIFEXITED(status))
+		g_ret_val = WEXITSTATUS(status);;
 	return (SUCCESS);
 }
 
