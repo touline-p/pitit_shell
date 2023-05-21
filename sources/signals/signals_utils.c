@@ -53,6 +53,8 @@ static void	_change_color(char *prompt)
 	if (color_from == NULL)
 		return ;
 	tmp = ft_strnstr(prompt, color_from, ft_strlen(prompt));
+	if (ft_strncmp((char *)color_from, (char *)color_to, ft_strlen(color_from)) == 0)
+		return ;
 	while (tmp)
 	{
 		ft_memcpy(tmp, color_to, ft_strlen(color_to));

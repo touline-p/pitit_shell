@@ -14,7 +14,7 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static void	handle_signal_main(int signal);
+static void	handle_signal_readline(int signal);
 
 /*----------------------------------------------------------------------------*/
 
@@ -28,10 +28,10 @@ void	init_signals(t_data *data)
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
-	signal(SIGINT, &handle_signal_main);
+	signal(SIGINT, &handle_signal_readline);
 }
 
-static void	handle_signal_main(int sign)
+static void	handle_signal_readline(int sign)
 {
 	char	*prompt;
 
@@ -41,7 +41,7 @@ static void	handle_signal_main(int sign)
 	prompt = get_prompt(NULL, 0);
 	prompt = update_prompt(prompt);
 	printf("%s", prompt);
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
@@ -73,8 +73,8 @@ void	handle_signal_child(int signo)
 	}
 }
 
-void	handle_signal_father_process(int signal)
+void	handle_signal_parent(int signo)
 {
-	(void)signal;
-	g_ret_val = 130;
+	(void)signo;
+	ft_dprintf(2, GREEN"\tPLEASE DON'T STOP THE MUSIC\n"END);
 }

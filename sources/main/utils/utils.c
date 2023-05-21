@@ -36,14 +36,25 @@ t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 
 void	loop_init(t_data *data, char **line_pt, char **env)
 {
-	init_signals(data);
-	if (get_prompt_on(&(data->prompt), env) != SUCCESS)
-		clean_the_prompt(data->prompt, *line_pt, env);
-	*line_pt = readline(data->prompt);
-	errno = 0;
-	if ((*line_pt == NULL) || ft_strcmp("", *line_pt) == 0)
-		clean_the_prompt(data->prompt, *line_pt, env);
-	add_history(*line_pt);
+	int flag;
+
+	flag = true;
+	while (flag)
+	{
+		flag = false;
+		init_signals(data);
+		if (get_prompt_on(&(data->prompt), env) != SUCCESS)
+			clean_the_prompt(data->prompt, *line_pt, env);
+		*line_pt = readline(data->prompt);
+
+		errno = 0;
+		if (*line_pt == NULL)
+			clean_the_prompt(data->prompt, *line_pt, env);
+		if (ft_strcmp("", *line_pt) == 0)
+			flag = true;
+		add_history(*line_pt);
+	}
+	signal(SIGINT, &handle_signal_parent);
 }
 
 t_return_status	set_data_instruction_arr(t_data *data, \

@@ -335,7 +335,7 @@ char		*get_color(void);
 void		init_signals(t_data *data);
 void		handle_signal_heredoc(int signal);
 void		handle_signal_child(int signo);
-void		handle_signal_father_process(int signal);
+void		handle_signal_parent(int signo);
 
 /*----------------------------------------------------------------------------*/
 /*---- Syntax ----------------------------------------------------------------*/
