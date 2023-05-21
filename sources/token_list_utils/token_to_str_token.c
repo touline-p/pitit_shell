@@ -57,6 +57,8 @@ static t_return_status	_get_str_token_on_and_reset_pin( \
 		return (FAILURE);
 	tmp = (*pin_pt)->token;
 	(*str_tok_pt)->content = _reset_pin_ret_string(pin_pt);
+	if ((*str_tok_pt)->content == NULL)
+		return (FAILURE);
 	if (tmp == LETTER)
 		(*str_tok_pt)->token = STRING;
 	else
@@ -85,7 +87,7 @@ static char	*_reset_pin_ret_string(t_token **pin_pt)
 	len = len_to_next_type(*pin_pt);
 	new = malloc(len + 1);
 	if (new == NULL)
-		return (NULL);
+		return (perror("reset_pin_ret_string"), NULL);
 	cpy_token_lst_to_str(*pin_pt, new);
 	while (len--)
 		*pin_pt = (*pin_pt)->next;
