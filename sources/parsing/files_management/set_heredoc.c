@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:20 by twang             #+#    #+#             */
-/*   Updated: 2023/05/19 12:28:26 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/21 20:48:43 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ t_return_status	heredoc_management(t_data *data, \
 		}
 		if (tmp->token == SYN_ERR)
 		{
-			redirection_syntax_error(format_string_token(tmp->next));
+			if (redirection_syntax_error(format_string_token(tmp->next)) != SUCCESS)
+			{
+				string_token_destructor(string_token_lst);
+				free(data->instructions_arr);
+			}
 			return (FAILURE);
 		}
 		tmp = tmp->next;

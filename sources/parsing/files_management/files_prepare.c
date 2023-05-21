@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_prepare.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:22:53 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/19 12:23:29 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/21 20:51:34 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ t_return_status	redirection_syntax_error(char *str)
 	tmp = ft_strjoin("syntax error near unexpected token : \'", str);
 	free(str);
 	if (!tmp)
-		return (FAILURE);
+	{
+		free(tmp);
+		return (perror("syntax error warning"), FAILURE);
+	}
 	write(2, tmp, ft_strlen(tmp));
 	free(tmp);
 	g_ret_val = 2;
