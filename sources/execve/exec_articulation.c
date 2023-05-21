@@ -68,7 +68,7 @@ static t_return_status	_alloc_cmd_block(t_data *data, \
 	}
 	data->cmds_block = ft_calloc((data->nb_of_pipe + 2), sizeof(t_cmd));
 	if (!data->cmds_block)
-		return (FAILED_MALLOC);
+		return (perror("alloc_cmd_block"), FAILED_MALLOC);
 	i = 0;
 	while (i < data->nb_of_pipe + 1)
 		data->cmds_block[i++].outfile = 1;
