@@ -16,6 +16,7 @@
 
 static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt);
 static void				_close_switchman_once(t_cmd cmd);
+static t_return_status	_switchman_once_ep(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
@@ -33,6 +34,8 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 		|| (cmd.id_command == EXPORT && cmd.commands[1] != NULL))
 		return (builtin_switch_free(cmd, cmd.commands, env_pt));
 	pid = fork();
+	if (pid == -1)
+		return (_switchman_once_ep(data));
 	if (pid == 0)
 		_execute_son(data, cmd, env_pt);
 	ft_free_split(cmd.commands);
@@ -80,4 +83,11 @@ static void	_close_switchman_once(t_cmd cmd)
 		close(cmd.infile);
 	if (cmd.outfile > 2)
 		close(cmd.outfile);
+}
+
+static t_return_status	_switchman_once_ep(t_data *data)
+{
+	ft_free_split(data->cmds_block->commands);
+	perror("fork switchman once");
+	return (FAILURE);
 }
