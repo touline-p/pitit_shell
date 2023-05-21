@@ -82,7 +82,7 @@ static t_return_status	_fill(t_string_token **instructions_arr, \
 			str_tok_lst = str_tok_lst->next;
 		if (str_tok_lst->next->token != EOL)
 		{
-			str_tok_lst->next = NULL; //string_token_creator();
+			str_tok_lst->next = string_token_creator();
 			if (str_tok_lst->next == NULL)
 				return (perror("_fill"), clear_instructions_arr(instructions_arr),
 						string_token_destructor(next), FAILED_MALLOC);
