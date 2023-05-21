@@ -37,7 +37,7 @@ t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env)
 	}
 	tmp = malloc(_count_ln(token_lst) + 2);
 	if (tmp == NULL)
-		return (FAILED_MALLOC);
+		return (perror("join token lst on"), FAILED_MALLOC);
 	ret = tmp;
 	token_lst = token_lst->next;
 	while (token_lst->token != EOL && token_lst->token != PIPE)
@@ -52,6 +52,8 @@ t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env)
 		|| join_arr_on(arr, &ret, env))
 		return (FAILED_MALLOC);
 	arr = ft_split(ret, - ' ');
+	if (arr == NULL)
+		return (perror("join_token_lst_on"), FAILED_MALLOC);
 	free(ret);
 	if (expand_wildcards(&arr) != SUCCESS)
 		return (FAILED_MALLOC);
