@@ -98,11 +98,14 @@ t_return_status	fill_dst_arr(char *line, char **arr_to_fill)
 	int	i;
 
 	i = 0;
-	_fill_dst_arr_one_name(line, arr_to_fill, &i);
+	if (_fill_dst_arr_one_name(line, arr_to_fill, &i) != SUCCESS)
+		return (FAILURE);
 	if (i == 0)
 	{
 		replace_wild_card(line);
 		arr_to_fill[i] = ft_strdup(line);
+		if (arr_to_fill[i] == NULL)
+			return (FAILURE);
 	}
 	free(line);
 	return (SUCCESS);
