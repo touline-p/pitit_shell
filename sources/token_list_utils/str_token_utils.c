@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+//// to do proteger les strjoins
+
+
 char	*format_string_token(t_string_token *token)
 {
 	const char	*msgarr[] = {"start", "\'|", "ifnot", "\'<", \
