@@ -70,8 +70,6 @@ FILES	=	ft_atoi.c 				\
 			list_utils.c 			\
 			per_n_ret.c 			\
 			ft_lststr_to_str.c 		\
-			get_next_line.c 		\
-			get_next_line_utils.c 	\
 			ft_print_split.c 		\
 			close_pipe_arr.c 		\
 			ft_free_int_arr.c 		\
@@ -88,6 +86,8 @@ FILES	=	ft_atoi.c 				\
 			ft_putnbr_base_fd.c		\
 			ft_putnbr_unsigned_fd.c	\
 			_get_next_line.c		\
+			lstc.c					\
+			lstc_2.c				\
 
 HFILES	=	libft.h
 

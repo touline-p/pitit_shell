@@ -6,15 +6,13 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/05/17 15:52:28 by twang            ###   ########.fr        #
+#    Updated: 2023/05/21 18:14:48 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include config/headers_execution.mk
-include config/headers_parsing.mk
 include config/print.mk
-include config/sources_execution.mk
-include config/sources_parsing.mk
+include config/sources.mk
+include config/headers.mk
 
 .SILENT:
 
@@ -39,7 +37,7 @@ OBJ_DIR		=	.objs
 
 #--flags-----------------------------------------------------------------------#
 
-CFLAGS		=	-g3 -Wall -Wextra -I $(LIBFT_DIR) -I $(INC_DIR)/execution_incs -I $(INC_DIR)/parsing_incs -o2 #-Werror
+CFLAGS		=	-g3 -Wall -Wextra -I $(LIBFT_DIR) -I $(INC_DIR) -I $(INC_DIR) #-Werror
 
 #--debug flags--------------------------------------------------------#
 
@@ -145,4 +143,3 @@ fclean:
 #--PHONY-----------------------------------------------------------------------#
 
 .PHONY: all lib debug re clean fclean
- 

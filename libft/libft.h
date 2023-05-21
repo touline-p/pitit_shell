@@ -62,6 +62,13 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_list_of_char	t_lstc;
+struct	s_list_of_char
+{
+	t_lstc	*next;
+	char	c;
+};
+
 //void		put_return_status(t_return_status signal);
 t_return_status	ft_join_str_arr_on(char **str_arr, char **line_pt);
 char			*ft_strdup(const char *src);
@@ -145,6 +152,7 @@ void			*ft_memdup(void *src, size_t ln);
 void			ft_swap(int *a, int *b);
 int				ft_is_overflowing(char *str);
 void			*ft_free_split(char **dst);
+void			ft_free_split_content(char **str_arr);
 void			ft_free_int_arr(int **int_arr);
 void			ft_eprint_split(char **split);
 void			ft_print_split(char **split);
@@ -156,6 +164,7 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 char			*ft_get_env(char *key, char **env);
 t_uchar			*ft_ustrdup(unsigned char *str);
+void			ft_arriteri(void **arr, void *(*f)(char **));
 
 t_return_status	ft_atoi_on(const char *str, int *int_pt);
 
@@ -216,5 +225,14 @@ char			*get_calloc(size_t count, size_t size);
 char			*get_strjoin(char *s1, char *s2);
 char			*get_next_line(int fd);
 char			*ft_strstr_w(char *name, char *line);
+
+void			lstc_cpy_in_str(t_lstc	*lst, char **str);
+t_lstc			*read_lstc_from_fd(int fd);
+t_lstc			*lstc_new(char c);
+t_lstc			*lstc_clear(t_lstc *trash);
+t_lstc			*init_lstc_first_read(int fd);
+t_return_status	read_fd_in_str(int fd, char **dst);
+void			read_lst(t_lstc *lst);
+size_t			lstc_size(t_lstc *lst);
 
 #endif

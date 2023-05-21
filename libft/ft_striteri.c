@@ -20,3 +20,13 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 	while (*s)
 		(*f)(i++, s++);
 }
+
+
+void	ft_arriteri(void **arr, void *(*f)(char **))
+{
+	while (*arr)
+	{
+		(*f)(*arr);
+		arr++;
+	}
+}
