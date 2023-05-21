@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:50:36 by twang             #+#    #+#             */
-/*   Updated: 2023/05/19 15:57:16 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/21 20:12:08 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	**get_paths(char **env)
 		paths[i] = strjoin_path_cmd(paths[i], "/");
 		if (!paths[i])
 		{
+			perror("paths error");
 			ft_free_split_content(paths + i + 1);
 			ft_free_split(paths);
 			return (NULL);
