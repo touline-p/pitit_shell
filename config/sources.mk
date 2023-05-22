@@ -51,7 +51,6 @@ SOURCES =																	\
 			sources/lexing/1_preservation/simple_quoting.c					\
 			sources/lexing/2_metachar_managing/split_toklst_on_meta.c		\
 			sources/lexing/lexing_token_utils/simple_tokens_utils.c			\
-			sources/lexing/lexing_token_utils/testing_utils.c				\
 			sources/lexing/lexing_token_utils/token_lst_utils_2.c			\
 			sources/lexing/lexing_token_utils/token_lst_utils.c				\
 			sources/lexing/lexing_articulation.c							\

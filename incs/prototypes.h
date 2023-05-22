@@ -199,18 +199,9 @@ t_token			*split_toklst_on_meta(t_token *tok);
 t_token			*regroup_meta(t_token *tok);
 char			*get_prompt(char *str, int flag);
 
-/*---- 3_expand_in_parsing ---------------------------------------------------*/
-/*---- expand_variable.c ----*/
-t_return_status	expand_dollars(t_token *token_lst, char **env);
-
 /*---- lexing_token_utils ----------------------------------------------------*/
 /*---- simple_tokens_utils.c ----*/
 t_return_status	is_control_operator(t_emt token);
-
-/*---- testing_utils.c ----*/
-void			display_tokens(t_token *token_lst);
-void			display_t_emt(t_token *token);
-void			put_esec(t_token *tok);
 
 /*---- tokens_lst_utils_2.c ----*/
 void			del_next_word(t_token *token);
