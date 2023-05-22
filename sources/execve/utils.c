@@ -60,6 +60,8 @@ char	*add_path_cmd(t_cmd *cmd, char **env)
 		{
 			str = ft_strjoin(cmd->commands[0], " : command not found\n");
 			g_ret_val = 127;
+			if (str == NULL)
+				return (perror("add path_cmd"), NULL);
 			write(2, str, ft_strlen(str));
 			free(str);
 		}
