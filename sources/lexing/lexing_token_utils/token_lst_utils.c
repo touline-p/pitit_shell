@@ -47,12 +47,3 @@ void	del_next_token(t_token *token)
 	del_token(token->next);
 	token->next = tmp;
 }
-
-void	del_first_token(t_token **token)
-{
-	t_token	*tmp;
-
-	tmp = *token;
-	*token = tmp->next;
-	del_token(tmp);
-}

@@ -12,14 +12,6 @@
 
 #include "minishell.h"
 
-void	del_next_word(t_token *token)
-{
-	while (ft_isalnum(token->next->sign_char))
-	{
-		del_next_token(token);
-	}
-}
-
 void	del_token(t_token *token)
 {
 	token_lst_clear(token->next_word);

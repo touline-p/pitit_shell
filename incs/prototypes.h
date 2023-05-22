@@ -200,22 +200,13 @@ t_token			*regroup_meta(t_token *tok);
 char			*get_prompt(char *str, int flag);
 
 /*---- lexing_token_utils ----------------------------------------------------*/
-/*---- simple_tokens_utils.c ----*/
-t_return_status	is_control_operator(t_emt token);
-
 /*---- tokens_lst_utils_2.c ----*/
-void			del_next_word(t_token *token);
 void			del_token(t_token *token);
-t_token			*token_lst_constructor_word(char *string, t_esec esec);
-t_return_status	insert_str_in_tkn_lst(t_token *token_lst, char *str, \
-										t_esec insert_esec);
 int				len_to_next_type(t_token *pin);
 
 /*---- tokens_lst_utils.c ----*/
 t_token			*token_constructor(t_emt emt, char msg);
-t_token			*token_constructor_esec(t_emt emt, char msg, t_esec esec);
 void			token_lst_clear(t_token *trash);
-void			del_next_token(t_token *token);
 
 
 /*---- lexing_articulation.c ----*/
