@@ -59,7 +59,13 @@ t_return_status	builtin_switch_free(t_cmd command, char **av, char ***env_pt)
 		close(command.infile);
 	if (command.outfile > 2)
 		close(command.outfile);
-	ft_free_split(av);
+	if (command.id_command != EXPORT)
+		ft_free_split(av);
+	else
+	{
+		free(*av);
+		free(av);
+	}
 	return (ret_val);
 }
 

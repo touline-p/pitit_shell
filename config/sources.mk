@@ -6,7 +6,7 @@
 #    By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 14:25:51 by twang             #+#    #+#              #
-#    Updated: 2023/05/19 15:58:53 by wangthea         ###   ########.fr        #
+#    Updated: 2023/05/22 17:12:48 by bpoumeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,6 @@ SOURCES =																	\
 			sources/signals/signals.c										\
 			sources/syntax/check_par_err.c									\
 			sources/syntax/check_unic_syntax.c								\
-			sources/token_list_utils/str_token_debug.c						\
 			sources/token_list_utils/str_token_utils.c						\
 			sources/token_list_utils/t_string_token_utils.c					\
 			sources/token_list_utils/t_string_token_cleans.c				\
