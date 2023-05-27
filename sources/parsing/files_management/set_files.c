@@ -51,7 +51,7 @@ t_return_status	set_infile(t_data *data, char **file, int block_id, \
 	signal = file_is_empty(*file);
 	if (redir_failed(&(data->cmds_block[block_id])))
 		return (SUCCESS);
-	if 	(cut_line_on(*file, &arr) != SUCCESS
+	if (cut_line_on(*file, &arr) != SUCCESS
 		|| join_arr_on(arr, file, env) != SUCCESS)
 		return (FAILED_MALLOC);
 	if (wildcard_files(data, file, block_id) != SUCCESS)
@@ -95,8 +95,8 @@ t_return_status	set_outfile(t_data *data, char **file, int block_id, \
 	check_opened_outfiles(data, block_id);
 	if (redir_failed(&(data->cmds_block[block_id])))
 		return (SUCCESS);
-	if 	(cut_line_on(*file, &arr) != SUCCESS
-		   || join_arr_on(arr, file, env) != SUCCESS)
+	if (cut_line_on(*file, &arr) != SUCCESS
+		|| join_arr_on(arr, file, env) != SUCCESS)
 		return (FAILED_MALLOC);
 	if (wildcard_files(data, file, block_id) != SUCCESS)
 		return (FAILURE);
@@ -126,8 +126,8 @@ t_return_status	set_appends(t_data *data, char **file, int block_id, \
 	check_opened_outfiles(data, block_id);
 	if (redir_failed(&(data->cmds_block[block_id])))
 		return (SUCCESS);
-	if 	(cut_line_on(*file, &arr) != SUCCESS
-		   || join_arr_on(arr, file, env) != SUCCESS)
+	if (cut_line_on(*file, &arr) != SUCCESS
+		|| join_arr_on(arr, file, env) != SUCCESS)
 		return (FAILED_MALLOC);
 	if (wildcard_files(data, file, block_id) != SUCCESS)
 		return (FAILURE);

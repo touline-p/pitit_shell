@@ -15,7 +15,6 @@
 /*---- prototypes ------------------------------------------------------------*/
 
 static int	find_path_in_environment(char **env);
-static int	_get_path_size(char **paths);
 
 /*----------------------------------------------------------------------------*/
 
@@ -24,7 +23,6 @@ char	**get_paths(char **env)
 	int		i;
 	int		find_path;
 	char	**paths;
-	size_t	path_size;
 
 	find_path = find_path_in_environment(env);
 	if (find_path == -1)
@@ -32,9 +30,8 @@ char	**get_paths(char **env)
 	paths = ft_split(&env[find_path][5], ':');
 	if (!paths)
 		return (perror("get_path spliting"), NULL);
-	path_size = _get_path_size(paths);
-	i = 0;
-	while (paths[i])
+	i = -1;
+	while (paths[++i])
 	{
 		paths[i] = strjoin_path_cmd(paths[i], "/");
 		if (!paths[i])
@@ -44,7 +41,6 @@ char	**get_paths(char **env)
 			ft_free_split(paths);
 			return (NULL);
 		}
-		i++;
 	}
 	return (paths);
 }
@@ -58,15 +54,5 @@ static int	find_path_in_environment(char **env)
 		i++;
 	if (!env[i])
 		return (FAILURE);
-	return (i);
-}
-
-static int	_get_path_size(char **paths)
-{
-	int	i;
-
-	i = 0;
-	while (paths[i])
-		i++;
 	return (i);
 }

@@ -80,7 +80,7 @@ t_return_status	redirection_syntax_error(char *str)
 	return (FAILURE);
 }
 
-bool redir_failed(t_cmd *cmd)
+bool	redir_failed(t_cmd *cmd)
 {
 	if (cmd->infile < 0
 		|| cmd->outfile < 0

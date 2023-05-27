@@ -43,7 +43,7 @@ t_return_status	heredoc_management(t_data *data, \
 		}
 		if (tmp->token == SYN_ERR)
 		{
-			if (redirection_syntax_error(format_string_token(tmp->next)) != SUCCESS)
+			if (redirection_syntax_error(format_string_token(tmp->next)))
 			{
 				string_token_destructor(string_token_lst);
 				free(data->instructions_arr);
@@ -55,7 +55,6 @@ t_return_status	heredoc_management(t_data *data, \
 	return (SUCCESS);
 }
 
-//// proteger TO DO
 static t_return_status	_get_here_doc_in_hr_data(t_data *data, \
 											t_string_token *token, char **env)
 {
@@ -98,7 +97,7 @@ static t_return_status	_father_process_here_doc_reading(char *limiter, \
 	if (waitpid(pid, &status, WUNTRACED) == -1)
 		g_ret_val = WEXITSTATUS(status);
 	else if (WIFEXITED(status))
-		g_ret_val = WEXITSTATUS(status);;
+		g_ret_val = WEXITSTATUS(status);
 	return (SUCCESS);
 }
 
