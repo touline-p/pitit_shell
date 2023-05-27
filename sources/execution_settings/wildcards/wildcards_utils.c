@@ -85,7 +85,8 @@ static t_return_status	_fill_dst_arr_one_name(char *line, \
 		{
 			arr_to_fill[*i] = ft_strdup(data->d_name);
 			if (arr_to_fill[*i] == NULL)
-				return (perror("fill dst arr one name"),closedir(directory), FAILURE);
+				return (perror("fill dst arr one name"), \
+					closedir(directory), FAILURE);
 			(*i)++;
 		}
 	}

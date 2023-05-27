@@ -55,9 +55,7 @@ t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env)
 	if (arr == NULL)
 		return (perror("join_token_lst_on"), FAILED_MALLOC);
 	free(ret);
-	if (expand_wildcards(&arr) != SUCCESS)
-		return (FAILED_MALLOC);
-	if (*arr == NULL)
+	if (expand_wildcards(&arr) != SUCCESS || *arr == NULL)
 		return (FAILED_MALLOC);
 	cmd->commands = arr;
 	return (SUCCESS);

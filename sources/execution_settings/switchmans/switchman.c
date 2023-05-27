@@ -31,10 +31,12 @@ t_return_status	switchman(t_data *data, \
 	data->instructions_arr = ft_calloc(_count_instructions_node(token_lst) + 1,
 			sizeof(t_string_token *));
 	if (data->instructions_arr == NULL)
-		return (string_token_destructor(token_lst), perror("switchman"), FAILED_MALLOC);
+		return (string_token_destructor(token_lst), \
+				perror("switchman"), FAILED_MALLOC);
 	if (_fill(data->instructions_arr, token_lst) != SUCCESS)
 		return (FAILED_MALLOC);
-	if (_launch_instructions_arr(data, data->instructions_arr, env_pt) != SUCCESS)
+	if (_launch_instructions_arr(data, \
+			data->instructions_arr, env_pt) != SUCCESS)
 		return (FAILED_MALLOC);
 	return (SUCCESS);
 }
@@ -54,7 +56,7 @@ static size_t	_count_instructions_node(t_string_token *str_tok_lst)
 	return (count);
 }
 
-void clear_instructions_arr(t_string_token **instructions_arr)
+void	clear_instructions_arr(t_string_token **instructions_arr)
 {
 	t_string_token	**tmp;
 
@@ -84,7 +86,8 @@ static t_return_status	_fill(t_string_token **instructions_arr, \
 		{
 			str_tok_lst->next = string_token_creator();
 			if (str_tok_lst->next == NULL)
-				return (perror("_fill"), clear_instructions_arr(instructions_arr),
+				return (perror("_fill"), \
+						clear_instructions_arr(instructions_arr), \
 						string_token_destructor(next), FAILED_MALLOC);
 			str_tok_lst->next->token = EOL;
 			str_tok_lst->next->next = NULL;
@@ -105,7 +108,8 @@ static t_return_status	_launch_instructions_arr(t_data *data, \
 	{
 		actual = instructions_arr[data->index];
 		if (execution(data, actual, env) != SUCCESS)
-			return (_free_minishell_data(data), FAILED_MALLOC);
+			return (free(data->instructions_arr), \
+				free(data->cmds_block), FAILED_MALLOC);
 		data->index = get_next_index(++data->index, instructions_arr);
 		if (g_ret_val == 2)
 			return (SUCCESS);
@@ -113,6 +117,7 @@ static t_return_status	_launch_instructions_arr(t_data *data, \
 	free(instructions_arr);
 	return (SUCCESS);
 }
+
 static void	_free_minishell_data(t_data *data)
 {
 	free(data->instructions_arr);
