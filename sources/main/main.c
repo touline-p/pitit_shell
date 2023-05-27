@@ -39,7 +39,6 @@ int	main(int ac, char **av, char **env)
 			&& reset_term_settings(&data) == SUCCESS)
 			continue ;
 		reset_term_settings(&data);
-		dprintf(2,  "bonjour\n");
 		switchman(&data, str_tok_lst, &env);
 	}
 }

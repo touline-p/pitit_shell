@@ -74,7 +74,8 @@ static t_return_status	_get_alloc_line_prompt_on(char **line_pt, char **env)
 	line = malloc(ft_strlen(g_ret_str) + ft_strlen(shlvl) + \
 					ft_strlen(PROMPT_MESSAGE) + 4);
 	if (line == NULL)
-		return (perror("prompt may seem not existing"), free(g_ret_str), FAILED_MALLOC);
+		return (perror("prompt may seem not existing"), \
+				free(g_ret_str), FAILED_MALLOC);
 	*line_pt = line;
 	line = ft_strcpy_rn(line, shlvl);
 	line = ft_strcpy_rn(line, " : ");

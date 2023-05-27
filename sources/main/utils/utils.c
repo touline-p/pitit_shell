@@ -36,7 +36,7 @@ t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 
 void	loop_init(t_data *data, char **line_pt, char **env)
 {
-	int flag;
+	int	flag;
 
 	flag = true;
 	while (flag)
@@ -46,7 +46,6 @@ void	loop_init(t_data *data, char **line_pt, char **env)
 		if (get_prompt_on(&(data->prompt), env) != SUCCESS)
 			clean_the_prompt(data->prompt, *line_pt, env);
 		*line_pt = readline(data->prompt);
-
 		errno = 0;
 		if (*line_pt == NULL)
 			clean_the_prompt(data->prompt, *line_pt, env);
