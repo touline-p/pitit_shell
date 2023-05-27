@@ -15,7 +15,8 @@
 /*---- prototypes ------------------------------------------------------------*/
 
 static bool	_check_for_par(t_string_token *str_tok_lst);
-static bool	_check_for_solo_string_till(t_emt till, t_string_token *str_tok_lst);
+static bool	_check_for_solo_string_till(t_emt till, \
+							t_string_token *str_tok_lst);
 static bool	_par_process(t_string_token *str_tok_lst);
 
 /*----------------------------------------------------------------------------*/
