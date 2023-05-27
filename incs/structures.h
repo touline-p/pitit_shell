@@ -25,8 +25,7 @@ typedef struct s_cmd			t_cmd;
 
 /*---- typedef function pointers ---------------------------------------------*/
 
-typedef t_return_status	(*t_preserv_act)(t_token *first, \
-								t_token *second, t_token **ref);
+typedef t_return_status	(*t_preserv_act)(t_token *a, t_token *b, t_token **c);
 typedef t_return_status	(*t_export_ft)(char *arg, char ***env_pt);
 typedef t_return_status	(*t_files_manage_ft)(t_data *data, \
 										char **line, int i, char **env);

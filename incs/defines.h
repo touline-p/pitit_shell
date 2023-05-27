@@ -18,7 +18,7 @@
 # define STRT_CHR -1
 # define EOSTR 0
 # define IT_DOES_NOT_WORK 0
-#define DONO_INDX 2
+# define DONO_INDX 2
 # define METACHAR_SET "|&<>() \t\v\f\r\n"
 # define IFS " \t\n"
 # define NAME_OF_EXE "Pitit shell"
