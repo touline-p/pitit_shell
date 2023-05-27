@@ -16,7 +16,8 @@
 
 static t_return_status	_alloc_cmd_block(t_data *data, \
 													t_string_token *lst_of_tok);
-static t_return_status	_check_if_token_lst_is_empty(t_string_token *lst_of_tok);
+static t_return_status	_check_if_token_lst_is_empty(t_string_token \
+													*lst_of_tok);
 static void				_wait_for_process_ids(t_data *data);
 static t_return_status	_wait_for_command(int pid, int *status, bool *signals);
 

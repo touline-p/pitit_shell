@@ -18,6 +18,7 @@ static t_return_status	_fork_process(t_data *data, int pid, \
 									int block_id, char ***env);
 static void				_child_launch_act(t_data *data, int nb_of_pipe, \
 									char ***env, int block_id);
+static void				_vd_string_token_destructor(char **str_arr);
 
 /*----------------------------------------------------------------------------*/
 
@@ -39,7 +40,7 @@ t_return_status	childs_execve(t_data *data, char ***env)
 						block_id, env) != SUCCESS)
 			return (FAILURE);
 		if (data->cmds_block[block_id].id_command == SUBSHELL)
-			string_token_destructor((t_string_token *)data->cmds_block[block_id].commands);
+			_vd_string_token_destructor(data->cmds_block[block_id].commands);
 		else
 			ft_free_split(data->cmds_block[block_id].commands);
 		free(data->cmds_block[block_id].heredoc_data);
@@ -48,6 +49,11 @@ t_return_status	childs_execve(t_data *data, char ***env)
 		block_id++;
 	}
 	return (SUCCESS);
+}
+
+static void	_vd_string_token_destructor(char **str_arr)
+{
+	string_token_destructor((t_string_token *)str_arr);
 }
 
 static t_return_status	_fork_process(t_data *data, int pid, \
@@ -95,4 +101,3 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 		builtin_then_exit(command_block, env);
 	execve_then_exit(command_block, env);
 }
-
