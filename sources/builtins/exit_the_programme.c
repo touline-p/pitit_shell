@@ -1,13 +1,23 @@
-//
-// Created by bpoumeau on 5/19/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_the_programme.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/27 14:46:35 by bpoumeau          #+#    #+#             */
+/*   Updated: 2023/05/27 14:46:37 by bpoumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static t_return_status	check_exit_args_unic(char **av, char ***env_pt, t_data *data);
-static void 			cleaning_process_exit(t_data *data, char **env, char **av);
+static t_return_status	check_exit_args_unic(char **av, \
+							char ***env_pt, t_data *data);
+static void				cleaning_process_exit(t_data *data, \
+							char **env, char **av);
 
 /*----------------------------------------------------------------------------*/
 
@@ -27,7 +37,8 @@ t_return_status	exit_the_program(t_data *data, char ***env_pt, t_cmd cmd)
 	return (SUCCESS);
 }
 
-static t_return_status	check_exit_args_unic(char **av, char ***env_pt, t_data *data)
+static t_return_status	check_exit_args_unic(char **av, \
+							char ***env_pt, t_data *data)
 {
 	int	nb;
 
@@ -52,7 +63,7 @@ static t_return_status	check_exit_args_unic(char **av, char ***env_pt, t_data *d
 	return (SUCCESS);
 }
 
-static void cleaning_process_exit(t_data *data, char **env, char **av)
+static void	cleaning_process_exit(t_data *data, char **env, char **av)
 {
 	free(data->instructions_arr);
 	free(data->prompt);
