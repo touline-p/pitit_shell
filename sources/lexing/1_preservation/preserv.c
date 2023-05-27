@@ -18,7 +18,7 @@ static void		wildcards_discard(t_token *token);
 static size_t	_code_from(char code);
 t_return_status	do_nothing(t_token *voided, \
 							t_token *also_voided, t_token **this_one_too);
-							
+
 /*----------------------------------------------------------------------------*/
 
 t_return_status	preserve_token_lst(t_token *token)
