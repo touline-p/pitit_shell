@@ -43,10 +43,9 @@ void	loop_init(t_data *data, char **line_pt, char **env)
 	{
 		flag = false;
 		init_signals(data);
-//		if (get_prompt_on(&(data->prompt), env) != SUCCESS)
-//			clean_the_prompt(data->prompt, *line_pt, env);
-data->prompt = ft_strdup("this");
-		*line_pt = readline("dman)");//data->prompt);
+		if (get_prompt_on(&(data->prompt), env) != SUCCESS)
+			clean_the_prompt(data->prompt, *line_pt, env);
+		*line_pt = readline(data->prompt);
 		errno = 0;
 		if (*line_pt == NULL)
 			clean_the_prompt(data->prompt, *line_pt, env);

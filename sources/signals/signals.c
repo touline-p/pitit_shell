@@ -20,11 +20,11 @@ static void	handle_signal_readline(int signal);
 
 void	init_signals(t_data *data)
 {
-//	if (tcgetattr(1, &data->term) == -1)
-//	{
-//		perror("tcgetattr");
-//		errno = SUCCESS;
-//	}
+	if (tcgetattr(1, &data->term) == -1)
+	{
+		perror("tcgetattr");
+		errno = SUCCESS;
+	}
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);

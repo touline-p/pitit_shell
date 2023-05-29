@@ -42,15 +42,15 @@ t_return_status	check_closing_par(t_string_token *string_token_lst)
 
 void	get_heredoc_setup(t_data *data)
 {
-//	struct termios	copy;
-//
-//	copy = data->term;
-//	copy.c_lflag &= ~(ECHOCTL);
-//	if (tcsetattr(1, TCSANOW, &copy) == -1)
-//	{
-//		perror("tcsetattr");
-//		errno = SUCCESS;
-//	}
+	struct termios	copy;
+
+	copy = data->term;
+	copy.c_lflag &= ~(ECHOCTL);
+	if (tcsetattr(1, TCSANOW, &copy) == -1)
+	{
+		perror("tcsetattr");
+		errno = SUCCESS;
+	}
 	string_token_destructor(data->instructions_arr[0]);
 	free(data->instructions_arr);
 	free(data->prompt);
