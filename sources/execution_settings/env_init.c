@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:15:32 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/17 17:55:46 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 18:19:24 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_return_status	env_init_on(char ***env_pt)
 	*env_pt = ft_str_array_dup(*env_pt);
 	if (*env_pt == NULL)
 		return (perror("env_init"), FAILED_MALLOC);
-	if (get_line_from_key("OLDPWD", *env_pt) == NULL)
-		if (add_str_to_env("OLDPWD", env_pt) != SUCCESS)
+	if (is_a_key_from_env("OLDPWD", *env_pt) == false)
+		if (add_str_to_env(ft_strdup("OLDPWD"), env_pt) != SUCCESS)
 			return (ft_free_split(*env_pt), FAILED_MALLOC);
 	_increment_shlvl(env_pt);
 	if (get_line_from_key("PWD", *env_pt) == NULL)

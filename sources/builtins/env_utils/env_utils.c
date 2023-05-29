@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:00:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/29 17:49:26 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 18:20:21 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_return_status	add_str_to_env(char *line, char ***env_pt)
 	char	**env;
 	size_t	i;
 
+	if (line == NULL)
+		return (FAILURE);
 	new_env = (char **)malloc(sizeof(char *) * (ft_str_array_len(*env_pt) + 2));
 	if (new_env == NULL)
 		return (perror("add str to env"), FAILED_MALLOC);
