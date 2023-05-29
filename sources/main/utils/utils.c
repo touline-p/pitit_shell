@@ -29,7 +29,7 @@ t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 	data->instructions_arr = NULL;
 	*str_token_pt = NULL;
 	if (check_arguments(av) != SUCCESS
-		|| welcome_to_minihell(env_pt) != SUCCESS)
+			|| welcome_to_minihell(env_pt) != SUCCESS)
 		return (FAILURE);
 	return (SUCCESS);
 }
@@ -43,9 +43,10 @@ void	loop_init(t_data *data, char **line_pt, char **env)
 	{
 		flag = false;
 		init_signals(data);
-		if (get_prompt_on(&(data->prompt), env) != SUCCESS)
-			clean_the_prompt(data->prompt, *line_pt, env);
-		*line_pt = readline(data->prompt);
+//		if (get_prompt_on(&(data->prompt), env) != SUCCESS)
+//			clean_the_prompt(data->prompt, *line_pt, env);
+data->prompt = ft_strdup("this");
+		*line_pt = readline("dman)");//data->prompt);
 		errno = 0;
 		if (*line_pt == NULL)
 			clean_the_prompt(data->prompt, *line_pt, env);

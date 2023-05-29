@@ -42,7 +42,7 @@ int	main(int ac, char **av, char **env)
 			string_token_destructor(str_tok_lst);
 			continue ;
 		}
-		reset_term_settings(&data);
+		//reset_term_settings(&data);
 		switchman(&data, str_tok_lst, &env);
 	}
 }

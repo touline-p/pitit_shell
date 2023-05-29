@@ -57,7 +57,7 @@ static void	_is_valid_identifier(char *str)
 	tmp = str;
 	while (*str)
 	{
-		if (ft_isalpha(*str) == false && *str != '_')
+		if (ft_isalnum(*str) == false && *str != '_')
 		{
 			flag = true;
 			break ;
