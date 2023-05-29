@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:58:54 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/17 16:59:48 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 17:02:56 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static t_return_status	_unset_builtin_ep(char *msg)
 
 static void	_is_valid_identifier(char *str)
 {
-	bool flag;
-	char *tmp;
+	bool	flag;
+	char	*tmp;
 
 	flag = false;
 	tmp = str;
@@ -59,7 +59,7 @@ static void	_is_valid_identifier(char *str)
 	{
 		if (ft_isalpha(*str) == false && *str != '_')
 		{
-			flag =true;
+			flag = true;
 			break ;
 		}
 		str++;
