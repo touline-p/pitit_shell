@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:50:36 by twang             #+#    #+#             */
-/*   Updated: 2023/05/21 20:12:08 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 15:01:06 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	**get_paths(char **env)
 		if (!paths[i])
 		{
 			perror("paths error");
+			ft_dprintf(2, "i = %d", i);
 			ft_free_split_content(paths + i + 1);
 			ft_free_split(paths);
 			return (NULL);

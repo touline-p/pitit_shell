@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_articulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/19 15:59:57 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:38:59 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_return_status	execution(t_data *data, t_string_token *lst_of_tok, \
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
 	if (_check_if_token_lst_is_empty(lst_of_tok) != SUCCESS)
-		return (string_token_destructor(lst_of_tok), SUCCESS);
+		return (free(data->cmds_block), \
+			string_token_destructor(lst_of_tok), SUCCESS);
 	strings_management(data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
 	if (g_ret_val == 130 && check_cmd(data->cmds_block))

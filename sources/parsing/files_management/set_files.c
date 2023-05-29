@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:08:37 by twang             #+#    #+#             */
-/*   Updated: 2023/05/29 09:40:28 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 15:41:56 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ t_return_status	set_infile(t_data *data, char **file, int block_id, \
 	{
 		g_ret_val = 1;
 		perror(*file);
-		// close(data->cmds_block[block_id].infile);
 	}
 	return (SUCCESS);
 }
