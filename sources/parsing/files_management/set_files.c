@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:08:37 by twang             #+#    #+#             */
-/*   Updated: 2023/05/29 15:46:41 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 19:33:07 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_return_status	set_infile(t_data *data, char **file, int block_id, \
 t_return_status	set_heredoc(t_data *data, char **hr_data, int block_id, \
 										char **env)
 {
-	(void)env;
 	check_opened_infiles(data, block_id);
 	if (redir_failed(&(data->cmds_block[block_id])) == true)
 		return (SUCCESS);
@@ -80,6 +79,13 @@ t_return_status	set_heredoc(t_data *data, char **hr_data, int block_id, \
 		free(data->cmds_block[block_id].heredoc_data);
 	data->cmds_block[block_id].is_heredoc = true;
 	data->cmds_block[block_id].heredoc_data = *hr_data;
+	if (*hr_data[0] == -2)
+	{
+		ft_memmove(*hr_data, *hr_data + 1, ft_strlen(*hr_data));
+		expand_hd(hr_data, env);
+	}
+	else
+		ft_memmove(*hr_data, *hr_data + 1, ft_strlen(*hr_data));
 	*hr_data = NULL;
 	return (SUCCESS);
 }

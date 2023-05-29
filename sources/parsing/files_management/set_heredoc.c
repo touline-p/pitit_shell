@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:20 by twang             #+#    #+#             */
-/*   Updated: 2023/05/29 18:39:59 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 19:39:30 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,19 @@ static void	_get_heredoc(char *limiter, int do_expand, int *fd_hd, char **env)
 	char	*line;
 	char	*here_doc;
 
+	g_ret_val = 0;
 	line = NULL;
 	here_doc = NULL;
-	here_doc = ft_strdup("");
+	here_doc = ft_strdup("n");
+	if (do_expand)
+		here_doc[0] = -1;
+	else
+		here_doc[0] = -2;
 	if (!here_doc)
 		perror("here doc _get_heredoc");
 	_read_here_doc_in_str(limiter, &here_doc);
 	free(line);
 	free(limiter);
-	if (do_expand == false)
-		expand_hd(&here_doc, env);
 	ft_free_split(env);
 	if (here_doc)
 		write(fd_hd[1], here_doc, ft_strlen(here_doc));
@@ -134,11 +137,9 @@ static t_return_status	_read_here_doc_in_str(char *limiter, \
 	{
 		nb_of_line++;
 		line = readline(GREEN"> "END);
-		if (read_hd_ep(line, nb_of_line, limiter))
-			break ;
-		if (!ft_strncmp(limiter, line, ft_strlen(limiter) + 1))
-			break ;
-		if (*documentation == NULL)
+		if (read_hd_ep(line, nb_of_line, limiter)
+			|| !ft_strncmp(limiter, line, ft_strlen(limiter) + 1)
+			|| documentation == NULL)
 			break ;
 		*documentation = strjoin_path_cmd(*documentation, line);
 		*documentation = ft_strjoin_free_first_sf(*documentation, "\n");

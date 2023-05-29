@@ -1,0 +1,13 @@
+config
+ignore_rl_reachable.txt
+incs
+libft
+Makefile
+minishell
+outfile
+outfile3
+outfile7
+README.md
+sources
+valgrind_ignore_leaks.txt
+valgrind.txt

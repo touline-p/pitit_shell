@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:08:04 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 18:46:09 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 19:12:54 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,18 @@ void	manage_ambiguous(t_cmd *cmd, char *file)
 t_return_status	expand_hd(char **here_doc, char **env)
 {
 	char	**arr;
+	char	*tmp;
 
 	if (cut_line_on(*here_doc, &arr) != SUCCESS
 		|| join_arr_on(arr, here_doc, env) != SUCCESS)
 		return (FAILURE);
+	tmp = *here_doc;
+	while (*tmp)
+	{
+		if (*tmp == - ' ')
+			*tmp = ' ';
+		tmp++;
+	}
 	return (SUCCESS);
 }
 
