@@ -106,7 +106,6 @@ t_return_status	set_outfile(t_data *data, char **file, int block_id, \
 	{
 		g_ret_val = 1;
 		perror(*file);
-		return (FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -133,7 +132,6 @@ t_return_status	set_appends(t_data *data, char **file, int block_id, \
 	{
 		g_ret_val = 1;
 		perror(*file);
-		return (FAILURE);
 	}
 	return (SUCCESS);
 }

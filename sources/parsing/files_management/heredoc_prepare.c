@@ -90,7 +90,7 @@ void	trim_limiter(char *s)
 void	keep_going(int *i, t_string_token **temp, t_data *data)
 {
 	if ((*temp)->token == PIPE)
-		i++;
+		(*i)++;
 	if ((*temp)->token == O_PRTSS)
 	{
 		data->cmds_block[*i].id_command = SUBSHELL;

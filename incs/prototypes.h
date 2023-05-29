@@ -17,6 +17,7 @@
 
 # include "structures.h"
 
+void    print_cmd_block(char *msg, t_cmd cmd);
 /*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*/
@@ -375,5 +376,6 @@ t_token			*token_lst_constructor(char *str);
 
 /*---- token_to_str_token.c ----*/
 t_string_token	*token_lst_to_str_token(t_token *tok);
+
 
 #endif
