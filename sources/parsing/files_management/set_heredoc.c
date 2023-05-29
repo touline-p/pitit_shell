@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:20 by twang             #+#    #+#             */
-/*   Updated: 2023/05/29 16:21:20 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 18:39:59 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ t_return_status	heredoc_management(t_data *data, \
 		}
 		if (tmp->token == SYN_ERR)
 		{
-			if (redirection_syntax_error(format_string_token(tmp->next)))
-			{
-				string_token_destructor(string_token_lst);
-				free(data->instructions_arr);
-			}
+			redirection_syntax_error(format_string_token(tmp->next));
 			return (FAILURE);
 		}
 		tmp = tmp->next;
