@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:57:56 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/17 16:51:35 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 14:48:38 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_return_status	cd_builtin(char **av, char ***env_pt)
 	}
 	if (chdir(av[1]) == -1)
 	{
-		perror(av[1]);
 		g_ret_val = 1;
 		return (free(pwd), perror(av[1]), FAILURE);
 	}
