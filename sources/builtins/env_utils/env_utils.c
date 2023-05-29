@@ -6,17 +6,11 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:00:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/21 19:49:53 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 17:49:26 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*---- prototypes ------------------------------------------------------------*/
-
-static bool	_is_a_key_from_env(char *key, char **env);
-
-/*----------------------------------------------------------------------------*/
 
 bool	has_a_key_from_env(char *line, char **env)
 {
@@ -25,17 +19,17 @@ bool	has_a_key_from_env(char *line, char **env)
 
 	equal_sign = ft_strchr(line, '=');
 	if (equal_sign == NULL)
-		ret_val = _is_a_key_from_env(line, env);
+		ret_val = is_a_key_from_env(line, env);
 	else
 	{
 		*equal_sign = 0;
-		ret_val = _is_a_key_from_env(line, env);
+		ret_val = is_a_key_from_env(line, env);
 		*equal_sign = '=';
 	}
 	return (ret_val);
 }
 
-static bool	_is_a_key_from_env(char *key, char **env)
+bool	is_a_key_from_env(char *key, char **env)
 {
 	if (get_line_from_key(key, env) != NULL)
 		return (true);

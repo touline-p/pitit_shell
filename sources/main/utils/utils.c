@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:13:46 by twang             #+#    #+#             */
-/*   Updated: 2023/05/21 20:44:39 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 17:54:38 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 	data->instructions_arr = NULL;
 	*str_token_pt = NULL;
 	if (check_arguments(av) != SUCCESS
-			|| welcome_to_minihell(env_pt) != SUCCESS)
+		|| welcome_to_minihell(env_pt) != SUCCESS)
 		return (FAILURE);
 	return (SUCCESS);
 }

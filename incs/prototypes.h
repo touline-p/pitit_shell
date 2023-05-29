@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:25:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/29 16:15:43 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 17:55:31 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 # include "structures.h"
 
-void    print_cmd_block(char *msg, t_cmd cmd);
 /*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*/
@@ -29,6 +28,7 @@ void    print_cmd_block(char *msg, t_cmd cmd);
 bool			has_a_key_from_env(char *line, char **env);
 void			replace_content_in_env(char *line, char **env);
 t_return_status	add_str_to_env(char *line, char ***env_pt);
+bool			is_a_key_from_env(char *key, char **env);
 t_return_status	del_str_from_env(char *line, char ***env_pt);
 
 /*---- get_in_env.c ----*/
@@ -376,6 +376,5 @@ t_token			*token_lst_constructor(char *str);
 
 /*---- token_to_str_token.c ----*/
 t_string_token	*token_lst_to_str_token(t_token *tok);
-
 
 #endif
