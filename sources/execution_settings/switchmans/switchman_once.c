@@ -17,16 +17,15 @@
 static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt);
 static void				_close_switchman_once(t_cmd cmd);
 static t_return_status	_switchman_once_ep(t_data *data);
+static void				_waiting(int pid);
 
 /*----------------------------------------------------------------------------*/
 
 t_return_status	switchman_once(t_data *data, char ***env_pt)
 {
 	int		pid;
-	int		status;
 	t_cmd	cmd;
 
-	status = 0;
 	cmd = *(data->cmds_block);
 	if (cmd.id_command == EXIT)
 		return (exit_the_program(data, env_pt, cmd));
@@ -38,8 +37,17 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 		return (_switchman_once_ep(data));
 	if (pid == 0)
 		_execute_son(data, cmd, env_pt);
+	_waiting(pid);
 	ft_free_split(cmd.commands);
 	_close_switchman_once(cmd);
+	return (SUCCESS);
+}
+
+static void	_waiting(int pid)
+{
+	int	status;
+
+	status = 0;
 	if (waitpid(pid, &status, WUNTRACED) == -1)
 		g_ret_val = 1;
 	else if (WIFEXITED(status))
@@ -50,7 +58,6 @@ t_return_status	switchman_once(t_data *data, char ***env_pt)
 		if (g_ret_val != 131)
 			g_ret_val += 128;
 	}
-	return (SUCCESS);
 }
 
 static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
