@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:20 by twang             #+#    #+#             */
-/*   Updated: 2023/05/21 20:48:43 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 15:58:48 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static t_return_status	_get_here_doc_in_hr_data(t_data *data, \
 		return (FAILED_PIPE);
 	pid = fork();
 	if (pid == -1)
-		perror("fork");
+		return (perror("fork"), FAILURE);
 	if (pid == 0)
 	{
 		get_heredoc_setup(data);
