@@ -14,16 +14,18 @@
 
 /*---- prototypes ------------------------------------------------------------*/
 
-static bool		_check_emptyness(t_string_token *arg);
-static size_t	_count_ln(t_string_token *token_lst);
+static bool				_check_emptyness(t_string_token *arg);
+static size_t			_count_ln(t_string_token *token_lst);
+static void				_cpy_on_tmp_reset_pin(char *ret_pt, \
+						t_string_token **arg, t_string_token *token_lst);
+static t_return_status	_do_wildcard_and_env_expand(char ***dst, char *tmp, \
+							char **env);
 
 /*----------------------------------------------------------------------------*/
 
 t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env)
 {
-	char			**arr;
 	char			*tmp;
-	char			*ret;
 	t_string_token	*token_lst;
 	const char		*arrar[] = {"", NULL};
 
@@ -38,7 +40,13 @@ t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env)
 	tmp = malloc(_count_ln(token_lst) + 2);
 	if (tmp == NULL)
 		return (perror("join token lst on"), FAILED_MALLOC);
-	ret = tmp;
+	_cpy_on_tmp_reset_pin(tmp, arg, token_lst);
+	return (_do_wildcard_and_env_expand(&(cmd->commands), tmp, env));
+}
+
+static void	_cpy_on_tmp_reset_pin(char *tmp, \
+					t_string_token **arg, t_string_token *token_lst)
+{
 	token_lst = token_lst->next;
 	while (token_lst->token != EOL && token_lst->token != PIPE)
 	{
@@ -48,16 +56,23 @@ t_return_status	join_token_lst_on(t_cmd *cmd, t_string_token **arg, char **env)
 	}
 	*tmp = 0;
 	*arg = token_lst;
-	if (cut_line_on(ret, &arr) != SUCCESS
-		|| join_arr_on(arr, &ret, env))
+}
+
+static t_return_status	_do_wildcard_and_env_expand(char ***dst, char *tmp, \
+							char **env)
+{
+	char	**arr;
+
+	if (cut_line_on(tmp, &arr) != SUCCESS
+		|| join_arr_on(arr, &tmp, env))
 		return (FAILED_MALLOC);
-	arr = ft_split(ret, - ' ');
+	arr = ft_split(tmp, - ' ');
 	if (arr == NULL)
 		return (perror("join_token_lst_on"), FAILED_MALLOC);
-	free(ret);
+	free(tmp);
 	if (expand_wildcards(&arr) != SUCCESS || *arr == NULL)
 		return (FAILED_MALLOC);
-	cmd->commands = arr;
+	*dst = arr;
 	return (SUCCESS);
 }
 
