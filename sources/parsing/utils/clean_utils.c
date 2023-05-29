@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 20:00:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 17:59:31 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 16:14:22 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,13 @@ void	clean_token(t_string_token *lst_of_tok)
 		else
 			temp = temp->next;
 	}
+}
+
+t_return_status	fork_heredoc_error_process(int *fd_hd, char *limiter)
+{
+	perror("fork heredoc");
+	free(limiter);
+	close(fd_hd[0]);
+	close(fd_hd[1]);
+	return (FAILURE);
 }

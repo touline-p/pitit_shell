@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:07:42 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 19:59:55 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 16:27:00 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ typedef struct s_cmd			t_cmd;
 
 /*---- typedef function pointers ---------------------------------------------*/
 
-typedef t_return_status	(*t_preserv_act)(t_token *a, t_token *b, t_token **c);
-typedef t_return_status	(*t_export_ft)(char *arg, char ***env_pt);
-typedef t_return_status	(*t_files_manage_ft)(t_data *data, \
+typedef t_return_status			(*t_preserv_act)(t_token *a, t_token *b, \
+																t_token **c);
+typedef t_return_status			(*t_export_ft)(char *arg, char ***env_pt);
+typedef t_return_status			(*t_files_manage_ft)(t_data *data, \
 										char **line, int i, char **env);
-typedef t_return_status	(*t_builtin_ft)(char **av, char ***env_pt);
-typedef bool			(*t_increment_ft)(char line_pt, void *arg);
-typedef bool			(*t_act_update)(t_string_token ** token);
+typedef t_return_status			(*t_builtin_ft)(char **av, char ***env_pt);
+typedef bool					(*t_increment_ft)(char line_pt, void *arg);
+typedef bool					(*t_act_update)(t_string_token ** token);
 
 /*---- structures ------------------------------------------------------------*/
 

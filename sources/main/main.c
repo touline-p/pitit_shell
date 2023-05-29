@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:14:50 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 16:22:07 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 16:25:58 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		if (set_data_instruction_arr(&data, str_tok_lst))
 			return (go_fuck_yourself_malloc(str_tok_lst, env));
-		if (heredoc_management(&data, str_tok_lst, env)
+		if (heredoc_management(&data, str_tok_lst, env) != SUCCESS
 			&& reset_term_settings(&data) == SUCCESS)
+		{
+			free(data.instructions_arr);
+			string_token_destructor(str_tok_lst);
 			continue ;
+		}
 		reset_term_settings(&data);
 		switchman(&data, str_tok_lst, &env);
 	}

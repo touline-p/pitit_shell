@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:25:03 by twang             #+#    #+#             */
-/*   Updated: 2023/05/19 15:58:02 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:15:43 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,6 +306,7 @@ bool			redir_failed(t_cmd *cmd);
 /*---- clean_utils.c ----*/
 void			clean_files_token(t_string_token *lst_of_tok);
 void			clean_token(t_string_token *lst_of_tok);
+t_return_status	fork_heredoc_error_process(int *fd_hd, char *limiter);
 
 /*----------------------------------------------------------------------------*/
 /*---- Signals ---------------------------------------------------------------*/

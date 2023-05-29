@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 22:35:42 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/17 17:13:45 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/29 16:33:24 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static t_return_status	_fill(t_string_token **instructions_arr, \
 					t_string_token *str_tok_lst);
 static t_return_status	_launch_instructions_arr(t_data *data, \
 						t_string_token **instructions_arr, char ***env);
-static void				_free_minishell_data(t_data *data);
 
 /*----------------------------------------------------------------------------*/
 
@@ -116,10 +115,4 @@ static t_return_status	_launch_instructions_arr(t_data *data, \
 	}
 	free(instructions_arr);
 	return (SUCCESS);
-}
-
-static void	_free_minishell_data(t_data *data)
-{
-	free(data->instructions_arr);
-	free(data->cmds_block);
 }
