@@ -56,3 +56,16 @@ bool	read_hd_ep(char *line, int nb_of_line, char *limiter)
 	}
 	return (false);
 }
+
+t_return_status	set_files_expand(char **file, char **env, \
+									t_data *data, int block_id)
+{
+	char	**arr;
+
+	if (cut_line_on(*file, &arr) != SUCCESS
+		|| join_arr_on(arr, file, env) != SUCCESS)
+		return (FAILED_MALLOC);
+	if (wildcard_files(data, file, block_id) != SUCCESS)
+		return (FAILURE);
+	return (SUCCESS);
+}

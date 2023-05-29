@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+t_return_status	set_files_expand(char **file, char **env, \
+									t_data *data, int block_id);
+
 t_return_status	files_management(t_data *data, t_string_token *lst_of_tok, \
 									char **env)
 {
@@ -44,17 +47,13 @@ t_return_status	files_management(t_data *data, t_string_token *lst_of_tok, \
 t_return_status	set_infile(t_data *data, char **file, int block_id, \
 										char **env)
 {
-	char	**arr;
 	bool	signal;
 
 	check_opened_infiles(data, block_id);
 	signal = file_is_empty(*file);
 	if (redir_failed(&(data->cmds_block[block_id])))
 		return (SUCCESS);
-	if (cut_line_on(*file, &arr) != SUCCESS
-		|| join_arr_on(arr, file, env) != SUCCESS)
-		return (FAILED_MALLOC);
-	if (wildcard_files(data, file, block_id) != SUCCESS)
+	if (set_files_expand(file, env, data, block_id) != SUCCESS)
 		return (FAILURE);
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
@@ -88,17 +87,13 @@ t_return_status	set_heredoc(t_data *data, char **hr_data, int block_id, \
 t_return_status	set_outfile(t_data *data, char **file, int block_id, \
 										char **env)
 {
-	char	**arr;
 	bool	signal;
 
 	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
 	if (redir_failed(&(data->cmds_block[block_id])))
 		return (SUCCESS);
-	if (cut_line_on(*file, &arr) != SUCCESS
-		|| join_arr_on(arr, file, env) != SUCCESS)
-		return (FAILED_MALLOC);
-	if (wildcard_files(data, file, block_id) != SUCCESS)
+	if (set_files_expand(file, env, data, block_id) != SUCCESS)
 		return (FAILURE);
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
@@ -119,17 +114,13 @@ t_return_status	set_outfile(t_data *data, char **file, int block_id, \
 t_return_status	set_appends(t_data *data, char **file, int block_id, \
 										char **env)
 {
-	char	**arr;
 	bool	signal;
 
 	signal = file_is_empty(*file);
 	check_opened_outfiles(data, block_id);
 	if (redir_failed(&(data->cmds_block[block_id])))
 		return (SUCCESS);
-	if (cut_line_on(*file, &arr) != SUCCESS
-		|| join_arr_on(arr, file, env) != SUCCESS)
-		return (FAILED_MALLOC);
-	if (wildcard_files(data, file, block_id) != SUCCESS)
+	if (set_files_expand(file, env, data, block_id) != SUCCESS)
 		return (FAILURE);
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
