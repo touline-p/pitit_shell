@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:20 by twang             #+#    #+#             */
-/*   Updated: 2023/05/29 19:39:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 15:30:26 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_return_status	heredoc_management(t_data *data, \
 
 	tmp = string_token_lst;
 	update_tokens(string_token_lst);
-	if (check_closing_par(string_token_lst) == FAILURE)
+	if (check_closing_par(string_token_lst) == SUCCESS)
 		check_par_err(string_token_lst);
 	while (tmp != NULL)
 	{

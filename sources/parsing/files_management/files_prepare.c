@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:22:53 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/29 18:40:33 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 15:40:48 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_return_status	redirection_syntax_error(char *str)
 		perror("formating");
 		return (FAILURE);
 	}
-	tmp = ft_strjoin("syntax error near unexpected token : ", str);
+	tmp = ft_strjoin("syntax error near unexpected token : '", str);
 	free(str);
 	if (!tmp)
 	{

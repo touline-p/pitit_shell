@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_prepare.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wangthea <wangthea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:35 by twang             #+#    #+#             */
-/*   Updated: 2023/05/19 15:37:54 by wangthea         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:38:14 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 t_return_status	check_closing_par(t_string_token *string_token_lst)
 {
-	int	open_par;
+	int				open_par;
+	t_string_token	*tmp;
 
+	tmp = string_token_lst;
 	open_par = 0;
 	while (string_token_lst->next != NULL)
 	{
@@ -34,7 +36,8 @@ t_return_status	check_closing_par(t_string_token *string_token_lst)
 	}
 	if (open_par > 0)
 	{
-		string_token_lst->token = SYN_ERR;
+		go_to_next_(O_PRTSS, tmp, &tmp);
+		tmp->token = SYN_ERR;
 		return (FAILURE);
 	}
 	return (SUCCESS);
