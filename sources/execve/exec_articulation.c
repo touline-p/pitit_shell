@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:54:36 by wangthea          #+#    #+#             */
-/*   Updated: 2023/05/29 15:38:59 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 10:37:14 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ static t_return_status	_alloc_cmd_block(t_data *data, \
 		if (temp->token == PIPE)
 			data->nb_of_pipe++;
 		temp = temp->next;
+	}
+	if (data->nb_of_pipe > 3332)
+	{
+		ft_dprintf(2, "minishell: syntax error near unexpected token `|'\n");
+		g_ret_val = 2;
+		return (FAILURE);
 	}
 	data->cmds_block = ft_calloc((data->nb_of_pipe + 2), sizeof(t_cmd));
 	if (!data->cmds_block)

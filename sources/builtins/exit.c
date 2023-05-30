@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:15:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 16:51:17 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 10:49:11 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static t_return_status	check_exit_args(char **av, char ***env_pt);
 
 t_return_status	exit_builtin(char **av, char ***env_pt)
 {
-	ft_dprintf(2, RED"exit\n"END);
 	if (av[1])
 	{
 		check_exit_args(av, env_pt);
