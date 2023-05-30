@@ -42,6 +42,8 @@ void	copy_all_box(char *box, char *pwd, size_t box_width)
 
 t_return_status	clean_the_prompt(char *prompt, char *line, char **env)
 {
+	if (line && ft_str_is_ascii(line) != false)
+		ft_dprintf(2, "Care our minishell doesnt like non ascii char\n");
 	free(line);
 	free(prompt);
 	ft_free_split(env);
