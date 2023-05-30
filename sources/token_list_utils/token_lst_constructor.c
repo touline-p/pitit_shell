@@ -23,7 +23,6 @@ t_token	*token_lst_constructor(char *str)
 	t_token	*token;
 	t_token	*pin;
 
-	
 	token = token_constructor(START, STRT_CHR);
 	if (token == NULL)
 		return (NULL);

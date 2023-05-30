@@ -58,6 +58,7 @@ SOURCES =																	\
 			sources/main/prompt/prompt.c									\
 			sources/main/utils/check_arguments.c							\
 			sources/main/utils/display.c									\
+			sources/main/utils/return_to_root.c								\
 			sources/main/utils/utils.c										\
 			sources/main/main.c												\
 			sources/parsing/cmds_management/path_utils.c					\

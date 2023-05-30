@@ -34,18 +34,6 @@ t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 	return (SUCCESS);
 }
 
-void	return_to_root(t_data *data, char *line, char **env)
-{
-	if (chdir("/") == -1)
-	{
-		perror("chdir");
-		clean_the_prompt(data->prompt, line, env);
-	}
-	ft_dprintf(2, "You were lost\nPitit shell bring you back to root.\n");
-	ft_dprintf(2, "Stop doing shit with directories pls.\n");
-	ft_dprintf(2, "PWD won't be updated until you cd again.\n");
-}
-
 void	loop_init(t_data *data, char **line_pt, char **env)
 {
 	int		flag;
@@ -64,12 +52,12 @@ void	loop_init(t_data *data, char **line_pt, char **env)
 			clean_the_prompt(data->prompt, *line_pt, env);
 		*line_pt = readline(data->prompt);
 		errno = 0;
-		if (*line_pt == NULL)
+		if (*line_pt == NULL
+			|| ft_str_is_ascii(*line_pt) != true
+			|| ft_strchr(*line_pt, '\n'))
 			clean_the_prompt(data->prompt, *line_pt, env);
 		if (ft_strcmp("", *line_pt) == 0)
 			flag = true;
-		if (ft_str_is_ascii(*line_pt) != true)
-			continue ;
 		add_history(*line_pt);
 	}
 	signal(SIGINT, &handle_signal_parent);
