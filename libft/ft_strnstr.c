@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:21:43 by twang             #+#    #+#             */
-/*   Updated: 2023/05/30 15:10:07 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 15:45:25 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ char	*ft_strstr_w(char *name, char *line)
 		j = 0;
 		while (name[i + j] == line[j])
 		{
-			if ((line[j] == '\0' && name[i + j] == '\0') || line[j + 1] == - '*')
+			if ((line[j] == '\0' && name[i + j] == '\0') \
+				|| line[j + 1] == - '*')
 			{
 				return ((char *) &name[i]);
 			}

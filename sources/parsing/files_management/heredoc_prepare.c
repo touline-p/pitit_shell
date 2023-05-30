@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:35 by twang             #+#    #+#             */
-/*   Updated: 2023/05/30 15:38:14 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 15:44:34 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ t_return_status	check_closing_par(t_string_token *string_token_lst)
 			open_par++;
 		else if (string_token_lst->token == C_PRTSS)
 		{
-			open_par--;
-			if (open_par < 0)
+			if (--open_par < 0)
 			{
 				string_token_lst->token = SYN_ERR;
 				return (FAILURE);
@@ -34,12 +33,9 @@ t_return_status	check_closing_par(t_string_token *string_token_lst)
 		}
 		string_token_lst = string_token_lst->next;
 	}
+	go_to_next_(O_PRTSS, tmp, &tmp);
 	if (open_par > 0)
-	{
-		go_to_next_(O_PRTSS, tmp, &tmp);
-		tmp->token = SYN_ERR;
-		return (FAILURE);
-	}
+		return (tmp->token = SYN_ERR, FAILURE);
 	return (SUCCESS);
 }
 
