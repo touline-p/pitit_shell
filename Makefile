@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/05/21 18:14:48 by twang            ###   ########.fr        #
+#    Updated: 2023/05/30 19:18:52 by bpoumeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,7 @@ leak_all:    all
 	            --show-leak-kinds=all --track-fds=yes \
 	            --show-mismatched-frees=yes --read-var-info=yes \
 	            --log-file=valgrind.txt ./${NAME}
+
 #--print header----------------------------------------------------------------#
 
 header:

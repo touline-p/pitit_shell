@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 17:19:52 by twang             #+#    #+#              #
-#    Updated: 2023/03/22 14:13:33 by twang            ###   ########.fr        #
+#    Updated: 2023/05/30 19:20:25 by bpoumeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ define    PRINT_FCLEAN
 endef
 
 define    PRINT_COMPILING
-    printf "%-95b%b" "[ ${PURPLE}compiling${END} ]\t${LIGHTBLUE}$<${END}" "${GREEN}[✓]${END}\n"
+    printf "%-105b%b" "[ ${PURPLE}compiling${END} ]\t${LIGHTBLUE}$<${END}" "${GREEN}[✓]${END}\n"
 endef
 
 define    PRINT_CREATING
