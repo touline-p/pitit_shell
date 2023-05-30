@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:57:41 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/30 16:19:02 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 16:24:47 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	check_par_err(t_string_token *str_tok_lst)
 		if (_par_process(str_tok_lst) == true)
 			return ;
 	}
-	printf("str tok lst %p\n", str_tok_lst->next);
 	go_to_next_logical_door(str_tok_lst, &str_tok_lst);
 	if (str_tok_lst->token != EOL)
 		check_par_err(str_tok_lst);

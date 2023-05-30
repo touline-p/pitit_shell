@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:13:46 by twang             #+#    #+#             */
-/*   Updated: 2023/05/29 17:54:38 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 17:06:34 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,27 @@ t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 	return (SUCCESS);
 }
 
+void	return_to_root(t_data *data, char *line, char **env)
+{
+	if (chdir("/") == -1)
+	{
+		perror("chdir");
+		clean_the_prompt(data->prompt, line, env);
+	}
+	ft_dprintf(2, "You were lost\nPitit shell bring you back to root.\n");
+	ft_dprintf(2, "Stop doing shit with directories pls.\n");
+	ft_dprintf(2, "PWD won't be updated until you cd again.\n");
+}
+
 void	loop_init(t_data *data, char **line_pt, char **env)
 {
-	int	flag;
+	int		flag;
+	char	*tmp;
 
+	tmp = getcwd(NULL, 0);
+	if (tmp == NULL)
+		return_to_root(data, *line_pt, env);
+	free(tmp);
 	flag = true;
 	while (flag)
 	{
@@ -51,6 +68,8 @@ void	loop_init(t_data *data, char **line_pt, char **env)
 			clean_the_prompt(data->prompt, *line_pt, env);
 		if (ft_strcmp("", *line_pt) == 0)
 			flag = true;
+		if (ft_str_is_ascii(*line_pt) != true)
+			continue ;
 		add_history(*line_pt);
 	}
 	signal(SIGINT, &handle_signal_parent);

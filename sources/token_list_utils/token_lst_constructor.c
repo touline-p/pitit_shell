@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:11:04 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/17 18:07:45 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 17:05:36 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token	*token_lst_constructor(char *str)
 	t_token	*token;
 	t_token	*pin;
 
+	
 	token = token_constructor(START, STRT_CHR);
 	if (token == NULL)
 		return (NULL);
