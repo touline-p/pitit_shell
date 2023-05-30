@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:14:50 by twang             #+#    #+#             */
-/*   Updated: 2023/05/30 15:25:56 by twang            ###   ########.fr       */
+/*   Updated: 2023/05/30 16:02:46 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(int ac, char **av, char **env)
 			string_token_destructor(str_tok_lst);
 			continue ;
 		}
-		puts("main post hd");
 		reset_term_settings(&data);
 		switchman(&data, str_tok_lst, &env);
 	}
