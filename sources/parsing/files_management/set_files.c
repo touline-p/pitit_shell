@@ -78,7 +78,6 @@ t_return_status	set_heredoc(t_data *data, char **hr_data, int block_id, \
 	if (data->cmds_block[block_id].is_heredoc)
 		free(data->cmds_block[block_id].heredoc_data);
 	data->cmds_block[block_id].is_heredoc = true;
-	data->cmds_block[block_id].heredoc_data = *hr_data;
 	if (*hr_data[0] == -2)
 	{
 		ft_memmove(*hr_data, *hr_data + 1, ft_strlen(*hr_data));
@@ -86,6 +85,7 @@ t_return_status	set_heredoc(t_data *data, char **hr_data, int block_id, \
 	}
 	else
 		ft_memmove(*hr_data, *hr_data + 1, ft_strlen(*hr_data));
+	data->cmds_block[block_id].heredoc_data = *hr_data;
 	*hr_data = NULL;
 	return (SUCCESS);
 }

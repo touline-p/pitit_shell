@@ -143,9 +143,9 @@ static t_return_status	_read_here_doc_in_str(char *limiter, \
 			break ;
 		*documentation = strjoin_path_cmd(*documentation, line);
 		*documentation = ft_strjoin_free_first_sf(*documentation, "\n");
-		if (*documentation == NULL)
-			free(line);
+		free(line);
 	}
+	free(line);
 	if (errno)
 		return (FAILURE);
 	return (SUCCESS);
