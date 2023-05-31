@@ -1,62 +1,62 @@
-==728856== Memcheck, a memory error detector
-==728856== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==728856== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==728856== Command: ./minishell
-==728856== Parent PID: 728827
-==728856== 
-==729054== 
-==729054== FILE DESCRIPTORS: 4 open at exit.
-==729054== Open file descriptor 3: /nfs/homes/twang/Documents/cursus_42/circle_4/minishell/valgrind.txt
-==729054==    <inherited from parent>
-==729054== 
-==729054== Open file descriptor 2: /dev/pts/1
-==729054==    <inherited from parent>
-==729054== 
-==729054== Open file descriptor 1: /dev/pts/1
-==729054==    <inherited from parent>
-==729054== 
-==729054== Open file descriptor 0: /dev/pts/1
-==729054==    <inherited from parent>
-==729054== 
-==729054== 
-==729054== HEAP SUMMARY:
-==729054==     in use at exit: 205,711 bytes in 228 blocks
-==729054==   total heap usage: 692 allocs, 464 frees, 573,107 bytes allocated
-==729054== 
-==729054== LEAK SUMMARY:
-==729054==    definitely lost: 0 bytes in 0 blocks
-==729054==    indirectly lost: 0 bytes in 0 blocks
-==729054==      possibly lost: 0 bytes in 0 blocks
-==729054==    still reachable: 0 bytes in 0 blocks
-==729054==         suppressed: 205,711 bytes in 228 blocks
-==729054== 
-==729054== For lists of detected and suppressed errors, rerun with: -s
-==729054== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==728856== 
-==728856== FILE DESCRIPTORS: 4 open at exit.
-==728856== Open file descriptor 3: /nfs/homes/twang/Documents/cursus_42/circle_4/minishell/valgrind.txt
-==728856==    <inherited from parent>
-==728856== 
-==728856== Open file descriptor 2: /dev/pts/1
-==728856==    <inherited from parent>
-==728856== 
-==728856== Open file descriptor 1: /dev/pts/1
-==728856==    <inherited from parent>
-==728856== 
-==728856== Open file descriptor 0: /dev/pts/1
-==728856==    <inherited from parent>
-==728856== 
-==728856== 
-==728856== HEAP SUMMARY:
-==728856==     in use at exit: 205,532 bytes in 216 blocks
-==728856==   total heap usage: 701 allocs, 485 frees, 575,845 bytes allocated
-==728856== 
-==728856== LEAK SUMMARY:
-==728856==    definitely lost: 0 bytes in 0 blocks
-==728856==    indirectly lost: 0 bytes in 0 blocks
-==728856==      possibly lost: 0 bytes in 0 blocks
-==728856==    still reachable: 0 bytes in 0 blocks
-==728856==         suppressed: 205,532 bytes in 216 blocks
-==728856== 
-==728856== For lists of detected and suppressed errors, rerun with: -s
-==728856== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1834742== Memcheck, a memory error detector
+==1834742== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1834742== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1834742== Command: ./minishell
+==1834742== Parent PID: 1834718
+==1834742== 
+==1834748== 
+==1834748== FILE DESCRIPTORS: 4 open at exit.
+==1834748== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
+==1834748==    <inherited from parent>
+==1834748== 
+==1834748== Open file descriptor 2: /dev/pts/2
+==1834748==    <inherited from parent>
+==1834748== 
+==1834748== Open file descriptor 1: /dev/pts/2
+==1834748==    <inherited from parent>
+==1834748== 
+==1834748== Open file descriptor 0: /dev/pts/2
+==1834748==    <inherited from parent>
+==1834748== 
+==1834748== 
+==1834748== HEAP SUMMARY:
+==1834748==     in use at exit: 205,452 bytes in 227 blocks
+==1834748==   total heap usage: 547 allocs, 320 frees, 240,810 bytes allocated
+==1834748== 
+==1834748== LEAK SUMMARY:
+==1834748==    definitely lost: 0 bytes in 0 blocks
+==1834748==    indirectly lost: 0 bytes in 0 blocks
+==1834748==      possibly lost: 0 bytes in 0 blocks
+==1834748==    still reachable: 0 bytes in 0 blocks
+==1834748==         suppressed: 205,452 bytes in 227 blocks
+==1834748== 
+==1834748== For lists of detected and suppressed errors, rerun with: -s
+==1834748== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==1834742== 
+==1834742== FILE DESCRIPTORS: 4 open at exit.
+==1834742== Open file descriptor 3: /nfs/homes/bpoumeau/Documents/pitit_shell/valgrind.txt
+==1834742==    <inherited from parent>
+==1834742== 
+==1834742== Open file descriptor 2: /dev/pts/2
+==1834742==    <inherited from parent>
+==1834742== 
+==1834742== Open file descriptor 1: /dev/pts/2
+==1834742==    <inherited from parent>
+==1834742== 
+==1834742== Open file descriptor 0: /dev/pts/2
+==1834742==    <inherited from parent>
+==1834742== 
+==1834742== 
+==1834742== HEAP SUMMARY:
+==1834742==     in use at exit: 205,343 bytes in 218 blocks
+==1834742==   total heap usage: 557 allocs, 339 frees, 247,078 bytes allocated
+==1834742== 
+==1834742== LEAK SUMMARY:
+==1834742==    definitely lost: 0 bytes in 0 blocks
+==1834742==    indirectly lost: 0 bytes in 0 blocks
+==1834742==      possibly lost: 0 bytes in 0 blocks
+==1834742==    still reachable: 0 bytes in 0 blocks
+==1834742==         suppressed: 205,343 bytes in 218 blocks
+==1834742== 
+==1834742== For lists of detected and suppressed errors, rerun with: -s
+==1834742== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
