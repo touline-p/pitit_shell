@@ -54,9 +54,9 @@ char	*add_path_cmd(t_cmd *cmd, char **env)
 	char	**paths;
 	char	*str;
 
-	if (cmd->id_command == EMPTY || cmd->commands == NULL)
+	if (cmd->id_command == EMPTY || cmd->commands[0] == NULL)
 	{
-		if (cmd->commands)
+		if (cmd->commands[0])
 		{
 			str = ft_strjoin(cmd->commands[0], " : command not found\n");
 			g_ret_val = 127;

@@ -70,7 +70,7 @@ static t_return_status	_do_wildcard_and_env_expand(char ***dst, char *tmp, \
 	if (arr == NULL)
 		return (perror("join_token_lst_on"), FAILED_MALLOC);
 	free(tmp);
-	if (expand_wildcards(&arr) != SUCCESS || *arr == NULL)
+	if (expand_wildcards(&arr) != SUCCESS && *arr == NULL)
 		return (FAILED_MALLOC);
 	*dst = arr;
 	return (SUCCESS);

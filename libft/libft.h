@@ -76,6 +76,7 @@ t_return_status	ft_strdup_on(const char *src, char **str_pt);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strjoin_free_first_sf(char *s1, char *s2);
 char			*ft_strjoin_free_sec_sf(char *s1, char *s2);
+char			*ft_strjoin_sf(char *s1, char *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 t_return_status	ft_substr_on(char const *s, unsigned int start, \

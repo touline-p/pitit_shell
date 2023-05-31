@@ -50,3 +50,12 @@ char	*ft_strjoin_free_first_sf(char *s1, char *s2)
 	free(s1);
 	return (dst);
 }
+
+char	*ft_strjoin_sf(char *s1, char *s2)
+{
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
+	return (ft_strjoin(s1, s2));
+}

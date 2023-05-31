@@ -73,8 +73,3 @@ bool	is_path(char *line)
 {
 	return (ft_strchr(line, '/') != NULL);
 }
-
-bool	is_cmd(char *line)
-{
-	return (ft_strchr(line, '/') == NULL);
-}
