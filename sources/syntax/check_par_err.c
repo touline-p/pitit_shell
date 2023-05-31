@@ -28,7 +28,7 @@ void	check_par_err(t_string_token *str_tok_lst)
 		if (_par_process(str_tok_lst) == true)
 			return ;
 	}
-	go_to_next_logical_door(str_tok_lst, &str_tok_lst);
+	go_to_next_logical_door(str_tok_lst->next, &str_tok_lst);
 	if (str_tok_lst->token != EOL)
 		check_par_err(str_tok_lst);
 }
