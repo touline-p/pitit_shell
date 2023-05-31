@@ -109,5 +109,8 @@ static char	*_get_cmd_from_path(t_cmd *cmd, char **paths)
 void	free_all_others(t_cmd *cmds, int block_id, int nb_of_pipes)
 {
 	while (block_id++ < nb_of_pipes + 1)
+	{
 		ft_free_split(cmds[block_id].commands);
+		free(cmds[block_id].heredoc_data);
+	}
 }
