@@ -88,6 +88,7 @@ FILES	=	ft_atoi.c 				\
 			_get_next_line.c		\
 			lstc.c					\
 			lstc_2.c				\
+			ft_sort_arr.c
 
 HFILES	=	libft.h
 

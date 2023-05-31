@@ -32,7 +32,7 @@ t_return_status	heredoc_management(t_data *data, \
 
 	tmp = string_token_lst;
 	update_tokens(string_token_lst);
-	if (check_closing_par(string_token_lst) == SUCCESS) /// rajouter if parenthese in
+	if (check_closing_par(string_token_lst) == SUCCESS)
 		check_par_err(string_token_lst);
 	while (tmp != NULL)
 	{

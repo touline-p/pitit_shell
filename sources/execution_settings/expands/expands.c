@@ -72,6 +72,7 @@ static t_return_status	_do_wildcard_and_env_expand(char ***dst, char *tmp, \
 	free(tmp);
 	if (expand_wildcards(&arr) != SUCCESS || *arr == NULL)
 		return (FAILED_MALLOC);
+	ft_sort_arr(arr);
 	*dst = arr;
 	return (SUCCESS);
 }
@@ -85,7 +86,7 @@ static bool	_check_emptyness(t_string_token *arg)
 		tmp = arg->content;
 		while (*tmp)
 		{
-			if (*tmp > 0)
+			if (*tmp > 0 || *tmp == - '*')
 				return (false);
 			tmp++;
 		}

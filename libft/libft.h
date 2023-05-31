@@ -133,6 +133,7 @@ char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int				ft_strncmp(char *s1, char *s2, unsigned int n);
 int				heredoc_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strcmp(char *s1, char *s2);
+int				ft_strcmp_ign_maj(char *s1, char *s2);
 int				ft_ustrcmp(t_uchar *s1, t_uchar *s2);
 char			*ft_strrchr(const char *s, int c);
 int				ft_tolower(int c);
@@ -221,6 +222,7 @@ char			*ft_strnstr(const char *haystack, \
 							const char *needle, size_t len);
 char			*ft_strndup(char *s1, int size);
 char			*get_strchr(char *s, int c);
+void			ft_sort_arr(char **arr);
 char			*get_calloc(size_t count, size_t size);
 char			*get_strjoin(char *s1, char *s2);
 char			*get_next_line(int fd);
