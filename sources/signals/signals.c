@@ -47,6 +47,7 @@ static void	handle_signal_readline(int sign)
 	}
 	else
 		ft_dprintf(2, "%s", prompt);
+	free(prompt);
 	rl_replace_line("", 0);
 	rl_redisplay();
 }

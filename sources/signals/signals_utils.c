@@ -25,7 +25,7 @@ char	*update_prompt(char *prompt)
 
 	_change_color(prompt);
 	end = ft_strjoin_free_first_sf(ft_itoa(g_ret_val), " - Y a quoi : ");
-	prompt[ft_strchr(prompt + 350, ':') - prompt + 2] = 0;
+	*(ft_strnstr(prompt, " : ", ft_strlen(prompt)) + 3) = 0;
 	end = ft_strjoin_free_sec_sf(prompt, end);
 	return (end);
 }
