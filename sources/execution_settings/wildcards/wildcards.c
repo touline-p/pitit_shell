@@ -64,6 +64,7 @@ static t_return_status	_fetch_on(char *line, char ***dst_arr)
 		return (perror("_fetch_on"), FAILURE);
 	if (fill_dst_arr(line, *dst_arr) != SUCCESS)
 		return (FAILURE);
+	ft_sort_arr(*dst_arr);
 	return (SUCCESS);
 }
 

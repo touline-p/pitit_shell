@@ -72,7 +72,6 @@ static t_return_status	_do_wildcard_and_env_expand(char ***dst, char *tmp, \
 	free(tmp);
 	if (expand_wildcards(&arr) != SUCCESS || *arr == NULL)
 		return (FAILED_MALLOC);
-	ft_sort_arr(arr);
 	*dst = arr;
 	return (SUCCESS);
 }
