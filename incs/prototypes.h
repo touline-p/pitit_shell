@@ -234,7 +234,7 @@ t_return_status	clean_the_prompt(char *prompt, char *line, char **env);
 t_return_status	welcome_to_minihell(char ***env_pt);
 
 /*---- return_to_root.c ====*/
-void	return_to_root(t_data *data, char *line, char **env);
+void			return_to_root(t_data *data, char *line, char **env);
 
 /*---- utils.c ----*/
 t_return_status	reset_term_settings(t_data *data);

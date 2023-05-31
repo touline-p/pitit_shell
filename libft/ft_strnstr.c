@@ -87,8 +87,8 @@ char	*ft_strstr(const char *haystack, const char *needle)
 
 char	*ft_strstrr(const char *haystack, const char *needle)
 {
-	char *tmp;
-	char *ret_val;
+	char	*tmp;
+	char	*ret_val;
 
 	puts("strstrr la");
 	ret_val = ft_strstr(haystack, needle);
