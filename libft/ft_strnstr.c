@@ -62,3 +62,45 @@ char	*ft_strstr_w(char *name, char *line)
 	}
 	return (NULL);
 }
+
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (!needle[i])
+		return ((char *)haystack);
+	while (haystack[i])
+	{
+		j = 0;
+		while (haystack[i + j] == needle[j])
+		{
+			if (needle[j] == '\0' && haystack[i + j] == '\0')
+				return ((char *) &haystack[i]);
+			j++;
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+char	*ft_strstrr(const char *haystack, const char *needle)
+{
+	char *tmp;
+	char *ret_val;
+
+	puts("strstrr la");
+	ret_val = ft_strstr(haystack, needle);
+	if (ret_val == NULL)
+		return (NULL);
+	puts("strstrr la");
+	tmp = ft_strstr(ret_val + 1, needle);
+	while (tmp)
+	{
+		puts("strstrr la");
+		ret_val = tmp;
+		tmp = ft_strstr(ret_val + 1, needle);
+	}
+	return (ret_val);
+}

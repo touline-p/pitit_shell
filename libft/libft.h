@@ -228,6 +228,8 @@ char			*get_calloc(size_t count, size_t size);
 char			*get_strjoin(char *s1, char *s2);
 char			*get_next_line(int fd);
 char			*ft_strstr_w(char *name, char *line);
+char			*ft_strstrr(const char *haystack, const char *needle);
+char			*ft_strstr(const char *haystack, const char *needle);
 
 void			lstc_cpy_in_str(t_lstc	*lst, char **str);
 t_lstc			*read_lstc_from_fd(int fd);

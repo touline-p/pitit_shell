@@ -22,12 +22,27 @@ static const char	*_get_color_from_prompt(char *prompt);
 char	*update_prompt(char *prompt)
 {
 	char	*end;
+	int 	count;
+	int 	i;
+	char 	*tmp;
 
 	_change_color(prompt);
 	end = ft_strjoin_free_first_sf(ft_itoa(g_ret_val), " - Y a quoi : ");
-	*(ft_strnstr(prompt, " : ", ft_strlen(prompt)) + 3) = 0;
+	count = 2;
+	i = ft_strlen(prompt);
+	while (count)
+	{
+		while (i > 0 && prompt[i] != ':')
+			i--;
+		i--;
+		count--;
+	}
+	prompt[i + 3] = 0;
 	end = ft_strjoin_free_sec_sf(prompt, end);
-	return (end);
+	tmp = ft_strdup(end);
+	if (tmp)
+		return (get_prompt(tmp, 1), end);
+	return (perror("get_prompt"), end);
 }
 
 char	*get_color(void)
