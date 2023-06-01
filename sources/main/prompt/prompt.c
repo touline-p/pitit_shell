@@ -26,7 +26,7 @@ t_return_status	get_prompt_on(char **prompt_pt, char **env)
 
 	box = NULL;
 	line = NULL;
-	free(*prompt_pt);
+	get_prompt(NULL, 2);
 	*prompt_pt = NULL;
 	if (_get_alloc_box_on(&box, env) != SUCCESS
 		|| box == NULL
