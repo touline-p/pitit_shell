@@ -64,7 +64,7 @@ static t_return_status	_fork_process(t_data *data, int pid, \
 		signal(SIGINT, &handle_signal_child);
 		signal(SIGQUIT, &handle_signal_child);
 		ft_free_all_str_lst(data, data->index);
-		free(data->prompt);
+		get_prompt(NULL, 2);
 		free_all_others(data->cmds_block, block_id, data->nb_of_pipe);
 		_child_launch_act(data, data->nb_of_pipe, env, block_id);
 	}
