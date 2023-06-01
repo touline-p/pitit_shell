@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:35:35 by twang             #+#    #+#             */
-/*   Updated: 2023/05/30 15:44:34 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/01 13:26:24 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ t_return_status	check_closing_par(t_string_token *string_token_lst)
 
 void	get_heredoc_setup(t_data *data)
 {
-	struct termios	copy;
+	// struct termios	copy;
 
-	copy = data->term;
-	copy.c_lflag &= ~(ECHOCTL);
-	if (tcsetattr(1, TCSANOW, &copy) == -1)
-	{
-		perror("tcsetattr");
-		errno = SUCCESS;
-	}
+	// copy = data->term;
+	// copy.c_lflag &= ~(ECHOCTL);
+	// if (tcsetattr(1, TCSANOW, &copy) == -1)
+	// {
+	// 	perror("tcsetattr");
+	// 	errno = SUCCESS;
+	// }
 	string_token_destructor(data->instructions_arr[0]);
 	free(data->instructions_arr);
 	get_prompt(NULL, 2);

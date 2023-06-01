@@ -6,21 +6,21 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:13:46 by twang             #+#    #+#             */
-/*   Updated: 2023/05/30 17:06:34 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/01 13:27:42 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_return_status	reset_term_settings(t_data *data)
-{
-	if (tcsetattr(1, TCSANOW, &data->term) == -1)
-	{
-		perror("tcsetattr");
-		errno = SUCCESS;
-	}
-	return (SUCCESS);
-}
+// t_return_status	reset_term_settings(t_data *data)
+// {
+// 	if (tcsetattr(1, TCSANOW, &data->term) == -1)
+// 	{
+// 		perror("tcsetattr");
+// 		errno = SUCCESS;
+// 	}
+// 	return (SUCCESS);
+// }
 
 t_return_status	init_main(t_data *data, t_string_token **str_token_pt, \
 				char **av, char ***env_pt)

@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/05/21 20:01:57 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/01 13:28:58 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ static void	handle_signal_readline(int signal);
 
 void	init_signals(t_data *data)
 {
-	if (tcgetattr(1, &data->term) == -1)
-	{
-		perror("tcgetattr");
-		errno = SUCCESS;
-	}
+	(void)data;
+	// if (tcgetattr(1, &data->term) == -1)
+	// {
+	// 	perror("tcgetattr");
+	// 	errno = SUCCESS;
+	// }
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
