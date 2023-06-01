@@ -40,6 +40,7 @@ char	*update_prompt(char *prompt)
 	prompt[i + 3] = 0;
 	end = ft_strjoin_free_sec_sf(prompt, end);
 	tmp = ft_strdup(end);
+	free(prompt);
 	if (tmp)
 		return (get_prompt(tmp, 1), end);
 	return (perror("get_prompt"), end);

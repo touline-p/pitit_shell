@@ -80,5 +80,10 @@ char	*get_prompt(char *str, int flag)
 		return (prompt);
 	if (flag == 1)
 		prompt = str;
+	if (flag == 2)
+	{
+		free(prompt);
+		prompt = NULL;
+	}
 	return (str);
 }
