@@ -40,18 +40,18 @@ void	loop_init(t_data *data, char **line_pt, char **env)
 
 	tmp = getcwd(NULL, 0);
 	if (tmp == NULL)
-		return_to_root(data, *line_pt, env);
+		return_to_root(*line_pt, env);
 	free(tmp);
 	while (true)
 	{
 		init_signals(data);
 		if (get_prompt_on(&(data->prompt), env) != SUCCESS)
-			clean_the_prompt(data->prompt, *line_pt, env);
+			clean_the_prompt(*line_pt, env);
 		*line_pt = readline(data->prompt);
 		errno = 0;
 		if (*line_pt == NULL || ft_str_is_ascii(*line_pt) != true
 			|| ft_strchr(*line_pt, '\n'))
-			clean_the_prompt(data->prompt, *line_pt, env);
+			clean_the_prompt(*line_pt, env);
 		add_history(*line_pt);
 		if (ft_strcmp("", *line_pt) == 0)
 		{

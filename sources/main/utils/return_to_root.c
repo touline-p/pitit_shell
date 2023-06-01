@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-void	return_to_root(t_data *data, char *line, char **env)
+void	return_to_root(char *line, char **env)
 {
 	if (chdir("/") == -1)
 	{
 		perror("chdir");
-		clean_the_prompt(data->prompt, line, env);
+		clean_the_prompt(line, env);
 	}
 	ft_dprintf(2, "You were lost\nPitit shell bring you back to root.\n");
 	ft_dprintf(2, "Stop doing shit with directories pls.\n");

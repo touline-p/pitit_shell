@@ -33,7 +33,7 @@ t_return_status	execution(t_data *data, t_string_token *lst_of_tok, \
 	clean_files_token(lst_of_tok);
 	clean_token(lst_of_tok);
 	if (_check_if_token_lst_is_empty(lst_of_tok) != SUCCESS)
-		return (free(data->cmds_block), \
+		return (free(data->cmds_block->heredoc_data), free(data->cmds_block), \
 			string_token_destructor(lst_of_tok), SUCCESS);
 	strings_management(data, lst_of_tok, *env_pt);
 	string_token_destructor(lst_of_tok);
