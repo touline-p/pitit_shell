@@ -110,8 +110,6 @@ static t_return_status	_launch_instructions_arr(t_data *data, \
 			return (free(data->instructions_arr), \
 				free(data->cmds_block), FAILED_MALLOC);
 		data->index = get_next_index(++data->index, instructions_arr);
-		if (g_ret_val == 2)
-			return (SUCCESS);
 	}
 	free(instructions_arr);
 	return (SUCCESS);
