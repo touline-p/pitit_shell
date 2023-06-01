@@ -52,7 +52,7 @@ void	get_heredoc_setup(t_data *data)
 	}
 	string_token_destructor(data->instructions_arr[0]);
 	free(data->instructions_arr);
-	free(data->prompt);
+	get_prompt(NULL, 2);
 	signal(SIGINT, &handle_signal_heredoc);
 	signal(SIGQUIT, &handle_signal_heredoc);
 }
