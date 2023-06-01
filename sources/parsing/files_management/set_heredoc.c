@@ -133,6 +133,7 @@ static t_return_status	_read_here_doc_in_str(char *limiter, \
 	nb_of_line = 0;
 	line = NULL;
 	errno = 0;
+	g_ret_val = 0;
 	while (HEREDOC_MUST_GO_ON)
 	{
 		nb_of_line++;

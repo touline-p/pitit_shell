@@ -60,7 +60,7 @@ void	handle_signal_heredoc(int signal)
 		ft_dprintf(2, "^C");
 		ft_dprintf(2, "\n");
 		g_ret_val = 130;
-		exit (g_ret_val);
+		close(0);
 	}
 	else if (signal == SIGQUIT)
 		(void)signal;

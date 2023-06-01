@@ -22,9 +22,9 @@ static const char	*_get_color_from_prompt(char *prompt);
 char	*update_prompt(char *prompt)
 {
 	char	*end;
-	int 	count;
-	int 	i;
-	char 	*tmp;
+	int		count;
+	int		i;
+	char	*tmp;
 
 	_change_color(prompt);
 	end = ft_strjoin_free_first_sf(ft_itoa(g_ret_val), " - Y a quoi : ");

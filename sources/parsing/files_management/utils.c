@@ -49,12 +49,8 @@ t_return_status	expand_hd(char **here_doc, char **env)
 
 bool	read_hd_ep(char *line, int nb_of_line, char *limiter)
 {
-	if (errno)
-	{
-		perror("here doc gnl");
-		perror("here doc get next line");
+	if (g_ret_val == 130)
 		return (true);
-	}
 	if (!line)
 	{
 		ft_dprintf(2, RED"minishell: warning: ");

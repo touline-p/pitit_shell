@@ -45,7 +45,7 @@ t_return_status	clean_the_prompt(char *prompt, char *line, char **env)
 	if (line && ft_str_is_ascii(line) != false)
 		ft_dprintf(2, "Care our minishell doesnt like non ascii char\n");
 	free(line);
-	free(prompt);
+	get_prompt(NULL, 2);
 	ft_free_split(env);
 	clear_history();
 	ft_dprintf(1, RED"exit\n"END);
