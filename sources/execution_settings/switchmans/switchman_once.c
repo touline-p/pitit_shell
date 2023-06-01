@@ -63,7 +63,7 @@ static void	_waiting(int pid)
 static t_return_status	_execute_son(t_data *data, t_cmd cmd, char ***env_pt)
 {
 	free(data->cmds_block);
-	free(data->prompt);
+	get_prompt(NULL, 2);
 	ft_free_all_str_lst(data, data->index);
 	if (duplicate_fds(cmd, data, env_pt) != SUCCESS)
 	{

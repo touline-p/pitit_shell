@@ -62,7 +62,6 @@ dkms.conf
 .idea
 tester
 minishell
-
 .nfs*
 .test*
 biblia
