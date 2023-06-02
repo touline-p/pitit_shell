@@ -6,7 +6,7 @@
 #    By: twang <twang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 14:09:46 by twang             #+#    #+#              #
-#    Updated: 2023/05/31 10:51:04 by bpoumeau         ###   ########.fr        #
+#    Updated: 2023/06/02 10:15:02 by twang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ OBJ_DIR		=	.objs
 
 #--flags-----------------------------------------------------------------------#
 
-CFLAGS		=	-g3 -Wall -Wextra -I $(LIBFT_DIR) -I $(INC_DIR) -I $(INC_DIR) #-Werror
+CFLAGS		=	-Wall -Wextra -Werror -I $(LIBFT_DIR) -I $(INC_DIR)
 
 #--debug flags--------------------------------------------------------#
 
@@ -49,7 +49,7 @@ endif
 
 #--leaks flags--------------------------------------------------------#
 
-LEAKS	=	valgrind --suppressions=ignore_rl_reachable.txt --leak-check=full --track-fds=yes #--show-leak-kinds=all --trace-children=yes
+LEAKS	=	valgrind --suppressions=ignore_rl_reachable.txt --leak-check=full --track-fds=yes
 
 #--libs------------------------------------------------------------------------#
 
