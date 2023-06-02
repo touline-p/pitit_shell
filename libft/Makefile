@@ -6,7 +6,7 @@ NAME	=	libft.a
 
 CC	=	cc
 
-CFLAGS	=	-Werror -Wall -Wextra
+CFLAGS	=	-g3 -Werror -Wall -Wextra
 
 AR	= 	ar
 
@@ -47,6 +47,7 @@ FILES	=	ft_atoi.c 				\
 			ft_strmapi.c 			\
 			ft_strncmp.c 			\
 			ft_strnstr.c 			\
+			ft_strstr.c				\
 			ft_strrchr.c 			\
 			ft_strtrim.c 			\
 			ft_substr.c 			\

@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:21:43 by twang             #+#    #+#             */
-/*   Updated: 2023/05/30 15:45:25 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:08:43 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,42 +63,39 @@ char	*ft_strstr_w(char *name, char *line)
 	return (NULL);
 }
 
-char	*ft_strstr(const char *haystack, const char *needle)
-{
-	size_t	i;
-	size_t	j;
+// char	*ft_strstr(const char *haystack, const char *needle)
+// {
+// 	size_t	i;
+// 	size_t	j;
 
-	i = 0;
-	if (!needle[i])
-		return ((char *)haystack);
-	while (haystack[i])
-	{
-		j = 0;
-		while (haystack[i + j] == needle[j])
-		{
-			if (needle[j] == '\0' && haystack[i + j] == '\0')
-				return ((char *) &haystack[i]);
-			j++;
-		}
-		i++;
-	}
-	return (NULL);
-}
+// 	i = 0;
+// 	if (!needle[i])
+// 		return ((char *)haystack);
+// 	while (haystack[i])
+// 	{
+// 		j = 0;
+// 		while (haystack[i + j] == needle[j])
+// 		{
+// 			if (needle[j] == '\0' && haystack[i + j] == '\0')
+// 				return ((char *) &haystack[i]);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (NULL);
+// }
 
-char	*ft_strstrr(const char *haystack, const char *needle)
+char	*ft_strstrr(char *haystack, char *needle)
 {
 	char	*tmp;
 	char	*ret_val;
 
-	puts("strstrr la");
 	ret_val = ft_strstr(haystack, needle);
 	if (ret_val == NULL)
 		return (NULL);
-	puts("strstrr la");
 	tmp = ft_strstr(ret_val + 1, needle);
 	while (tmp)
 	{
-		puts("strstrr la");
 		ret_val = tmp;
 		tmp = ft_strstr(ret_val + 1, needle);
 	}

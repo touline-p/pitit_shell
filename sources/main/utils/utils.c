@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:13:46 by twang             #+#    #+#             */
-/*   Updated: 2023/05/30 17:06:34 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/02 12:13:50 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	loop_init(t_data *data, char **line_pt, char **env)
 		if (*line_pt == NULL || ft_str_is_ascii(*line_pt) != true
 			|| ft_strchr(*line_pt, '\n'))
 			clean_the_prompt(*line_pt, env);
-		add_history(*line_pt);
+		if (ft_strcmp("", *line_pt) != 0)
+			add_history(*line_pt);
 		if (ft_strcmp("", *line_pt) == 0)
 		{
 			free(*line_pt);

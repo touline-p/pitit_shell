@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:23:19 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/05/30 17:04:08 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:06:51 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,8 +228,8 @@ char			*get_calloc(size_t count, size_t size);
 char			*get_strjoin(char *s1, char *s2);
 char			*get_next_line(int fd);
 char			*ft_strstr_w(char *name, char *line);
-char			*ft_strstrr(const char *haystack, const char *needle);
-char			*ft_strstr(const char *haystack, const char *needle);
+char			*ft_strstrr(char *haystack, char *needle);
+char			*ft_strstr(char *haystack, char *needle);
 
 void			lstc_cpy_in_str(t_lstc	*lst, char **str);
 t_lstc			*read_lstc_from_fd(int fd);
