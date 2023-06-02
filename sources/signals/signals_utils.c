@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:35:32 by twang             #+#    #+#             */
-/*   Updated: 2023/06/02 17:28:49 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/02 18:40:39 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static const char	*_get_color_from_prompt(char *prompt);
 void	print_box_prompt(int i, char *prompt)
 {
 	char	tmp;
-	
+
 	i--;
 	while (ft_isalnum(prompt[i]))
 		i--;
 	tmp = prompt[i];
 	prompt[i] = 0;
 	ft_dprintf(2, "%s", prompt);
-	prompt[i] = tmp;	
+	prompt[i] = tmp;
 }
 
 char	*update_prompt(char *prompt)
