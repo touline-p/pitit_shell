@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:08:37 by twang             #+#    #+#             */
-/*   Updated: 2023/05/29 19:33:07 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/02 18:25:32 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_return_status	set_infile(t_data *data, char **file, int block_id, \
 	if (ft_strchr(*file, -32) != NULL || (**file == 0 && signal))
 	{
 		manage_ambiguous(&(data->cmds_block[block_id]), *file);
-		return (FAILURE);
+		return (SUCCESS);
 	}
 	data->cmds_block[block_id].infile = open(*file, O_RDONLY, 0644);
 	if (data->cmds_block[block_id].infile == -1)

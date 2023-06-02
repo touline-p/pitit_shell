@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:17:52 by twang             #+#    #+#             */
-/*   Updated: 2023/05/17 17:47:30 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/02 18:24:07 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ static void	_child_launch_act(t_data *data, int nb_of_pipe, \
 		close_this(command_block.fd_hd[0]);
 	if (duplicate_fds(command_block, data, env) != SUCCESS)
 	{
+		close_this(command_block.infile);
+		close_this(command_block.outfile);
 		ft_free_split(command_block.commands);
 		ft_free_split(*env);
 		exit(1);

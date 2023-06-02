@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:50:13 by twang             #+#    #+#             */
-/*   Updated: 2023/06/02 15:19:22 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/02 17:18:27 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ static void	handle_signal_readline(int sign)
 		ft_dprintf(2, RED"🤷 Sorry bro: "END);
 	}
 	else
-		ft_dprintf(2, "%s", prompt);
-	free(prompt);
+		rl_set_prompt(prompt);
 	rl_replace_line("", 0);
+	rl_on_new_line();
 	rl_redisplay();
+	free(prompt);
 }
 
 void	handle_signal_heredoc(int signal)

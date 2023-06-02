@@ -6,7 +6,7 @@
 /*   By: twang <twang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:41:45 by twang             #+#    #+#             */
-/*   Updated: 2023/06/02 14:51:22 by twang            ###   ########.fr       */
+/*   Updated: 2023/06/02 18:18:48 by twang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	execve_then_exit(t_cmd command, char ***env)
 	command_str = NULL;
 	if (command.commands != NULL)
 		command_str = add_path_cmd(&command, *env);
+	else
+		write(2, "'' : command not found\n", 23);
 	if (command_str != NULL && is_executable(command_str) == SUCCESS)
 	{
 		execve(command_str, command.commands, *env);
